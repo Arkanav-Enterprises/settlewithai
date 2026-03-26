@@ -236,6 +236,75 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Case Study: Orient ────────────────────────── */}
+      <section ref={caseRef}>
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
+          <div
+            className="fade-up rounded-xl p-8 md:p-12 lg:p-16"
+            style={{
+              background: "rgba(0,0,0,0.04)",
+              backgroundImage:
+                "linear-gradient(135deg, rgba(0,0,0,0.04), rgba(0,0,0,0.02))",
+              backdropFilter: "blur(6px)",
+              WebkitBackdropFilter: "blur(6px)",
+              boxShadow:
+                "inset 1px 1px 1px rgba(0,0,0,0.1), inset -1px -1px 1px rgba(255,255,255,0.3), 0 4px 16px rgba(0,0,0,0.1)",
+              border: "1px solid rgba(0,0,0,0.1)",
+            }}
+          >
+            {/* header */}
+            <div className="flex items-center gap-5 mb-10">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/orient-logo.png"
+                alt="Orient Printing & Packaging"
+                className="h-10 w-auto"
+              />
+              <div>
+                <div className="font-medium text-[17px]">
+                  Orient Printing & Packaging
+                </div>
+                <div className="text-sm text-text-faint mt-0.5">
+                  Manufacturing · 79 years in operation · 50+ countries
+                </div>
+              </div>
+            </div>
+
+            {/* quote */}
+            <blockquote className="border-l-2 border-accent pl-6 md:pl-8 text-text-muted text-[clamp(1rem,1.5vw,1.15rem)] leading-[1.8] mb-12 max-w-3xl">
+              &ldquo;49 use cases mapped across 7 departments. 18 projects
+              structured. 11 deployed in the first engagement &mdash; from offer
+              generation to BOM creation to service troubleshooting. Phased from
+              quick wins to ERP integration over six months.&rdquo;
+            </blockquote>
+
+            {/* stats */}
+            <div className="grid grid-cols-3 gap-8 md:gap-12">
+              {[
+                { v: "49", l: "Use cases mapped" },
+                { v: "11", l: "Projects deployed" },
+                { v: "85%", l: "Time saved on docs" },
+              ].map((s) => (
+                <div key={s.l}>
+                  <div
+                    className="text-accent text-[clamp(1.5rem,2.5vw,2.2rem)] font-medium leading-none mb-2"
+                    style={{
+                      fontFamily: "Sentient, Georgia, serif",
+                      letterSpacing: "-0.03em",
+                    }}
+                  >
+                    {s.v}
+                  </div>
+                  <div className="text-text-faint text-xs uppercase tracking-[0.12em]">
+                    {s.l}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── Process ──────────────────────────────────── */}
       <section id="process" ref={processRef}>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
@@ -390,75 +459,6 @@ export default function Home() {
                 </ul>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Case Study: Orient ────────────────────────── */}
-      <section ref={caseRef}>
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
-          <div
-            className="fade-up rounded-xl p-8 md:p-12 lg:p-16"
-            style={{
-              background: "rgba(0,0,0,0.04)",
-              backgroundImage:
-                "linear-gradient(135deg, rgba(0,0,0,0.04), rgba(0,0,0,0.02))",
-              backdropFilter: "blur(6px)",
-              WebkitBackdropFilter: "blur(6px)",
-              boxShadow:
-                "inset 1px 1px 1px rgba(0,0,0,0.1), inset -1px -1px 1px rgba(255,255,255,0.3), 0 4px 16px rgba(0,0,0,0.1)",
-              border: "1px solid rgba(0,0,0,0.1)",
-            }}
-          >
-            {/* header */}
-            <div className="flex items-center gap-5 mb-10">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/orient-logo.png"
-                alt="Orient Printing & Packaging"
-                className="h-10 w-auto"
-              />
-              <div>
-                <div className="font-medium text-[17px]">
-                  Orient Printing & Packaging
-                </div>
-                <div className="text-sm text-text-faint mt-0.5">
-                  Manufacturing · 79 years in operation · 50+ countries
-                </div>
-              </div>
-            </div>
-
-            {/* quote */}
-            <blockquote className="border-l-2 border-accent pl-6 md:pl-8 text-text-muted text-[clamp(1rem,1.5vw,1.15rem)] leading-[1.8] mb-12 max-w-3xl">
-              &ldquo;49 use cases mapped across 7 departments. 18 projects
-              structured. 11 deployed in the first engagement &mdash; from offer
-              generation to BOM creation to service troubleshooting. Phased from
-              quick wins to ERP integration over six months.&rdquo;
-            </blockquote>
-
-            {/* stats */}
-            <div className="grid grid-cols-3 gap-8 md:gap-12">
-              {[
-                { v: "49", l: "Use cases mapped" },
-                { v: "11", l: "Projects deployed" },
-                { v: "85%", l: "Time saved on docs" },
-              ].map((s) => (
-                <div key={s.l}>
-                  <div
-                    className="text-accent text-[clamp(1.5rem,2.5vw,2.2rem)] font-medium leading-none mb-2"
-                    style={{
-                      fontFamily: "Sentient, Georgia, serif",
-                      letterSpacing: "-0.03em",
-                    }}
-                  >
-                    {s.v}
-                  </div>
-                  <div className="text-text-faint text-xs uppercase tracking-[0.12em]">
-                    {s.l}
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
