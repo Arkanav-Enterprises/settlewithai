@@ -397,15 +397,27 @@ export default function Home() {
       {/* ── Case Study: Orient ────────────────────────── */}
       <section ref={caseRef}>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
-          <div className="fade-up border border-border-light rounded-2xl p-8 md:p-12 lg:p-16">
+          <div
+            className="fade-up rounded-xl p-8 md:p-12 lg:p-16"
+            style={{
+              background: "rgba(0,0,0,0.04)",
+              backgroundImage:
+                "linear-gradient(135deg, rgba(0,0,0,0.04), rgba(0,0,0,0.02))",
+              backdropFilter: "blur(6px)",
+              WebkitBackdropFilter: "blur(6px)",
+              boxShadow:
+                "inset 1px 1px 1px rgba(0,0,0,0.1), inset -1px -1px 1px rgba(255,255,255,0.3), 0 4px 16px rgba(0,0,0,0.1)",
+              border: "1px solid rgba(0,0,0,0.1)",
+            }}
+          >
             {/* header */}
-            <div className="flex items-center gap-4 mb-10">
-              <span
-                className="w-11 h-11 rounded-xl bg-accent-soft border border-accent-border flex items-center justify-center text-accent text-lg font-semibold"
-                style={{ fontFamily: "Sentient, Georgia, serif" }}
-              >
-                O
-              </span>
+            <div className="flex items-center gap-5 mb-10">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/orient-logo.png"
+                alt="Orient Printing & Packaging"
+                className="h-10 w-auto"
+              />
               <div>
                 <div className="font-medium text-[17px]">
                   Orient Printing & Packaging
