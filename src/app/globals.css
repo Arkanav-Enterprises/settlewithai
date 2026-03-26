@@ -69,3 +69,59 @@ h1, h2, h3 {
 .stagger > .fade-up:nth-child(2) { transition-delay: 80ms; }
 .stagger > .fade-up:nth-child(3) { transition-delay: 160ms; }
 .stagger > .fade-up:nth-child(4) { transition-delay: 240ms; }
+
+/* ─── Article typography ────────────────────── */
+.prose-settle p {
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+.prose-settle h2 {
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  font-weight: 500;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+.prose-settle h3 {
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  font-weight: 500;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+.prose-settle ul {
+  margin-bottom: 1.5rem;
+  padding-left: 0;
+  list-style: none;
+}
+.prose-settle ul li {
+  position: relative;
+  padding-left: 1.25rem;
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  margin-bottom: 0.6rem;
+}
+.prose-settle ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.prose-settle strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.prose-settle a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.prose-settle a:hover {
+  text-decoration: underline;
+}
