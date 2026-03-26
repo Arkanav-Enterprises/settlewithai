@@ -130,7 +130,7 @@ export default function Home() {
           <h1
             className="text-[clamp(2.8rem,5.5vw,5rem)] font-medium leading-[1.08] mb-8 max-w-[560px]"
           >
-            AI, thoughtfully deployed.
+            AI, <span className="text-accent">thoughtfully</span> deployed.
           </h1>
           <p className="text-text-muted text-[clamp(1rem,1.5vw,1.2rem)] max-w-[420px] leading-[1.7] mb-10">
             We settle AI into your team&apos;s actual workflows &mdash;
