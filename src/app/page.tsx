@@ -307,9 +307,9 @@ export default function Home() {
       </section>
 
       {/* ── Process ──────────────────────────────────── */}
-      <section id="process" ref={processRef}>
+      <section id="process" ref={processRef} className="bg-accent">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
-          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-20 max-w-2xl">
+          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-20 max-w-2xl text-bg">
             From zero to settled in four phases.
           </h2>
 
@@ -323,7 +323,7 @@ export default function Home() {
             >
               <path
                 d="M 80,60 C 80,140 920,100 920,250 S 80,340 80,500 S 920,600 920,750 S 80,850 80,940"
-                stroke="#d97757"
+                stroke="#e8e6dc"
                 strokeWidth="2.5"
                 strokeDasharray="6 10"
                 strokeLinecap="round"
@@ -331,10 +331,10 @@ export default function Home() {
                 vectorEffect="non-scaling-stroke"
               />
               {/* Dots at each phase */}
-              <circle cx="80" cy="60" r="5" fill="#d97757" opacity="0.5" />
-              <circle cx="920" cy="250" r="5" fill="#d97757" opacity="0.5" />
-              <circle cx="80" cy="500" r="5" fill="#d97757" opacity="0.5" />
-              <circle cx="920" cy="750" r="5" fill="#d97757" opacity="0.5" />
+              <circle cx="80" cy="60" r="5" fill="#e8e6dc" opacity="0.5" />
+              <circle cx="920" cy="250" r="5" fill="#e8e6dc" opacity="0.5" />
+              <circle cx="80" cy="500" r="5" fill="#e8e6dc" opacity="0.5" />
+              <circle cx="920" cy="750" r="5" fill="#e8e6dc" opacity="0.5" />
             </svg>
 
             {[
@@ -378,18 +378,18 @@ export default function Home() {
               >
                 <div className="max-w-md">
                   <span
-                    className="text-accent text-[15px] font-medium block mb-4"
+                    className="text-bg/60 text-[15px] font-medium block mb-4"
                     style={{ fontFamily: "Sentient, Georgia, serif" }}
                   >
                     {p.num}
                   </span>
-                  <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-medium mb-4">
+                  <h3 className="text-bg text-[clamp(1.25rem,2vw,1.5rem)] font-medium mb-4">
                     {p.title}
                   </h3>
-                  <p className="text-text-muted leading-[1.75] mb-3">
+                  <p className="text-bg/70 leading-[1.75] mb-3">
                     {p.desc}
                   </p>
-                  <p className="text-text-faint text-sm">{p.detail}</p>
+                  <p className="text-bg/45 text-sm">{p.detail}</p>
                 </div>
               </div>
             ))}
