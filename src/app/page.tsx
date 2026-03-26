@@ -158,7 +158,7 @@ export default function Home() {
       {/* ── Stats ────────────────────────────────────── */}
       <section ref={statsRef}>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-20 md:py-28">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-10 stagger">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-10 items-start stagger">
             {[
               { value: "85%", label: "Faster document generation" },
               { value: "11", label: "Projects deployed per engagement" },
@@ -167,7 +167,7 @@ export default function Home() {
             ].map((s) => (
               <div key={s.label} className="fade-up">
                 <div
-                  className="text-[clamp(2rem,3.5vw,3rem)] font-medium leading-none mb-3 text-accent"
+                  className="text-[clamp(2rem,3.5vw,3rem)] font-medium leading-none mb-3 text-accent whitespace-nowrap"
                   style={{
                     fontFamily: "Sentient, Georgia, serif",
                     letterSpacing: "-0.03em",
