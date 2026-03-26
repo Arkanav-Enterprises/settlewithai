@@ -375,7 +375,7 @@ export default function Home() {
               >
                 <div className="max-w-md">
                   <span
-                    className="text-bg/60 text-[15px] font-medium block mb-4"
+                    className="text-white/70 text-[15px] font-medium block mb-4"
                     style={{ fontFamily: "Sentient, Georgia, serif" }}
                   >
                     {p.num}
@@ -383,10 +383,10 @@ export default function Home() {
                   <h3 className="text-white text-[clamp(1.25rem,2vw,1.5rem)] font-medium mb-4">
                     {p.title}
                   </h3>
-                  <p className="text-bg/70 leading-[1.75] mb-3">
+                  <p className="text-white/85 leading-[1.75] mb-3">
                     {p.desc}
                   </p>
-                  <p className="text-bg/45 text-sm">{p.detail}</p>
+                  <p className="text-white/60 text-sm">{p.detail}</p>
                 </div>
               </div>
             ))}
