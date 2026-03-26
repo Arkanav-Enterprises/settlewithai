@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+anthropic-full.png
+settle-hero.png
+settle-process.png
+settle-process-2.png
+settle-v2-full.png
+settle-v2-visible.png
