@@ -168,7 +168,7 @@ export default function Home() {
             ].map((s) => (
               <div key={s.label} className="fade-up text-center">
                 <div
-                  className="text-[clamp(2rem,3.5vw,3rem)] font-medium leading-none mb-3 text-white whitespace-nowrap"
+                  className="text-[clamp(1.6rem,3.5vw,3rem)] font-medium leading-none mb-3 text-white md:whitespace-nowrap"
                   style={{
                     fontFamily: "Sentient, Georgia, serif",
                     letterSpacing: "-0.03em",
