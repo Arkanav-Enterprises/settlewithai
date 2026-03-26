@@ -309,7 +309,7 @@ export default function Home() {
       {/* ── Process ──────────────────────────────────── */}
       <section id="process" ref={processRef} className="bg-accent">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
-          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-20 max-w-2xl text-bg">
+          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-20 max-w-2xl text-white">
             From zero to settled in four phases.
           </h2>
 
@@ -383,7 +383,7 @@ export default function Home() {
                   >
                     {p.num}
                   </span>
-                  <h3 className="text-bg text-[clamp(1.25rem,2vw,1.5rem)] font-medium mb-4">
+                  <h3 className="text-white text-[clamp(1.25rem,2vw,1.5rem)] font-medium mb-4">
                     {p.title}
                   </h3>
                   <p className="text-bg/70 leading-[1.75] mb-3">
