@@ -166,7 +166,7 @@ export default function Home() {
               { value: "49", label: "Use cases mapped per company" },
               { value: "4hrs → 30min", label: "Typical task time reduction" },
             ].map((s) => (
-              <div key={s.label} className="fade-up">
+              <div key={s.label} className="fade-up text-center">
                 <div
                   className="text-[clamp(2rem,3.5vw,3rem)] font-medium leading-none mb-3 text-white whitespace-nowrap"
                   style={{
@@ -176,7 +176,7 @@ export default function Home() {
                 >
                   {s.value}
                 </div>
-                <div className="text-white/50 text-xs uppercase tracking-[0.12em] leading-relaxed">
+                <div className="text-white/80 text-xs uppercase tracking-[0.12em] leading-relaxed">
                   {s.label}
                 </div>
               </div>
