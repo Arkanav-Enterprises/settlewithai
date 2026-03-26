@@ -501,8 +501,57 @@ export default function Home() {
       <section id="contact" ref={ctaRef} className="bg-accent">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-28 md:py-40">
           <div className="max-w-xl mx-auto text-center">
-            <div className="fade-up text-[clamp(3rem,5vw,4.5rem)] mb-6">
-              <span className="wave">👋</span>
+            {/* Hand-drawn style illustration */}
+            <div className="fade-up mb-10">
+              <div className="w-28 h-28 md:w-36 md:h-36 mx-auto rounded-2xl bg-[rgba(0,0,0,0.12)] flex items-center justify-center">
+                <svg
+                  viewBox="0 0 120 120"
+                  fill="none"
+                  className="w-20 h-20 md:w-24 md:h-24"
+                >
+                  {/* Organic curvy lines */}
+                  <path
+                    d="M 25,90 C 25,50 40,30 55,25 C 70,20 75,35 65,50 C 55,65 45,55 50,40"
+                    stroke="#141413"
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M 65,50 C 75,35 85,30 90,40 C 95,50 85,65 75,60"
+                    stroke="#141413"
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M 50,40 C 55,25 70,15 80,22"
+                    stroke="#141413"
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  {/* Dots */}
+                  <circle cx="55" cy="25" r="5" fill="white" />
+                  <circle cx="90" cy="40" r="5" fill="white" />
+                  <circle cx="25" cy="90" r="4" fill="white" />
+                  {/* Small accent marks */}
+                  <path
+                    d="M 35,75 C 38,70 42,72 40,78"
+                    stroke="#141413"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M 78,28 C 82,24 86,27 83,32"
+                    stroke="#141413"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                </svg>
+              </div>
             </div>
             <h2 className="fade-up text-[clamp(1.8rem,4vw,3.5rem)] font-medium leading-[1.1] mb-5 text-white">
               Ready to settle in?
