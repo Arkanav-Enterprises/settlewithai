@@ -1,0 +1,28 @@
+# Settle — AI, thoughtfully deployed.
+
+> Settle is an AI deployment studio that settles AI into businesses, taking them from 0 to 1. We deploy structured rollouts, production-grade instructions, and measurable results.
+
+## Services
+
+- AI Readiness Assessment: Department-by-department workflow audit, use case discovery, tier-based rollout planning
+- Deployment Dashboard: Interactive rollout visualisation, project-level tracking, skill mapping, kanban execution
+- Instruction Engineering: Production-grade Claude instructions, knowledge file specifications, review gates, safety rules
+- Setup & Training: Project creation, knowledge file preparation, team training, ongoing iteration
+
+## Process
+
+1. Discovery — Map every repeatable workflow. Identify what eats time, what's error-prone, what's high-volume.
+2. Architecture — Use cases, departments, timelines, gaps, and skills in one interactive dashboard.
+3. Instruction Engineering — Production-grade project instructions with review gates, rules, and knowledge files.
+4. Deploy & Settle — Deploy, train, iterate. Quick wins in weeks, deeper integrations in phases.
+
+## Results
+
+- 85% faster document generation
+- 49 use cases mapped per company
+- 11 projects deployed per engagement
+- Task time reduction from 4 hours to 30 minutes
+
+## Contact
+
+Website: https://settlewithai.com
