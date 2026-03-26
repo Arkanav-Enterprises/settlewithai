@@ -573,23 +573,12 @@ export default function Home() {
             ) : (
               <>
                 <form
-                  name="contact"
-                  method="POST"
-                  data-netlify="true"
-                  data-netlify-honeypot="bot-field"
                   onSubmit={async (e) => {
                     e.preventDefault();
-                    const body = new URLSearchParams({
-                      "form-name": "contact",
-                      email,
-                    });
-                    const res = await fetch("/form.html", {
+                    const res = await fetch("/api/contact", {
                       method: "POST",
-                      headers: {
-                        "Content-Type":
-                          "application/x-www-form-urlencoded",
-                      },
-                      body: body.toString(),
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ email }),
                     });
                     if (res.ok) {
                       setSubmitted(true);
@@ -597,8 +586,6 @@ export default function Home() {
                   }}
                   className="fade-up flex flex-col sm:flex-row gap-3"
                 >
-                  <input type="hidden" name="form-name" value="contact" />
-                  <input type="hidden" name="bot-field" />
                   <input
                     type="email"
                     name="email"
