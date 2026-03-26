@@ -157,7 +157,7 @@ export default function Home() {
       </section>
 
       {/* ── Stats ────────────────────────────────────── */}
-      <section ref={statsRef}>
+      <section ref={statsRef} className="bg-accent">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-20 md:py-28">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-10 items-start stagger">
             {[
@@ -168,7 +168,7 @@ export default function Home() {
             ].map((s) => (
               <div key={s.label} className="fade-up">
                 <div
-                  className="text-[clamp(2rem,3.5vw,3rem)] font-medium leading-none mb-3 text-accent whitespace-nowrap"
+                  className="text-[clamp(2rem,3.5vw,3rem)] font-medium leading-none mb-3 text-white whitespace-nowrap"
                   style={{
                     fontFamily: "Sentient, Georgia, serif",
                     letterSpacing: "-0.03em",
@@ -176,15 +176,12 @@ export default function Home() {
                 >
                   {s.value}
                 </div>
-                <div className="text-text-faint text-xs uppercase tracking-[0.12em] leading-relaxed">
+                <div className="text-white/50 text-xs uppercase tracking-[0.12em] leading-relaxed">
                   {s.label}
                 </div>
               </div>
             ))}
           </div>
-        </div>
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
-          <div className="h-px bg-border-light" />
         </div>
       </section>
 
@@ -501,23 +498,23 @@ export default function Home() {
       </section>
 
       {/* ── CTA ──────────────────────────────────────── */}
-      <section id="contact" ref={ctaRef}>
+      <section id="contact" ref={ctaRef} className="bg-accent">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-28 md:py-40">
           <div className="max-w-xl mx-auto text-center">
-            <h2 className="fade-up text-[clamp(1.8rem,4vw,3.5rem)] font-medium leading-[1.1] mb-5">
+            <h2 className="fade-up text-[clamp(1.8rem,4vw,3.5rem)] font-medium leading-[1.1] mb-5 text-white">
               Ready to settle in?
             </h2>
-            <p className="fade-up text-text-muted text-[17px] leading-relaxed mb-12">
+            <p className="fade-up text-white/70 text-[17px] leading-relaxed mb-12">
               Tell us about your team. We&apos;ll scope your rollout and come
               back with a concrete plan &mdash; what ships first, what comes
               next.
             </p>
             {submitted ? (
               <div className="fade-up visible">
-                <p className="text-accent text-lg font-medium mb-2">
+                <p className="text-white text-lg font-medium mb-2">
                   Thanks — we&apos;ll be in touch.
                 </p>
-                <p className="text-text-faint text-sm">
+                <p className="text-white/50 text-sm">
                   Expect a reply within 24 hours.
                 </p>
               </div>
@@ -557,16 +554,16 @@ export default function Home() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@company.com"
-                    className="flex-1 bg-transparent border border-border rounded-full px-5 py-3.5 text-sm text-text placeholder-text-faint focus:border-text-muted focus:outline-none transition-colors duration-200"
+                    className="flex-1 bg-white/10 border border-white/20 rounded-full px-5 py-3.5 text-sm text-white placeholder-white/40 focus:border-white/40 focus:outline-none transition-colors duration-200"
                   />
                   <button
                     type="submit"
-                    className="bg-text text-bg font-medium px-7 py-3.5 rounded-full hover:bg-[#30302e] transition-colors duration-200 whitespace-nowrap text-[15px]"
+                    className="bg-white text-accent font-medium px-7 py-3.5 rounded-full hover:bg-white/90 transition-colors duration-200 whitespace-nowrap text-[15px]"
                   >
                     Let&apos;s talk
                   </button>
                 </form>
-                <p className="fade-up text-text-faint text-sm mt-5">
+                <p className="fade-up text-white/40 text-sm mt-5">
                   We&apos;ll respond within 24 hours.
                 </p>
               </>
