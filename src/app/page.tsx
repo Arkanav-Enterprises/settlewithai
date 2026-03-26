@@ -75,6 +75,7 @@ export default function Home() {
   const ctaRef = useFadeIn();
 
   const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   return (
     <main className="min-h-screen">
@@ -511,27 +512,65 @@ export default function Home() {
               back with a concrete plan &mdash; what ships first, what comes
               next.
             </p>
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="fade-up flex flex-col sm:flex-row gap-3"
-            >
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@company.com"
-                className="flex-1 bg-transparent border border-border rounded-full px-5 py-3.5 text-sm text-text placeholder-text-faint focus:border-text-muted focus:outline-none transition-colors duration-200"
-              />
-              <button
-                type="submit"
-                className="bg-text text-bg font-medium px-7 py-3.5 rounded-full hover:bg-[#30302e] transition-colors duration-200 whitespace-nowrap text-[15px]"
-              >
-                Let&apos;s talk
-              </button>
-            </form>
-            <p className="fade-up text-text-faint text-sm mt-5">
-              We&apos;ll respond within 24 hours.
-            </p>
+            {submitted ? (
+              <div className="fade-up visible">
+                <p className="text-accent text-lg font-medium mb-2">
+                  Thanks — we&apos;ll be in touch.
+                </p>
+                <p className="text-text-faint text-sm">
+                  Expect a reply within 24 hours.
+                </p>
+              </div>
+            ) : (
+              <>
+                <form
+                  name="contact"
+                  method="POST"
+                  data-netlify="true"
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    const body = new URLSearchParams({
+                      "form-name": "contact",
+                      email,
+                    });
+                    try {
+                      await fetch("/", {
+                        method: "POST",
+                        headers: {
+                          "Content-Type":
+                            "application/x-www-form-urlencoded",
+                        },
+                        body: body.toString(),
+                      });
+                      setSubmitted(true);
+                    } catch {
+                      setSubmitted(true);
+                    }
+                  }}
+                  className="fade-up flex flex-col sm:flex-row gap-3"
+                >
+                  <input type="hidden" name="form-name" value="contact" />
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@company.com"
+                    className="flex-1 bg-transparent border border-border rounded-full px-5 py-3.5 text-sm text-text placeholder-text-faint focus:border-text-muted focus:outline-none transition-colors duration-200"
+                  />
+                  <button
+                    type="submit"
+                    className="bg-text text-bg font-medium px-7 py-3.5 rounded-full hover:bg-[#30302e] transition-colors duration-200 whitespace-nowrap text-[15px]"
+                  >
+                    Let&apos;s talk
+                  </button>
+                </form>
+                <p className="fade-up text-text-faint text-sm mt-5">
+                  We&apos;ll respond within 24 hours.
+                </p>
+              </>
+            )}
           </div>
         </div>
       </section>
