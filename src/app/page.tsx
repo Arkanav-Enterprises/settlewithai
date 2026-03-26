@@ -380,13 +380,13 @@ export default function Home() {
                   >
                     {p.num}
                   </span>
-                  <h3 className="text-white text-[clamp(1.25rem,2vw,1.5rem)] font-medium mb-4">
+                  <h3 className="text-white text-[clamp(1.5rem,2.5vw,2rem)] font-medium mb-4">
                     {p.title}
                   </h3>
                   <p className="text-white/85 leading-[1.75] mb-3">
                     {p.desc}
                   </p>
-                  <p className="text-white/60 text-sm">{p.detail}</p>
+                  <p className="text-black text-sm">{p.detail}</p>
                 </div>
               </div>
             ))}
