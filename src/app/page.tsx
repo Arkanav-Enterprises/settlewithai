@@ -386,7 +386,7 @@ export default function Home() {
                   <p className="text-white/85 leading-[1.75] mb-3">
                     {p.desc}
                   </p>
-                  <p className="text-black text-sm">{p.detail}</p>
+                  <p className="text-white/60 text-sm">{p.detail}</p>
                 </div>
               </div>
             ))}
