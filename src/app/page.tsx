@@ -501,6 +501,9 @@ export default function Home() {
       <section id="contact" ref={ctaRef} className="bg-accent">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-28 md:py-40">
           <div className="max-w-xl mx-auto text-center">
+            <div className="fade-up text-[clamp(3rem,5vw,4.5rem)] mb-6">
+              <span className="wave">👋</span>
+            </div>
             <h2 className="fade-up text-[clamp(1.8rem,4vw,3.5rem)] font-medium leading-[1.1] mb-5 text-white">
               Ready to settle in?
             </h2>
