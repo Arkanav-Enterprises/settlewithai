@@ -65,15 +65,15 @@ function Arrow() {
 
 /* ─── Logo mark ─────────────────────────────────────────── */
 
-function SettleMark({ className = "h-6 w-auto", stroke = "#141413", dotFill = "white" }: { className?: string; stroke?: string; dotFill?: string }) {
+function SettleMark({ className = "h-6 w-auto", stroke = "#141413" }: { className?: string; stroke?: string }) {
   return (
-    <svg viewBox="0 0 175 310" fill="none" className={className}>
-      <path d="M122.703 40.733C111.217 75.1925 134.19 98.1654 157.163 63.706C180.136 29.2465 168.649 -5.21294 134.19 6.27355C99.7301 17.76 65.2706 105.102 65.2706 155.598C65.2706 206.094 102.027 149.899 122.703 188.953C143.379 228.007 107.222 316.731 57.2301 303.818C22.4167 294.825 -4.79689 264.764 6.68955 226.858C18.176 188.953 48.3139 202.153 57.2301 219.966C61.4465 228.39 61.4465 235.664 57.2301 244.088" stroke={stroke} strokeWidth="8.04054" strokeLinecap="round"/>
-      <path d="M134.967 38.4798C141.858 26.9933 151.048 31.5879 146.453 45.3717" stroke={stroke} strokeWidth="5.74324" strokeLinecap="round"/>
-      <path d="M25.0206 233.996C31.9125 245.483 41.1017 240.888 36.5071 227.104" stroke={stroke} strokeWidth="5.74324" strokeLinecap="round"/>
-      <circle cx="66.0476" cy="130.372" r="11.4865" fill={dotFill}/>
-      <circle cx="91.3179" cy="293.48" r="11.4865" fill={dotFill}/>
-      <circle cx="164.831" cy="13.2096" r="9.18919" fill={dotFill}/>
+    <svg viewBox="0 0 199 298" fill="none" className={className}>
+      <path d="M146.118 42.7126C134.632 77.172 157.605 100.145 180.578 65.6855C203.551 31.2261 192.064 -3.23338 157.605 8.2531C123.145 19.7396 79.1857 107.5 88.6857 157.577C98.1857 207.655 146.536 175.199 143.686 198C141.183 218.02 122.766 234.672 103.186 252.601C78.9328 274.809 48.99 295.263 29.4417 293.252C-6.69105 289.535 -2.97404 253.403 32.1474 231.455C67.2688 209.507 78.7483 239.9 54.095 266.576" stroke={stroke} strokeWidth="8.04054" strokeLinecap="round"/>
+      <path d="M163.02 26.5102C169.912 15.0237 179.101 19.6183 174.507 33.4021" stroke={stroke} strokeWidth="5.74324" strokeLinecap="round"/>
+      <path d="M38.0201 243.892C44.9119 255.378 54.1011 250.784 49.5065 237" stroke={stroke} strokeWidth="5.74324" strokeLinecap="round"/>
+      <circle cx="106.507" cy="248.486" r="11.4865" fill="#D97757"/>
+      <circle cx="187.507" cy="11.4865" r="11.4865" fill="#D97757"/>
+      <circle cx="94.5065" cy="98.4865" r="11.4865" fill="#D97757"/>
     </svg>
   );
 }
@@ -517,57 +517,8 @@ export default function Home() {
       <section id="contact" ref={ctaRef} className="bg-accent">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-28 md:py-40">
           <div className="max-w-xl mx-auto text-center">
-            {/* Hand-drawn style illustration */}
             <div className="fade-up mb-10">
-              <div className="w-28 h-28 md:w-36 md:h-36 mx-auto rounded-2xl bg-[rgba(0,0,0,0.12)] flex items-center justify-center">
-                <svg
-                  viewBox="0 0 120 120"
-                  fill="none"
-                  className="w-20 h-20 md:w-24 md:h-24"
-                >
-                  {/* Organic curvy lines */}
-                  <path
-                    d="M 25,90 C 25,50 40,30 55,25 C 70,20 75,35 65,50 C 55,65 45,55 50,40"
-                    stroke="#141413"
-                    strokeWidth="3.5"
-                    strokeLinecap="round"
-                    fill="none"
-                  />
-                  <path
-                    d="M 65,50 C 75,35 85,30 90,40 C 95,50 85,65 75,60"
-                    stroke="#141413"
-                    strokeWidth="3.5"
-                    strokeLinecap="round"
-                    fill="none"
-                  />
-                  <path
-                    d="M 50,40 C 55,25 70,15 80,22"
-                    stroke="#141413"
-                    strokeWidth="3.5"
-                    strokeLinecap="round"
-                    fill="none"
-                  />
-                  {/* Dots */}
-                  <circle cx="55" cy="25" r="5" fill="white" />
-                  <circle cx="90" cy="40" r="5" fill="white" />
-                  <circle cx="25" cy="90" r="4" fill="white" />
-                  {/* Small accent marks */}
-                  <path
-                    d="M 35,75 C 38,70 42,72 40,78"
-                    stroke="#141413"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    fill="none"
-                  />
-                  <path
-                    d="M 78,28 C 82,24 86,27 83,32"
-                    stroke="#141413"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    fill="none"
-                  />
-                </svg>
-              </div>
+              <SettleMark className="h-24 md:h-32 w-auto mx-auto" stroke="white" />
             </div>
             <h2 className="fade-up text-[clamp(1.8rem,4vw,3.5rem)] font-medium leading-[1.1] mb-5 text-white">
               Ready to settle in?
@@ -631,7 +582,7 @@ export default function Home() {
       <footer className="bg-bg-dark text-[#e8e6dc]">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-12 flex items-center justify-between">
           <span className="flex items-center gap-2.5">
-            <SettleMark className="h-6 w-auto" stroke="#e8e6dc" dotFill="rgba(232,230,220,0.3)" />
+            <SettleMark className="h-6 w-auto" stroke="#e8e6dc" />
             <span
               className="text-[1rem] font-medium tracking-[-0.03em]"
               style={{ fontFamily: "Sentient, Georgia, serif" }}
