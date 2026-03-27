@@ -250,8 +250,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Integration Diagram ─────────────────────── */}
-      <section className="overflow-hidden">
+      {/* ── Integration Diagram (hidden for now) ───── */}
+      <section className="overflow-hidden hidden">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
           <h2
             className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-6 max-w-2xl"
