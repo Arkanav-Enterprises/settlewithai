@@ -358,6 +358,13 @@ export default function Home() {
                 detail:
                   "You get a prioritised use-case matrix, not a pitch deck.",
                 align: "left" as const,
+                examples: [
+                  "Offer generation",
+                  "Vendor RFQs",
+                  "Troubleshooting",
+                  "Payroll processing",
+                  "BOM creation",
+                ],
               },
               {
                 num: "02",
@@ -366,6 +373,12 @@ export default function Home() {
                 detail:
                   "Live project tracking. Tier-based phasing. Gap analysis built in.",
                 align: "right" as const,
+                examples: [
+                  "18 functional projects",
+                  "4-tier phased rollout",
+                  "Dependency mapping",
+                  "Skills gap analysis",
+                ],
               },
               {
                 num: "03",
@@ -374,6 +387,13 @@ export default function Home() {
                 detail:
                   "Your team uses the tool. They don\u2019t need to understand the tool.",
                 align: "left" as const,
+                examples: [
+                  "Pricing calculator",
+                  "Config suggestor",
+                  "Email writer",
+                  "RFQ template builder",
+                  "Service diagnostics",
+                ],
               },
               {
                 num: "04",
@@ -381,6 +401,12 @@ export default function Home() {
                 desc: "We deploy, train your team, and iterate. Quick wins ship in weeks. Deeper integrations follow in phases.",
                 detail: "A roadmap you can actually execute.",
                 align: "right" as const,
+                examples: [
+                  "85% faster docs",
+                  "400+ hrs/mo saved",
+                  "$200K+ annual savings",
+                  "11 projects live",
+                ],
               },
             ].map((p) => (
               <div
@@ -402,7 +428,17 @@ export default function Home() {
                   <p className="text-white/85 leading-[1.75] mb-3">
                     {p.desc}
                   </p>
-                  <p className="text-white/60 text-sm">{p.detail}</p>
+                  <p className="text-white/60 text-sm mb-5">{p.detail}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {p.examples.map((ex) => (
+                      <span
+                        key={ex}
+                        className="text-xs font-medium px-3 py-1.5 rounded-full bg-white/12 text-white/90 border border-white/15"
+                      >
+                        {ex}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
