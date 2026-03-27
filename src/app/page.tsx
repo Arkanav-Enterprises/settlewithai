@@ -134,9 +134,9 @@ export default function Home() {
 
       {/* ── Hero + Globe ─────────────────────────────── */}
       <section className="relative min-h-screen overflow-hidden">
-        {/* Globe background */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-[min(90vw,900px)] h-[min(90vw,900px)] mt-16">
+        {/* Globe background — on mobile, push to bottom edge */}
+        <div className="absolute inset-0 flex items-end md:items-center justify-center">
+          <div className="w-[min(110vw,900px)] h-[min(110vw,900px)] translate-y-[30%] md:translate-y-0 md:mt-16">
             <Globe className="w-full h-full" />
           </div>
         </div>
