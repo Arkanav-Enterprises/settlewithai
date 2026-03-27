@@ -63,6 +63,21 @@ function Arrow() {
   );
 }
 
+/* ─── Logo mark ─────────────────────────────────────────── */
+
+function SettleMark({ className = "h-6 w-auto", stroke = "#141413", dotFill = "white" }: { className?: string; stroke?: string; dotFill?: string }) {
+  return (
+    <svg viewBox="0 0 175 310" fill="none" className={className}>
+      <path d="M122.703 40.733C111.217 75.1925 134.19 98.1654 157.163 63.706C180.136 29.2465 168.649 -5.21294 134.19 6.27355C99.7301 17.76 65.2706 105.102 65.2706 155.598C65.2706 206.094 102.027 149.899 122.703 188.953C143.379 228.007 107.222 316.731 57.2301 303.818C22.4167 294.825 -4.79689 264.764 6.68955 226.858C18.176 188.953 48.3139 202.153 57.2301 219.966C61.4465 228.39 61.4465 235.664 57.2301 244.088" stroke={stroke} strokeWidth="8.04054" strokeLinecap="round"/>
+      <path d="M134.967 38.4798C141.858 26.9933 151.048 31.5879 146.453 45.3717" stroke={stroke} strokeWidth="5.74324" strokeLinecap="round"/>
+      <path d="M25.0206 233.996C31.9125 245.483 41.1017 240.888 36.5071 227.104" stroke={stroke} strokeWidth="5.74324" strokeLinecap="round"/>
+      <circle cx="66.0476" cy="130.372" r="11.4865" fill={dotFill}/>
+      <circle cx="91.3179" cy="293.48" r="11.4865" fill={dotFill}/>
+      <circle cx="164.831" cy="13.2096" r="9.18919" fill={dotFill}/>
+    </svg>
+  );
+}
+
 /* ─── Page ──────────────────────────────────────────────── */
 
 export default function Home() {
@@ -83,7 +98,8 @@ export default function Home() {
       <nav className="fixed top-0 w-full z-50 backdrop-blur-xl bg-[#e8e6dc]/80">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 h-[4.25rem] flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
+          <a href="#" className="flex items-center gap-2.5">
+            <SettleMark className="h-7 w-auto" />
             <span
               className="text-[1.15rem] font-semibold tracking-[-0.03em] text-text"
               style={{ fontFamily: "Sentient, Georgia, serif" }}
@@ -614,11 +630,14 @@ export default function Home() {
       {/* ── Footer ───────────────────────────────────── */}
       <footer className="bg-bg-dark text-[#e8e6dc]">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-12 flex items-center justify-between">
-          <span
-            className="text-[1rem] font-medium tracking-[-0.03em]"
-            style={{ fontFamily: "Sentient, Georgia, serif" }}
-          >
-            SETTLE
+          <span className="flex items-center gap-2.5">
+            <SettleMark className="h-6 w-auto" stroke="#e8e6dc" dotFill="rgba(232,230,220,0.3)" />
+            <span
+              className="text-[1rem] font-medium tracking-[-0.03em]"
+              style={{ fontFamily: "Sentient, Georgia, serif" }}
+            >
+              SETTLE
+            </span>
           </span>
           <span className="text-[rgba(232,230,220,0.4)] text-sm">
             AI, thoughtfully deployed.
