@@ -518,7 +518,9 @@ export default function Home() {
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-28 md:py-40">
           <div className="max-w-xl mx-auto text-center">
             <div className="fade-up mb-10">
-              <SettleMark className="h-24 md:h-32 w-auto mx-auto" stroke="white" />
+              <div className="w-28 h-28 md:w-36 md:h-36 mx-auto rounded-2xl bg-[rgba(0,0,0,0.12)] flex items-center justify-center">
+                <SettleMark className="h-16 md:h-20 w-auto" stroke="white" />
+              </div>
             </div>
             <h2 className="fade-up text-[clamp(1.8rem,4vw,3.5rem)] font-medium leading-[1.1] mb-5 text-white">
               Ready to settle in?
