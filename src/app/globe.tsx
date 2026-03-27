@@ -16,7 +16,7 @@ export default function Globe({ className = "" }: GlobeProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animRef = useRef<number>(0);
   const rotationRef = useRef(0);
-  const countriesRef = useRef<ReturnType<typeof feature> | null>(null);
+  const landRef = useRef<ReturnType<typeof feature> | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -37,14 +37,15 @@ export default function Globe({ className = "" }: GlobeProps) {
     resize();
     window.addEventListener("resize", resize);
 
-    const graticule = geoGraticule().step([20, 20])();
+    /* 10° grid — matches Anthropic's density */
+    const graticule = geoGraticule().step([10, 10])();
 
     fetch(WORLD_URL)
       .then((r) => r.json())
       .then((topo: Topology) => {
         if (!mounted) return;
         const geom = topo.objects.countries as GeometryCollection;
-        countriesRef.current = feature(topo, geom);
+        landRef.current = feature(topo, geom);
         draw();
       });
 
@@ -53,7 +54,8 @@ export default function Globe({ className = "" }: GlobeProps) {
 
       const w = canvas.getBoundingClientRect().width;
       const h = canvas.getBoundingClientRect().height;
-      const radius = Math.min(w, h) * 0.45;
+      /* Globe fills 80% of height, matching Anthropic's proportions */
+      const radius = h * 0.48;
       const cx = w / 2;
       const cy = h / 2;
 
@@ -67,44 +69,51 @@ export default function Globe({ className = "" }: GlobeProps) {
 
       ctx.clearRect(0, 0, w, h);
 
-      // Globe disk — filled with page bg
+      /* ── Globe disk ── */
       ctx.beginPath();
       ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
       ctx.fillStyle = "#e8e6dc";
       ctx.fill();
 
-      // Graticule — very faint continuous lines
+      /* ── Graticule — rgba(20,20,19,0.063), width 0.35 ── */
       ctx.beginPath();
       path(graticule);
       ctx.strokeStyle = "rgba(20, 20, 19, 0.063)";
       ctx.lineWidth = 0.35;
       ctx.stroke();
 
-      // Country outlines — thin continuous strokes
-      if (countriesRef.current) {
+      if (landRef.current) {
+        /* ── Land fill — very subtle ── */
         ctx.beginPath();
-        path(countriesRef.current as Parameters<typeof path>[0]);
+        path(landRef.current as Parameters<typeof path>[0]);
+        ctx.fillStyle = "rgba(20, 20, 19, 0.035)";
+        ctx.fill();
+
+        /* ── Country outlines — rgba(20,20,19,0.32), width 0.55 ── */
+        ctx.beginPath();
+        path(landRef.current as Parameters<typeof path>[0]);
         ctx.strokeStyle = "rgba(20, 20, 19, 0.32)";
         ctx.lineWidth = 0.55;
         ctx.lineCap = "round";
+        ctx.lineJoin = "round";
         ctx.stroke();
       }
 
-      // Inner rim
+      /* ── Inner rim — 0.55 opacity, width 0.6 ── */
       ctx.beginPath();
       ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
       ctx.strokeStyle = "rgba(20, 20, 19, 0.55)";
-      ctx.lineWidth = 0.8;
+      ctx.lineWidth = 0.6;
       ctx.stroke();
 
-      // Outer rim
+      /* ── Outer rim — 0.35 opacity, width 0.4, +6px out ── */
       ctx.beginPath();
       ctx.arc(cx, cy, radius + 6, 0, 2 * Math.PI);
       ctx.strokeStyle = "rgba(20, 20, 19, 0.35)";
-      ctx.lineWidth = 0.5;
+      ctx.lineWidth = 0.4;
       ctx.stroke();
 
-      rotationRef.current += 0.04;
+      rotationRef.current += 0.03;
       animRef.current = requestAnimationFrame(draw);
     }
 
