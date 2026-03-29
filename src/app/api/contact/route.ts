@@ -18,7 +18,7 @@ export async function POST(req: Request) {
 
     await resend.emails.send({
       from: "Settle <onboarding@resend.dev>",
-      to: "arkanaventerprises@gmail.com",
+      to: "hi@settlewithai.com",
       subject: `New lead from settlewithai.com: ${email}`,
       text: `New contact form submission.\n\nEmail: ${email}\nSubmitted: ${new Date().toISOString()}`,
     });
