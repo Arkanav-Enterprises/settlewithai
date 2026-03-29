@@ -532,7 +532,7 @@ export default function Home() {
         <img
           src="/cave-art.png"
           alt=""
-          className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] md:w-[700px] lg:w-[800px] h-auto opacity-[0.04] md:opacity-[0.06] pointer-events-none select-none"
+          className="absolute right-0 top-0 w-[500px] md:w-[700px] lg:w-[800px] h-auto opacity-[0.04] md:opacity-[0.06] pointer-events-none select-none"
         />
         <div className="relative max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24">
           <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-14 max-w-2xl text-text">
