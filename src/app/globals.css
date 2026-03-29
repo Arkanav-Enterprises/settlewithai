@@ -73,6 +73,13 @@ h1, h2, h3 {
 .stagger > .fade-up:nth-child(3) { transition-delay: 160ms; }
 .stagger > .fade-up:nth-child(4) { transition-delay: 240ms; }
 
+/* ─── Hide Cal.com default floating button ──── */
+[data-cal-namespace="15min"] + div,
+#cal-floating-button,
+.cal-floating-button {
+  display: none !important;
+}
+
 /* ─── Fuse path (linear top-to-bottom pulse) ── */
 @keyframes fuse-travel {
   0% { stroke-dashoffset: 0; }

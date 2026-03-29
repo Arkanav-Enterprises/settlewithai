@@ -171,7 +171,15 @@ export default function Home() {
             </a>
             <a
               href="#process"
-              className="group inline-flex items-center text-[15px] font-medium border border-border text-text px-6 py-3 rounded-full hover:border-text-muted transition-colors duration-200"
+              className="group inline-flex items-center text-[15px] font-medium text-text px-6 py-3 rounded-full hover:border-[rgba(20,20,19,0.2)] transition-all duration-200"
+              style={{
+                background: "rgba(0,0,0,0.04)",
+                backgroundImage: "linear-gradient(135deg, rgba(0,0,0,0.04), rgba(0,0,0,0.02))",
+                backdropFilter: "blur(6px)",
+                WebkitBackdropFilter: "blur(6px)",
+                boxShadow: "inset 1px 1px 1px rgba(0,0,0,0.1), inset -1px -1px 1px rgba(255,255,255,0.3), 0 2px 8px rgba(0,0,0,0.06)",
+                border: "1px solid rgba(0,0,0,0.1)",
+              }}
             >
               See how it works
               <Arrow />
