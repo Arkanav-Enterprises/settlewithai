@@ -73,13 +73,13 @@ h1, h2, h3 {
 .stagger > .fade-up:nth-child(3) { transition-delay: 160ms; }
 .stagger > .fade-up:nth-child(4) { transition-delay: 240ms; }
 
-/* ─── Pulsating path ────────────────────────── */
-@keyframes pulse-path {
-  0%, 100% { opacity: 0.25; stroke-width: 2; }
-  50% { opacity: 0.5; stroke-width: 3; }
+/* ─── Fuse path (linear top-to-bottom pulse) ── */
+@keyframes fuse-travel {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -1; }
 }
-.path-pulse {
-  animation: pulse-path 3s ease-in-out infinite;
+.path-fuse {
+  animation: fuse-travel 6s linear infinite;
 }
 
 /* ─── Article typography ────────────────────── */

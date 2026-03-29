@@ -542,16 +542,28 @@ export default function Home() {
               <path
                 d="M 80,60 C 80,140 920,100 920,250 S 80,340 80,500 S 920,600 920,750 S 80,850 80,940"
                 stroke="#d97757"
-                strokeWidth="2.5"
+                strokeWidth="1.5"
                 strokeDasharray="6 10"
                 strokeLinecap="round"
+                opacity="0.2"
                 vectorEffect="non-scaling-stroke"
-                className="path-pulse"
               />
-              <circle cx="80" cy="60" r="5" fill="#d97757" opacity="0.5" />
-              <circle cx="920" cy="250" r="5" fill="#d97757" opacity="0.5" />
-              <circle cx="80" cy="500" r="5" fill="#d97757" opacity="0.5" />
-              <circle cx="920" cy="750" r="5" fill="#d97757" opacity="0.5" />
+              {/* Fuse glow that travels along the path */}
+              <path
+                d="M 80,60 C 80,140 920,100 920,250 S 80,340 80,500 S 920,600 920,750 S 80,850 80,940"
+                stroke="#d97757"
+                strokeWidth="2"
+                strokeLinecap="round"
+                opacity="0.4"
+                vectorEffect="non-scaling-stroke"
+                pathLength="1"
+                strokeDasharray="0.08 0.92"
+                className="path-fuse"
+              />
+              <circle cx="80" cy="60" r="4" fill="#d97757" opacity="0.3" />
+              <circle cx="920" cy="250" r="4" fill="#d97757" opacity="0.3" />
+              <circle cx="80" cy="500" r="4" fill="#d97757" opacity="0.3" />
+              <circle cx="920" cy="750" r="4" fill="#d97757" opacity="0.3" />
             </svg>
 
             {[
