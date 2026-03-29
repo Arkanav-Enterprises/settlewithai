@@ -100,8 +100,10 @@ export default function Home() {
         calLink: "settle-ai/15min",
         config: { layout: "month_view", useSlotsViewOnSmallScreen: "true" },
         buttonText: "Book Demo",
+      buttonColor: "#141413",
+      buttonTextColor: "#e8e6dc",
       });
-      cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
+      cal("ui", { hideEventTypeDetails: false, layout: "month_view", cssVarsPerTheme: { light: { "cal-brand": "#141413" } } });
     })();
   }, []);
 
