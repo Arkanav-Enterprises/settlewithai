@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
+import { getCalApi } from "@calcom/embed-react";
 
 const Globe = dynamic(() => import("./globe"), { ssr: false });
 
@@ -91,6 +92,18 @@ export default function Home() {
 
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    (async function () {
+      const cal = await getCalApi({ namespace: "15min" });
+      cal("floatingButton", {
+        calLink: "settle-ai/15min",
+        config: { layout: "month_view", useSlotsViewOnSmallScreen: "true" },
+        buttonText: "Book Demo",
+      });
+      cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
+    })();
+  }, []);
 
   return (
     <main className="min-h-screen">
@@ -794,7 +807,17 @@ export default function Home() {
                   </button>
                 </form>
                 <p className="fade-up text-white/40 text-sm mt-5">
-                  We&apos;ll respond within 24 hours.
+                  We&apos;ll respond within 24 hours. Or{" "}
+                  <button
+                    type="button"
+                    data-cal-namespace="15min"
+                    data-cal-link="settle-ai/15min"
+                    data-cal-config='{"layout":"month_view"}'
+                    className="text-white/70 underline hover:text-white transition-colors"
+                  >
+                    book a 15-min call
+                  </button>
+                  .
                 </p>
               </>
             )}
