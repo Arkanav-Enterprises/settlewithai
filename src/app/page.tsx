@@ -221,7 +221,7 @@ export default function Home() {
       <section>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24 text-center">
           <h2
-            className="fade-up text-[clamp(1.4rem,2.5vw,2rem)] font-medium leading-[1.2] mb-10 text-text-muted"
+            className="text-[clamp(1.4rem,2.5vw,2rem)] font-medium leading-[1.2] mb-10 text-text-muted"
             style={{
               fontFamily: "Sentient, Georgia, serif",
               letterSpacing: "-0.03em",
@@ -233,7 +233,7 @@ export default function Home() {
           <img
             src="/claude-preview.png"
             alt="Claude interface with integrations — Google Drive, Gmail, HubSpot, Shopify"
-            className="fade-up mx-auto w-full max-w-[720px] rounded-2xl"
+            className="mx-auto w-full max-w-[720px] rounded-2xl"
           />
         </div>
       </section>
