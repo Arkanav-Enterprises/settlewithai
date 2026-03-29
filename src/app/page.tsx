@@ -103,7 +103,7 @@ export default function Home() {
       buttonColor: "#141413",
       buttonTextColor: "#e8e6dc",
       });
-      cal("ui", { hideEventTypeDetails: false, layout: "month_view", cssVarsPerTheme: { light: { "cal-brand": "#141413" } } });
+      cal("ui", { hideEventTypeDetails: false, layout: "month_view", cssVarsPerTheme: { light: { "cal-brand": "#141413" }, dark: { "cal-brand": "#141413" } } });
     })();
   }, []);
 
@@ -188,9 +188,9 @@ export default function Home() {
       </section>
 
       {/* ── Stats ────────────────────────────────────── */}
-      <section ref={statsRef} className="bg-accent">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-20 md:py-28">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-10 items-start stagger">
+      <section ref={statsRef} className="bg-[#ddd9cc]">
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-10 md:py-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-8 items-start stagger">
             {[
               { value: "85%", label: "Faster document generation" },
               { value: "11", label: "Projects deployed per engagement" },
@@ -199,7 +199,7 @@ export default function Home() {
             ].map((s) => (
               <div key={s.label} className="fade-up text-center">
                 <div
-                  className="text-[clamp(1.6rem,3.5vw,3rem)] font-medium leading-none mb-3 text-white md:whitespace-nowrap"
+                  className="text-[clamp(1.5rem,3vw,2.5rem)] font-medium leading-none mb-2 text-text md:whitespace-nowrap"
                   style={{
                     fontFamily: "Sentient, Georgia, serif",
                     letterSpacing: "-0.03em",
@@ -207,7 +207,7 @@ export default function Home() {
                 >
                   {s.value}
                 </div>
-                <div className="text-white/80 text-xs uppercase tracking-[0.12em] leading-relaxed">
+                <div className="text-text-muted text-[11px] uppercase tracking-[0.12em] leading-relaxed">
                   {s.label}
                 </div>
               </div>
