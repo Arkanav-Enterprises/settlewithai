@@ -92,14 +92,17 @@ h1, h2, h3 {
 .shine-wrapper::after {
   content: "";
   position: absolute;
-  inset: 0;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
   background: linear-gradient(
     105deg,
-    transparent 40%,
-    rgba(255,255,255,0.25) 45%,
-    rgba(255,255,255,0.5) 50%,
-    rgba(255,255,255,0.25) 55%,
-    transparent 60%
+    transparent 48%,
+    rgba(255,255,255,0.4) 49.5%,
+    rgba(255,255,255,0.6) 50%,
+    rgba(255,255,255,0.4) 50.5%,
+    transparent 52%
   );
   animation: shine-sweep 4s ease-in-out infinite;
   animation-delay: 2s;
