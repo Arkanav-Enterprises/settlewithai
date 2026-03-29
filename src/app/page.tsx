@@ -217,6 +217,27 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Claude Preview ─────────────────────────── */}
+      <section>
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24 text-center">
+          <h2
+            className="fade-up text-[clamp(1.4rem,2.5vw,2rem)] font-medium leading-[1.2] mb-10 text-text-muted"
+            style={{
+              fontFamily: "Sentient, Georgia, serif",
+              letterSpacing: "-0.03em",
+            }}
+          >
+            Here&apos;s what it looks like.
+          </h2>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/claude-preview.png"
+            alt="Claude interface with integrations — Google Drive, Gmail, HubSpot, Shopify"
+            className="fade-up mx-auto w-full max-w-[720px] rounded-2xl"
+          />
+        </div>
+      </section>
+
       {/* ── Problem ──────────────────────────────────── */}
       <section ref={problemRef}>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36 relative">
