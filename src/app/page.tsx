@@ -582,7 +582,6 @@ export default function Home() {
                 detail:
                   "You get a prioritised use-case matrix, not a pitch deck.",
                 align: "left" as const,
-                stage: "/stage-1.svg",
                 examples: [
                   "Offer generation",
                   "Vendor RFQs",
@@ -598,7 +597,6 @@ export default function Home() {
                 detail:
                   "Live project tracking. Tier-based phasing. Gap analysis built in.",
                 align: "right" as const,
-                stage: "/stage-2.svg",
                 examples: [
                   "18 functional projects",
                   "4-tier phased rollout",
@@ -613,7 +611,6 @@ export default function Home() {
                 detail:
                   "Your team uses the tool. They don\u2019t need to understand the tool.",
                 align: "left" as const,
-                stage: "/stage-3.svg",
                 examples: [
                   "Pricing calculator",
                   "Config suggestor",
@@ -628,7 +625,6 @@ export default function Home() {
                 desc: "We deploy, train your team, and iterate. Quick wins ship in weeks. Deeper integrations follow in phases.",
                 detail: "A roadmap you can actually execute.",
                 align: "right" as const,
-                stage: "/stage-4.svg",
                 examples: [
                   "85% faster docs",
                   "400+ hrs/mo saved",
@@ -644,8 +640,6 @@ export default function Home() {
                 }`}
               >
                 <div className="max-w-md">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={p.stage} alt="" className="w-16 md:w-20 h-auto mb-4 opacity-40" />
                   <span
                     className="text-text-muted text-[15px] font-medium block mb-4"
                     style={{ fontFamily: "Sentient, Georgia, serif" }}
