@@ -526,33 +526,74 @@ export default function Home() {
 
       {/* ── Process ──────────────────────────────────── */}
       <section id="process" ref={processRef} className="bg-accent">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
-          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-20 max-w-2xl text-white">
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24">
+          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-14 max-w-2xl text-white">
             From zero to settled in four phases.
           </h2>
 
           <div className="relative">
-            {/* ── Curvy dotted path ── */}
+            {/* ── Pulsating curvy path with caveman figures ── */}
             <svg
               className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
               viewBox="0 0 1000 1000"
               preserveAspectRatio="none"
               fill="none"
             >
+              {/* Pulsating path */}
               <path
                 d="M 80,60 C 80,140 920,100 920,250 S 80,340 80,500 S 920,600 920,750 S 80,850 80,940"
                 stroke="#e8e6dc"
                 strokeWidth="2.5"
                 strokeDasharray="6 10"
                 strokeLinecap="round"
-                opacity="0.35"
                 vectorEffect="non-scaling-stroke"
+                className="path-pulse"
               />
-              {/* Dots at each phase */}
-              <circle cx="80" cy="60" r="5" fill="#e8e6dc" opacity="0.5" />
-              <circle cx="920" cy="250" r="5" fill="#e8e6dc" opacity="0.5" />
-              <circle cx="80" cy="500" r="5" fill="#e8e6dc" opacity="0.5" />
-              <circle cx="920" cy="750" r="5" fill="#e8e6dc" opacity="0.5" />
+
+              {/* Caveman figure 1 — walking with torch (discovery) */}
+              <g transform="translate(70, 20)" className="caveman-walk">
+                <circle cx="10" cy="5" r="5" fill="#e8e6dc" />
+                <line x1="10" y1="10" x2="10" y2="28" stroke="#e8e6dc" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="10" y1="15" x2="2" y2="22" stroke="#e8e6dc" strokeWidth="2" strokeLinecap="round" />
+                <line x1="10" y1="15" x2="20" y2="20" stroke="#e8e6dc" strokeWidth="2" strokeLinecap="round" />
+                <line x1="10" y1="28" x2="4" y2="38" stroke="#e8e6dc" strokeWidth="2" strokeLinecap="round" />
+                <line x1="10" y1="28" x2="16" y2="38" stroke="#e8e6dc" strokeWidth="2" strokeLinecap="round" />
+                {/* torch */}
+                <line x1="20" y1="20" x2="24" y2="12" stroke="#e8e6dc" strokeWidth="1.5" strokeLinecap="round" />
+                <circle cx="24" cy="10" r="3" fill="#e8e6dc" opacity="0.6" />
+              </g>
+
+              {/* Caveman figure 2 — pointing at map (architecture) */}
+              <g transform="translate(910, 210)" className="caveman-walk" style={{ animationDelay: "0.3s" }}>
+                <circle cx="10" cy="5" r="5" fill="#e8e6dc" />
+                <line x1="10" y1="10" x2="10" y2="28" stroke="#e8e6dc" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="10" y1="15" x2="0" y2="20" stroke="#e8e6dc" strokeWidth="2" strokeLinecap="round" />
+                <line x1="10" y1="15" x2="22" y2="12" stroke="#e8e6dc" strokeWidth="2" strokeLinecap="round" />
+                <line x1="10" y1="28" x2="4" y2="38" stroke="#e8e6dc" strokeWidth="2" strokeLinecap="round" />
+                <line x1="10" y1="28" x2="16" y2="38" stroke="#e8e6dc" strokeWidth="2" strokeLinecap="round" />
+              </g>
+
+              {/* Caveman figure 3 — hammering/building (engineering) */}
+              <g transform="translate(70, 460)" className="caveman-walk" style={{ animationDelay: "0.6s" }}>
+                <circle cx="10" cy="5" r="5" fill="#e8e6dc" />
+                <line x1="10" y1="10" x2="10" y2="28" stroke="#e8e6dc" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="10" y1="15" x2="2" y2="22" stroke="#e8e6dc" strokeWidth="2" strokeLinecap="round" />
+                <line x1="10" y1="15" x2="22" y2="8" stroke="#e8e6dc" strokeWidth="2" strokeLinecap="round" />
+                <line x1="10" y1="28" x2="4" y2="38" stroke="#e8e6dc" strokeWidth="2" strokeLinecap="round" />
+                <line x1="10" y1="28" x2="16" y2="38" stroke="#e8e6dc" strokeWidth="2" strokeLinecap="round" />
+                {/* hammer */}
+                <rect x="20" y="4" width="6" height="4" rx="1" fill="#e8e6dc" opacity="0.7" />
+              </g>
+
+              {/* Caveman figure 4 — arms raised/celebrating (deploy) */}
+              <g transform="translate(910, 710)" className="caveman-walk" style={{ animationDelay: "0.9s" }}>
+                <circle cx="10" cy="5" r="5" fill="#e8e6dc" />
+                <line x1="10" y1="10" x2="10" y2="28" stroke="#e8e6dc" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="10" y1="15" x2="0" y2="8" stroke="#e8e6dc" strokeWidth="2" strokeLinecap="round" />
+                <line x1="10" y1="15" x2="20" y2="8" stroke="#e8e6dc" strokeWidth="2" strokeLinecap="round" />
+                <line x1="10" y1="28" x2="4" y2="38" stroke="#e8e6dc" strokeWidth="2" strokeLinecap="round" />
+                <line x1="10" y1="28" x2="16" y2="38" stroke="#e8e6dc" strokeWidth="2" strokeLinecap="round" />
+              </g>
             </svg>
 
             {[
@@ -616,7 +657,7 @@ export default function Home() {
             ].map((p) => (
               <div
                 key={p.num}
-                className={`fade-up relative py-14 md:py-20 ${
+                className={`fade-up relative py-10 md:py-14 ${
                   p.align === "right" ? "md:flex md:justify-end" : ""
                 }`}
               >

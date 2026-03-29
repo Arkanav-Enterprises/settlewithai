@@ -68,7 +68,29 @@ h1, h2, h3 {
 .stagger > .fade-up:nth-child(1) { transition-delay: 0ms; }
 .stagger > .fade-up:nth-child(2) { transition-delay: 80ms; }
 .stagger > .fade-up:nth-child(3) { transition-delay: 160ms; }
+.stagger > .fade-up:nth-child(1) { transition-delay: 0ms; }
+.stagger > .fade-up:nth-child(2) { transition-delay: 80ms; }
+.stagger > .fade-up:nth-child(3) { transition-delay: 160ms; }
 .stagger > .fade-up:nth-child(4) { transition-delay: 240ms; }
+
+/* ─── Pulsating path ────────────────────────── */
+@keyframes pulse-path {
+  0%, 100% { opacity: 0.25; stroke-width: 2; }
+  50% { opacity: 0.5; stroke-width: 3; }
+}
+.path-pulse {
+  animation: pulse-path 3s ease-in-out infinite;
+}
+
+/* ─── Walking stick figure ──────────────────── */
+@keyframes walk {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+.caveman-walk {
+  transform-origin: bottom center;
+  animation: walk 0.6s ease-in-out infinite;
+}
 
 /* ─── Article typography ────────────────────── */
 .prose-settle p {
