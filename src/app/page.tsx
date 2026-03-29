@@ -564,6 +564,56 @@ export default function Home() {
               <circle cx="920" cy="250" r="4" fill="#d97757" opacity="0.3" />
               <circle cx="80" cy="500" r="4" fill="#d97757" opacity="0.3" />
               <circle cx="920" cy="750" r="4" fill="#d97757" opacity="0.3" />
+
+              {/* Stage 1: Caveman — hunched, carrying club */}
+              <g transform="translate(40, 25)" opacity="0.35">
+                <circle cx="12" cy="4" r="4.5" stroke="#141413" strokeWidth="2" fill="none" />
+                <path d="M12 8.5 C12 8.5 10 18 11 22 L8 32" stroke="#141413" strokeWidth="2" strokeLinecap="round" fill="none" />
+                <path d="M11 22 L15 31" stroke="#141413" strokeWidth="2" strokeLinecap="round" />
+                <path d="M12 13 L4 19" stroke="#141413" strokeWidth="2" strokeLinecap="round" />
+                <path d="M12 13 L22 10 L24 6" stroke="#141413" strokeWidth="2" strokeLinecap="round" />
+                <rect x="22" y="3" width="5" height="4" rx="1.5" fill="#141413" opacity="0.4" />
+              </g>
+
+              {/* Stage 2: Hunter — upright, holding spear */}
+              <g transform="translate(880, 215)" opacity="0.35">
+                <circle cx="12" cy="4" r="4.5" stroke="#141413" strokeWidth="2" fill="none" />
+                <line x1="12" y1="9" x2="12" y2="26" stroke="#141413" strokeWidth="2" strokeLinecap="round" />
+                <line x1="12" y1="26" x2="7" y2="36" stroke="#141413" strokeWidth="2" strokeLinecap="round" />
+                <line x1="12" y1="26" x2="17" y2="36" stroke="#141413" strokeWidth="2" strokeLinecap="round" />
+                <line x1="12" y1="14" x2="4" y2="20" stroke="#141413" strokeWidth="2" strokeLinecap="round" />
+                <line x1="12" y1="14" x2="22" y2="11" stroke="#141413" strokeWidth="2" strokeLinecap="round" />
+                <line x1="22" y1="11" x2="24" y2="-2" stroke="#141413" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M22.5 -2 L24 -5 L25.5 -2" fill="#141413" opacity="0.4" />
+              </g>
+
+              {/* Stage 3: Builder — upright, holding hammer up */}
+              <g transform="translate(40, 465)" opacity="0.35">
+                <circle cx="12" cy="4" r="4.5" stroke="#141413" strokeWidth="2" fill="none" />
+                <line x1="12" y1="9" x2="12" y2="26" stroke="#141413" strokeWidth="2" strokeLinecap="round" />
+                <line x1="12" y1="26" x2="7" y2="36" stroke="#141413" strokeWidth="2" strokeLinecap="round" />
+                <line x1="12" y1="26" x2="17" y2="36" stroke="#141413" strokeWidth="2" strokeLinecap="round" />
+                <line x1="12" y1="14" x2="3" y2="18" stroke="#141413" strokeWidth="2" strokeLinecap="round" />
+                <path d="M12 14 L20 8 L22 2" stroke="#141413" strokeWidth="2" strokeLinecap="round" fill="none" />
+                <rect x="19" y="-2" width="7" height="5" rx="1" fill="#141413" opacity="0.4" />
+                {/* brick */}
+                <rect x="0" y="33" width="10" height="6" rx="1" stroke="#141413" strokeWidth="1.5" fill="none" opacity="0.3" />
+              </g>
+
+              {/* Stage 4: Roman — tall, cape, laurel, arms raised */}
+              <g transform="translate(880, 715)" opacity="0.35">
+                <circle cx="12" cy="4" r="4.5" stroke="#141413" strokeWidth="2" fill="none" />
+                {/* laurel */}
+                <path d="M7 2 C8 0 10 -1 12 -1 C14 -1 16 0 17 2" stroke="#141413" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+                <line x1="12" y1="9" x2="12" y2="26" stroke="#141413" strokeWidth="2" strokeLinecap="round" />
+                {/* cape */}
+                <path d="M12 10 C16 12 18 20 17 28 L12 26 L7 28 C6 20 8 12 12 10Z" fill="#141413" opacity="0.08" stroke="#141413" strokeWidth="1" />
+                <line x1="12" y1="26" x2="7" y2="36" stroke="#141413" strokeWidth="2" strokeLinecap="round" />
+                <line x1="12" y1="26" x2="17" y2="36" stroke="#141413" strokeWidth="2" strokeLinecap="round" />
+                {/* arms raised in triumph */}
+                <line x1="12" y1="14" x2="3" y2="6" stroke="#141413" strokeWidth="2" strokeLinecap="round" />
+                <line x1="12" y1="14" x2="21" y2="6" stroke="#141413" strokeWidth="2" strokeLinecap="round" />
+              </g>
             </svg>
 
             {[
