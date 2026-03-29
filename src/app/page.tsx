@@ -233,7 +233,7 @@ export default function Home() {
           <img
             src="/claude-preview.png"
             alt="Claude interface with integrations — Google Drive, Gmail, HubSpot, Shopify"
-            className="mx-auto w-full max-w-[720px] rounded-2xl"
+            className="mx-auto w-full max-w-[900px] rounded-2xl mt-4"
           />
         </div>
       </section>
