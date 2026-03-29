@@ -80,6 +80,32 @@ h1, h2, h3 {
   display: none !important;
 }
 
+/* ─── Shine/glisten sweep ───────────────────── */
+@keyframes shine-sweep {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  100% { transform: translateX(200%) rotate(25deg); }
+}
+.shine-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+.shine-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255,255,255,0.25) 45%,
+    rgba(255,255,255,0.5) 50%,
+    rgba(255,255,255,0.25) 55%,
+    transparent 60%
+  );
+  animation: shine-sweep 4s ease-in-out infinite;
+  animation-delay: 2s;
+  pointer-events: none;
+}
+
 /* ─── Fuse path (linear top-to-bottom pulse) ── */
 @keyframes fuse-travel {
   0% { stroke-dashoffset: 0; }

@@ -229,12 +229,14 @@ export default function Home() {
           >
             Here&apos;s what it looks like.
           </h2>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/claude-preview.png"
-            alt="Claude interface with integrations — Google Drive, Gmail, HubSpot, Shopify"
-            className="mx-auto w-full max-w-[900px] rounded-2xl mt-4"
-          />
+          <div className="shine-wrapper mx-auto w-full max-w-[900px] rounded-2xl mt-4">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/claude-preview.png"
+              alt="Claude interface with integrations — SAP, Salesforce, Oracle, Snowflake, Shopify"
+              className="w-full rounded-2xl"
+            />
+          </div>
         </div>
       </section>
 
