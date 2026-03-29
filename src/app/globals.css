@@ -82,16 +82,6 @@ h1, h2, h3 {
   animation: pulse-path 3s ease-in-out infinite;
 }
 
-/* ─── Walking stick figure ──────────────────── */
-@keyframes walk {
-  0%, 100% { transform: rotate(-5deg); }
-  50% { transform: rotate(5deg); }
-}
-.caveman-walk {
-  transform-origin: bottom center;
-  animation: walk 0.6s ease-in-out infinite;
-}
-
 /* ─── Article typography ────────────────────── */
 .prose-settle p {
   color: var(--text-muted);
