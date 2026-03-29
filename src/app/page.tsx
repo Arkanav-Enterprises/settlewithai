@@ -217,11 +217,8 @@ export default function Home() {
       {/* ── Problem ──────────────────────────────────── */}
       <section ref={problemRef}>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36 relative">
-          {/* Mobile: low-opacity background SVG */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/settle-char-1.svg" alt="" className="lg:hidden absolute right-0 top-12 w-44 opacity-[0.07] pointer-events-none" />
           <div className="flex items-start justify-between mb-16">
-            <div className="max-w-2xl">
+            <div className="max-w-[70%] sm:max-w-2xl">
               <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-5">
                 Most AI adoption stalls at the demo.
               </h2>
@@ -231,7 +228,7 @@ export default function Home() {
               </p>
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/settle-char-1.svg" alt="" className="hidden lg:block w-[220px] shrink-0 ml-12 -mt-4" />
+            <img src="/settle-char-1.svg" alt="" className="w-[100px] md:w-[160px] lg:w-[220px] shrink-0 ml-4 md:ml-8 lg:ml-12 -mt-4" />
           </div>
 
           <div className="grid sm:grid-cols-2 gap-px bg-border-light rounded-2xl overflow-hidden stagger">
@@ -660,13 +657,12 @@ export default function Home() {
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
           {/* Mobile: low-opacity background SVG */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/settle-char-2.svg" alt="" className="lg:hidden absolute right-0 top-8 w-48 opacity-[0.07] pointer-events-none" />
           <div className="flex items-start justify-between mb-20">
             <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12]">
               What we deliver.
             </h2>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/settle-char-2.svg" alt="" className="hidden lg:block w-[200px] shrink-0 ml-12 -mt-8" />
+            <img src="/settle-char-2.svg" alt="" className="w-[90px] md:w-[140px] lg:w-[200px] shrink-0 ml-4 md:ml-8 lg:ml-12 -mt-8" />
           </div>
 
           <div className="grid md:grid-cols-2 gap-px bg-border-light rounded-2xl overflow-hidden stagger">
