@@ -742,9 +742,13 @@ export default function Home() {
           <div className="h-px bg-border-light" />
         </div>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
-          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-20 max-w-2xl">
-            Built for teams who&apos;d rather ship than strategise.
-          </h2>
+          <div className="flex items-start justify-between mb-20">
+            <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] max-w-2xl">
+              Built for teams who&apos;d rather ship than strategise.
+            </h2>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/settle-char-3.svg" alt="" className="w-[90px] md:w-[140px] lg:w-[200px] shrink-0 ml-4 md:ml-8 lg:ml-12 -mt-4" />
+          </div>
 
           <div className="grid md:grid-cols-3 gap-px bg-border-light rounded-2xl overflow-hidden stagger">
             {[
