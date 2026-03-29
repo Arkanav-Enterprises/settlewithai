@@ -526,8 +526,15 @@ export default function Home() {
       </section>
 
       {/* ── Process ──────────────────────────────────── */}
-      <section id="process" ref={processRef} className="bg-[#ddd9cc]">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24">
+      <section id="process" ref={processRef} className="bg-[#ddd9cc] relative overflow-hidden">
+        {/* Cave art background */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/cave-art.png"
+          alt=""
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] md:w-[700px] lg:w-[800px] h-auto opacity-[0.04] md:opacity-[0.06] pointer-events-none select-none"
+        />
+        <div className="relative max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24">
           <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-14 max-w-2xl text-text">
             From zero to settled in four phases.
           </h2>
@@ -575,6 +582,7 @@ export default function Home() {
                 detail:
                   "You get a prioritised use-case matrix, not a pitch deck.",
                 align: "left" as const,
+                stage: "/stage-1.svg",
                 examples: [
                   "Offer generation",
                   "Vendor RFQs",
@@ -590,6 +598,7 @@ export default function Home() {
                 detail:
                   "Live project tracking. Tier-based phasing. Gap analysis built in.",
                 align: "right" as const,
+                stage: "/stage-2.svg",
                 examples: [
                   "18 functional projects",
                   "4-tier phased rollout",
@@ -604,6 +613,7 @@ export default function Home() {
                 detail:
                   "Your team uses the tool. They don\u2019t need to understand the tool.",
                 align: "left" as const,
+                stage: "/stage-3.svg",
                 examples: [
                   "Pricing calculator",
                   "Config suggestor",
@@ -618,6 +628,7 @@ export default function Home() {
                 desc: "We deploy, train your team, and iterate. Quick wins ship in weeks. Deeper integrations follow in phases.",
                 detail: "A roadmap you can actually execute.",
                 align: "right" as const,
+                stage: "/stage-4.svg",
                 examples: [
                   "85% faster docs",
                   "400+ hrs/mo saved",
@@ -633,6 +644,8 @@ export default function Home() {
                 }`}
               >
                 <div className="max-w-md">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={p.stage} alt="" className="w-16 md:w-20 h-auto mb-4 opacity-40" />
                   <span
                     className="text-text-muted text-[15px] font-medium block mb-4"
                     style={{ fontFamily: "Sentient, Georgia, serif" }}
