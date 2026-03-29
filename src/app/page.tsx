@@ -860,18 +860,18 @@ export default function Home() {
       </button>
 
       {/* ── Footer ───────────────────────────────────── */}
-      <footer className="bg-bg-dark text-[#e8e6dc]">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-12 flex items-center justify-between">
+      <footer className="border-t border-border-light">
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
           <span className="flex items-center gap-2.5">
-            <SettleMark className="h-6 w-auto" stroke="#e8e6dc" />
+            <SettleMark className="h-5 w-auto" stroke="#141413" />
             <span
-              className="text-[1rem] font-medium tracking-[-0.03em]"
+              className="text-[0.95rem] font-medium tracking-[-0.03em] text-text"
               style={{ fontFamily: "Sentient, Georgia, serif" }}
             >
               SETTLE
             </span>
           </span>
-          <span className="text-[rgba(232,230,220,0.4)] text-sm">
+          <span className="text-text-faint text-sm">
             AI, thoughtfully deployed.
           </span>
         </div>
