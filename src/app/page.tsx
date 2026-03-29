@@ -132,7 +132,7 @@ export default function Home() {
             </a>
             <a
               href="#contact"
-              className="text-[14px] font-medium bg-text text-bg px-5 py-2.5 rounded-full hover:bg-[#30302e] transition-colors duration-200"
+              className="text-[14px] font-medium bg-text text-bg px-5 py-2.5 rounded-lg hover:bg-[#30302e] transition-colors duration-200"
             >
               Get Started
             </a>
@@ -164,14 +164,14 @@ export default function Home() {
           <div className="flex flex-wrap gap-4">
             <a
               href="#contact"
-              className="group inline-flex items-center text-[15px] font-medium bg-text text-bg px-6 py-3 rounded-full hover:bg-[#30302e] transition-colors duration-200"
+              className="group inline-flex items-center text-[15px] font-medium bg-text text-bg px-6 py-3 rounded-lg hover:bg-[#30302e] transition-colors duration-200"
             >
               Start a conversation
               <Arrow />
             </a>
             <a
               href="#process"
-              className="group inline-flex items-center text-[15px] font-medium text-text px-6 py-3 rounded-full hover:border-[rgba(20,20,19,0.2)] transition-all duration-200"
+              className="group inline-flex items-center text-[15px] font-medium text-text px-6 py-3 rounded-lg hover:border-[rgba(20,20,19,0.2)] transition-all duration-200"
               style={{
                 background: "rgba(0,0,0,0.04)",
                 backgroundImage: "linear-gradient(135deg, rgba(0,0,0,0.04), rgba(0,0,0,0.02))",
@@ -667,11 +667,11 @@ export default function Home() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@company.com"
-                    className="flex-1 bg-white/10 border border-white/20 rounded-full px-5 py-3.5 text-sm text-white placeholder-white/40 focus:border-white/40 focus:outline-none transition-colors duration-200"
+                    className="flex-1 bg-white/10 border border-white/20 rounded-lg px-5 py-3.5 text-sm text-white placeholder-white/40 focus:border-white/40 focus:outline-none transition-colors duration-200"
                   />
                   <button
                     type="submit"
-                    className="bg-white text-accent font-medium px-7 py-3.5 rounded-full hover:bg-white/90 transition-colors duration-200 whitespace-nowrap text-[15px]"
+                    className="bg-white text-accent font-medium px-7 py-3.5 rounded-lg hover:bg-white/90 transition-colors duration-200 whitespace-nowrap text-[15px]"
                   >
                     Let&apos;s talk
                   </button>
@@ -700,7 +700,7 @@ export default function Home() {
         data-cal-namespace="15min"
         data-cal-link="settle-ai/15min"
         data-cal-config='{"layout":"month_view"}'
-        className="fixed bottom-6 right-6 z-40 text-[14px] font-medium bg-text text-bg px-5 py-2.5 rounded-full hover:bg-[#30302e] transition-colors duration-200 shadow-lg"
+        className="fixed bottom-6 right-6 z-40 text-[14px] font-medium bg-text text-bg px-5 py-2.5 rounded-lg hover:bg-[#30302e] transition-colors duration-200 shadow-lg"
       >
         Book Demo
       </button>
