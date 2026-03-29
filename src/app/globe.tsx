@@ -56,11 +56,16 @@ export default function Globe({ className = "" }: GlobeProps) {
     let mounted = true;
     startTimeRef.current = performance.now();
 
+    let w = 0;
+    let h = 0;
+
     const resize = () => {
       const dpr = window.devicePixelRatio || 1;
       const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
+      w = rect.width;
+      h = rect.height;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
@@ -90,10 +95,8 @@ export default function Globe({ className = "" }: GlobeProps) {
     const INTRO_DURATION = 3; // initial intro animation
 
     function draw() {
-      if (!ctx || !canvas || !mounted) return;
+      if (!ctx || !canvas || !mounted || w === 0) return;
 
-      const w = canvas.getBoundingClientRect().width;
-      const h = canvas.getBoundingClientRect().height;
       const cx = w / 2;
       const cy = h / 2;
 
