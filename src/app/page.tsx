@@ -96,13 +96,6 @@ export default function Home() {
   useEffect(() => {
     (async function () {
       const cal = await getCalApi({ namespace: "15min" });
-      cal("floatingButton", {
-        calLink: "settle-ai/15min",
-        config: { layout: "month_view", useSlotsViewOnSmallScreen: "true" },
-        buttonText: "Book Demo",
-      buttonColor: "#141413",
-      buttonTextColor: "#e8e6dc",
-      });
       cal("ui", { hideEventTypeDetails: false, layout: "month_view", cssVarsPerTheme: { light: { "cal-brand": "#141413" }, dark: { "cal-brand": "#141413" } } });
     })();
   }, []);
@@ -847,6 +840,16 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── Floating Book Demo button ──────────────── */}
+      <button
+        data-cal-namespace="15min"
+        data-cal-link="settle-ai/15min"
+        data-cal-config='{"layout":"month_view"}'
+        className="fixed bottom-6 right-6 z-40 text-[14px] font-medium bg-text text-bg px-5 py-2.5 rounded-full hover:bg-[#30302e] transition-colors duration-200 shadow-lg"
+      >
+        Book Demo
+      </button>
 
       {/* ── Footer ───────────────────────────────────── */}
       <footer className="bg-bg-dark text-[#e8e6dc]">
