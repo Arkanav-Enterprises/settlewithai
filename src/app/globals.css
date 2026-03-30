@@ -173,3 +173,50 @@ h1, h2, h3 {
 .prose-settle a:hover {
   text-decoration: underline;
 }
+
+/* ─── FAQ accordion ────────────────────────── */
+details summary { list-style: none; }
+details summary::-webkit-details-marker { display: none; }
+details summary .faq-icon-v {
+  transition: transform 0.25s ease;
+}
+details[open] summary .faq-icon-v {
+  transform: rotate(90deg);
+  opacity: 0;
+}
+
+/* ─── Mindmap tooltip ──────────────────────── */
+.mindmap-tooltip {
+  position: fixed;
+  z-index: 25;
+  width: 100%;
+  max-width: 190px;
+  background-color: var(--bg);
+  color: var(--text);
+  padding: 12px 10px 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  pointer-events: none;
+  will-change: transform;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 24px rgba(20, 20, 19, 0.12);
+}
+.mindmap-tooltip h3 {
+  font-size: 13px;
+  font-weight: 500;
+  font-family: Inter, sans-serif;
+}
+.mindmap-tooltip img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.mindmap-tooltip p {
+  font-size: 11px;
+  line-height: 120%;
+  color: var(--text-muted);
+  font-family: Inter, sans-serif;
+}

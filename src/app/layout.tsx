@@ -96,7 +96,7 @@ export default function RootLayout({
         description:
           "End-to-end Claude (Anthropic) deployment — readiness assessment, deployment dashboards, instruction engineering, setup and training for manufacturers and mid-market companies.",
         serviceType: "Claude AI Consulting and Deployment",
-        areaServed: "Worldwide",
+        areaServed: { "@type": "Place", name: "Worldwide" },
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: "AI Deployment Services",
@@ -130,6 +130,75 @@ export default function RootLayout({
             },
           ],
         },
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "What is Claude AI, and why does Settle use it exclusively?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Claude is Anthropic\u2019s AI assistant \u2014 built for long, complex reasoning and safe enterprise use. Settle chose it exclusively because it handles multi-step business workflows (pricing, documentation, diagnostics) better than any model we\u2019ve tested. One model, deep expertise, no vendor sprawl.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Is AI realistic for manufacturers and traditional businesses?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes. Settle\u2019s first client is a 79-year-old printing and packaging manufacturer. We mapped 49 use cases across 7 departments and deployed 11 in the first engagement \u2014 from offer generation to BOM creation to service troubleshooting.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "How is Settle different from hiring a big consulting firm?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Large firms charge enterprise rates, move slowly, and usually hand you a strategy deck. Settle deploys working Claude projects your team uses from week one. Built for the 50\u2013500 employee company that\u2019s too complex for DIY but doesn\u2019t need a six-month discovery phase.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What does a typical Claude AI deployment engagement look like?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Four phases: Discovery (audit every department\u2019s workflows), Architecture (prioritised rollout plan), Instruction Engineering (production-grade Claude projects with safety rules), and Deploy & Settle (training, launch, iteration). Quick wins ship in weeks.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "How long until we see results from AI deployment?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Most teams see their first working Claude project within 2\u20133 weeks. Orient deployed 11 projects across 7 departments in about 6 months, with measurable time savings from month one.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What systems can Claude connect to?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Claude can read and write to ERPs, CRMs, databases, and internal tools via MCP (Model Context Protocol). If your system has an API or structured data export, Settle can connect it.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Do employees need technical skills to use Claude?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "No. Settle engineers the instructions so your team interacts with Claude in plain language. They don\u2019t write prompts or configure anything \u2014 they use structured projects built and tested for their specific workflows.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Is company data safe with Claude AI?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes. Claude is built by Anthropic with enterprise-grade security. Data sent via the API is not used for training. Every project is configured with explicit safety rules, review gates, and output boundaries.",
+            },
+          },
+        ],
       },
     ],
   };

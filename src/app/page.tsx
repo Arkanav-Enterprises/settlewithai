@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { getCalApi } from "@calcom/embed-react";
 
 const Globe = dynamic(() => import("./globe"), { ssr: false });
+const Mindmap = dynamic(() => import("./mindmap"), { ssr: false });
 
 /* ─── Scroll-triggered fade-in ──────────────────────────── */
 
@@ -89,6 +90,7 @@ export default function Home() {
   const caseRef = useFadeIn();
   const quotesRef = useFadeIn();
   const audienceRef = useFadeIn();
+  const faqRef = useFadeIn();
   const ctaRef = useFadeIn();
 
   const [email, setEmail] = useState("");
@@ -278,28 +280,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Claude Preview ─────────────────────────── */}
+      {/* ── Claude Mind Map ──────────────────────────── */}
       <section>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24 text-center">
           <h2
-            className="text-[clamp(1.4rem,2.5vw,2rem)] font-medium leading-[1.2] mb-10 text-text-muted"
+            className="text-[clamp(1.4rem,2.5vw,2rem)] font-medium leading-[1.2] mb-4 text-text-muted"
             style={{
               fontFamily: "Sentient, Georgia, serif",
               letterSpacing: "-0.03em",
             }}
           >
-            Here&apos;s what it looks like.
+            Here&apos;s what Claude can do.
           </h2>
-          <div className="shine-wrapper mx-auto w-full max-w-[900px] rounded-2xl mt-4">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/claude-preview.webp"
-              alt="Claude interface with integrations — SAP, Salesforce, Oracle, Snowflake, Shopify"
-              width={1536}
-              height={1024}
-              className="w-full rounded-2xl"
-            />
-          </div>
+          <Mindmap className="mx-auto w-full max-w-[900px]" />
         </div>
       </section>
 
@@ -707,6 +700,72 @@ export default function Home() {
                   {a.desc}
                 </p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ──────────────────────────────────────── */}
+      <section ref={faqRef}>
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
+          <div className="h-px bg-border-light" />
+        </div>
+        <div className="max-w-[860px] mx-auto px-6 lg:px-10 py-24 md:py-36">
+          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-14">
+            Frequently asked questions.
+          </h2>
+
+          <div className="divide-y divide-border-light">
+            {[
+              {
+                q: "What is Claude AI, and why does Settle use it exclusively?",
+                a: "Claude is Anthropic\u2019s AI assistant \u2014 built for long, complex reasoning and safe enterprise use. We chose it exclusively because it handles multi-step business workflows (pricing, documentation, diagnostics) better than any model we\u2019ve tested. One model, deep expertise, no vendor sprawl.",
+              },
+              {
+                q: "We\u2019re a manufacturer \u2014 is AI realistic for us?",
+                a: "Yes. Our first client is a 79-year-old printing and packaging manufacturer. We mapped 49 use cases across 7 departments and deployed 11 in the first engagement \u2014 from offer generation to BOM creation to service troubleshooting. Traditional businesses often have the most to gain because their workflows are repeatable and documentation-heavy.",
+              },
+              {
+                q: "How is Settle different from hiring a big consulting firm?",
+                a: "Large firms charge enterprise rates, move slowly, and usually hand you a strategy deck. We deploy working Claude projects your team uses from week one. We\u2019re built for the 50\u2013500 employee company that\u2019s too complex for DIY but doesn\u2019t need a six-month discovery phase.",
+              },
+              {
+                q: "What does a typical engagement look like?",
+                a: "Four phases: Discovery (we audit every department\u2019s workflows), Architecture (a prioritised rollout plan), Instruction Engineering (production-grade Claude projects with safety rules and review gates), and Deploy & Settle (training, launch, iteration). Quick wins ship in weeks; deeper integrations follow in phases.",
+              },
+              {
+                q: "How long until we see results?",
+                a: "Most teams see their first working Claude project within 2\u20133 weeks. The full rollout depends on scope \u2014 Orient deployed 11 projects across 7 departments in about 6 months, with measurable time savings from month one.",
+              },
+              {
+                q: "What systems can Claude connect to?",
+                a: "Claude can read and write to ERPs, CRMs, databases, and internal tools via MCP (Model Context Protocol). If your system has an API or a structured data export, we can connect it. We\u2019ve built connectors for manufacturing-specific tools like BOM systems and service databases.",
+              },
+              {
+                q: "Do our employees need technical skills?",
+                a: "No. We engineer the instructions so your team interacts with Claude in plain language. They don\u2019t write prompts or configure anything \u2014 they use structured projects we\u2019ve built and tested for their specific workflows.",
+              },
+              {
+                q: "Is our company data safe with Claude?",
+                a: "Yes. Claude is built by Anthropic with enterprise-grade security. Data sent to Claude via the API is not used for training. We configure every project with explicit safety rules, review gates, and output boundaries. Your proprietary processes stay private.",
+              },
+            ].map((faq, i) => (
+              <details key={i} className="fade-up group" style={{ animationDelay: `${i * 40}ms` }}>
+                <summary className="flex items-center justify-between gap-6 py-6 cursor-pointer select-none">
+                  <span className="text-[clamp(1rem,1.5vw,1.1rem)] font-medium leading-snug">
+                    {faq.q}
+                  </span>
+                  <span className="relative shrink-0 w-5 h-5 text-text-faint">
+                    {/* horizontal line (always visible = minus when open) */}
+                    <span className="absolute top-1/2 left-0 w-full h-px bg-current -translate-y-1/2" />
+                    {/* vertical line (fades out on open = plus → minus) */}
+                    <span className="faq-icon-v absolute top-0 left-1/2 h-full w-px bg-current -translate-x-1/2" />
+                  </span>
+                </summary>
+                <div className="pb-6 pr-11 text-text-muted text-[15px] leading-[1.75]">
+                  {faq.a}
+                </div>
+              </details>
             ))}
           </div>
         </div>
