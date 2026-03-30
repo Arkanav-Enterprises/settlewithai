@@ -45,6 +45,8 @@ export default function Article() {
     description:
       "How we used Claude Cowork to automate prospect research, personalised outreach, Gmail draft creation, and send scheduling.",
     datePublished: "2026-03-29T00:00:00Z",
+    dateModified: "2026-03-29T00:00:00Z",
+    image: "https://settlewithai.com/og-image.png",
     author: {
       "@type": "Organization",
       name: "Settle",
@@ -53,6 +55,10 @@ export default function Article() {
     publisher: {
       "@type": "Organization",
       name: "Settle",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://settlewithai.com/apple-touch-icon.png",
+      },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
@@ -66,6 +72,20 @@ export default function Article() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://settlewithai.com" },
+              { "@type": "ListItem", position: 2, name: "Blog", item: "https://settlewithai.com/blog" },
+              { "@type": "ListItem", position: 3, name: "AI-Powered Outreach", item: "https://settlewithai.com/blog/ai-powered-outreach-with-cowork" },
+            ],
+          }),
+        }}
       />
 
       {/* Nav */}
@@ -254,6 +274,21 @@ export default function Article() {
             That&apos;s what settling AI into a business actually looks
             like.
           </p>
+
+          {/* Related */}
+          <div className="mt-16 pt-10 border-t border-[rgba(20,20,19,0.1)]">
+            <h3 className="text-lg font-medium mb-6">Related</h3>
+            <div className="grid sm:grid-cols-2 gap-6">
+              <a href="/blog/orient-case-study" className="group">
+                <p className="font-medium group-hover:text-[#d97757] transition-colors">How a 79-Year-Old Manufacturer Deployed AI Across 7 Departments</p>
+                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">49 use cases mapped, 18 projects structured, 11 deployed in the first engagement.</p>
+              </a>
+              <a href="/blog/integrating-ai-into-your-company" className="group">
+                <p className="font-medium group-hover:text-[#d97757] transition-colors">How to Actually Integrate AI Into Your Company</p>
+                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">A structured, phase-by-phase approach to deploying AI across your team&apos;s real workflows.</p>
+              </a>
+            </div>
+          </div>
 
           {/* CTA */}
           <div className="mt-16 pt-10 border-t border-border-light">

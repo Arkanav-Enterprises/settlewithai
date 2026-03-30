@@ -239,7 +239,7 @@ export default function Home() {
               </p>
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/settle-char-1.svg" alt="" className="w-[100px] md:w-[160px] lg:w-[220px] shrink-0 ml-4 md:ml-8 lg:ml-12 -mt-4" />
+            <img src="/settle-char-1.svg" alt="" width={1000} height={1000} loading="lazy" className="w-[100px] md:w-[160px] lg:w-[220px] shrink-0 ml-4 md:ml-8 lg:ml-12 -mt-4" />
           </div>
 
           <div className="grid sm:grid-cols-2 gap-px bg-border-light rounded-2xl overflow-hidden stagger">
@@ -293,8 +293,10 @@ export default function Home() {
           <div className="shine-wrapper mx-auto w-full max-w-[900px] rounded-2xl mt-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/claude-preview.png"
+              src="/claude-preview.webp"
               alt="Claude interface with integrations — SAP, Salesforce, Oracle, Snowflake, Shopify"
+              width={1536}
+              height={1024}
               className="w-full rounded-2xl"
             />
           </div>
@@ -323,6 +325,9 @@ export default function Home() {
               <img
                 src="/orient-logo.png"
                 alt="Orient Printing & Packaging"
+                width={259}
+                height={78}
+                loading="lazy"
                 className="h-10 w-auto"
               />
               <div>
@@ -455,8 +460,11 @@ export default function Home() {
         {/* Cave art background */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/cave-art.png"
+          src="/cave-art.webp"
           alt=""
+          width={1024}
+          height={1024}
+          loading="lazy"
           className="absolute right-0 top-0 w-[500px] md:w-[700px] lg:w-[800px] h-auto opacity-[0.04] md:opacity-[0.06] pointer-events-none select-none"
         />
         <div className="relative max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24">
@@ -608,7 +616,7 @@ export default function Home() {
               What we deliver.
             </h2>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/settle-char-2.svg" alt="" className="w-[90px] md:w-[140px] lg:w-[200px] shrink-0 ml-4 md:ml-8 lg:ml-12 -mt-8" />
+            <img src="/settle-char-2.svg" alt="" width={1000} height={1000} loading="lazy" className="w-[90px] md:w-[140px] lg:w-[200px] shrink-0 ml-4 md:ml-8 lg:ml-12 -mt-8" />
           </div>
 
           <div className="grid md:grid-cols-2 gap-px bg-border-light rounded-2xl overflow-hidden stagger">
@@ -679,7 +687,7 @@ export default function Home() {
               Who we work with.
             </h2>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/settle-char-3.svg" alt="" className="w-[90px] md:w-[140px] lg:w-[200px] shrink-0 ml-4 md:ml-8 lg:ml-12 -mt-4" />
+            <img src="/settle-char-3.svg" alt="" width={1000} height={1000} loading="lazy" className="w-[90px] md:w-[140px] lg:w-[200px] shrink-0 ml-4 md:ml-8 lg:ml-12 -mt-4" />
           </div>
 
           <div className="grid md:grid-cols-2 gap-px bg-border-light rounded-2xl overflow-hidden stagger">

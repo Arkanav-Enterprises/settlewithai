@@ -46,6 +46,8 @@ export default function Article() {
     description:
       "A structured, phase-by-phase approach to deploying AI across your team's real workflows.",
     datePublished: "2026-03-27T00:00:00Z",
+    dateModified: "2026-03-27T00:00:00Z",
+    image: "https://settlewithai.com/og-image.png",
     author: {
       "@type": "Organization",
       name: "Settle",
@@ -54,6 +56,10 @@ export default function Article() {
     publisher: {
       "@type": "Organization",
       name: "Settle",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://settlewithai.com/apple-touch-icon.png",
+      },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
@@ -67,6 +73,20 @@ export default function Article() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://settlewithai.com" },
+              { "@type": "ListItem", position: 2, name: "Blog", item: "https://settlewithai.com/blog" },
+              { "@type": "ListItem", position: 3, name: "Integrating AI", item: "https://settlewithai.com/blog/integrating-ai-into-your-company" },
+            ],
+          }),
+        }}
       />
 
       {/* Nav */}
@@ -370,6 +390,21 @@ export default function Article() {
             problem. You have a deployment problem. And that&apos;s a
             solvable problem — with the right structure.
           </p>
+
+          {/* Related */}
+          <div className="mt-16 pt-10 border-t border-[rgba(20,20,19,0.1)]">
+            <h3 className="text-lg font-medium mb-6">Related</h3>
+            <div className="grid sm:grid-cols-2 gap-6">
+              <a href="/blog/orient-case-study" className="group">
+                <p className="font-medium group-hover:text-[#d97757] transition-colors">How a 79-Year-Old Manufacturer Deployed AI Across 7 Departments</p>
+                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">49 use cases mapped, 18 projects structured, 11 deployed in the first engagement.</p>
+              </a>
+              <a href="/blog/mcp-explained-for-business" className="group">
+                <p className="font-medium group-hover:text-[#d97757] transition-colors">MCP Explained: Connect Your ERP, CRM, and Systems to Claude</p>
+                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">How Model Context Protocol lets Claude read and write to your business systems.</p>
+              </a>
+            </div>
+          </div>
 
           {/* CTA */}
           <div className="mt-16 pt-10 border-t border-border-light">
