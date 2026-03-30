@@ -48,12 +48,14 @@ export const metadata: Metadata = {
     title: "Settle — Claude AI Deployment Studio for Traditional Businesses",
     description:
       "We deploy Claude (Anthropic's AI) across your team's actual workflows. Structured rollouts, production-grade instructions, real results. Built for manufacturers and mid-market companies.",
+    images: [{ url: "/og-image.png", width: 1519, height: 1090, alt: "Settle — Claude AI Deployment Studio" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Settle — Claude AI Deployment Studio",
     description:
       "We deploy Claude (Anthropic's AI) across your team's actual workflows. Structured rollouts, production-grade instructions, real results.",
+    images: ["/og-image.png"],
   },
 };
 
