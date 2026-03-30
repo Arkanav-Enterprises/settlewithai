@@ -223,6 +223,16 @@ export default function Article() {
             guide and a free afternoon.
           </p>
 
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/blog/projects-dashboard.webp"
+            alt="Claude Projects dashboard showing OrientPrint Sales Proposals, Vendor Finder, and other deployed projects"
+            width={1512}
+            height={782}
+            loading="lazy"
+            className="rounded-xl border border-[rgba(20,20,19,0.1)] my-10"
+          />
+
           <h2>Where it starts to break</h2>
           <p>
             The cracks show up around three dimensions: organizational
@@ -337,6 +347,16 @@ export default function Article() {
             one.
           </p>
 
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/blog/orient-project-sidebar.webp"
+            alt="Orient Sales Proposals project showing custom instructions, knowledge files including pricing logic, offer format guide, and machine configuration documents"
+            width={440}
+            height={1210}
+            loading="lazy"
+            className="rounded-xl border border-[rgba(20,20,19,0.1)] my-10 max-w-[360px]"
+          />
+
           <h3>Phase 2: Instruction engineering</h3>
           <p>
             Each project gets production-grade instructions. Not a paragraph
@@ -417,6 +437,16 @@ export default function Article() {
             These aren&apos;t projections. They&apos;re measurements from
             production use.
           </p>
+
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/blog/orient-pricing-output.webp"
+            alt="Claude generating a real pricing breakdown for an OrientJet L&P Series press — head count calculations, component pricing, GST, and a safety flag about an unconfirmed line item"
+            width={1512}
+            height={782}
+            loading="lazy"
+            className="rounded-xl border border-[rgba(20,20,19,0.1)] my-10"
+          />
 
           <h2>The instruction engineering gap</h2>
           <p>
