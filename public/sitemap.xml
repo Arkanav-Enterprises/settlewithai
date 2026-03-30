@@ -7,6 +7,12 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://settlewithai.com/blog</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://settlewithai.com/blog/integrating-ai-into-your-company</loc>
     <lastmod>2026-03-27</lastmod>
     <changefreq>monthly</changefreq>
