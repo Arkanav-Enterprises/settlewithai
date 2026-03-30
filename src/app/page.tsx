@@ -145,7 +145,7 @@ export default function Home() {
       </nav>
 
       {/* ── Hero + Globe ─────────────────────────────── */}
-      <section className="relative min-h-screen">
+      <section className="relative min-h-screen overflow-hidden">
         {/* Globe background — on mobile, push to bottom edge */}
         <div className="absolute inset-0 flex items-end md:items-center justify-center">
           <div className="w-[min(110vw,900px)] h-[min(110vw,900px)] translate-y-[30%] md:translate-y-0 md:mt-16">
