@@ -18,6 +18,15 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "claude-team-deployment-beyond-diy",
+    title:
+      "Beyond the 7-Day Playbook: Deploying Claude AI Across a Real Organization",
+    description:
+      "Ruben Hassid's Claude team setup guide is great for small teams. Here's what changes when you deploy across 7 departments at a 200-person manufacturer.",
+    date: "2026-03-30",
+    tag: "Deployment",
+  },
+  {
     slug: "orient-case-study",
     title:
       "How a 79-Year-Old Manufacturer Deployed AI Across 7 Departments in 6 Months",
