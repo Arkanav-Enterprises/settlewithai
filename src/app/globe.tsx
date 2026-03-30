@@ -96,7 +96,7 @@ export default function Globe({ className = "" }: { className?: string }) {
 
       /* Intro */
       const ip = Math.min(elapsed / INTRO, 1);
-      const scale = (0.8 + 0.2 * easeInOut(ip)) * (1 + Math.min(scrollY / 4000, 0.08));
+      const scale = 0.8 + 0.2 * easeInOut(ip);
       const radius = ch * 0.48 * scale;
 
       /* Country cycling */
