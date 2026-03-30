@@ -87,6 +87,7 @@ export default function Home() {
   const processRef = useFadeIn();
   const servicesRef = useFadeIn();
   const caseRef = useFadeIn();
+  const quotesRef = useFadeIn();
   const audienceRef = useFadeIn();
   const ctaRef = useFadeIn();
 
@@ -161,7 +162,7 @@ export default function Home() {
             AI, <span className="text-accent">thoughtfully</span> deployed.
           </h1>
           <p className="text-text-muted text-[clamp(1rem,1.5vw,1.2rem)] max-w-[420px] leading-[1.7] mb-10">
-            We settle AI into your team&apos;s actual workflows &mdash;
+            We settle Claude into your team&apos;s actual workflows &mdash;
             structured rollouts, production-grade instructions, and real
             results.
           </p>
@@ -195,12 +196,15 @@ export default function Home() {
       {/* ── Stats ────────────────────────────────────── */}
       <section ref={statsRef} className="bg-[#ddd9cc]">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-10 md:py-12">
+          <p className="text-xs text-text-faint uppercase tracking-[0.12em] text-center mb-6">
+            From our first engagement &mdash; Orient Printing &amp; Packaging
+          </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-8 items-start stagger">
             {[
               { value: "85%", label: "Faster document generation" },
-              { value: "11", label: "Projects deployed per engagement" },
-              { value: "49", label: "Use cases mapped per company" },
-              { value: "4hrs → 30min", label: "Typical task time reduction" },
+              { value: "11", label: "Projects deployed" },
+              { value: "49", label: "Use cases mapped" },
+              { value: "4hrs → 30min", label: "Task time reduction" },
             ].map((s) => (
               <div key={s.label} className="fade-up text-center">
                 <div
@@ -221,29 +225,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Claude Preview ─────────────────────────── */}
-      <section>
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24 text-center">
-          <h2
-            className="text-[clamp(1.4rem,2.5vw,2rem)] font-medium leading-[1.2] mb-10 text-text-muted"
-            style={{
-              fontFamily: "Sentient, Georgia, serif",
-              letterSpacing: "-0.03em",
-            }}
-          >
-            Here&apos;s what it looks like.
-          </h2>
-          <div className="shine-wrapper mx-auto w-full max-w-[900px] rounded-2xl mt-4">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/claude-preview.png"
-              alt="Claude interface with integrations — SAP, Salesforce, Oracle, Snowflake, Shopify"
-              className="w-full rounded-2xl"
-            />
-          </div>
-        </div>
-      </section>
-
       {/* ── Problem ──────────────────────────────────── */}
       <section ref={problemRef}>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36 relative">
@@ -254,7 +235,7 @@ export default function Home() {
               </h2>
               <p className="fade-up text-text-muted text-[17px] leading-relaxed">
                 The gap isn&apos;t tools &mdash; it&apos;s deployment.
-                Here&apos;s what we do differently.
+                Here&apos;s how we deploy Claude differently.
               </p>
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -293,6 +274,29 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Claude Preview ─────────────────────────── */}
+      <section>
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24 text-center">
+          <h2
+            className="text-[clamp(1.4rem,2.5vw,2rem)] font-medium leading-[1.2] mb-10 text-text-muted"
+            style={{
+              fontFamily: "Sentient, Georgia, serif",
+              letterSpacing: "-0.03em",
+            }}
+          >
+            Here&apos;s what it looks like.
+          </h2>
+          <div className="shine-wrapper mx-auto w-full max-w-[900px] rounded-2xl mt-4">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/claude-preview.png"
+              alt="Claude interface with integrations — SAP, Salesforce, Oracle, Snowflake, Shopify"
+              className="w-full rounded-2xl"
+            />
           </div>
         </div>
       </section>
@@ -363,6 +367,86 @@ export default function Home() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ── Customer Quotes ─────────────────────────── */}
+      <section ref={quotesRef} className="bg-[#ddd9cc]">
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
+          <p className="fade-up text-xs uppercase tracking-[0.15em] text-text-faint mb-4">
+            Voices from South Asia
+          </p>
+          <h2
+            className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-16 max-w-3xl text-text"
+            style={{ animationDelay: "80ms" }}
+          >
+            What business leaders are saying about AI adoption.
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-px bg-border-light rounded-2xl overflow-hidden">
+            {[
+              {
+                q: "My worry isn\u2019t intentional harm but unexamined assumptions being scaled through automation.",
+                attr: "Entrepreneur, India",
+                span: "md:row-span-2",
+                featured: true,
+              },
+              {
+                q: "I\u2019m a father, small business owner in a small town in India \u2014 not rich, not Ivy League. I tried building an app in a programming language I\u2019d never touched\u2026 in 2 days with an AI tool, I had the app. It would have taken at least 2 months before.",
+                attr: "Entrepreneur, India",
+              },
+              {
+                q: "It\u2019s not AI giving me ideas \u2014 it\u2019s me discovering ideas myself, as AI writes the code. Since I could think faster than I could build, my range of ideas has grown.",
+                attr: "Entrepreneur, India",
+              },
+              {
+                q: "A laptop crash wiped three months of work \u2014 my website, gone. I rebuilt it in four languages within five weeks\u2026 then built a financial data tool for a charity in four days. I don\u2019t see any limit anymore.",
+                attr: "Entrepreneur, India",
+              },
+              {
+                q: "I was finding ways to earn, and accidentally AI gave me the idea of a new business\u2026 so I can marry the love of my life, retire my family, and help people in Balochistan and Sindh with food, schools, and hospitals.",
+                attr: "Entrepreneur, Pakistan",
+              },
+            ].map((quote, i) => (
+              <div
+                key={i}
+                className={`fade-up bg-bg p-8 md:p-10 flex flex-col justify-between ${
+                  quote.span ?? ""
+                }`}
+                style={{ animationDelay: `${i * 80}ms` }}
+              >
+                <blockquote
+                  className={`leading-[1.7] mb-8 ${
+                    quote.featured
+                      ? "text-[clamp(1.1rem,1.8vw,1.35rem)] text-text"
+                      : "text-[clamp(0.95rem,1.2vw,1.05rem)] text-text-muted"
+                  }`}
+                  style={{
+                    fontFamily: quote.featured
+                      ? "Sentient, Georgia, serif"
+                      : "inherit",
+                  }}
+                >
+                  &ldquo;{quote.q}&rdquo;
+                </blockquote>
+                <div className="text-xs text-text-faint uppercase tracking-[0.08em]">
+                  {quote.attr}
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-text-faint mt-6 max-w-2xl">
+            Quotes sampled from Anthropic&rsquo;s{" "}
+            <a
+              href="https://www.anthropic.com/features/81k-interviews#quotes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-text-muted transition-colors"
+            >
+              81,000 Conversations About AI
+            </a>
+            , filtered by South Asia. Edited for clarity.
+          </p>
         </div>
       </section>
 
@@ -448,9 +532,9 @@ export default function Home() {
               {
                 num: "03",
                 title: "Instruction Engineering",
-                desc: "We write production-grade project instructions for every use case. Not prompts \u2014 structured workflows with review gates, rules, and knowledge files.",
+                desc: "We write production-grade Claude project instructions for every use case. Not prompts \u2014 structured workflows with review gates, safety rules, and knowledge files.",
                 detail:
-                  "Your team uses the tool. They don\u2019t need to understand the tool.",
+                  "Your team uses Claude. They don\u2019t need to understand the engineering behind it.",
                 align: "left" as const,
                 examples: [
                   "Pricing calculator",
@@ -592,25 +676,21 @@ export default function Home() {
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
           <div className="flex items-start justify-between mb-20">
             <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] max-w-2xl">
-              Built for teams who&apos;d rather ship than strategise.
+              Who we work with.
             </h2>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/settle-char-3.svg" alt="" className="w-[90px] md:w-[140px] lg:w-[200px] shrink-0 ml-4 md:ml-8 lg:ml-12 -mt-4" />
           </div>
 
-          <div className="grid md:grid-cols-3 gap-px bg-border-light rounded-2xl overflow-hidden stagger">
+          <div className="grid md:grid-cols-2 gap-px bg-border-light rounded-2xl overflow-hidden stagger">
             {[
               {
-                title: "Startups",
-                desc: "Small team, no time to waste. We deploy AI across your workflows so five people operate like fifty.",
+                title: "Manufacturers & Industrial Companies",
+                desc: "Complex operations, multiple departments, high documentation overhead. We map your workflows, deploy Claude across teams, and train your people to use it.",
               },
               {
-                title: "SMBs & Manufacturers",
-                desc: "Departments, processes, documents. We map the complexity, structure the rollout, and deploy without disruption.",
-              },
-              {
-                title: "Solo Operators",
-                desc: "You\u2019re one person doing everything. We build your AI operating system so you can focus on the work that matters.",
+                title: "Growing SMBs",
+                desc: "Lean teams doing more than they should manually. We find the workflows where Claude saves the most time and deploy them first.",
               },
             ].map((a) => (
               <div key={a.title} className="fade-up bg-bg p-8 md:p-10">
@@ -727,7 +807,7 @@ export default function Home() {
             </span>
           </span>
           <span className="text-text-faint text-sm">
-            AI, thoughtfully deployed.
+            AI, thoughtfully deployed. Built on Claude by Anthropic.
           </span>
         </div>
       </footer>

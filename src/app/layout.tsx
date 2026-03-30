@@ -6,11 +6,11 @@ const siteUrl = "https://settlewithai.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Settle — AI, thoughtfully deployed.",
+    default: "Settle — Claude AI Deployment Studio",
     template: "%s | Settle",
   },
   description:
-    "We settle AI into your team's actual workflows — structured rollouts, production-grade instructions, and real results. Not a chatbot demo. Not a slide deck.",
+    "We deploy Claude (Anthropic's AI) across your team's actual workflows. Structured rollouts, production-grade instructions, real results. Built for manufacturers and mid-market companies.",
   keywords: [
     "AI deployment",
     "AI consulting",
@@ -45,15 +45,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "Settle",
-    title: "Settle — AI, thoughtfully deployed.",
+    title: "Settle — Claude AI Deployment Studio for Traditional Businesses",
     description:
-      "We settle AI into your team's actual workflows — structured rollouts, production-grade instructions, and real results.",
+      "We deploy Claude (Anthropic's AI) across your team's actual workflows. Structured rollouts, production-grade instructions, real results. Built for manufacturers and mid-market companies.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Settle — AI, thoughtfully deployed.",
+    title: "Settle — Claude AI Deployment Studio",
     description:
-      "We settle AI into your team's actual workflows — structured rollouts, production-grade instructions, and real results.",
+      "We deploy Claude (Anthropic's AI) across your team's actual workflows. Structured rollouts, production-grade instructions, real results.",
   },
 };
 
@@ -70,7 +70,7 @@ export default function RootLayout({
         name: "Settle",
         url: siteUrl,
         description:
-          "AI deployment studio that settles AI into businesses with structured rollouts, production-grade instructions, and real results.",
+          "Claude AI deployment studio that settles Anthropic's Claude into businesses with structured rollouts, production-grade instructions, and real results.",
         knowsAbout: [
           "Artificial Intelligence",
           "AI Deployment",
@@ -86,14 +86,14 @@ export default function RootLayout({
       },
       {
         "@type": "Service",
-        name: "AI Deployment Services",
+        name: "Claude AI Deployment Services",
         provider: {
           "@type": "Organization",
           name: "Settle",
         },
         description:
-          "End-to-end AI deployment — readiness assessment, deployment dashboards, instruction engineering, setup and training.",
-        serviceType: "AI Consulting and Deployment",
+          "End-to-end Claude (Anthropic) deployment — readiness assessment, deployment dashboards, instruction engineering, setup and training for manufacturers and mid-market companies.",
+        serviceType: "Claude AI Consulting and Deployment",
         areaServed: "Worldwide",
         hasOfferCatalog: {
           "@type": "OfferCatalog",
