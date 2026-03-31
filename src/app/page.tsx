@@ -293,7 +293,7 @@ export default function Home() {
           >
             Here&apos;s what Claude can do.
           </h2>
-          <CoworkDemo className="mx-auto w-full max-w-[900px]" />
+          <CoworkDemo className="mx-auto w-full max-w-[900px] text-left" />
         </div>
       </section>
 
