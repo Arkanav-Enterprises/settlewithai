@@ -97,6 +97,7 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hoveredService, setHoveredService] = useState<string | null>(null);
 
   useEffect(() => {
     (async function () {
@@ -614,27 +615,35 @@ export default function Home() {
                 {
                   icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>,
                   title: "AI Readiness Assessment",
+                  category: "AI Readiness",
                   desc: "We audit every department\u2019s workflows, discover use cases, and build a tier-based rollout map with blocker analysis.",
                 },
                 {
                   icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>,
                   title: "Deployment Dashboard",
+                  category: "Deployment Dashboard",
                   desc: "Interactive rollout visualisation with project-level tracking, skill mapping, and a kanban board for execution.",
                 },
                 {
                   icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>,
                   title: "Instruction Engineering",
+                  category: "Instruction Engineering",
                   desc: "Production-grade Claude instructions with knowledge file specs, review gates, safety rules, and output standards.",
                 },
                 {
                   icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
                   title: "Setup & Training",
+                  category: "Setup & Training",
                   desc: "Project creation, knowledge file preparation, team onboarding, and ongoing iteration support.",
                 },
               ].map((s, i) => (
-                <div key={s.title}>
+                <div
+                  key={s.title}
+                  onMouseEnter={() => setHoveredService(s.category)}
+                  onMouseLeave={() => setHoveredService(null)}
+                >
                   {i > 0 && <div className="h-px bg-border-light my-6" />}
-                  <div className="fade-up">
+                  <div className="fade-up cursor-default">
                     <div className="text-accent mb-3">{s.icon}</div>
                     <h3
                       className="text-[1rem] font-medium mb-2"
@@ -650,7 +659,7 @@ export default function Home() {
 
             {/* Right column — mindmap (primary visual, sticky) */}
             <div className="lg:flex-1 lg:sticky lg:top-24 lg:self-start">
-              <Mindmap className="w-full" />
+              <Mindmap className="w-full" highlightCategory={hoveredService} />
             </div>
           </div>
         </div>

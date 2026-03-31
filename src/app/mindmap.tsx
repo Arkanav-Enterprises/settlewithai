@@ -107,9 +107,50 @@ const MOBILE_MAX_NODES = 3;
 
 /* ─── Component ─────────────────────────────────────────── */
 
-export default function Mindmap({ className = "" }: { className?: string }) {
+export default function Mindmap({ className = "", highlightCategory }: { className?: string; highlightCategory?: string | null }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<d3.Selection<SVGSVGElement, unknown, null, undefined> | null>(null);
+  const nodesRef = useRef<MindmapNode[]>([]);
+
+  /* Highlight effect — dims nodes not in the highlighted category */
+  useEffect(() => {
+    const svg = svgRef.current;
+    const nodes = nodesRef.current;
+    if (!svg || nodes.length === 0) return;
+
+    if (!highlightCategory) {
+      // Reset all
+      svg.selectAll<SVGCircleElement, MindmapNode>(".item-circle").transition().duration(300).attr("opacity", 0.8);
+      svg.selectAll<SVGGElement, MindmapNode>(".item-label-group").transition().duration(300).attr("opacity", 1);
+      svg.selectAll(".categories circle").transition().duration(300).attr("opacity", 0.9);
+      svg.selectAll(".categories text").transition().duration(300).attr("opacity", 1);
+      svg.selectAll<SVGLineElement, MindmapNode>(".links line").transition().duration(300)
+        .attr("opacity", (d: MindmapNode) => d.type === "category" ? 0.6 : 0.4);
+    } else {
+      // Category circles/labels
+      const catTextNodes = svg.selectAll(".categories text").nodes() as SVGTextElement[];
+      const catCircleNodes = svg.selectAll(".categories circle").nodes() as SVGCircleElement[];
+      catTextNodes.forEach((textEl, i) => {
+        const match = textEl.textContent === highlightCategory;
+        d3.select(textEl).transition().duration(300).attr("opacity", match ? 1 : 0.15);
+        if (catCircleNodes[i]) d3.select(catCircleNodes[i]).transition().duration(300).attr("opacity", match ? 1 : 0.15);
+      });
+
+      // Items
+      svg.selectAll<SVGCircleElement, MindmapNode>(".item-circle").transition().duration(300)
+        .attr("opacity", (d: MindmapNode) => d.category === highlightCategory ? 0.9 : 0.1);
+      svg.selectAll<SVGGElement, MindmapNode>(".item-label-group").transition().duration(300)
+        .attr("opacity", (d: MindmapNode) => d.category === highlightCategory ? 1 : 0.1);
+
+      // Lines
+      svg.selectAll<SVGLineElement, MindmapNode>(".links line").transition().duration(300)
+        .attr("opacity", (d: MindmapNode) => {
+          if (d.type === "category") return d.name === highlightCategory ? 0.6 : 0.05;
+          return d.category === highlightCategory ? 0.4 : 0.05;
+        });
+    }
+  }, [highlightCategory]);
 
   useEffect(() => {
     const container = wrapRef.current;
@@ -207,6 +248,10 @@ export default function Mindmap({ className = "" }: { className?: string }) {
     const linkGroup = svg.append("g").attr("class", "links");
     const categoryGroup = svg.append("g").attr("class", "categories");
     const nodeGroup = svg.append("g").attr("class", "nodes");
+
+    /* Store refs for highlight effect */
+    svgRef.current = svg as unknown as d3.Selection<SVGSVGElement, unknown, null, undefined>;
+    nodesRef.current = nodes;
 
     /* ── Force helpers ── */
     function chargeForce() {
