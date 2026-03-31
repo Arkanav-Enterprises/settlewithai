@@ -38,6 +38,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  other: {
+    "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION || "",
+  },
   alternates: {
     canonical: siteUrl,
   },
@@ -72,20 +75,51 @@ export default function RootLayout({
         "@type": "Organization",
         name: "Settle",
         url: siteUrl,
+        logo: {
+          "@type": "ImageObject",
+          url: `${siteUrl}/apple-touch-icon.png`,
+        },
         description:
           "Claude AI deployment studio that settles Anthropic's Claude into businesses with structured rollouts, production-grade instructions, and real results.",
+        foundingDate: "2026",
+        contactPoint: {
+          "@type": "ContactPoint",
+          email: "hi@settlewithai.com",
+          contactType: "sales",
+          availableLanguage: ["English"],
+        },
+        sameAs: [],
         knowsAbout: [
           "Artificial Intelligence",
           "AI Deployment",
           "Workflow Automation",
           "Instruction Engineering",
           "Claude AI",
+          "Anthropic",
+          "Model Context Protocol",
         ],
       },
       {
         "@type": "WebSite",
         name: "Settle",
         url: siteUrl,
+        publisher: {
+          "@type": "Organization",
+          name: "Settle",
+        },
+      },
+      {
+        "@type": "ProfessionalService",
+        name: "Settle",
+        url: siteUrl,
+        description:
+          "AI deployment studio specializing in Claude (Anthropic) deployment for mid-market businesses. Structured rollouts, instruction engineering, measurable results.",
+        priceRange: "$$",
+        areaServed: {
+          "@type": "Place",
+          name: "Worldwide",
+        },
+        serviceType: "AI Consulting and Deployment",
       },
       {
         "@type": "Service",

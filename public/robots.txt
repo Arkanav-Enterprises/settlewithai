@@ -16,6 +16,12 @@ Allow: /
 User-agent: ChatGPT-User
 Allow: /
 
+User-agent: Bingbot
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
 User-agent: Bytespider
 Disallow: /
 
