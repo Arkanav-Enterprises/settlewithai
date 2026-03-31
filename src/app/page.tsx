@@ -5,7 +5,8 @@ import dynamic from "next/dynamic";
 import { getCalApi } from "@calcom/embed-react";
 
 const Globe = dynamic(() => import("./globe"), { ssr: false });
-const Mindmap = dynamic(() => import("./mindmap"), { ssr: false });
+// const Mindmap = dynamic(() => import("./mindmap"), { ssr: false });
+const CoworkDemo = dynamic(() => import("./cowork-demo"), { ssr: false });
 
 /* ─── Scroll-triggered fade-in ──────────────────────────── */
 
@@ -292,7 +293,7 @@ export default function Home() {
           >
             Here&apos;s what Claude can do.
           </h2>
-          <Mindmap className="mx-auto w-full max-w-[900px]" />
+          <CoworkDemo className="mx-auto w-full max-w-[900px]" />
         </div>
       </section>
 

@@ -185,6 +185,16 @@ details[open] summary .faq-icon-v {
   opacity: 0;
 }
 
+/* ─── Cowork demo animations ───────────────── */
+@keyframes panelSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes gridReveal {
+  from { clip-path: circle(0% at 50% 50%); }
+  to { clip-path: circle(150% at 50% 50%); }
+}
+
 /* ─── Mindmap tooltip ──────────────────────── */
 .mindmap-tooltip {
   position: fixed;
