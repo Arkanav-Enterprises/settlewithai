@@ -200,7 +200,7 @@ function CoworkView() {
                     <div className="relative w-7 h-7 rounded-lg flex items-center justify-center overflow-hidden shrink-0" style={{ backgroundColor: "rgba(20,20,19,0.03)", border: "0.5px solid rgba(20,20,19,0.08)" }}>
                       {/* Default icon — hide on hover */}
                       <div style={{ opacity: hovered === item.key ? 0 : 1, transition: "opacity 200ms" }}>
-                        {item.icon ?? <span className="text-xs font-medium" style={{ color: "rgba(20,20,19,0.4)" }}>{item.letter}</span>}
+                        {item.icon}
                       </div>
                       {/* Arrow icon — show on hover */}
                       <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", opacity: hovered === item.key ? 1 : 0, transition: "opacity 200ms" }}>
