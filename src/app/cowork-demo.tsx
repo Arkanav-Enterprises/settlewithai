@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 /* ─── SVG Icons ─── */
 const CLAUDE_SPARK = (
@@ -93,6 +93,15 @@ function ChatView() {
 /* ─── Cowork View — all hover via React state ─── */
 function CoworkView() {
   const [hovered, setHovered] = useState<string | null>(null);
+
+  // Animated progress: activeStep advances every 1.5s, loops back
+  const [activeStep, setActiveStep] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % (steps.length + 1)); // 0-6, then reset
+    }, 1500);
+    return () => clearInterval(timer);
+  }, []);
   const h = hovered !== null; // anything hovered?
   const isFolder = hovered && ["BOM Templates", "Vendor RFQs", "Production Reports", "Service Logs"].includes(hovered);
   const isCtx = hovered && !isFolder;
@@ -146,29 +155,43 @@ function CoworkView() {
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="rgba(20,20,19,0.45)"><path d="M14.128 7.165a.502.502 0 0 1 .744.67l-4.5 5-.078.07a.5.5 0 0 1-.666-.07l-4.5-5-.06-.082a.501.501 0 0 1 .729-.656l.075.068L10 11.752z" /></svg>
               </div>
               <div className="px-3 pb-3">
-                {steps.map((label, i) => (
+                {steps.map((label, i) => {
+                  const done = i < activeStep;
+                  const loading = i === activeStep;
+                  return (
                   <div key={i} className="flex">
                     <div className="flex flex-col items-center mr-3 shrink-0">
-                      {i === 0 ? (
-                        /* Step 1: spinning loader ring */
+                      {done ? (
+                        /* Completed: accent checkmark */
+                        <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ backgroundColor: "#d97757", transition: "background-color 300ms" }}>
+                          <svg width="12" height="12" viewBox="0 0 20 20" fill="white"><path d="M15.188 5.11a.5.5 0 0 1 .752.626l-.056.084-7.5 9a.5.5 0 0 1-.738.033l-3.5-3.5-.064-.078a.501.501 0 0 1 .693-.693l.078.064 3.113 3.113 7.15-8.58z" /></svg>
+                        </div>
+                      ) : loading ? (
+                        /* Active: spinning loader ring */
                         <div className="relative w-6 h-6">
                           <svg className="w-6 h-6 progress-spin" viewBox="0 0 24 24" fill="none">
                             <circle cx="12" cy="12" r="10" stroke="rgba(20,20,19,0.1)" strokeWidth="2.5" />
                             <circle cx="12" cy="12" r="10" stroke="#3B82F6" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="20 43" />
                           </svg>
-                          <span className="absolute inset-0 flex items-center justify-center text-[9px] font-medium" style={{ color: "#3B82F6" }}>1</span>
+                          <span className="absolute inset-0 flex items-center justify-center text-[9px] font-medium" style={{ color: "#3B82F6" }}>{i + 1}</span>
                         </div>
                       ) : (
-                        /* Steps 2-6: numbered circles */
+                        /* Pending: numbered circle */
                         <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-medium" style={{ backgroundColor: "rgba(20,20,19,0.08)", color: "rgba(20,20,19,0.4)" }}>
                           {i + 1}
                         </div>
                       )}
                     </div>
                     <div className={`text-sm ${i < 5 ? "pb-3" : "pb-0"}`}>
-                      <span style={{ color: i === 0 ? "#141413" : "rgba(20,20,19,0.4)", fontWeight: i === 0 ? 500 : 400 }}>{label}</span>
+                      <span style={{
+                        color: done ? "rgba(20,20,19,0.3)" : loading ? "#141413" : "rgba(20,20,19,0.4)",
+                        fontWeight: loading ? 500 : 400,
+                        textDecoration: done ? "line-through" : "none",
+                        transition: "color 300ms",
+                      }}>{label}</span>
                     </div>
                   </div>
+                  );}
                 ))}
               </div>
             </div>
