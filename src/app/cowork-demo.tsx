@@ -18,18 +18,18 @@ const FOLDER_SVG = (
 
 const P = { backgroundColor: "white", border: "0.5px solid rgba(20,20,19,0.08)", boxShadow: "0 17px 35px 0 rgba(0,0,0,0.15)" } as const;
 
-const steps = ["Read meeting transcripts", "Pull out key points", "Find action items", "Check Google Calendar", "Build standup deck", "Write summary"];
+const steps = ["Read vendor specifications", "Extract pricing tiers", "Cross-reference with current BOMs", "Check delivery timelines", "Generate comparison table", "Draft recommendation"];
 
 /* Tooltip content for hoverable items */
 const tooltipData: Record<string, string> = {
-  "Meeting Transcripts": "I can summarize your meetings",
-  Analysis: "I can analyze your data",
-  "Quarterly Reports": "I can compile your reports",
-  Expenses: "I can categorize your expenses",
-  "SKILL.md": "Teach me your workflows and I\u2019ll follow them every time",
-  "Claude in Chrome": "I can navigate, click, and fill forms in your browser",
-  Notion: "I can read and update your Notion workspace",
-  Linear: "I can track and manage your Linear issues",
+  "BOM Templates": "I can generate and validate bills of materials",
+  "Vendor RFQs": "I can compare vendor quotes against your current costs",
+  "Production Reports": "I can spot trends and flag anomalies in output data",
+  "Service Logs": "I can diagnose issues from maintenance and service records",
+  "Pricing Rules": "Teach me your margins and I\u2019ll price every order consistently",
+  "SAP Connector": "I can read and write to your ERP system via MCP",
+  SharePoint: "I can pull specs, SOPs, and reports from your document library",
+  "Service DB": "I can search service history and suggest troubleshooting steps",
 };
 
 /* ─── Chat View ─── */
@@ -39,29 +39,29 @@ function ChatView() {
       <div className="max-w-lg mx-auto space-y-5 pt-4">
         <div className="flex justify-end" style={{ opacity: 0, animation: "400ms ease-out 500ms forwards panelSlideUp" }}>
           <div className="rounded-[20px] px-5 py-3.5 text-[14px] leading-[1.5]" style={{ backgroundColor: "rgba(20,20,19,0.07)", color: "#141413" }}>
-            How should I structure this project proposal?
+            Generate an offer for the ABC Packaging order &mdash; 50,000 units, 4-colour offset.
           </div>
         </div>
         <div style={{ opacity: 0, animation: "400ms ease-out 800ms forwards panelSlideUp" }}>
           <div className="flex items-start gap-3">
             {CLAUDE_SPARK}
             <p className="text-[14px] leading-[1.65]" style={{ color: "rgba(20,20,19,0.5)" }}>
-              I&apos;d go with: Problem &rarr; Solution &rarr; Timeline &rarr; Ask. Keep it tight &mdash; one page max. The trick is making the problem feel urgent before you pitch the fix.
+              I&apos;ll pull the specs from the RFQ, cross-reference with your BOM pricing rules, and draft the offer. One moment &mdash; checking material costs and current lead times.
             </p>
           </div>
         </div>
         <div className="flex justify-end" style={{ opacity: 0, animation: "400ms ease-out 1100ms forwards panelSlideUp" }}>
           <div className="rounded-[20px] px-5 py-3.5 text-[14px] leading-[1.5]" style={{ backgroundColor: "rgba(20,20,19,0.07)", color: "#141413" }}>
-            Can you find some examples of successful proposals in our industry?
+            Do we have capacity for this run next month?
           </div>
         </div>
         <div style={{ opacity: 0, animation: "400ms ease-out 1400ms forwards panelSlideUp" }}>
           <div className="space-y-3">
             <div className="flex items-center gap-1 text-[13px]" style={{ color: "rgba(20,20,19,0.35)" }}>
-              Searched 3 sites
+              Checking production schedule
               <svg width="12" height="12" viewBox="0 0 20 20" fill="rgba(20,20,19,0.25)"><path d="M7.165 5.872a.502.502 0 0 1 .67-.744l5 4.5.07.078a.5.5 0 0 1-.07.666l-5 4.5-.082.06a.501.501 0 0 1-.656-.729l.068-.075L11.752 10z" /></svg>
             </div>
-            <p className="text-[14px] leading-[1.65]" style={{ color: "rgba(20,20,19,0.5)" }}>I found a few stro</p>
+            <p className="text-[14px] leading-[1.65]" style={{ color: "rgba(20,20,19,0.5)" }}>Based on current util</p>
             <div className="typing-spark">{CLAUDE_SPARK}</div>
           </div>
         </div>
@@ -95,7 +95,7 @@ function CoworkView() {
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-1 p-3">
-                {["Analysis", "Meeting Transcripts", "Quarterly Reports", "Expenses"].map((name) => (
+                {["BOM Templates", "Vendor RFQs", "Production Reports", "Service Logs"].map((name) => (
                   <div
                     key={name}
                     onMouseEnter={() => setHovered(name)}
@@ -151,19 +151,19 @@ function CoworkView() {
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="rgba(20,20,19,0.45)"><path d="M14.128 7.165a.502.502 0 0 1 .744.67l-4.5 5-.078.07a.5.5 0 0 1-.666-.07l-4.5-5-.06-.082a.501.501 0 0 1 .729-.656l.075.068L10 11.752z" /></svg>
               </div>
               <div className="flex flex-col pb-2">
-                {/* Meeting Transcripts — NOT hoverable */}
+                {/* Vendor Specs — NOT hoverable */}
                 <div className="mx-2 px-2 py-2 flex items-center gap-3 rounded-lg">
                   <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: "rgba(20,20,19,0.03)", border: "0.5px solid rgba(20,20,19,0.08)" }}>
                     <svg width="16" height="16" viewBox="0 0 20 20" fill="rgba(20,20,19,0.35)"><path d="M11.586 2a1.5 1.5 0 0 1 1.06.44l2.914 2.914a1.5 1.5 0 0 1 .44 1.06V16.5a1.5 1.5 0 0 1-1.5 1.5h-9a1.5 1.5 0 0 1-1.492-1.347L4 16.5v-13A1.5 1.5 0 0 1 5.5 2zM5.5 3a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h-2.5A1.5 1.5 0 0 1 11 5.5V3z" /></svg>
                   </div>
-                  <span className="text-sm truncate" style={{ color: "rgba(20,20,19,0.6)" }}>Meeting Transcri...</span>
+                  <span className="text-sm truncate" style={{ color: "rgba(20,20,19,0.6)" }}>Vendor Specs</span>
                 </div>
                 {/* Hoverable context links */}
                 {[
-                  { key: "SKILL.md", icon: <svg width="16" height="16" viewBox="0 0 20 20" fill="rgba(20,20,19,0.35)"><path d="M8 4c.82 0 1.544.396 2 1.005A2.5 2.5 0 0 1 12 4h4.5A1.5 1.5 0 0 1 18 5.5v9a1.5 1.5 0 0 1-1.5 1.5h-4.559a1.5 1.5 0 0 0-1.422 1.025l-.044.133a.5.5 0 0 1-.95 0l-.044-.133A1.5 1.5 0 0 0 8.06 16H3.5A1.5 1.5 0 0 1 2 14.5v-9A1.5 1.5 0 0 1 3.5 4zM3.5 5a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h4.559c.529 0 1.029.167 1.441.458V6.5A1.5 1.5 0 0 0 8 5zM12 5a1.5 1.5 0 0 0-1.5 1.5v8.958c.412-.29.912-.458 1.441-.458H16.5a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5z" /></svg> },
-                  { key: "Claude in Chrome", icon: <svg width="16" height="16" viewBox="0 0 20 20" fill="rgba(20,20,19,0.35)"><path d="M13.5 6a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V7.707l-6.147 6.147a.5.5 0 0 1-.707-.707L12.293 7H8.5a.5.5 0 0 1 0-1z" /></svg> },
-                  { key: "Notion", letter: "N" },
-                  { key: "Linear", letter: "L" },
+                  { key: "Pricing Rules", icon: <svg width="16" height="16" viewBox="0 0 20 20" fill="rgba(20,20,19,0.35)"><path d="M8 4c.82 0 1.544.396 2 1.005A2.5 2.5 0 0 1 12 4h4.5A1.5 1.5 0 0 1 18 5.5v9a1.5 1.5 0 0 1-1.5 1.5h-4.559a1.5 1.5 0 0 0-1.422 1.025l-.044.133a.5.5 0 0 1-.95 0l-.044-.133A1.5 1.5 0 0 0 8.06 16H3.5A1.5 1.5 0 0 1 2 14.5v-9A1.5 1.5 0 0 1 3.5 4zM3.5 5a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h4.559c.529 0 1.029.167 1.441.458V6.5A1.5 1.5 0 0 0 8 5zM12 5a1.5 1.5 0 0 0-1.5 1.5v8.958c.412-.29.912-.458 1.441-.458H16.5a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5z" /></svg> },
+                  { key: "SAP Connector", icon: <svg width="16" height="16" viewBox="0 0 20 20" fill="rgba(20,20,19,0.35)"><path d="M13.5 6a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V7.707l-6.147 6.147a.5.5 0 0 1-.707-.707L12.293 7H8.5a.5.5 0 0 1 0-1z" /></svg> },
+                  { key: "SharePoint", letter: "S" },
+                  { key: "Service DB", letter: "D" },
                 ].map((item) => (
                   <div
                     key={item.key}
