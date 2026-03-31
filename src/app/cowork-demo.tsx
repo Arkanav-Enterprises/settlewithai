@@ -18,7 +18,7 @@ const FOLDER_SVG = (
 
 const P = { backgroundColor: "white", border: "0.5px solid rgba(20,20,19,0.08)", boxShadow: "0 17px 35px 0 rgba(0,0,0,0.15)" } as const;
 
-const steps = ["Read vendor specifications", "Extract pricing tiers", "Cross-reference with current BOMs", "Check delivery timelines", "Generate comparison table", "Draft recommendation"];
+const steps = ["Reading vendor specifications", "Extract pricing tiers", "Cross-reference with current BOMs", "Check delivery timelines", "Generate comparison table", "Draft recommendation"];
 
 /* Tooltip content for hoverable items */
 const tooltipData: Record<string, string> = {
@@ -149,12 +149,24 @@ function CoworkView() {
                 {steps.map((label, i) => (
                   <div key={i} className="flex">
                     <div className="flex flex-col items-center mr-3 shrink-0">
-                      <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ backgroundColor: "#d97757" }}>
-                        <svg width="12" height="12" viewBox="0 0 20 20" fill="white"><path d="M15.188 5.11a.5.5 0 0 1 .752.626l-.056.084-7.5 9a.5.5 0 0 1-.738.033l-3.5-3.5-.064-.078a.501.501 0 0 1 .693-.693l.078.064 3.113 3.113 7.15-8.58z" /></svg>
-                      </div>
+                      {i === 0 ? (
+                        /* Step 1: spinning loader ring */
+                        <div className="relative w-6 h-6">
+                          <svg className="w-6 h-6 progress-spin" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10" stroke="rgba(20,20,19,0.1)" strokeWidth="2.5" />
+                            <circle cx="12" cy="12" r="10" stroke="#3B82F6" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="20 43" />
+                          </svg>
+                          <span className="absolute inset-0 flex items-center justify-center text-[9px] font-medium" style={{ color: "#3B82F6" }}>1</span>
+                        </div>
+                      ) : (
+                        /* Steps 2-6: numbered circles */
+                        <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-medium" style={{ backgroundColor: "rgba(20,20,19,0.08)", color: "rgba(20,20,19,0.4)" }}>
+                          {i + 1}
+                        </div>
+                      )}
                     </div>
                     <div className={`text-sm ${i < 5 ? "pb-3" : "pb-0"}`}>
-                      <span className="line-through" style={{ color: "rgba(20,20,19,0.3)" }}>{label}</span>
+                      <span style={{ color: i === 0 ? "#141413" : "rgba(20,20,19,0.4)", fontWeight: i === 0 ? 500 : 400 }}>{label}</span>
                     </div>
                   </div>
                 ))}

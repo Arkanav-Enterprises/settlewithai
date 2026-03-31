@@ -242,6 +242,15 @@ details[open] summary .faq-icon-v {
 .folder-item .folder-label { color: rgba(20, 20, 19, 0.5); transition: color 150ms, font-weight 150ms; }
 .folder-item:hover .folder-label { color: #141413; font-weight: 500; }
 
+/* ─── Progress spinner ─────────────────────── */
+@keyframes progressSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.progress-spin {
+  animation: progressSpin 1.2s linear infinite;
+}
+
 /* ─── Typing spark pulse ───────────────────── */
 @keyframes sparkPulse {
   0%, 100% { opacity: 1; }
