@@ -603,10 +603,10 @@ export default function Home() {
           <div className="h-px bg-border-light" />
         </div>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
-          <div className="flex flex-col lg:flex-row gap-12 lg:gap-0">
-            {/* Left column — text */}
-            <div className="lg:w-[42%] lg:pr-12">
-              <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-16">
+          <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
+            {/* Left column — text (compact) */}
+            <div className="lg:w-[30%] lg:shrink-0">
+              <h2 className="fade-up text-[clamp(1.5rem,2.5vw,2rem)] font-medium leading-[1.12] mb-12">
                 What we deliver.
               </h2>
 
@@ -633,23 +633,23 @@ export default function Home() {
                 },
               ].map((s, i) => (
                 <div key={s.title}>
-                  {i > 0 && <div className="h-px bg-border-light my-8" />}
+                  {i > 0 && <div className="h-px bg-border-light my-6" />}
                   <div className="fade-up">
-                    <div className="text-accent mb-4">{s.icon}</div>
+                    <div className="text-accent mb-3">{s.icon}</div>
                     <h3
-                      className="text-[clamp(1.15rem,2vw,1.4rem)] font-medium mb-3"
+                      className="text-[1rem] font-medium mb-2"
                       style={{ fontFamily: "Sentient, Georgia, serif" }}
                     >
                       {s.title}
                     </h3>
-                    <p className="text-text-muted text-[15px] leading-[1.7]">{s.desc}</p>
+                    <p className="text-text-muted text-[13px] leading-[1.65]">{s.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Right column — mindmap (sticky on desktop, full-width on mobile) */}
-            <div className="lg:w-[58%] lg:sticky lg:top-24 lg:self-start">
+            {/* Right column — mindmap (primary visual, sticky) */}
+            <div className="lg:flex-1 lg:sticky lg:top-24 lg:self-start">
               <Mindmap className="w-full" />
             </div>
           </div>
