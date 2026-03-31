@@ -603,13 +603,13 @@ export default function Home() {
           <div className="h-px bg-border-light" />
         </div>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
+          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-16">
+            What we deliver.
+          </h2>
+
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
             {/* Left column — text (compact) */}
             <div className="lg:w-[30%] lg:shrink-0">
-              <h2 className="fade-up text-[clamp(1.5rem,2.5vw,2rem)] font-medium leading-[1.12] mb-12">
-                What we deliver.
-              </h2>
-
               {[
                 {
                   icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>,
