@@ -18,6 +18,15 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "built-with-claude-code",
+    title:
+      "How We Built This Entire Site with Claude Code",
+    description:
+      "Every component — the WebGL globe, D3 mindmap, Cowork demo, SEO infrastructure — was built in Claude Code sessions. Here's how a CLI coding tool shipped a full Next.js site.",
+    date: "2026-03-30",
+    tag: "Engineering",
+  },
+  {
     slug: "claude-team-deployment-beyond-diy",
     title:
       "Beyond the 7-Day Playbook: Deploying Claude AI Across a Real Organization",
