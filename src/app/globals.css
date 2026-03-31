@@ -173,6 +173,70 @@ h1, h2, h3 {
 .prose-settle a:hover {
   text-decoration: underline;
 }
+.prose-settle blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1.25rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--text-muted);
+}
+.prose-settle ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.25rem;
+  list-style: decimal;
+}
+.prose-settle ol li {
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  margin-bottom: 0.6rem;
+}
+.prose-settle table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9375rem;
+}
+.prose-settle thead th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--text);
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid var(--border);
+}
+.prose-settle tbody td {
+  padding: 0.75rem 1rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-light);
+}
+.prose-settle tbody tr:last-child td {
+  border-bottom: none;
+}
+.prose-settle code {
+  background: rgba(20, 20, 19, 0.06);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.prose-settle pre {
+  background: var(--bg-dark);
+  color: #e8e6dc;
+  padding: 1.25rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+.prose-settle pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.875rem;
+}
+.prose-settle hr {
+  border: none;
+  border-top: 1px solid var(--border-light);
+  margin: 2.5rem 0;
+}
 
 /* ─── FAQ accordion ────────────────────────── */
 details summary { list-style: none; }

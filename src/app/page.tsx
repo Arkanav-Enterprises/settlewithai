@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { getCalApi } from "@calcom/embed-react";
+import { Footer } from "@/components/layout/Footer";
 
 const Globe = dynamic(() => import("./globe"), { ssr: false });
 const Mindmap = dynamic(() => import("./mindmap"), { ssr: false });
@@ -858,22 +859,7 @@ export default function Home() {
       </button>
 
       {/* ── Footer ───────────────────────────────────── */}
-      <footer className="border-t border-border-light pb-16 sm:pb-0">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 min-h-16 py-4 sm:py-0 sm:h-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
-          <span className="flex items-center gap-2.5">
-            <SettleMark className="h-5 w-auto" stroke="#141413" />
-            <span
-              className="text-[0.95rem] font-medium tracking-[-0.03em] text-text"
-              style={{ fontFamily: "Sentient, Georgia, serif" }}
-            >
-              SETTLE
-            </span>
-          </span>
-          <span className="text-text-faint text-sm">
-            AI, thoughtfully deployed. Built on Claude by Anthropic.
-          </span>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }
