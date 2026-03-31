@@ -175,15 +175,19 @@ function CoworkView() {
   );
 }
 
-/* Context link with CSS-class-driven hover (shimmer text + bounce arrow) */
+/* Context link — matches Anthropic's exact HTML structure */
 function CtxLink({ label, icon, letter }: { label: string; icon?: React.ReactNode; letter?: string }) {
   return (
     <a href="#" onClick={(e) => e.preventDefault()} className="ctx-link mx-2 px-2 py-2 flex items-center gap-3 rounded-lg cursor-pointer no-underline" style={{ transition: "background-color 150ms" }}>
       <div className="relative w-7 h-7 rounded-lg flex items-center justify-center overflow-hidden shrink-0" style={{ backgroundColor: "rgba(20,20,19,0.03)", border: "0.5px solid rgba(20,20,19,0.08)" }}>
+        {/* Default icon — fades out on hover */}
         <div className="ctx-icon-default">
           {icon ?? <span className="text-xs font-medium" style={{ color: "rgba(20,20,19,0.4)" }}>{letter}</span>}
         </div>
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="rgba(20,20,19,0.45)" className="ctx-icon-arrow" style={{ flexShrink: 0 }}><path d="M13.5 6a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V7.707l-6.147 6.147a.5.5 0 0 1-.707-.707L12.293 7H8.5a.5.5 0 0 1 0-1z" /></svg>
+        {/* Bounce arrow — wrapped in a div with explicit dimensions, exactly like Anthropic */}
+        <div className="ctx-icon-arrow" style={{ width: 20, height: 20, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="rgba(20,20,19,0.45)" style={{ flexShrink: 0 }}><path d="M13.5 6a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V7.707l-6.147 6.147a.5.5 0 0 1-.707-.707L12.293 7H8.5a.5.5 0 0 1 0-1z" /></svg>
+        </div>
       </div>
       <span className="ctx-label text-sm truncate">{label}</span>
     </a>
