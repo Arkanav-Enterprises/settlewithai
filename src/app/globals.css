@@ -216,6 +216,32 @@ details[open] summary .faq-icon-v {
   100% { color: rgba(20, 20, 19, 0.6); }
 }
 
+/* ─── Context link hover effects ──────────── */
+.ctx-link .ctx-icon-default { transition: opacity 200ms; }
+.ctx-link:hover .ctx-icon-default { opacity: 0; }
+.ctx-link .ctx-icon-arrow {
+  position: absolute; inset: 0; margin: auto;
+  opacity: 0; transition: opacity 200ms;
+}
+.ctx-link:hover .ctx-icon-arrow {
+  opacity: 1;
+  animation: bounceUpRight 0.6s ease-in-out infinite;
+}
+.ctx-link .ctx-label {
+  color: rgba(20, 20, 19, 0.6);
+  animation: shimmertext 2.25s infinite;
+  animation-play-state: paused;
+}
+.ctx-link:hover .ctx-label {
+  animation-play-state: running;
+}
+
+/* ─── Folder hover ────────────────────────── */
+.folder-item { transition: background-color 150ms; }
+.folder-item:hover { background-color: rgba(20, 20, 19, 0.04); }
+.folder-item .folder-label { color: rgba(20, 20, 19, 0.5); transition: color 150ms, font-weight 150ms; }
+.folder-item:hover .folder-label { color: #141413; font-weight: 500; }
+
 /* ─── Typing spark pulse ───────────────────── */
 @keyframes sparkPulse {
   0%, 100% { opacity: 1; }

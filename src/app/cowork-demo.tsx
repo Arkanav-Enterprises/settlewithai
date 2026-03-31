@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-/* ─── Interactive Claude demo — Chat + Cowork toggle ─── */
+/* ─── SVG Icons ─── */
 
 const CLAUDE_SPARK = (
   <svg width="16" height="16" viewBox="0 0 26 27" fill="none" className="shrink-0">
@@ -10,80 +10,23 @@ const CLAUDE_SPARK = (
   </svg>
 );
 
-const CHECK = (
-  <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor">
-    <path d="M15.188 5.11a.5.5 0 0 1 .752.626l-.056.084-7.5 9a.5.5 0 0 1-.738.033l-3.5-3.5-.064-.078a.501.501 0 0 1 .693-.693l.078.064 3.113 3.113 7.15-8.58z" />
-  </svg>
-);
+const CHECK_SVG = `<svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M15.188 5.11a.5.5 0 0 1 .752.626l-.056.084-7.5 9a.5.5 0 0 1-.738.033l-3.5-3.5-.064-.078a.501.501 0 0 1 .693-.693l.078.064 3.113 3.113 7.15-8.58z"/></svg>`;
 
-const FOLDER = (
+const FOLDER_SVG = (
   <svg width="48" height="48" viewBox="0 0 40 40" fill="none">
     <path d="M7.035 6.5H16.424a2.5 2.5 0 0 1 1.767.732l.744.742A2.5 2.5 0 0 0 21.41 9H33a2.5 2.5 0 0 1 2.5 2.5v3a2.5 2.5 0 0 1-2.5 2.5H7.1a2.5 2.5 0 0 1-2.5-2.471l-.065-5.5A2.5 2.5 0 0 1 7.035 6.5Z" fill="#45B3E0" stroke="#3BA6D4" />
     <path d="M4 16.8c0-1.68 0-2.52.327-3.162a3 3 0 0 1 1.311-1.311C6.28 12 7.12 12 8.8 12h22.4c1.68 0 2.52 0 3.162.327a3 3 0 0 1 1.311 1.311C36 14.28 36 15.12 36 16.8v11.4c0 1.68 0 2.52-.327 3.162a3 3 0 0 1-1.311 1.311C33.72 33 32.88 33 31.2 33H8.8c-1.68 0-2.52 0-3.162-.327a3 3 0 0 1-1.311-1.311C4 30.72 4 29.88 4 28.2V16.8Z" fill="#5AC8FA" />
   </svg>
 );
 
-const CHEVRON = (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="rgba(20,20,19,0.4)">
-    <path d="M14.128 7.165a.502.502 0 0 1 .744.67l-4.5 5-.078.07a.5.5 0 0 1-.666-.07l-4.5-5-.06-.082a.501.501 0 0 1 .729-.656l.075.068L10 11.752z" />
-  </svg>
-);
+/* ─── Shared ─── */
 
-const DOC_ICON = (
-  <svg width="16" height="16" viewBox="0 0 20 20" fill="rgba(20,20,19,0.35)">
-    <path d="M11.586 2a1.5 1.5 0 0 1 1.06.44l2.914 2.914a1.5 1.5 0 0 1 .44 1.06V16.5a1.5 1.5 0 0 1-1.5 1.5h-9a1.5 1.5 0 0 1-1.492-1.347L4 16.5v-13A1.5 1.5 0 0 1 5.5 2zM5.5 3a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h-2.5A1.5 1.5 0 0 1 11 5.5V3z" />
-  </svg>
-);
-
-const BOOK_ICON = (
-  <svg width="16" height="16" viewBox="0 0 20 20" fill="rgba(20,20,19,0.35)">
-    <path d="M8 4c.82 0 1.544.396 2 1.005A2.5 2.5 0 0 1 12 4h4.5A1.5 1.5 0 0 1 18 5.5v9a1.5 1.5 0 0 1-1.5 1.5h-4.559a1.5 1.5 0 0 0-1.422 1.025l-.044.133a.5.5 0 0 1-.95 0l-.044-.133A1.5 1.5 0 0 0 8.06 16H3.5A1.5 1.5 0 0 1 2 14.5v-9A1.5 1.5 0 0 1 3.5 4zM3.5 5a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h4.559c.529 0 1.029.167 1.441.458V6.5A1.5 1.5 0 0 0 8 5zM12 5a1.5 1.5 0 0 0-1.5 1.5v8.958c.412-.29.912-.458 1.441-.458H16.5a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5z" />
-  </svg>
-);
-
-const SEARCH_ICON = (
-  <svg width="12" height="12" viewBox="0 0 20 20" fill="rgba(20,20,19,0.35)">
-    <path d="M8.5 2a6.5 6.5 0 0 1 4.935 10.728l4.419 4.419a.5.5 0 0 1-.638.765l-.07-.057-4.418-4.42A6.5 6.5 0 1 1 8.5 2m0 1a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11" />
-  </svg>
-);
-
-const FOLDER_OPEN_ICON = (
-  <svg width="12" height="12" viewBox="0 0 20 20" fill="white">
-    <path d="M16.5 3A1.5 1.5 0 0 1 18 4.5v11a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 2 15.5v-9A1.5 1.5 0 0 1 3.5 5h7.293l1.56-1.56a1.5 1.5 0 0 1 1.061-.44zm-3.086 1a.5.5 0 0 0-.354.146L11.354 5.854A.5.5 0 0 1 11 6H3.5a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-11a.5.5 0 0 0-.5-.5z" />
-  </svg>
-);
-
-const ARROW_UP_RIGHT = (
-  <svg width="16" height="16" viewBox="0 0 20 20" fill="rgba(20,20,19,0.35)">
-    <path d="M13.5 6a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V7.707l-6.147 6.147a.5.5 0 0 1-.707-.707L12.293 7H8.5a.5.5 0 0 1 0-1z" />
-  </svg>
-);
-
-/* Small bouncing arrow for hover state on context links — must be a function, not a constant, so each instance is unique */
-function BounceArrow() {
-  return (
-    <svg
-      width="12"
-      height="12"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      className="absolute inset-0 m-auto opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-hover:animate-[bounceUpRight_0.6s_ease-in-out_infinite]"
-      style={{ color: "rgba(20,20,19,0.45)" }}
-    >
-      <path d="M13.5 6a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V7.707l-6.147 6.147a.5.5 0 0 1-.707-.707L12.293 7H8.5a.5.5 0 0 1 0-1z" />
-    </svg>
-  );
-}
-
-/* ─── Shared styles ─── */
-const panelStyle = {
+const P = { // panel style
   backgroundColor: "white",
   border: "0.5px solid rgba(20,20,19,0.08)",
-  boxShadow: "0 17px 35px 0 rgba(0,0,0,0.08)",
-};
-const borderSubtle = "1px solid rgba(20,20,19,0.06)";
+  boxShadow: "0 17px 35px 0 rgba(0,0,0,0.15)",
+} as const;
 
-/* ─── Progress steps — ALL completed ─── */
 const steps = [
   "Read meeting transcripts",
   "Pull out key points",
@@ -98,17 +41,11 @@ function ChatView() {
   return (
     <div className="absolute inset-0 top-28 px-6 md:px-10 overflow-hidden">
       <div className="max-w-lg mx-auto space-y-5 pt-4">
-        {/* User message 1 */}
         <div className="flex justify-end" style={{ opacity: 0, animation: "400ms ease-out 500ms forwards panelSlideUp" }}>
-          <div
-            className="rounded-[20px] px-5 py-3.5 text-[14px] leading-[1.5]"
-            style={{ backgroundColor: "rgba(20,20,19,0.07)", color: "#141413" }}
-          >
+          <div className="rounded-[20px] px-5 py-3.5 text-[14px] leading-[1.5]" style={{ backgroundColor: "rgba(20,20,19,0.07)", color: "#141413" }}>
             How should I structure this project proposal?
           </div>
         </div>
-
-        {/* Claude response */}
         <div style={{ opacity: 0, animation: "400ms ease-out 800ms forwards panelSlideUp" }}>
           <div className="flex items-start gap-3">
             {CLAUDE_SPARK}
@@ -117,31 +54,18 @@ function ChatView() {
             </p>
           </div>
         </div>
-
-        {/* User message 2 */}
         <div className="flex justify-end" style={{ opacity: 0, animation: "400ms ease-out 1100ms forwards panelSlideUp" }}>
-          <div
-            className="rounded-[20px] px-5 py-3.5 text-[14px] leading-[1.5]"
-            style={{ backgroundColor: "rgba(20,20,19,0.07)", color: "#141413" }}
-          >
+          <div className="rounded-[20px] px-5 py-3.5 text-[14px] leading-[1.5]" style={{ backgroundColor: "rgba(20,20,19,0.07)", color: "#141413" }}>
             Can you find some examples of successful proposals in our industry?
           </div>
         </div>
-
-        {/* Searched + typing */}
         <div style={{ opacity: 0, animation: "400ms ease-out 1400ms forwards panelSlideUp" }}>
           <div className="space-y-3">
             <div className="flex items-center gap-1 text-[13px]" style={{ color: "rgba(20,20,19,0.35)" }}>
-              <span>Searched 3 sites</span>
-              <svg width="12" height="12" viewBox="0 0 20 20" fill="rgba(20,20,19,0.25)">
-                <path d="M7.165 5.872a.502.502 0 0 1 .67-.744l5 4.5.07.078a.5.5 0 0 1-.07.666l-5 4.5-.082.06a.501.501 0 0 1-.656-.729l.068-.075L11.752 10z" />
-              </svg>
+              Searched 3 sites
+              <svg width="12" height="12" viewBox="0 0 20 20" fill="rgba(20,20,19,0.25)"><path d="M7.165 5.872a.502.502 0 0 1 .67-.744l5 4.5.07.078a.5.5 0 0 1-.07.666l-5 4.5-.082.06a.501.501 0 0 1-.656-.729l.068-.075L11.752 10z" /></svg>
             </div>
-            <div className="flex items-start gap-3">
-              <p className="text-[14px] leading-[1.65]" style={{ color: "rgba(20,20,19,0.5)" }}>
-                I found a few stro
-              </p>
-            </div>
+            <p className="text-[14px] leading-[1.65]" style={{ color: "rgba(20,20,19,0.5)" }}>I found a few stro</p>
             <div className="typing-spark">{CLAUDE_SPARK}</div>
           </div>
         </div>
@@ -150,255 +74,161 @@ function ChatView() {
   );
 }
 
-/* ─── Context link item (with hover shimmer + bounce arrow) ─── */
-function ContextLink({
-  icon,
-  letter,
-  label,
-}: {
-  icon?: React.ReactNode;
-  letter?: string;
-  label: string;
-}) {
+/* ─── Cowork View ─── */
+function CoworkView() {
   return (
-    <a
-      href="#"
-      onClick={(e) => e.preventDefault()}
-      className="group mx-2 px-2 py-2 flex items-center gap-3 rounded-lg transition-colors duration-150 hover:bg-[rgba(20,20,19,0.04)]"
-    >
-      <div
-        className="relative w-7 h-7 rounded-lg flex items-center justify-center overflow-hidden shrink-0"
-        style={{ backgroundColor: "rgba(20,20,19,0.03)", border: "0.5px solid rgba(20,20,19,0.08)" }}
-      >
-        <span className="transition-opacity duration-200 group-hover:opacity-0">
-          {icon ?? <span className="text-xs font-medium" style={{ color: "rgba(20,20,19,0.4)" }}>{letter}</span>}
-        </span>
-        <BounceArrow />
+    <div className="absolute inset-0 top-32">
+      <div className="relative w-full h-full">
+
+        {/* ── Left: File picker ── */}
+        <div className="absolute -left-8 top-4" style={{ opacity: 1, filter: "none", zIndex: 1, transition: "opacity 300ms, filter 300ms" }}>
+          <div style={{ opacity: 0, animation: "400ms ease-out 650ms 1 normal forwards running panelSlideUp" }}>
+            <div className="rounded-xl overflow-hidden w-[220px]" style={P}>
+              <div className="flex items-center gap-2 px-2.5 py-2" style={{ borderBottom: "1px solid rgba(20,20,19,0.06)" }}>
+                <div className="w-5 h-5 rounded bg-[#3B82F6] flex items-center justify-center">
+                  <svg width="16" height="16" viewBox="0 0 20 20" fill="white" style={{ flexShrink: 0 }}><path d="M16.5 3A1.5 1.5 0 0 1 18 4.5v11a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 2 15.5v-9A1.5 1.5 0 0 1 3.5 5h7.293l1.56-1.56.11-.1a1.5 1.5 0 0 1 .951-.34zm-3.086 1a.5.5 0 0 0-.277.084l-.077.062-1.707 1.708A.5.5 0 0 1 11 6H3.5a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-11a.5.5 0 0 0-.5-.5z" /></svg>
+                </div>
+                <div className="flex-1 flex items-center gap-1.5 rounded-md px-2 py-1" style={{ backgroundColor: "rgba(20,20,19,0.04)" }}>
+                  <svg width="16" height="16" viewBox="0 0 20 20" fill="rgba(20,20,19,0.35)" style={{ flexShrink: 0 }}><path d="M8.5 2a6.5 6.5 0 0 1 4.935 10.728l4.419 4.419.064.078a.5.5 0 0 1-.693.693l-.079-.064-4.419-4.42A6.5 6.5 0 1 1 8.5 2m0 1a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11" /></svg>
+                  <span className="text-xs" style={{ color: "rgba(20,20,19,0.35)" }}>Search</span>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-1 p-3">
+                {["Analysis", "Meeting Transcripts", "Quarterly Reports", "Expenses"].map((name) => (
+                  <div key={name} className="folder-item flex flex-col items-center gap-1 rounded-lg px-2 py-2">
+                    {FOLDER_SVG}
+                    <span className="folder-label text-[10px] text-center leading-tight line-clamp-2">{name}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="pointer-events-none flex justify-end gap-2 px-3 py-2" style={{ borderTop: "1px solid rgba(20,20,19,0.06)" }}>
+                <div className="rounded-md px-4 py-0.5 text-[10px]" style={{ border: "1px solid rgba(20,20,19,0.1)", color: "rgba(20,20,19,0.6)", backgroundColor: "white" }}>Cancel</div>
+                <div className="rounded-md bg-[#007AFF] px-4 py-0.5 text-[10px] text-white">Open</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Center: Progress ── */}
+        <div className="absolute left-1/2 -translate-x-1/2 top-48" style={{ opacity: 1, filter: "none", zIndex: 1, transition: "opacity 300ms, filter 300ms" }}>
+          <div style={{ opacity: 0, animation: "400ms ease-out 900ms 1 normal forwards running panelSlideUp" }}>
+            <div className="rounded-xl overflow-hidden w-[280px]" style={P}>
+              <div className="px-3 pt-2.5 pb-4 flex items-center justify-between">
+                <span className="text-sm font-medium" style={{ color: "#141413" }}>Progress</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="rgba(20,20,19,0.45)" style={{ flexShrink: 0 }}><path d="M14.128 7.165a.502.502 0 0 1 .744.67l-4.5 5-.078.07a.5.5 0 0 1-.666-.07l-4.5-5-.06-.082a.501.501 0 0 1 .729-.656l.075.068L10 11.752z" /></svg>
+              </div>
+              <div className="px-3 pb-3">
+                {steps.map((label, i) => (
+                  <div key={i} className="flex">
+                    <div className="flex flex-col items-center mr-3">
+                      <div className="shrink-0">
+                        <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ backgroundColor: "#d97757", transition: "background-color 300ms" }}>
+                          <div className="text-white" style={{ width: 12, height: 12, display: "flex", alignItems: "center", justifyContent: "center" }} dangerouslySetInnerHTML={{ __html: CHECK_SVG }} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className={`text-sm ${i < 5 ? "pb-3" : "pb-0"}`}>
+                      <span className="line-through" style={{ color: "rgba(20,20,19,0.3)", transition: "all 300ms" }}>{label}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Right: Context ── */}
+        <div className="absolute -right-2 top-12" style={{ opacity: 1, filter: "none", zIndex: 1, transition: "opacity 300ms, filter 300ms" }}>
+          <div style={{ opacity: 0, animation: "400ms ease-out 1150ms 1 normal forwards running panelSlideUp" }}>
+            <div className="rounded-xl overflow-hidden w-[200px]" style={P}>
+              <div className="px-3 py-2.5 flex items-center justify-between">
+                <span className="text-sm font-medium" style={{ color: "#141413" }}>Context</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="rgba(20,20,19,0.45)" style={{ flexShrink: 0 }}><path d="M14.128 7.165a.502.502 0 0 1 .744.67l-4.5 5-.078.07a.5.5 0 0 1-.666-.07l-4.5-5-.06-.082a.501.501 0 0 1 .729-.656l.075.068L10 11.752z" /></svg>
+              </div>
+              <div className="flex flex-col pb-2">
+                {/* Meeting Transcripts — plain, not a link */}
+                <div className="mx-2 px-2 py-2 flex items-center gap-3 rounded-lg">
+                  <div className="w-7 h-7 rounded-lg flex items-center justify-center overflow-hidden shrink-0" style={{ backgroundColor: "rgba(20,20,19,0.03)", border: "0.5px solid rgba(20,20,19,0.08)" }}>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="rgba(20,20,19,0.35)" style={{ flexShrink: 0 }}><path d="M11.586 2a1.5 1.5 0 0 1 1.06.44l2.914 2.914a1.5 1.5 0 0 1 .44 1.06V16.5a1.5 1.5 0 0 1-1.5 1.5h-9a1.5 1.5 0 0 1-1.492-1.347L4 16.5v-13A1.5 1.5 0 0 1 5.5 2zM5.5 3a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h-2.5A1.5 1.5 0 0 1 11 5.5V3z" /></svg>
+                  </div>
+                  <span className="text-sm truncate" style={{ color: "rgba(20,20,19,0.6)" }}>Meeting Transcripts</span>
+                </div>
+
+                {/* SKILL.md — link */}
+                <CtxLink label="SKILL.md" icon={<svg width="20" height="20" viewBox="0 0 20 20" fill="rgba(20,20,19,0.35)" style={{ flexShrink: 0 }}><path d="M8 4c.82 0 1.544.396 2 1.005A2.5 2.5 0 0 1 12 4h4.5A1.5 1.5 0 0 1 18 5.5v9a1.5 1.5 0 0 1-1.5 1.5h-4.559a1.5 1.5 0 0 0-1.422 1.025l-.044.133a.5.5 0 0 1-.95 0l-.044-.133A1.5 1.5 0 0 0 8.06 16H3.5A1.5 1.5 0 0 1 2 14.5v-9A1.5 1.5 0 0 1 3.5 4zM3.5 5a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h4.559c.529 0 1.029.167 1.441.458V6.5A1.5 1.5 0 0 0 8 5zM12 5a1.5 1.5 0 0 0-1.5 1.5v8.958c.412-.29.912-.458 1.441-.458H16.5a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5z" /></svg>} />
+
+                {/* Claude in Chrome */}
+                <CtxLink label="Claude in Chrome" icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(20,20,19,0.35)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><rect x="2" y="3" width="20" height="14" rx="2" ry="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" /></svg>} />
+
+                {/* Notion */}
+                <CtxLink label="Notion" letter="N" />
+
+                {/* Linear */}
+                <CtxLink label="Linear" letter="L" />
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <span
-        className="text-sm truncate animate-[shimmertext_2.25s_infinite] [animation-play-state:paused] group-hover:[animation-play-state:running]"
-        style={{ color: "rgba(20,20,19,0.6)" }}
-      >
-        {label}
-      </span>
+    </div>
+  );
+}
+
+/* Context link with CSS-class-driven hover (shimmer text + bounce arrow) */
+function CtxLink({ label, icon, letter }: { label: string; icon?: React.ReactNode; letter?: string }) {
+  return (
+    <a href="#" onClick={(e) => e.preventDefault()} className="ctx-link mx-2 px-2 py-2 flex items-center gap-3 rounded-lg cursor-pointer no-underline" style={{ transition: "background-color 150ms" }}>
+      <div className="relative w-7 h-7 rounded-lg flex items-center justify-center overflow-hidden shrink-0" style={{ backgroundColor: "rgba(20,20,19,0.03)", border: "0.5px solid rgba(20,20,19,0.08)" }}>
+        <div className="ctx-icon-default">
+          {icon ?? <span className="text-xs font-medium" style={{ color: "rgba(20,20,19,0.4)" }}>{letter}</span>}
+        </div>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="rgba(20,20,19,0.45)" className="ctx-icon-arrow" style={{ flexShrink: 0 }}><path d="M13.5 6a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V7.707l-6.147 6.147a.5.5 0 0 1-.707-.707L12.293 7H8.5a.5.5 0 0 1 0-1z" /></svg>
+      </div>
+      <span className="ctx-label text-sm truncate">{label}</span>
     </a>
   );
 }
 
-/* ─── Context plain item (no link, no hover effects) ─── */
-function ContextItem({
-  icon,
-  label,
-}: {
-  icon: React.ReactNode;
-  label: string;
-}) {
-  return (
-    <div className="mx-2 px-2 py-2 flex items-center gap-3 rounded-lg">
-      <div
-        className="w-7 h-7 rounded-lg flex items-center justify-center overflow-hidden shrink-0"
-        style={{ backgroundColor: "rgba(20,20,19,0.03)", border: "0.5px solid rgba(20,20,19,0.08)" }}
-      >
-        {icon}
-      </div>
-      <span className="text-sm truncate" style={{ color: "rgba(20,20,19,0.6)" }}>{label}</span>
-    </div>
-  );
-}
-
-/* ─── Cowork View ─── */
-function CoworkView() {
-  const folders = ["Analysis", "Meeting Transcripts", "Quarterly Reports", "Expenses"];
-
-  return (
-    <div className="absolute inset-0 top-32">
-      <div className="relative w-full h-full">
-        {/* Left panel — File picker */}
-        <div
-          className="absolute -left-8 top-4"
-          style={{ opacity: 1, filter: "none", zIndex: 1, transition: "opacity 300ms, filter 300ms" }}
-        >
-          <div
-            className="rounded-xl overflow-hidden w-[220px] relative"
-            style={{ ...panelStyle, opacity: 0, animation: "400ms ease-out 650ms 1 normal forwards running panelSlideUp" }}
-          >
-            <div className="flex items-center gap-2 px-2.5 py-2" style={{ borderBottom: borderSubtle }}>
-              <div className="w-5 h-5 rounded bg-[#3B82F6] flex items-center justify-center">
-                {FOLDER_OPEN_ICON}
-              </div>
-              <div className="flex-1 flex items-center gap-1.5 rounded-md px-2 py-1" style={{ backgroundColor: "rgba(20,20,19,0.04)" }}>
-                {SEARCH_ICON}
-                <span className="text-xs" style={{ color: "rgba(20,20,19,0.35)" }}>Search</span>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-1 p-3">
-              {folders.map((name) => (
-                <div
-                  key={name}
-                  className="group flex flex-col items-center gap-1 rounded-lg px-2 py-2 transition-colors hover:bg-[rgba(20,20,19,0.04)] cursor-default"
-                >
-                  {FOLDER}
-                  <span
-                    className="text-[10px] text-center leading-tight line-clamp-2 transition-colors group-hover:text-[#141413] group-hover:font-medium"
-                    style={{ color: "rgba(20,20,19,0.5)" }}
-                  >
-                    {name}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <div className="pointer-events-none flex justify-end gap-2 px-3 py-2" style={{ borderTop: borderSubtle }}>
-              <div className="rounded-md px-4 py-0.5 text-[10px]" style={{ border: "1px solid rgba(20,20,19,0.1)", color: "rgba(20,20,19,0.6)" }}>Cancel</div>
-              <div className="rounded-md bg-[#007AFF] px-4 py-0.5 text-[10px] text-white">Open</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Center panel — Progress */}
-        <div
-          className="absolute left-1/2 -translate-x-1/2 top-48"
-          style={{ opacity: 1, filter: "none", zIndex: 1, transition: "opacity 300ms, filter 300ms" }}
-        >
-          <div
-            className="rounded-xl overflow-hidden w-[280px]"
-            style={{ ...panelStyle, opacity: 0, animation: "400ms ease-out 900ms 1 normal forwards running panelSlideUp" }}
-          >
-            <div className="px-3 pt-2.5 pb-3 flex items-center justify-between">
-              <span className="text-sm font-medium text-[#141413]">Progress</span>
-              {CHEVRON}
-            </div>
-            <div className="px-3 pb-3">
-              {steps.map((label, i) => (
-                <div key={i} className="flex">
-                  <div className="flex flex-col items-center mr-3">
-                    <div
-                      className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-white"
-                      style={{ backgroundColor: "#d97757" }}
-                    >
-                      {CHECK}
-                    </div>
-                  </div>
-                  <div className={i < 5 ? "text-sm pb-3" : "text-sm pb-0"}>
-                    <span
-                      className="line-through"
-                      style={{ color: "rgba(20,20,19,0.3)" }}
-                    >
-                      {label}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Right panel — Context */}
-        <div
-          className="absolute -right-2 top-12"
-          style={{ opacity: 1, filter: "none", zIndex: 1, transition: "opacity 300ms, filter 300ms" }}
-        >
-          <div
-            className="rounded-xl overflow-hidden w-[200px]"
-            style={{ ...panelStyle, opacity: 0, animation: "400ms ease-out 1150ms 1 normal forwards running panelSlideUp" }}
-          >
-            <div className="px-3 py-2.5 flex items-center justify-between">
-              <span className="text-sm font-medium text-[#141413]">Context</span>
-              {CHEVRON}
-            </div>
-            <div className="flex flex-col pb-2">
-              {/* Meeting Transcripts — plain div, NOT a link */}
-              <ContextItem icon={DOC_ICON} label="Meeting Transcri..." />
-
-              {/* SKILL.md — link with shimmer + bounce */}
-              <ContextLink icon={BOOK_ICON} label="SKILL.md" />
-
-              {/* Claude in Chrome — link */}
-              <ContextLink icon={ARROW_UP_RIGHT} label="Claude in Chrome" />
-
-              {/* Notion — link */}
-              <ContextLink letter="N" label="Notion" />
-
-              {/* Linear — link */}
-              <ContextLink letter="L" label="Linear" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 /* ─── Main Component ─── */
-
 export default function CoworkDemo({ className = "" }: { className?: string }) {
   const [activeTab, setActiveTab] = useState<"chat" | "cowork">("cowork");
 
   return (
     <div className={`hidden min-[500px]:flex justify-center items-center w-full ${className}`}>
       <div className="rounded-2xl w-full h-[70vh] min-h-[500px] max-h-[700px] flex justify-center items-center overflow-hidden">
-        <div className="relative w-full h-full">
-          <div
-            className="relative w-full h-full rounded-2xl"
-            style={{ backgroundColor: "rgba(20,20,19,0.03)", boxShadow: "0 4px 20px 0 rgba(20,20,19,0.04)" }}
-          >
-            <div
-              className="absolute inset-0 w-full h-full overflow-hidden rounded-2xl border"
-              style={{ borderColor: "rgba(20,20,19,0.06)", backgroundColor: "rgba(255,255,255,0.4)" }}
-            >
-              {/* Grid background — Cowork only */}
-              <div
-                className="absolute inset-0 transition-opacity duration-500"
-                style={{
-                  backgroundImage: "linear-gradient(to right, rgba(20,20,19,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(20,20,19,0.06) 1px, transparent 1px)",
-                  backgroundSize: "48px 48px",
-                  backgroundPosition: "24px 24px",
-                  opacity: activeTab === "cowork" ? 1 : 0,
-                }}
-              />
+        <div className="relative w-full h-full flex items-center justify-center" style={{ opacity: 1 }}>
+          <div className="relative w-full h-full rounded-2xl flex justify-center items-center" style={{ backgroundColor: "rgba(20,20,19,0.03)", boxShadow: "0 4px 20px 0 rgba(20,20,19,0.04)" }}>
+            <div className="w-full h-full overflow-hidden rounded-2xl relative" style={{ border: "1px solid rgba(20,20,19,0.06)", backgroundColor: "rgba(255,255,255,0.4)" }}>
 
-              {/* Segmented control */}
-              <div className="flex justify-center pt-[60px] relative z-20">
-                <div
-                  className="relative inline-flex h-10 text-base font-medium p-0.5 select-none min-w-[290px] rounded-[.625rem]"
-                  style={{ backgroundColor: "rgba(20,20,19,0.06)", boxShadow: "0 11px 23px 0 rgba(0,0,0,0.08)", border: "0.5px solid rgba(20,20,19,0.08)" }}
-                >
-                  <button
-                    type="button"
-                    onClick={() => setActiveTab("chat")}
-                    className="flex items-center justify-center h-[36px] px-3 rounded-lg whitespace-nowrap flex-1 transition-colors duration-250 cursor-pointer relative z-10"
-                    style={{ color: activeTab === "chat" ? "#141413" : "rgba(20,20,19,0.35)" }}
-                  >
-                    Chat
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setActiveTab("cowork")}
-                    className="flex items-center justify-center h-[36px] px-3 rounded-lg whitespace-nowrap flex-1 transition-colors duration-250 cursor-pointer relative z-10"
-                    style={{ color: activeTab === "cowork" ? "#141413" : "rgba(20,20,19,0.35)" }}
-                  >
-                    Cowork
-                  </button>
-                  {/* Sliding pill */}
-                  <div className="pointer-events-none absolute inset-0 p-0.5 rounded-[.625rem]" style={{ filter: "drop-shadow(0px 0px 0.5px rgba(20,20,19,0.08))" }}>
-                    <div
-                      className="relative flex h-full rounded-lg transition-[clip-path] duration-250 ease-out"
-                      style={{
-                        backgroundColor: "white",
-                        clipPath: activeTab === "chat" ? "inset(0px 50% 0px 0% round 8px)" : "inset(0px 0% 0px 50% round 8px)",
-                      }}
-                    >
-                      <div className="flex items-center justify-center h-full px-3 whitespace-nowrap flex-1 font-medium text-[#141413]">Chat</div>
-                      <div className="flex items-center justify-center h-full px-3 whitespace-nowrap flex-1 font-medium text-[#141413]">Cowork</div>
+              {/* Grid bg */}
+              <div className="absolute inset-0" style={{
+                backgroundImage: "linear-gradient(to right, rgba(20,20,19,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(20,20,19,0.06) 1px, transparent 1px)",
+                backgroundSize: "48px 48px",
+                backgroundPosition: "24px 24px",
+                opacity: activeTab === "cowork" ? 1 : 0,
+                transition: "opacity 500ms",
+              }} />
+
+              {/* Tab control */}
+              <div className="flex justify-center pt-[60px] relative z-10">
+                <div className="relative inline-flex h-10 text-base font-medium p-0.5 select-none min-w-[290px] rounded-[.625rem]" style={{ backgroundColor: "rgba(20,20,19,0.06)", boxShadow: "0 11px 23px 0 rgba(0,0,0,0.15)", outline: "none", border: "0.5px solid rgba(20,20,19,0.08)" }}>
+                  <button type="button" onClick={() => setActiveTab("chat")} className="flex items-center justify-center h-[36px] px-3 rounded-lg whitespace-nowrap cursor-pointer flex-1" style={{ color: activeTab === "chat" ? "#141413" : "rgba(20,20,19,0.35)", transition: "color 250ms" }}>Chat</button>
+                  <button type="button" onClick={() => setActiveTab("cowork")} className="flex items-center justify-center h-[36px] px-3 rounded-lg whitespace-nowrap cursor-pointer flex-1" style={{ color: activeTab === "cowork" ? "#141413" : "rgba(20,20,19,0.35)", transition: "color 250ms" }}>Cowork</button>
+                  <div aria-hidden="true" className="pointer-events-none absolute inset-0 p-0.5 rounded-[.625rem]" style={{ filter: "drop-shadow(0px 0px 0.5px rgba(20,20,19,0.08))" }}>
+                    <div className="relative flex h-full" style={{ backgroundColor: "white", borderRadius: 8, clipPath: activeTab === "chat" ? "inset(0px 50% 0px 0% round 8px)" : "inset(0px 0% 0px 50% round 8px)", transition: "clip-path 250ms ease" }}>
+                      <div className="flex items-center justify-center h-full px-3 whitespace-nowrap flex-1 font-medium" style={{ color: "#141413" }}>Chat</div>
+                      <div className="flex items-center justify-center h-full px-3 whitespace-nowrap flex-1 font-medium" style={{ color: "#141413" }}>Cowork</div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Views with crossfade */}
-              <div className="absolute inset-0 transition-opacity duration-300" style={{ opacity: activeTab === "cowork" ? 1 : 0, pointerEvents: activeTab === "cowork" ? "auto" : "none" }}>
+              {/* Views */}
+              <div style={{ opacity: activeTab === "cowork" ? 1 : 0, pointerEvents: activeTab === "cowork" ? "auto" : "none", transition: "opacity 300ms", position: "absolute", inset: 0 }}>
                 <CoworkView />
               </div>
-              <div className="absolute inset-0 transition-opacity duration-300" style={{ opacity: activeTab === "chat" ? 1 : 0, pointerEvents: activeTab === "chat" ? "auto" : "none" }}>
+              <div style={{ opacity: activeTab === "chat" ? 1 : 0, pointerEvents: activeTab === "chat" ? "auto" : "none", transition: "opacity 300ms", position: "absolute", inset: 0 }}>
                 <ChatView />
               </div>
             </div>
