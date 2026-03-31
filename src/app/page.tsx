@@ -291,7 +291,7 @@ export default function Home() {
               letterSpacing: "-0.03em",
             }}
           >
-            Here&apos;s what Claude can do.
+            A glimpse of what Claude can do for your business.
           </h2>
           <CoworkDemo className="mx-auto w-full max-w-[900px] text-left" />
         </div>
