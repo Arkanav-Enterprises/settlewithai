@@ -196,7 +196,7 @@ function CoworkView() {
             className="absolute z-50 pointer-events-none"
             style={{
               ...(isFolder
-                ? { left: 232, top: "30%" }
+                ? { left: 0, top: "55%" }
                 : { right: 212, top: "45%" }),
               animation: "200ms ease-out forwards panelSlideUp",
             }}
