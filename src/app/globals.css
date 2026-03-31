@@ -48,6 +48,12 @@ h1, h2, h3 {
   background: rgba(217, 119, 87, 0.3);
 }
 
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+.animate-breathe { animation: breathe 2.5s ease-in-out infinite; }
+
 /* ─── Scrollbar ─────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }

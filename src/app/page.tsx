@@ -167,7 +167,11 @@ export default function Home() {
             AI, <span className="text-accent">thoughtfully</span> deployed.
           </h1>
           <p className="text-text-muted text-[clamp(1rem,1.5vw,1.2rem)] max-w-[420px] leading-[1.7] mb-10">
-            We settle Claude into your team&apos;s actual workflows &mdash;
+            We settle{" "}
+            <span className="inline items-baseline text-accent">
+              <img src="/claude-color.svg" alt="" className="inline-block w-[0.85em] h-[0.85em] mr-1 align-baseline animate-breathe" aria-hidden="true" />Claude
+            </span>{" "}
+            into your team&apos;s actual workflows &mdash;
             structured rollouts, production-grade instructions, and real
             results.
           </p>
