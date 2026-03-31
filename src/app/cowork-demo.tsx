@@ -190,20 +190,28 @@ function CoworkView() {
           </div>
         </div>
 
-        {/* ── Tooltip (dark bubble) — appears on any hover ── */}
+        {/* ── Tooltip (dark bubble) — positioned near hovered item ── */}
         {hovered && tooltipData[hovered] && (
           <div
-            className="absolute left-1/2 -translate-x-1/2 z-50 flex items-start gap-3 rounded-2xl px-5 py-4 pointer-events-none"
+            className="absolute z-50 pointer-events-none"
             style={{
-              top: isFolder ? "45%" : "55%",
-              backgroundColor: "#1a1a19",
-              boxShadow: "0 12px 40px rgba(0,0,0,0.25)",
-              maxWidth: 280,
+              ...(isFolder
+                ? { left: 232, top: "30%" }
+                : { right: 212, top: "45%" }),
               animation: "200ms ease-out forwards panelSlideUp",
             }}
           >
-            <div className="shrink-0 mt-0.5">{CLAUDE_SPARK}</div>
-            <span className="text-[14px] text-white leading-snug">{tooltipData[hovered]}</span>
+            <div
+              className="flex items-center gap-2.5 rounded-2xl px-4 py-3"
+              style={{
+                backgroundColor: "#1a1a19",
+                boxShadow: "0 12px 40px rgba(0,0,0,0.25)",
+                maxWidth: 260,
+              }}
+            >
+              <div className="shrink-0">{CLAUDE_SPARK}</div>
+              <span className="text-[13px] text-white leading-[1.4]">{tooltipData[hovered]}</span>
+            </div>
           </div>
         )}
       </div>
