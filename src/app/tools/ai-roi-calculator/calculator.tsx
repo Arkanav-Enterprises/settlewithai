@@ -9,12 +9,24 @@ const REDUCTION_OPTIONS = [
   { label: "85% — Document generation and templates", value: 0.85 },
 ];
 
+const CURRENCIES = [
+  { code: "USD", symbol: "$", label: "USD ($)", locale: "en-US" },
+  { code: "EUR", symbol: "\u20AC", label: "EUR (\u20AC)", locale: "de-DE" },
+  { code: "GBP", symbol: "\u00A3", label: "GBP (\u00A3)", locale: "en-GB" },
+  { code: "INR", symbol: "\u20B9", label: "INR (\u20B9)", locale: "en-IN" },
+  { code: "CAD", symbol: "C$", label: "CAD (C$)", locale: "en-CA" },
+  { code: "AUD", symbol: "A$", label: "AUD (A$)", locale: "en-AU" },
+  { code: "PKR", symbol: "Rs", label: "PKR (Rs)", locale: "en-PK" },
+  { code: "AED", symbol: "AED", label: "AED", locale: "en-AE" },
+];
+
 function formatNumber(n: number): string {
   return n.toLocaleString("en-US", { maximumFractionDigits: 0 });
 }
 
-function formatCurrency(n: number): string {
-  return "$" + n.toLocaleString("en-US", { maximumFractionDigits: 0 });
+function formatCurrency(n: number, currencyIndex: number): string {
+  const c = CURRENCIES[currencyIndex];
+  return c.symbol + n.toLocaleString(c.locale, { maximumFractionDigits: 0 });
 }
 
 export function RoiCalculator() {
@@ -22,6 +34,7 @@ export function RoiCalculator() {
   const [hoursPerWeek, setHoursPerWeek] = useState(10);
   const [hourlyCost, setHourlyCost] = useState(75);
   const [reductionIndex, setReductionIndex] = useState(1); // default 50%
+  const [currencyIndex, setCurrencyIndex] = useState(0); // default USD
 
   const reduction = REDUCTION_OPTIONS[reductionIndex].value;
 
@@ -100,6 +113,32 @@ export function RoiCalculator() {
           </div>
         </div>
 
+        {/* Currency */}
+        <div>
+          <label
+            htmlFor="currency"
+            className="block text-[0.9375rem] font-medium text-text mb-3"
+          >
+            Currency
+          </label>
+          <div className="flex flex-wrap gap-2">
+            {CURRENCIES.map((c, i) => (
+              <button
+                key={c.code}
+                type="button"
+                onClick={() => setCurrencyIndex(i)}
+                className={`px-3.5 py-2 rounded-lg text-[0.875rem] font-medium border transition-all duration-200 cursor-pointer ${
+                  currencyIndex === i
+                    ? "border-accent bg-accent-soft text-text"
+                    : "border-border-light text-text-muted hover:border-accent-border"
+                }`}
+              >
+                {c.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Hourly cost */}
         <div>
           <div className="flex items-center justify-between mb-3">
@@ -110,7 +149,7 @@ export function RoiCalculator() {
               Fully loaded hourly cost per employee
             </label>
             <span className="text-[0.9375rem] font-heading font-semibold text-text tabular-nums">
-              ${hourlyCost}
+              {CURRENCIES[currencyIndex].symbol}{hourlyCost}
             </span>
           </div>
           <input
@@ -124,8 +163,8 @@ export function RoiCalculator() {
             className="w-full accent-[#d97757] h-2 rounded-full cursor-pointer"
           />
           <div className="flex justify-between text-xs text-text-faint mt-1">
-            <span>$30</span>
-            <span>$200</span>
+            <span>{CURRENCIES[currencyIndex].symbol}30</span>
+            <span>{CURRENCIES[currencyIndex].symbol}200</span>
           </div>
         </div>
 
@@ -181,7 +220,7 @@ export function RoiCalculator() {
               Annual cost savings
             </p>
             <p className="text-[clamp(1.5rem,3vw,2rem)] font-semibold text-accent font-heading tabular-nums">
-              {formatCurrency(annualCostSavings)}
+              {formatCurrency(annualCostSavings, currencyIndex)}
             </p>
           </div>
           <div className="border border-border-light rounded-xl p-5">
@@ -273,10 +312,10 @@ export function RoiCalculator() {
               <tr>
                 <td className="px-5 py-3 text-text-muted">Annual labor cost</td>
                 <td className="px-5 py-3 text-right text-text tabular-nums">
-                  {formatCurrency(totalWeeklyHours * 52 * hourlyCost)}
+                  {formatCurrency(totalWeeklyHours * 52 * hourlyCost, currencyIndex)}
                 </td>
                 <td className="px-5 py-3 text-right text-accent font-medium tabular-nums">
-                  {formatCurrency(afterWeeklyHours * 52 * hourlyCost)}
+                  {formatCurrency(afterWeeklyHours * 52 * hourlyCost, currencyIndex)}
                 </td>
               </tr>
             </tbody>
