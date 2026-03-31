@@ -181,10 +181,14 @@ function CoworkView() {
                 </div>
                 {/* Hoverable context links */}
                 {[
-                  { key: "Pricing Rules", icon: <svg width="16" height="16" viewBox="0 0 20 20" fill="rgba(20,20,19,0.35)"><path d="M8 4c.82 0 1.544.396 2 1.005A2.5 2.5 0 0 1 12 4h4.5A1.5 1.5 0 0 1 18 5.5v9a1.5 1.5 0 0 1-1.5 1.5h-4.559a1.5 1.5 0 0 0-1.422 1.025l-.044.133a.5.5 0 0 1-.95 0l-.044-.133A1.5 1.5 0 0 0 8.06 16H3.5A1.5 1.5 0 0 1 2 14.5v-9A1.5 1.5 0 0 1 3.5 4zM3.5 5a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h4.559c.529 0 1.029.167 1.441.458V6.5A1.5 1.5 0 0 0 8 5zM12 5a1.5 1.5 0 0 0-1.5 1.5v8.958c.412-.29.912-.458 1.441-.458H16.5a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5z" /></svg> },
-                  { key: "SAP Connector", icon: <svg width="16" height="16" viewBox="0 0 20 20" fill="rgba(20,20,19,0.35)"><path d="M13.5 6a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V7.707l-6.147 6.147a.5.5 0 0 1-.707-.707L12.293 7H8.5a.5.5 0 0 1 0-1z" /></svg> },
-                  { key: "SharePoint", letter: "S" },
-                  { key: "Service DB", letter: "D" },
+                  {/* Pricing Rules — tag/label icon */
+                    key: "Pricing Rules", icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(20,20,19,0.35)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" /><line x1="7" y1="7" x2="7.01" y2="7" /></svg> },
+                  {/* SAP Connector — plug/connector icon */
+                    key: "SAP Connector", icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(20,20,19,0.35)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg> },
+                  {/* SharePoint — grid/sites icon */
+                    key: "SharePoint", icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(20,20,19,0.35)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /></svg> },
+                  {/* Service DB — database icon */
+                    key: "Service DB", icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(20,20,19,0.35)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" /><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" /></svg> },
                 ].map((item) => (
                   <div
                     key={item.key}
