@@ -242,6 +242,36 @@ details[open] summary .faq-icon-v {
 .folder-item .folder-label { color: rgba(20, 20, 19, 0.5); transition: color 150ms, font-weight 150ms; }
 .folder-item:hover .folder-label { color: #141413; font-weight: 500; }
 
+/* ─── Mindmap tooltip ──────────────────────── */
+.mindmap-tooltip {
+  position: fixed;
+  z-index: 50;
+  max-width: 220px;
+  background-color: #1a1a19;
+  color: white;
+  padding: 12px 14px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+  will-change: transform;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+.mindmap-tooltip h3 {
+  font-size: 13px;
+  font-weight: 600;
+  font-family: Sentient, Georgia, serif;
+  color: white;
+}
+.mindmap-tooltip p {
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: Inter, sans-serif;
+}
+
 /* ─── Progress spinner ─────────────────────── */
 @keyframes progressSpin {
   from { transform: rotate(0deg); }
