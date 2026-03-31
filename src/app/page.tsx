@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { getCalApi } from "@calcom/embed-react";
 
 const Globe = dynamic(() => import("./globe"), { ssr: false });
-// const Mindmap = dynamic(() => import("./mindmap"), { ssr: false });
+const Mindmap = dynamic(() => import("./mindmap"), { ssr: false });
 const CoworkDemo = dynamic(() => import("./cowork-demo"), { ssr: false });
 
 /* ─── Scroll-triggered fade-in ──────────────────────────── */
@@ -597,75 +597,61 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Services ─────────────────────────────────── */}
+      {/* ── Services — text left + mindmap right ─── */}
       <section id="services" ref={servicesRef}>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
           <div className="h-px bg-border-light" />
         </div>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
-          {/* Mobile: low-opacity background SVG */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <div className="flex items-start justify-between mb-20">
-            <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12]">
-              What we deliver.
-            </h2>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/settle-char-2.svg" alt="" width={1000} height={1000} loading="lazy" className="w-[90px] md:w-[140px] lg:w-[200px] shrink-0 ml-4 md:ml-8 lg:ml-12 -mt-8" />
-          </div>
+          <div className="flex flex-col lg:flex-row gap-12 lg:gap-0">
+            {/* Left column — text */}
+            <div className="lg:w-[42%] lg:pr-12">
+              <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-16">
+                What we deliver.
+              </h2>
 
-          <div className="grid md:grid-cols-2 gap-px bg-border-light rounded-2xl overflow-hidden stagger">
-            {[
-              {
-                title: "AI Readiness Assessment",
-                items: [
-                  "Department-by-department workflow audit",
-                  "Use case discovery and prioritisation",
-                  "Tier-based rollout map and blocker analysis",
-                ],
-              },
-              {
-                title: "Deployment Dashboard",
-                items: [
-                  "Interactive rollout visualisation",
-                  "Project-level tracking",
-                  "Skill mapping and architecture recommendations",
-                  "Kanban board for execution",
-                ],
-              },
-              {
-                title: "Instruction Engineering",
-                items: [
-                  "Production-grade Claude instructions",
-                  "Per-project knowledge file specifications",
-                  "Review gates and safety rules",
-                  "Output format and formatting standards",
-                ],
-              },
-              {
-                title: "Setup & Training",
-                items: [
-                  "Project creation and configuration",
-                  "Knowledge file preparation",
-                  "Team training and onboarding",
-                  "Ongoing iteration and support",
-                ],
-              },
-            ].map((s) => (
-              <div key={s.title} className="fade-up bg-bg p-8 md:p-10">
-                <h3 className="text-lg font-medium mb-5">{s.title}</h3>
-                <ul className="space-y-3">
-                  {s.items.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-3 text-[15px] text-text-muted leading-relaxed"
+              {[
+                {
+                  icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>,
+                  title: "AI Readiness Assessment",
+                  desc: "We audit every department\u2019s workflows, discover use cases, and build a tier-based rollout map with blocker analysis.",
+                },
+                {
+                  icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>,
+                  title: "Deployment Dashboard",
+                  desc: "Interactive rollout visualisation with project-level tracking, skill mapping, and a kanban board for execution.",
+                },
+                {
+                  icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>,
+                  title: "Instruction Engineering",
+                  desc: "Production-grade Claude instructions with knowledge file specs, review gates, safety rules, and output standards.",
+                },
+                {
+                  icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+                  title: "Setup & Training",
+                  desc: "Project creation, knowledge file preparation, team onboarding, and ongoing iteration support.",
+                },
+              ].map((s, i) => (
+                <div key={s.title}>
+                  {i > 0 && <div className="h-px bg-border-light my-8" />}
+                  <div className="fade-up">
+                    <div className="text-accent mb-4">{s.icon}</div>
+                    <h3
+                      className="text-[clamp(1.15rem,2vw,1.4rem)] font-medium mb-3"
+                      style={{ fontFamily: "Sentient, Georgia, serif" }}
                     >
-                      <span className="mt-2 w-1 h-1 rounded-full bg-accent shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+                      {s.title}
+                    </h3>
+                    <p className="text-text-muted text-[15px] leading-[1.7]">{s.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Right column — mindmap (sticky on desktop, full-width on mobile) */}
+            <div className="lg:w-[58%] lg:sticky lg:top-24 lg:self-start">
+              <Mindmap className="w-full" />
+            </div>
           </div>
         </div>
       </section>
