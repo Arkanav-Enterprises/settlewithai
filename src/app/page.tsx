@@ -777,7 +777,7 @@ export default function Home() {
               </div>
             </div>
             <h2 className="fade-up text-[clamp(1.8rem,4vw,3.5rem)] font-medium leading-[1.1] mb-5 text-white">
-              Ready to settle into AI?
+              Ready to settle in with AI?
             </h2>
             <p className="fade-up text-white/70 text-[17px] leading-relaxed mb-12">
               Tell us about your team. We&apos;ll scope your rollout and come
