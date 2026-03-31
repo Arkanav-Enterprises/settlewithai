@@ -5,7 +5,31 @@ import * as d3 from "d3";
 
 /* ─── Data ──────────────────────────────────────────────── */
 
-/* No tooltip items — this mindmap is a visual illustration, not interactive links */
+/* Tooltip descriptions for every child node */
+const nodeDescriptions: Record<string, string> = {
+  // AI Readiness
+  "Workflow Audit": "Map every repeatable process across departments — what eats time, what\u2019s error-prone.",
+  "Use Cases": "Discover and prioritise the highest-impact AI opportunities for your team.",
+  "Rollout Map": "A phased deployment plan: quick wins first, deeper integrations over time.",
+  "Blocker Analysis": "Identify skill gaps, data issues, and organisational resistance before they stall your rollout.",
+  // Deployment Dashboard
+  "Visualisation": "See your entire AI rollout in one interactive view — departments, timelines, dependencies.",
+  "Tracking": "Monitor project-level progress with real-time status updates.",
+  "Skill Mapping": "Match team capabilities to use cases and flag training needs.",
+  "Kanban": "Execution board for managing deployment tasks across teams.",
+  // Instruction Engineering
+  "Claude Instructions": "Production-grade prompts with structured workflows, not generic templates.",
+  "Knowledge Files": "Per-project reference documents that give Claude your business context.",
+  "Safety Rules": "Review gates and guardrails that prevent errors before they reach your team.",
+  "Output Standards": "Formatting rules so every output matches your internal conventions.",
+  // Setup & Training
+  "Configuration": "Project creation, tool connections, and environment setup.",
+  "Knowledge Prep": "Organise and structure the documents Claude needs to do its job.",
+  "Onboarding": "Hands-on training so your team uses Claude confidently from day one.",
+  "Iteration": "Ongoing refinement — we monitor, adjust, and expand as your needs evolve.",
+};
+
+/* Keep the old type for compatibility but we won't use images/urls */
 const tooltipItems: Record<string, { heading: string; body: string; image: string; url: string }> = {};
 
 const categories: Record<string, { items: string[] }> = {
@@ -499,8 +523,10 @@ export default function Mindmap({ className = "" }: { className?: string }) {
     }
 
     function showTooltip(name: string) {
+      const desc = nodeDescriptions[name];
+      if (!desc) return;
       if (activeTooltips.includes(name)) {
-        const ex = document.getElementById(`mm-tip-${name.toLowerCase()}`);
+        const ex = document.getElementById(`mm-tip-${name.toLowerCase().replace(/\s/g, "-")}`);
         if (ex) {
           positionTooltip(ex);
           ex.style.opacity = "1";
@@ -509,11 +535,10 @@ export default function Mindmap({ className = "" }: { className?: string }) {
         return;
       }
       activeTooltips.push(name);
-      const item = tooltipItems[name];
       const el = document.createElement("div");
-      el.id = `mm-tip-${name.toLowerCase()}`;
+      el.id = `mm-tip-${name.toLowerCase().replace(/\s/g, "-")}`;
       el.className = "mindmap-tooltip";
-      el.innerHTML = `<h3>${item.heading}</h3><img src="${item.image}" crossorigin="anonymous" alt="" /><p>${item.body}</p>`;
+      el.innerHTML = `<h3>${name}</h3><p>${desc}</p>`;
       const ox = mouse.x < window.innerWidth / 2 ? "left" : "right";
       const oy = mouse.y < window.innerHeight / 2 ? "top" : "bottom";
       el.style.transformOrigin = `${oy} ${ox}`;
@@ -530,7 +555,7 @@ export default function Mindmap({ className = "" }: { className?: string }) {
     function hideTooltip(name: string) {
       const idx = activeTooltips.indexOf(name);
       if (idx >= 0) activeTooltips.splice(idx, 1);
-      const el = document.getElementById(`mm-tip-${name.toLowerCase()}`);
+      const el = document.getElementById(`mm-tip-${name.toLowerCase().replace(/\s/g, "-")}`);
       if (el) {
         el.style.opacity = "0";
         el.style.transform = "scale(0.95)";
@@ -687,46 +712,28 @@ export default function Mindmap({ className = "" }: { className?: string }) {
 
       enterGroups.each(function (d) {
         const g = d3.select(this);
-        if (tooltipItems[d.name]) {
-          const a = g
-            .append("a")
-            .attr("href", tooltipItems[d.name].url)
-            .attr("target", "_blank")
-            .attr("rel", "noopener noreferrer");
-          a.append("text")
-            .text(d.name)
-            .attr("font-size", "11px")
-            .attr("font-weight", "400")
-            .attr("font-family", "Inter, sans-serif")
-            .attr("text-anchor", "middle")
-            .attr("x", d.x!)
-            .attr("y", d.y! + 3)
-            .attr("fill", fgTertiary)
-            .style("cursor", "pointer")
-            .style("text-decoration", "underline 0.5px rgba(20,20,19,0.2)")
-            .style("text-underline-offset", "4px");
-        } else {
-          g.append("text")
-            .text(d.name)
-            .attr("font-size", "11px")
-            .attr("font-weight", "400")
-            .attr("font-family", "Inter, sans-serif")
-            .attr("text-anchor", "middle")
-            .attr("x", d.x!)
-            .attr("y", d.y! + 3)
-            .attr("fill", fgTertiary)
-            .style("cursor", "default");
-        }
+        g.append("text")
+          .text(d.name)
+          .attr("font-size", "11px")
+          .attr("font-weight", "400")
+          .attr("font-family", "Inter, sans-serif")
+          .attr("text-anchor", "middle")
+          .attr("x", d.x!)
+          .attr("y", d.y! + 3)
+          .attr("fill", fgTertiary)
+          .style("cursor", nodeDescriptions[d.name] ? "pointer" : "default")
+          .style("text-decoration", nodeDescriptions[d.name] ? "underline 0.5px rgba(20,20,19,0.2)" : "none")
+          .style("text-underline-offset", "4px");
       });
 
-      /* tooltip events */
+      /* tooltip events — all nodes with descriptions */
       nodeGroup
         .selectAll<SVGGElement, MindmapNode>(".item-label-group")
         .on("mouseenter", (_event, d) => {
-          if (tooltipItems[d.name]) showTooltip(d.name);
+          if (nodeDescriptions[d.name]) showTooltip(d.name);
         })
         .on("mouseleave", (_event, d) => {
-          if (tooltipItems[d.name]) hideTooltip(d.name);
+          if (nodeDescriptions[d.name]) hideTooltip(d.name);
         });
     }
 
@@ -746,12 +753,7 @@ export default function Mindmap({ className = "" }: { className?: string }) {
     );
     observer.observe(container);
 
-    /* ── Preload tooltip images ── */
-    Object.values(tooltipItems).forEach((item) => {
-      const img = new Image();
-      img.src = item.image;
-      img.crossOrigin = "anonymous";
-    });
+    /* no image preload needed — tooltips are text-only */
 
     /* ── Resize ── */
     function handleResize() {
@@ -784,7 +786,7 @@ export default function Mindmap({ className = "" }: { className?: string }) {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
       activeTooltips.forEach((name) => {
-        const el = document.getElementById(`mm-tip-${name.toLowerCase()}`);
+        const el = document.getElementById(`mm-tip-${name.toLowerCase().replace(/\s/g, "-")}`);
         if (el) positionTooltip(el);
       });
     }
