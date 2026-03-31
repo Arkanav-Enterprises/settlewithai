@@ -83,6 +83,13 @@ export default async function ComparePage(props: {
       parseFrontmatter: false,
       mdxOptions: { remarkPlugins: [remarkGfm] },
     },
+    components: {
+      table: (props: React.ComponentProps<"table">) => (
+        <div className="table-scroll-wrapper">
+          <table {...props} />
+        </div>
+      ),
+    },
   });
 
   const articleSchema = {

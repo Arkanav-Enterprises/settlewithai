@@ -107,7 +107,7 @@ export function ArticleLayout({
         <div className="prose-settle">{children}</div>
 
         {/* CTA */}
-        <section className="mt-20 -mx-6 lg:-mx-10 px-6 lg:px-10 py-14 bg-accent rounded-2xl text-center">
+        <section className="mt-20 lg:-mx-10 lg:px-10 py-14 bg-accent rounded-2xl text-center">
           <h2
             className="text-[clamp(1.4rem,3vw,2rem)] font-semibold leading-tight tracking-[-0.02em] text-white mb-3"
             style={{ fontFamily: "Sentient, Georgia, serif" }}

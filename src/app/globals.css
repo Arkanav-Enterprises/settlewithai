@@ -197,13 +197,20 @@ h1, h2, h3 {
   line-height: 1.8;
   margin-bottom: 0.6rem;
 }
-.prose-settle table {
-  display: block;
+.table-scroll-wrapper {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  margin: 1.5rem 0;
+  max-width: calc(100vw - 48px);
+}
+@media (min-width: 768px) {
+  .table-scroll-wrapper {
+    max-width: none;
+  }
+}
+.prose-settle table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1.5rem 0;
   font-size: 0.9375rem;
 }
 .prose-settle thead th {
