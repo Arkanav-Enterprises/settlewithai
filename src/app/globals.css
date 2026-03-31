@@ -28,6 +28,10 @@
   --font-heading: "Sentient", Georgia, "Times New Roman", serif;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 html {
   scroll-behavior: smooth;
 }
