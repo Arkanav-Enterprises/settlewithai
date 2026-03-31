@@ -342,6 +342,56 @@ details[open] summary .faq-icon-v {
   font-family: Inter, sans-serif;
 }
 
+/* ─── Claude tooltip ──────────────────────── */
+.claude-tooltip {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 10px);
+  z-index: 50;
+  width: 240px;
+  background-color: #1a1a19;
+  color: white;
+  padding: 14px 16px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  animation: tooltipIn 0.2s ease;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+.claude-tooltip:hover {
+  background-color: #252524;
+}
+.claude-tooltip h3 {
+  font-size: 13px;
+  font-weight: 600;
+  font-family: Sentient, Georgia, serif;
+  color: white;
+  margin: 0;
+}
+.claude-tooltip p {
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: Inter, sans-serif;
+  margin: 0;
+}
+.claude-tooltip-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #D97757;
+  margin-top: 2px;
+}
+@keyframes tooltipIn {
+  from { opacity: 0; transform: scale(0.95) translateY(-4px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
 /* ─── Progress spinner ─────────────────────── */
 @keyframes progressSpin {
   from { transform: rotate(0deg); }

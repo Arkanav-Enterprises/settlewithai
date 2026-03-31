@@ -67,6 +67,73 @@ function Arrow() {
   );
 }
 
+/* ─── Claude tooltip ───────────────────────────────────── */
+
+function ClaudeTooltip() {
+  const [open, setOpen] = useState(false);
+  const timeout = useRef<ReturnType<typeof setTimeout>>(null);
+
+  const show = () => {
+    if (timeout.current) clearTimeout(timeout.current);
+    setOpen(true);
+  };
+  const hide = () => {
+    timeout.current = setTimeout(() => setOpen(false), 200);
+  };
+
+  return (
+    <span
+      className="inline items-baseline text-accent relative"
+      onMouseEnter={show}
+      onMouseLeave={hide}
+    >
+      <img
+        src="/claude-color.svg"
+        alt=""
+        className="inline-block w-[0.85em] h-[0.85em] mr-1 align-baseline animate-breathe"
+        aria-hidden="true"
+      />
+      Claude
+      {open && (
+        <a
+          href="https://claude.ai"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="claude-tooltip"
+          onMouseEnter={show}
+          onMouseLeave={hide}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <img
+            src="/claude-color.svg"
+            alt="Claude"
+            className="w-8 h-8 rounded-md"
+          />
+          <div>
+            <h3>Claude</h3>
+            <p>
+              Anthropic&apos;s AI assistant &mdash; built to be helpful,
+              harmless, and honest. The model we deploy for every client.
+            </p>
+          </div>
+          <span className="claude-tooltip-link">
+            claude.ai
+            <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
+              <path
+                d="M1 7h11m0 0L8 3m4 4L8 11"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
+        </a>
+      )}
+    </span>
+  );
+}
+
 /* ─── Logo mark ─────────────────────────────────────────── */
 
 function SettleMark({ className = "h-6 w-auto", stroke = "#141413" }: { className?: string; stroke?: string }) {
@@ -168,9 +235,7 @@ export default function Home() {
           </h1>
           <p className="text-text-muted text-[clamp(1rem,1.5vw,1.2rem)] max-w-[420px] leading-[1.7] mb-10">
             We settle{" "}
-            <span className="inline items-baseline text-accent">
-              <img src="/claude-color.svg" alt="" className="inline-block w-[0.85em] h-[0.85em] mr-1 align-baseline animate-breathe" aria-hidden="true" />Claude
-            </span>{" "}
+            <ClaudeTooltip />{" "}
             into your team&apos;s actual workflows &mdash;
             structured rollouts, production-grade instructions, and real
             results.
