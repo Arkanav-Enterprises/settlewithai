@@ -190,9 +190,30 @@ details[open] summary .faq-icon-v {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+@keyframes panelSlideDown {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(20px); }
+}
 @keyframes gridReveal {
   from { clip-path: circle(0% at 50% 50%); }
   to { clip-path: circle(150% at 50% 50%); }
+}
+@keyframes gridHide {
+  from { clip-path: circle(150% at 50% 50%); }
+  to { clip-path: circle(0% at 50% 50%); }
+}
+@keyframes demoFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes bounceUpRight {
+  0%, 100% { transform: translate(-0.5px, 0.5px); }
+  50% { transform: translate(0.5px, -0.5px); }
+}
+@keyframes shimmertext {
+  0% { color: rgba(20, 20, 19, 0.6); }
+  50% { color: #d97757; }
+  100% { color: rgba(20, 20, 19, 0.6); }
 }
 
 /* ─── Typing spark pulse ───────────────────── */
@@ -202,40 +223,4 @@ details[open] summary .faq-icon-v {
 }
 .typing-spark {
   animation: sparkPulse 1.2s ease-in-out infinite;
-}
-
-/* ─── Mindmap tooltip ──────────────────────── */
-.mindmap-tooltip {
-  position: fixed;
-  z-index: 25;
-  width: 100%;
-  max-width: 190px;
-  background-color: var(--bg);
-  color: var(--text);
-  padding: 12px 10px 16px;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  pointer-events: none;
-  will-change: transform;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 4px 24px rgba(20, 20, 19, 0.12);
-}
-.mindmap-tooltip h3 {
-  font-size: 13px;
-  font-weight: 500;
-  font-family: Inter, sans-serif;
-}
-.mindmap-tooltip img {
-  width: 100%;
-  height: auto;
-  border-radius: 4px;
-}
-.mindmap-tooltip p {
-  font-size: 11px;
-  line-height: 120%;
-  color: var(--text-muted);
-  font-family: Inter, sans-serif;
 }

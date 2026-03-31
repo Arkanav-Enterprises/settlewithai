@@ -53,17 +53,22 @@ const FOLDER_OPEN_ICON = (
   </svg>
 );
 
-const ARROW_ICON = (
+const ARROW_UP_RIGHT = (
   <svg width="16" height="16" viewBox="0 0 20 20" fill="rgba(20,20,19,0.35)">
     <path d="M13.5 6a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V7.707l-6.147 6.147a.5.5 0 0 1-.707-.707L12.293 7H8.5a.5.5 0 0 1 0-1z" />
   </svg>
 );
 
-const GLOBE_ICON = (
-  <svg width="14" height="14" viewBox="0 0 16 16" fill="rgba(20,20,19,0.25)">
-    <circle cx="8" cy="8" r="7" stroke="rgba(20,20,19,0.25)" strokeWidth="1" fill="none" />
-    <ellipse cx="8" cy="8" rx="3.5" ry="7" stroke="rgba(20,20,19,0.25)" strokeWidth="1" fill="none" />
-    <line x1="1" y1="8" x2="15" y2="8" stroke="rgba(20,20,19,0.2)" strokeWidth="1" />
+/* Small bouncing arrow for hover state on context links */
+const BOUNCE_ARROW = (
+  <svg
+    width="12"
+    height="12"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+    className="absolute inset-0 m-auto opacity-0 group-hover:opacity-100 group-hover:animate-[bounceUpRight_0.6s_ease-in-out_infinite]"
+  >
+    <path d="M13.5 6a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V7.707l-6.147 6.147a.5.5 0 0 1-.707-.707L12.293 7H8.5a.5.5 0 0 1 0-1z" />
   </svg>
 );
 
@@ -75,14 +80,14 @@ const panelStyle = {
 };
 const borderSubtle = "1px solid rgba(20,20,19,0.06)";
 
-/* ─── Progress steps ─── */
+/* ─── Progress steps — ALL completed ─── */
 const steps = [
-  { label: "Read meeting transcripts", status: "done" as const },
-  { label: "Pulling out key points", status: "active" as const },
-  { label: "Find action items", status: "pending" as const },
-  { label: "Checking Google Calendar", status: "loading" as const },
-  { label: "Build standup deck", status: "pending" as const },
-  { label: "Write summary", status: "pending" as const },
+  "Read meeting transcripts",
+  "Pull out key points",
+  "Find action items",
+  "Check Google Calendar",
+  "Build standup deck",
+  "Write summary",
 ];
 
 /* ─── Chat View ─── */
@@ -142,36 +147,78 @@ function ChatView() {
   );
 }
 
+/* ─── Context link item (with hover shimmer + bounce arrow) ─── */
+function ContextLink({
+  icon,
+  letter,
+  label,
+}: {
+  icon?: React.ReactNode;
+  letter?: string;
+  label: string;
+}) {
+  return (
+    <a
+      href="#"
+      onClick={(e) => e.preventDefault()}
+      className="group mx-2 px-2 py-2 flex items-center gap-3 rounded-lg transition-colors duration-150 hover:bg-[rgba(20,20,19,0.04)]"
+    >
+      <div
+        className="relative w-7 h-7 rounded-lg flex items-center justify-center overflow-hidden shrink-0"
+        style={{ backgroundColor: "rgba(20,20,19,0.03)", border: "0.5px solid rgba(20,20,19,0.08)" }}
+      >
+        <span className="transition-opacity duration-200 group-hover:opacity-0">
+          {icon ?? <span className="text-xs font-medium" style={{ color: "rgba(20,20,19,0.4)" }}>{letter}</span>}
+        </span>
+        {BOUNCE_ARROW}
+      </div>
+      <span
+        className="text-sm truncate animate-[shimmertext_2.25s_infinite] [animation-play-state:paused] group-hover:[animation-play-state:running]"
+        style={{ color: "rgba(20,20,19,0.6)" }}
+      >
+        {label}
+      </span>
+    </a>
+  );
+}
+
+/* ─── Context plain item (no link, no hover effects) ─── */
+function ContextItem({
+  icon,
+  label,
+}: {
+  icon: React.ReactNode;
+  label: string;
+}) {
+  return (
+    <div className="mx-2 px-2 py-2 flex items-center gap-3 rounded-lg">
+      <div
+        className="w-7 h-7 rounded-lg flex items-center justify-center overflow-hidden shrink-0"
+        style={{ backgroundColor: "rgba(20,20,19,0.03)", border: "0.5px solid rgba(20,20,19,0.08)" }}
+      >
+        {icon}
+      </div>
+      <span className="text-sm truncate" style={{ color: "rgba(20,20,19,0.6)" }}>{label}</span>
+    </div>
+  );
+}
+
 /* ─── Cowork View ─── */
 function CoworkView() {
-  const [hovered, setHovered] = useState<string | null>(null);
-
   const folders = ["Analysis", "Meeting Transcripts", "Quarterly Reports", "Expenses"];
-  const tooltips: Record<string, string> = {
-    "Meeting Transcripts": "I can summarize your meetings",
-    "Analysis": "I can analyze your data",
-    "Quarterly Reports": "I can compile your reports",
-    "Expenses": "I can categorize your expenses",
-  };
-  const contextTooltips: Record<string, string> = {
-    "SKILL.md": "Teach me your workflows and I\u2019ll follow them every time",
-  };
-
-  const anyHovered = hovered !== null;
 
   return (
     <div className="absolute inset-0 top-32">
       <div className="relative w-full h-full">
         {/* Left panel — File picker */}
         <div
-          className="absolute -left-8 top-4 z-[3] transition-all duration-300"
-          style={{
-            opacity: 0,
-            animation: "400ms ease-out 650ms 1 forwards panelSlideUp",
-            filter: hovered && !folders.includes(hovered) ? "blur(2px)" : "none",
-          }}
+          className="absolute -left-8 top-4"
+          style={{ opacity: 1, filter: "none", zIndex: 1, transition: "opacity 300ms, filter 300ms" }}
         >
-          <div className="rounded-xl overflow-hidden w-[220px] relative" style={panelStyle}>
+          <div
+            className="rounded-xl overflow-hidden w-[220px] relative"
+            style={{ ...panelStyle, opacity: 0, animation: "400ms ease-out 650ms 1 normal forwards running panelSlideUp" }}
+          >
             <div className="flex items-center gap-2 px-2.5 py-2" style={{ borderBottom: borderSubtle }}>
               <div className="w-5 h-5 rounded bg-[#3B82F6] flex items-center justify-center">
                 {FOLDER_OPEN_ICON}
@@ -185,84 +232,55 @@ function CoworkView() {
               {folders.map((name) => (
                 <div
                   key={name}
-                  className="flex flex-col items-center gap-1 rounded-lg px-2 py-2 transition-colors duration-150 cursor-default"
-                  style={{ backgroundColor: hovered === name ? "rgba(20,20,19,0.04)" : "transparent" }}
-                  onMouseEnter={() => setHovered(name)}
-                  onMouseLeave={() => setHovered(null)}
+                  className="flex flex-col items-center gap-1 rounded-lg px-2 py-2 cursor-default"
                 >
                   {FOLDER}
                   <span
-                    className="text-[10px] text-center leading-tight line-clamp-2 transition-all duration-150"
-                    style={{ color: hovered === name ? "#141413" : "rgba(20,20,19,0.5)", fontWeight: hovered === name ? 500 : 400 }}
+                    className="text-[10px] text-center leading-tight line-clamp-2"
+                    style={{ color: "rgba(20,20,19,0.5)" }}
                   >
                     {name}
                   </span>
                 </div>
               ))}
             </div>
-            <div className="flex justify-end gap-2 px-3 py-2" style={{ borderTop: borderSubtle }}>
+            <div className="pointer-events-none flex justify-end gap-2 px-3 py-2" style={{ borderTop: borderSubtle }}>
               <div className="rounded-md px-4 py-0.5 text-[10px]" style={{ border: "1px solid rgba(20,20,19,0.1)", color: "rgba(20,20,19,0.6)" }}>Cancel</div>
               <div className="rounded-md bg-[#007AFF] px-4 py-0.5 text-[10px] text-white">Open</div>
             </div>
           </div>
-
-          {/* Folder hover tooltip */}
-          {hovered && tooltips[hovered] && (
-            <div
-              className="absolute left-[232px] top-[45%] -translate-y-1/2 z-30 flex items-center gap-2.5 rounded-2xl px-5 py-3.5 text-[14px]"
-              style={{
-                backgroundColor: "#1a1a19",
-                boxShadow: "0 12px 40px rgba(0,0,0,0.25)",
-                animation: "200ms ease-out forwards panelSlideUp",
-              }}
-            >
-              {CLAUDE_SPARK}
-              <span className="text-white whitespace-nowrap">{tooltips[hovered]}</span>
-            </div>
-          )}
         </div>
 
         {/* Center panel — Progress */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 top-44 z-[2] transition-all duration-300"
-          style={{
-            opacity: 0,
-            animation: "400ms ease-out 900ms 1 forwards panelSlideUp",
-            filter: anyHovered ? "blur(2px) opacity(0.6)" : "none",
-          }}
+          className="absolute left-1/2 -translate-x-1/2 top-48"
+          style={{ opacity: 1, filter: "none", zIndex: 1, transition: "opacity 300ms, filter 300ms" }}
         >
-          <div className="rounded-xl overflow-hidden w-[280px]" style={panelStyle}>
+          <div
+            className="rounded-xl overflow-hidden w-[280px]"
+            style={{ ...panelStyle, opacity: 0, animation: "400ms ease-out 900ms 1 normal forwards running panelSlideUp" }}
+          >
             <div className="px-3 pt-2.5 pb-3 flex items-center justify-between">
               <span className="text-sm font-medium text-[#141413]">Progress</span>
               {CHEVRON}
             </div>
             <div className="px-3 pb-3">
-              {steps.map((step, i) => (
+              {steps.map((label, i) => (
                 <div key={i} className="flex">
                   <div className="flex flex-col items-center mr-3">
                     <div
-                      className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-[10px] font-medium ${step.status === "loading" ? "loading-spinner" : ""}`}
-                      style={{
-                        backgroundColor:
-                          step.status === "done" ? "#d97757"
-                          : step.status === "active" ? "#3B82F6"
-                          : step.status === "loading" ? "#3B82F6"
-                          : "rgba(20,20,19,0.1)",
-                        color: step.status === "pending" ? "rgba(20,20,19,0.4)" : "white",
-                        opacity: step.status === "loading" ? 0.5 : 1,
-                      }}
+                      className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-white"
+                      style={{ backgroundColor: "#d97757" }}
                     >
-                      {step.status === "done" ? CHECK : i + 1}
+                      {CHECK}
                     </div>
                   </div>
                   <div className={i < 5 ? "text-sm pb-3" : "text-sm pb-0"}>
                     <span
-                      style={{
-                        color: step.status === "done" ? "rgba(20,20,19,0.3)" : "#141413",
-                        textDecoration: step.status === "done" ? "line-through" : "none",
-                      }}
+                      className="line-through"
+                      style={{ color: "rgba(20,20,19,0.3)" }}
                     >
-                      {step.label}
+                      {label}
                     </span>
                   </div>
                 </div>
@@ -273,61 +291,34 @@ function CoworkView() {
 
         {/* Right panel — Context */}
         <div
-          className="absolute -right-2 top-8 z-[2] transition-all duration-300"
-          style={{
-            opacity: 0,
-            animation: "400ms ease-out 1150ms 1 forwards panelSlideUp",
-            filter: anyHovered && !contextTooltips[hovered!] ? "blur(2px) opacity(0.6)" : "none",
-          }}
+          className="absolute -right-2 top-12"
+          style={{ opacity: 1, filter: "none", zIndex: 1, transition: "opacity 300ms, filter 300ms" }}
         >
-          <div className="rounded-xl overflow-hidden w-[200px]" style={panelStyle}>
+          <div
+            className="rounded-xl overflow-hidden w-[200px]"
+            style={{ ...panelStyle, opacity: 0, animation: "400ms ease-out 1150ms 1 normal forwards running panelSlideUp" }}
+          >
             <div className="px-3 py-2.5 flex items-center justify-between">
               <span className="text-sm font-medium text-[#141413]">Context</span>
               {CHEVRON}
             </div>
             <div className="flex flex-col pb-2">
-              {[
-                { icon: DOC_ICON, label: "Meeting Transcri...", key: "Meeting Transcripts" },
-                { icon: BOOK_ICON, label: "SKILL.md", key: "SKILL.md", hoverable: true },
-                { icon: ARROW_ICON, label: "Claude in Chrome", key: "Chrome", hoverable: true },
-                { icon: null, label: "Notion", key: "Notion", letter: "N", hoverable: true },
-                { icon: null, label: "Linear", key: "Linear", letter: "L", hoverable: true },
-              ].map((item) => (
-                <div
-                  key={item.key}
-                  className="mx-2 px-2 py-2 flex items-center gap-3 rounded-lg transition-colors duration-150"
-                  style={{ backgroundColor: hovered === item.key ? "rgba(20,20,19,0.04)" : "transparent" }}
-                  onMouseEnter={() => item.hoverable ? setHovered(item.key) : undefined}
-                  onMouseLeave={() => item.hoverable ? setHovered(null) : undefined}
-                >
-                  <div
-                    className="w-7 h-7 rounded-lg flex items-center justify-center overflow-hidden shrink-0"
-                    style={{ backgroundColor: "rgba(20,20,19,0.03)", border: "0.5px solid rgba(20,20,19,0.08)" }}
-                  >
-                    {item.icon ? item.icon : (
-                      <span className="text-xs font-medium" style={{ color: "rgba(20,20,19,0.4)" }}>{item.letter}</span>
-                    )}
-                  </div>
-                  <span className="text-sm truncate" style={{ color: "rgba(20,20,19,0.6)" }}>{item.label}</span>
-                </div>
-              ))}
+              {/* Meeting Transcripts — plain div, NOT a link */}
+              <ContextItem icon={DOC_ICON} label="Meeting Transcri..." />
+
+              {/* SKILL.md — link with shimmer + bounce */}
+              <ContextLink icon={BOOK_ICON} label="SKILL.md" />
+
+              {/* Claude in Chrome — link */}
+              <ContextLink icon={ARROW_UP_RIGHT} label="Claude in Chrome" />
+
+              {/* Notion — link */}
+              <ContextLink letter="N" label="Notion" />
+
+              {/* Linear — link */}
+              <ContextLink letter="L" label="Linear" />
             </div>
           </div>
-
-          {/* Context hover tooltip — dark card, positioned left of context panel */}
-          {hovered && contextTooltips[hovered] && (
-            <div
-              className="absolute right-[212px] top-[55%] -translate-y-1/2 z-30 flex items-start gap-3 rounded-2xl px-5 py-4 text-[14px] w-[180px]"
-              style={{
-                backgroundColor: "#1a1a19",
-                boxShadow: "0 12px 40px rgba(0,0,0,0.25)",
-                animation: "200ms ease-out forwards panelSlideUp",
-              }}
-            >
-              <div className="shrink-0 mt-0.5">{CLAUDE_SPARK}</div>
-              <span className="text-white leading-snug">{contextTooltips[hovered]}</span>
-            </div>
-          )}
         </div>
       </div>
     </div>
