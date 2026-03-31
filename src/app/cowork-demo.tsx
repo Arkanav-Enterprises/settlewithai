@@ -59,18 +59,21 @@ const ARROW_UP_RIGHT = (
   </svg>
 );
 
-/* Small bouncing arrow for hover state on context links */
-const BOUNCE_ARROW = (
-  <svg
-    width="12"
-    height="12"
-    viewBox="0 0 20 20"
-    fill="currentColor"
-    className="absolute inset-0 m-auto opacity-0 group-hover:opacity-100 group-hover:animate-[bounceUpRight_0.6s_ease-in-out_infinite]"
-  >
-    <path d="M13.5 6a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V7.707l-6.147 6.147a.5.5 0 0 1-.707-.707L12.293 7H8.5a.5.5 0 0 1 0-1z" />
-  </svg>
-);
+/* Small bouncing arrow for hover state on context links — must be a function, not a constant, so each instance is unique */
+function BounceArrow() {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      className="absolute inset-0 m-auto opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-hover:animate-[bounceUpRight_0.6s_ease-in-out_infinite]"
+      style={{ color: "rgba(20,20,19,0.45)" }}
+    >
+      <path d="M13.5 6a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V7.707l-6.147 6.147a.5.5 0 0 1-.707-.707L12.293 7H8.5a.5.5 0 0 1 0-1z" />
+    </svg>
+  );
+}
 
 /* ─── Shared styles ─── */
 const panelStyle = {
@@ -170,7 +173,7 @@ function ContextLink({
         <span className="transition-opacity duration-200 group-hover:opacity-0">
           {icon ?? <span className="text-xs font-medium" style={{ color: "rgba(20,20,19,0.4)" }}>{letter}</span>}
         </span>
-        {BOUNCE_ARROW}
+        <BounceArrow />
       </div>
       <span
         className="text-sm truncate animate-[shimmertext_2.25s_infinite] [animation-play-state:paused] group-hover:[animation-play-state:running]"
@@ -232,11 +235,11 @@ function CoworkView() {
               {folders.map((name) => (
                 <div
                   key={name}
-                  className="flex flex-col items-center gap-1 rounded-lg px-2 py-2 cursor-default"
+                  className="group flex flex-col items-center gap-1 rounded-lg px-2 py-2 transition-colors hover:bg-[rgba(20,20,19,0.04)] cursor-default"
                 >
                   {FOLDER}
                   <span
-                    className="text-[10px] text-center leading-tight line-clamp-2"
+                    className="text-[10px] text-center leading-tight line-clamp-2 transition-colors group-hover:text-[#141413] group-hover:font-medium"
                     style={{ color: "rgba(20,20,19,0.5)" }}
                   >
                     {name}
