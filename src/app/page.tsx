@@ -609,7 +609,7 @@ export default function Home() {
 
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
             {/* Left column — text (compact) */}
-            <div className="lg:w-[30%] lg:shrink-0">
+            <div className="lg:w-[30%] lg:shrink-0 rounded-2xl p-6 md:p-8" style={{ backgroundColor: "#DED9CC" }}>
               {[
                 {
                   icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>,
