@@ -56,13 +56,11 @@ function ChatView() {
           </div>
         </div>
         <div style={{ opacity: 0, animation: "400ms ease-out 1400ms forwards panelSlideUp" }}>
-          <div className="space-y-3">
-            <div className="flex items-center gap-1 text-[13px]" style={{ color: "rgba(20,20,19,0.35)" }}>
-              Checking production schedule
-              <svg width="12" height="12" viewBox="0 0 20 20" fill="rgba(20,20,19,0.25)"><path d="M7.165 5.872a.502.502 0 0 1 .67-.744l5 4.5.07.078a.5.5 0 0 1-.07.666l-5 4.5-.082.06a.501.501 0 0 1-.656-.729l.068-.075L11.752 10z" /></svg>
-            </div>
-            <p className="text-[14px] leading-[1.65]" style={{ color: "rgba(20,20,19,0.5)" }}>Based on current util</p>
-            <div className="typing-spark">{CLAUDE_SPARK}</div>
+          <div className="flex items-start gap-3">
+            {CLAUDE_SPARK}
+            <p className="text-[14px] leading-[1.65]" style={{ color: "rgba(20,20,19,0.5)" }}>
+              Line 2 has 68% utilization next month. You can fit a 50K run in the second week &mdash; I&apos;ll block the slot and add it to the offer.
+            </p>
           </div>
         </div>
       </div>
