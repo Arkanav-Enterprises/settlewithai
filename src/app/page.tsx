@@ -83,7 +83,7 @@ function ClaudeTooltip() {
 
   return (
     <span
-      className="inline items-baseline text-accent relative"
+      className="inline items-baseline text-accent relative underline decoration-accent/40 underline-offset-4 cursor-pointer"
       onMouseEnter={show}
       onMouseLeave={hide}
     >
