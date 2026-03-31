@@ -80,7 +80,7 @@ const steps = [
   { label: "Read meeting transcripts", status: "done" as const },
   { label: "Pulling out key points", status: "active" as const },
   { label: "Find action items", status: "pending" as const },
-  { label: "Check Google Calendar", status: "pending" as const },
+  { label: "Checking Google Calendar", status: "loading" as const },
   { label: "Build standup deck", status: "pending" as const },
   { label: "Write summary", status: "pending" as const },
 ];
@@ -88,49 +88,52 @@ const steps = [
 /* ─── Chat View ─── */
 function ChatView() {
   return (
-    <div className="absolute inset-0 top-32 px-8 md:px-12 overflow-hidden">
-      <div className="max-w-md mx-auto space-y-6">
+    <div className="absolute inset-0 top-28 px-6 md:px-10 overflow-hidden">
+      <div className="max-w-lg mx-auto space-y-5 pt-4">
         {/* User message 1 */}
         <div className="flex justify-end" style={{ opacity: 0, animation: "400ms ease-out 500ms forwards panelSlideUp" }}>
           <div
-            className="rounded-2xl rounded-br-md px-4 py-3 text-[13px] leading-relaxed"
-            style={{ backgroundColor: "rgba(20,20,19,0.06)", color: "#141413", maxWidth: "85%" }}
+            className="rounded-[20px] px-5 py-3.5 text-[14px] leading-[1.5]"
+            style={{ backgroundColor: "rgba(20,20,19,0.07)", color: "#141413" }}
           >
             How should I structure this project proposal?
           </div>
         </div>
 
         {/* Claude response */}
-        <div className="flex items-start gap-2.5" style={{ opacity: 0, animation: "400ms ease-out 800ms forwards panelSlideUp" }}>
-          {CLAUDE_SPARK}
-          <p className="text-[13px] leading-[1.7]" style={{ color: "rgba(20,20,19,0.55)" }}>
-            I&apos;d go with: Problem &rarr; Solution &rarr; Timeline &rarr; Ask. Keep it tight &mdash; one page max. The trick is making the problem feel urgent before you pitch the fix.
-          </p>
+        <div style={{ opacity: 0, animation: "400ms ease-out 800ms forwards panelSlideUp" }}>
+          <div className="flex items-start gap-3">
+            {CLAUDE_SPARK}
+            <p className="text-[14px] leading-[1.65]" style={{ color: "rgba(20,20,19,0.5)" }}>
+              I&apos;d go with: Problem &rarr; Solution &rarr; Timeline &rarr; Ask. Keep it tight &mdash; one page max. The trick is making the problem feel urgent before you pitch the fix.
+            </p>
+          </div>
         </div>
 
         {/* User message 2 */}
         <div className="flex justify-end" style={{ opacity: 0, animation: "400ms ease-out 1100ms forwards panelSlideUp" }}>
           <div
-            className="rounded-2xl rounded-br-md px-4 py-3 text-[13px] leading-relaxed"
-            style={{ backgroundColor: "rgba(20,20,19,0.06)", color: "#141413", maxWidth: "85%" }}
+            className="rounded-[20px] px-5 py-3.5 text-[14px] leading-[1.5]"
+            style={{ backgroundColor: "rgba(20,20,19,0.07)", color: "#141413" }}
           >
             Can you find some examples of successful proposals in our industry?
           </div>
         </div>
 
         {/* Searched + typing */}
-        <div className="flex items-start gap-2.5" style={{ opacity: 0, animation: "400ms ease-out 1400ms forwards panelSlideUp" }}>
-          <div className="space-y-2.5 flex-1">
-            <div className="flex items-center gap-1.5 text-[12px]" style={{ color: "rgba(20,20,19,0.4)" }}>
+        <div style={{ opacity: 0, animation: "400ms ease-out 1400ms forwards panelSlideUp" }}>
+          <div className="space-y-3">
+            <div className="flex items-center gap-1 text-[13px]" style={{ color: "rgba(20,20,19,0.35)" }}>
               <span>Searched 3 sites</span>
-              <svg width="10" height="10" viewBox="0 0 20 20" fill="rgba(20,20,19,0.3)">
+              <svg width="12" height="12" viewBox="0 0 20 20" fill="rgba(20,20,19,0.25)">
                 <path d="M7.165 5.872a.502.502 0 0 1 .67-.744l5 4.5.07.078a.5.5 0 0 1-.07.666l-5 4.5-.082.06a.501.501 0 0 1-.656-.729l.068-.075L11.752 10z" />
               </svg>
             </div>
-            <p className="text-[13px] leading-[1.7]" style={{ color: "rgba(20,20,19,0.55)" }}>
-              I found a few stro
-            </p>
-            {/* Typing indicator */}
+            <div className="flex items-start gap-3">
+              <p className="text-[14px] leading-[1.65]" style={{ color: "rgba(20,20,19,0.5)" }}>
+                I found a few stro
+              </p>
+            </div>
             <div className="typing-spark">{CLAUDE_SPARK}</div>
           </div>
         </div>
@@ -203,18 +206,18 @@ function CoworkView() {
             </div>
           </div>
 
-          {/* Folder hover tooltip — dark bubble */}
+          {/* Folder hover tooltip */}
           {hovered && tooltips[hovered] && (
             <div
-              className="absolute left-[230px] top-1/2 -translate-y-1/2 z-10 flex items-center gap-2 rounded-full px-4 py-2.5 whitespace-nowrap text-[13px]"
+              className="absolute left-[232px] top-[45%] -translate-y-1/2 z-30 flex items-center gap-2.5 rounded-2xl px-5 py-3.5 text-[14px]"
               style={{
                 backgroundColor: "#1a1a19",
-                boxShadow: "0 8px 30px rgba(0,0,0,0.2)",
+                boxShadow: "0 12px 40px rgba(0,0,0,0.25)",
                 animation: "200ms ease-out forwards panelSlideUp",
               }}
             >
               {CLAUDE_SPARK}
-              <span className="text-white">{tooltips[hovered]}</span>
+              <span className="text-white whitespace-nowrap">{tooltips[hovered]}</span>
             </div>
           )}
         </div>
@@ -238,13 +241,15 @@ function CoworkView() {
                 <div key={i} className="flex">
                   <div className="flex flex-col items-center mr-3">
                     <div
-                      className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-white text-[10px] font-medium"
+                      className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-[10px] font-medium ${step.status === "loading" ? "loading-spinner" : ""}`}
                       style={{
                         backgroundColor:
                           step.status === "done" ? "#d97757"
                           : step.status === "active" ? "#3B82F6"
+                          : step.status === "loading" ? "#3B82F6"
                           : "rgba(20,20,19,0.1)",
                         color: step.status === "pending" ? "rgba(20,20,19,0.4)" : "white",
+                        opacity: step.status === "loading" ? 0.5 : 1,
                       }}
                     >
                       {step.status === "done" ? CHECK : i + 1}
@@ -309,17 +314,17 @@ function CoworkView() {
             </div>
           </div>
 
-          {/* Context hover tooltip — dark bubble */}
+          {/* Context hover tooltip — dark card, positioned left of context panel */}
           {hovered && contextTooltips[hovered] && (
             <div
-              className="absolute right-[210px] top-1/2 -translate-y-1/2 z-10 flex items-center gap-2 rounded-2xl px-4 py-3 text-[13px] max-w-[220px]"
+              className="absolute right-[212px] top-[55%] -translate-y-1/2 z-30 flex items-start gap-3 rounded-2xl px-5 py-4 text-[14px] w-[180px]"
               style={{
                 backgroundColor: "#1a1a19",
-                boxShadow: "0 8px 30px rgba(0,0,0,0.2)",
+                boxShadow: "0 12px 40px rgba(0,0,0,0.25)",
                 animation: "200ms ease-out forwards panelSlideUp",
               }}
             >
-              {CLAUDE_SPARK}
+              <div className="shrink-0 mt-0.5">{CLAUDE_SPARK}</div>
               <span className="text-white leading-snug">{contextTooltips[hovered]}</span>
             </div>
           )}
