@@ -260,7 +260,7 @@ export default function CoworkDemo({ className = "" }: { className?: string }) {
   const [activeTab, setActiveTab] = useState<"chat" | "cowork">("cowork");
 
   return (
-    <div className={`hidden min-[500px]:flex justify-center items-center w-full ${className}`}>
+    <div className={`flex justify-center items-center w-full ${className}`}>
       <div className="rounded-2xl w-full h-[70vh] min-h-[500px] max-h-[700px] flex justify-center items-center">
         <div className="relative w-full h-full flex items-center justify-center">
           <div className="relative w-full h-full rounded-2xl flex justify-center items-center" style={{ backgroundColor: "rgba(20,20,19,0.03)", boxShadow: "0 4px 20px 0 rgba(20,20,19,0.04)" }}>
