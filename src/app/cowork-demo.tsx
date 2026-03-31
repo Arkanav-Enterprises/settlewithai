@@ -230,8 +230,18 @@ export default function CoworkDemo({ className = "" }: { className?: string }) {
         <div className="relative w-full h-full flex items-center justify-center">
           <div className="relative w-full h-full rounded-2xl flex justify-center items-center" style={{ backgroundColor: "rgba(20,20,19,0.03)", boxShadow: "0 4px 20px 0 rgba(20,20,19,0.04)" }}>
             <div className="w-full h-full rounded-2xl relative" style={{ border: "1px solid rgba(20,20,19,0.06)", backgroundColor: "rgba(255,255,255,0.4)" }}>
-              {/* Grid bg — this div clips the grid pattern */}
-              <div className="absolute inset-0 overflow-hidden rounded-2xl" style={{ backgroundImage: "linear-gradient(to right, rgba(20,20,19,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(20,20,19,0.06) 1px, transparent 1px)", backgroundSize: "48px 48px", backgroundPosition: "24px 24px", opacity: activeTab === "cowork" ? 1 : 0, transition: "opacity 500ms" }} />
+              {/* Grid bg — animates with circle clip on tab switch */}
+              <div
+                className="absolute inset-0 overflow-hidden rounded-2xl"
+                style={{
+                  backgroundImage: "linear-gradient(to right, rgba(20,20,19,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(20,20,19,0.06) 1px, transparent 1px)",
+                  backgroundSize: "48px 48px",
+                  backgroundPosition: "24px 24px",
+                  animation: activeTab === "cowork"
+                    ? "2500ms cubic-bezier(0.22, 1, 0.36, 1) forwards gridReveal"
+                    : "600ms cubic-bezier(0.22, 1, 0.36, 1) forwards gridHide",
+                }}
+              />
               {/* Tab control */}
               <div className="flex justify-center pt-[60px] relative z-10">
                 <div className="relative inline-flex h-10 text-base font-medium p-0.5 select-none min-w-[290px] rounded-[.625rem]" style={{ backgroundColor: "rgba(20,20,19,0.06)", boxShadow: "0 11px 23px 0 rgba(0,0,0,0.15)", border: "0.5px solid rgba(20,20,19,0.08)" }}>
@@ -245,12 +255,9 @@ export default function CoworkDemo({ className = "" }: { className?: string }) {
                   </div>
                 </div>
               </div>
-              {/* Views */}
-              <div style={{ opacity: activeTab === "cowork" ? 1 : 0, pointerEvents: activeTab === "cowork" ? "auto" : "none", transition: "opacity 300ms", position: "absolute", inset: 0 }}>
-                <CoworkView />
-              </div>
-              <div style={{ opacity: activeTab === "chat" ? 1 : 0, pointerEvents: activeTab === "chat" ? "auto" : "none", transition: "opacity 300ms", position: "absolute", inset: 0 }}>
-                <ChatView />
+              {/* Active view — key forces remount so entrance animations replay */}
+              <div key={activeTab} style={{ position: "absolute", inset: 0, animation: "400ms ease-out forwards demoFadeIn" }}>
+                {activeTab === "cowork" ? <CoworkView /> : <ChatView />}
               </div>
             </div>
           </div>
