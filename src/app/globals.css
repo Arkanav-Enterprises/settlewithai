@@ -195,6 +195,15 @@ details[open] summary .faq-icon-v {
   to { clip-path: circle(150% at 50% 50%); }
 }
 
+/* ─── Typing spark pulse ───────────────────── */
+@keyframes sparkPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.typing-spark {
+  animation: sparkPulse 1.2s ease-in-out infinite;
+}
+
 /* ─── Mindmap tooltip ──────────────────────── */
 .mindmap-tooltip {
   position: fixed;
