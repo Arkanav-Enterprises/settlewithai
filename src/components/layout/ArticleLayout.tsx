@@ -58,7 +58,7 @@ export function ArticleLayout({
 
       <Nav />
 
-      <article className="max-w-[720px] mx-auto px-6 lg:px-10 pt-32 pb-24 md:pt-40 md:pb-36">
+      <article className="max-w-[720px] mx-auto px-6 lg:px-10 pt-32 pb-24 md:pt-40 md:pb-36 overflow-x-hidden">
         {/* Breadcrumbs */}
         <Breadcrumbs items={breadcrumbs} />
 
