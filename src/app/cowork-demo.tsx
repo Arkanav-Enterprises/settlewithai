@@ -32,11 +32,21 @@ const tooltipData: Record<string, string> = {
   "Service DB": "I can search service history and suggest troubleshooting steps",
 };
 
-/* ─── Tooltip ─── */
-function Tooltip({ text }: { text: string }) {
+/* ─── Tooltip — absolutely positioned, doesn't affect layout ─── */
+function Tooltip({ text, side }: { text: string; side: "left" | "right" }) {
   return (
-    <div className="mt-3 pointer-events-none" style={{ animation: "200ms ease-out forwards panelSlideUp" }}>
-      <div className="flex items-center gap-2.5 rounded-2xl px-4 py-3" style={{ backgroundColor: "#1a1a19", boxShadow: "0 12px 40px rgba(0,0,0,0.25)", maxWidth: 280 }}>
+    <div
+      className="pointer-events-none"
+      style={{
+        position: "absolute",
+        top: "50%",
+        transform: "translateY(-50%)",
+        ...(side === "left" ? { left: "calc(100% + 12px)" } : { right: "calc(100% + 12px)" }),
+        zIndex: 50,
+        animation: "200ms ease-out forwards panelSlideUp",
+      }}
+    >
+      <div className="flex items-center gap-2.5 rounded-2xl px-4 py-3" style={{ backgroundColor: "#1a1a19", boxShadow: "0 12px 40px rgba(0,0,0,0.25)", width: 240 }}>
         <div className="shrink-0">{CLAUDE_SPARK}</div>
         <span className="text-[13px] text-white leading-[1.4]">{text}</span>
       </div>
@@ -84,7 +94,7 @@ function ChatView() {
 function CoworkView() {
   const [hovered, setHovered] = useState<string | null>(null);
   const h = hovered !== null; // anything hovered?
-  const isFolder = hovered && ["Analysis", "Meeting Transcripts", "Quarterly Reports", "Expenses"].includes(hovered);
+  const isFolder = hovered && ["BOM Templates", "Vendor RFQs", "Production Reports", "Service Logs"].includes(hovered);
   const isCtx = hovered && !isFolder;
 
   return (
@@ -93,7 +103,7 @@ function CoworkView() {
 
         {/* ── Left: File picker ── */}
         <div className="absolute -left-8 top-4" style={{ zIndex: isFolder ? 3 : 1, opacity: h && !isFolder ? 0.4 : 1, filter: h && !isFolder ? "blur(3px)" : "none", transition: "opacity 300ms, filter 300ms" }}>
-          <div style={{ opacity: 0, animation: "400ms ease-out 650ms 1 forwards panelSlideUp" }}>
+          <div className="relative" style={{ opacity: 0, animation: "400ms ease-out 650ms 1 forwards panelSlideUp" }}>
             <div className="rounded-xl overflow-hidden w-[220px]" style={P}>
               <div className="flex items-center gap-2 px-2.5 py-2" style={{ borderBottom: "1px solid rgba(20,20,19,0.06)" }}>
                 <div className="w-5 h-5 rounded bg-[#3B82F6] flex items-center justify-center">
@@ -123,7 +133,7 @@ function CoworkView() {
                 <div className="rounded-md bg-[#007AFF] px-4 py-0.5 text-[10px] text-white">Open</div>
               </div>
             </div>
-            {isFolder && tooltipData[hovered!] && <Tooltip text={tooltipData[hovered!]} />}
+            {isFolder && tooltipData[hovered!] && <Tooltip text={tooltipData[hovered!]} side="left" />}
           </div>
         </div>
 
@@ -155,7 +165,7 @@ function CoworkView() {
 
         {/* ── Right: Context ── */}
         <div className="absolute -right-2 top-12" style={{ zIndex: isCtx ? 3 : 1, opacity: h && !isCtx ? 0.4 : 1, filter: h && !isCtx ? "blur(3px)" : "none", transition: "opacity 300ms, filter 300ms" }}>
-          <div style={{ opacity: 0, animation: "400ms ease-out 1150ms 1 forwards panelSlideUp" }}>
+          <div className="relative" style={{ opacity: 0, animation: "400ms ease-out 1150ms 1 forwards panelSlideUp" }}>
             <div className="rounded-xl overflow-hidden w-[200px]" style={P}>
               <div className="px-3 py-2.5 flex items-center justify-between">
                 <span className="text-sm font-medium" style={{ color: "#141413" }}>Context</span>
@@ -198,7 +208,7 @@ function CoworkView() {
                 ))}
               </div>
             </div>
-            {isCtx && tooltipData[hovered!] && <Tooltip text={tooltipData[hovered!]} />}
+            {isCtx && tooltipData[hovered!] && <Tooltip text={tooltipData[hovered!]} side="right" />}
           </div>
         </div>
       </div>
