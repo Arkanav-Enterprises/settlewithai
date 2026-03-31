@@ -188,30 +188,27 @@ function CoworkView() {
           </div>
         </div>
 
-        {/* ── Tooltip (dark bubble) — positioned near hovered item ── */}
-        {hovered && tooltipData[hovered] && (
-          <div
-            className="absolute z-50 pointer-events-none"
-            style={{
-              ...(isFolder
-                ? { left: 0, top: "55%" }
-                : { right: 212, top: "45%" }),
-              animation: "200ms ease-out forwards panelSlideUp",
-            }}
-          >
+        {/* ── Tooltip (dark bubble) — near the hovered panel ── */}
+        {hovered && tooltipData[hovered] && (() => {
+          // Position tooltip near the panel that contains the hovered item
+          const pos = isFolder
+            ? { left: 10, bottom: -10 } // below the file picker
+            : { right: 10, bottom: -10 }; // below the context panel
+          return (
             <div
-              className="flex items-center gap-2.5 rounded-2xl px-4 py-3"
-              style={{
-                backgroundColor: "#1a1a19",
-                boxShadow: "0 12px 40px rgba(0,0,0,0.25)",
-                maxWidth: 260,
-              }}
+              className="absolute z-50 pointer-events-none"
+              style={{ ...pos, animation: "200ms ease-out forwards panelSlideUp" }}
             >
-              <div className="shrink-0">{CLAUDE_SPARK}</div>
-              <span className="text-[13px] text-white leading-[1.4]">{tooltipData[hovered]}</span>
+              <div
+                className="flex items-center gap-2.5 rounded-2xl px-4 py-3"
+                style={{ backgroundColor: "#1a1a19", boxShadow: "0 12px 40px rgba(0,0,0,0.25)", maxWidth: 280 }}
+              >
+                <div className="shrink-0">{CLAUDE_SPARK}</div>
+                <span className="text-[13px] text-white leading-[1.4]">{tooltipData[hovered]}</span>
+              </div>
             </div>
-          </div>
-        )}
+          );
+        })()}
       </div>
     </div>
   );
