@@ -1,0 +1,177 @@
+import type { Metadata } from "next";
+import { Planner } from "./planner";
+import { Nav } from "@/components/layout/Nav";
+import { Footer } from "@/components/layout/Footer";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { JsonLd } from "@/components/seo/JsonLd";
+
+const SITE_URL = "https://settlewithai.com";
+
+export const metadata: Metadata = {
+  title:
+    "Claude Project Planner — Design Your First AI Project in 5 Minutes",
+  description:
+    "Use this guided wizard to plan your first Claude Project. Define the workflow, knowledge files, safety rules, and get a ready-to-build blueprint with complexity rating and setup estimate.",
+  keywords: [
+    "claude ai project template",
+    "ai project planning",
+    "claude project setup",
+    "ai deployment plan",
+    "first ai project",
+  ],
+  alternates: {
+    canonical: `${SITE_URL}/tools/claude-project-planner`,
+  },
+  openGraph: {
+    type: "website",
+    title: "Claude Project Planner | Settle",
+    description:
+      "Design your first Claude AI project in 5 minutes. Guided wizard with blueprint output.",
+    url: `${SITE_URL}/tools/claude-project-planner`,
+    siteName: "Settle",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Claude Project Planner | Settle",
+    description:
+      "Design your first Claude AI project in 5 minutes. Guided wizard with blueprint output.",
+  },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What is a Claude Project?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "A Claude Project is a persistent workspace in Anthropic's Claude that bundles custom instructions, knowledge files, and safety rules together. Instead of re-explaining context every conversation, the project remembers your setup — so Claude produces consistent, on-brand output every time.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How many Claude Projects does a typical company need?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Settle typically maps 15 to 49 use cases per company during a discovery engagement. Each distinct workflow — proposal generation, customer email drafts, compliance checks — becomes its own project with tailored instructions and knowledge files.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What knowledge files should I upload to a Claude Project?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Upload any reference material Claude needs to produce accurate output: company policies, product catalogs, pricing sheets, SOPs, templates, and style guides. The planner helps you identify which files your specific workflow requires.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can Settle build these projects for my team?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. Settle's core service is mapping your workflows, building Claude Projects with proper instructions and knowledge files, and training your team to use them. The planner gives you a preview of what one project looks like — Settle builds the full system.",
+      },
+    },
+  ],
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Claude Project Planner",
+      item: `${SITE_URL}/tools/claude-project-planner`,
+    },
+  ],
+};
+
+export default function ClaudeProjectPlannerPage() {
+  return (
+    <>
+      <JsonLd data={faqSchema} />
+      <JsonLd data={breadcrumbSchema} />
+      <Nav />
+      <main className="max-w-[720px] mx-auto px-6 lg:px-10 pt-32 pb-24 md:pt-40 md:pb-36">
+        <Breadcrumbs
+          items={[
+            { label: "Tools", href: "/tools/ai-readiness" },
+            {
+              label: "Claude Project Planner",
+              href: "/tools/claude-project-planner",
+            },
+          ]}
+        />
+
+        <header className="mb-12">
+          <span className="inline-block text-[11px] font-semibold uppercase tracking-[0.1em] text-accent mb-4">
+            Free Tool
+          </span>
+          <h1 className="text-[clamp(1.8rem,4vw,2.8rem)] font-semibold leading-[1.15] tracking-[-0.03em] text-text mb-4 font-heading">
+            Claude Project Planner
+          </h1>
+          <p className="text-text-muted text-[1.05rem] leading-relaxed">
+            Design your first Claude Project in about 5 minutes. Answer a few
+            questions about your workflow and get a ready-to-build blueprint
+            with instructions, knowledge file list, and complexity estimate.
+          </p>
+        </header>
+
+        <Planner />
+
+        <section className="mt-20">
+          <h2 className="text-xl font-semibold tracking-[-0.02em] text-text mb-6 font-heading">
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-4">
+            {[
+              {
+                q: "What is a Claude Project?",
+                a: "A persistent workspace in Anthropic's Claude that bundles custom instructions, knowledge files, and safety rules. Instead of re-explaining context every conversation, the project remembers your setup for consistent output.",
+              },
+              {
+                q: "How many projects does a typical company need?",
+                a: "Settle typically maps 15 to 49 use cases per company. Each distinct workflow — proposal generation, email drafts, compliance checks — becomes its own project with tailored instructions and knowledge files.",
+              },
+              {
+                q: "What knowledge files should I upload?",
+                a: "Any reference material Claude needs for accurate output: company policies, product catalogs, pricing sheets, SOPs, templates, and style guides. This planner helps you identify which files your workflow requires.",
+              },
+              {
+                q: "Can Settle build these projects for my team?",
+                a: "Yes. Settle maps your workflows, builds Claude Projects with proper instructions and knowledge files, and trains your team. This planner previews one project — Settle builds the full system.",
+              },
+            ].map((faq) => (
+              <details
+                key={faq.q}
+                className="group border border-border-light rounded-lg"
+              >
+                <summary className="flex items-center justify-between px-5 py-4 cursor-pointer text-[0.95rem] font-medium text-text">
+                  {faq.q}
+                  <svg
+                    className="w-4 h-4 text-text-faint shrink-0 ml-4 transition-transform duration-200 group-open:rotate-45"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path d="M12 5v14M5 12h14" />
+                  </svg>
+                </summary>
+                <div className="px-5 pb-4 text-text-muted text-[0.9375rem] leading-relaxed">
+                  {faq.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
+}

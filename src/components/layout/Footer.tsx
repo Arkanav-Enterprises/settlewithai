@@ -29,6 +29,15 @@ const BLOG_LINKS = [
   { label: "Built with Claude Code", href: "/blog/built-with-claude-code" },
 ];
 
+const TOOL_LINKS = [
+  { label: "AI Readiness Assessment", href: "/tools/ai-readiness" },
+  { label: "AI ROI Calculator", href: "/tools/ai-roi-calculator" },
+  { label: "Use Case Finder", href: "/tools/use-case-finder" },
+  { label: "Workflow Automation Quiz", href: "/tools/workflow-automation-quiz" },
+  { label: "AI vs Manual Calculator", href: "/tools/ai-vs-manual-calculator" },
+  { label: "Claude Project Planner", href: "/tools/claude-project-planner" },
+];
+
 const COMPANY_LINKS = [
   { label: "Home", href: "/" },
   { label: "Blog", href: "/blog" },
@@ -65,8 +74,9 @@ export function Footer() {
     <footer className="border-t border-border-light">
       {/* Link columns */}
       <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-12 lg:py-16">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-6">
           <FooterColumn title="Company" links={COMPANY_LINKS} />
+          <FooterColumn title="Free Tools" links={TOOL_LINKS} />
           <FooterColumn title="Compare" links={COMPARE_LINKS} />
           <FooterColumn title="Industries" links={INDUSTRY_LINKS.slice(0, 5)} />
           <FooterColumn title="More Industries" links={INDUSTRY_LINKS.slice(5)} />
