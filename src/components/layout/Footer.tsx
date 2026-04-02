@@ -28,6 +28,7 @@ const BLOG_LINKS = [
   { label: "AI-Powered Outreach with Cowork", href: "/blog/ai-powered-outreach-with-cowork" },
   { label: "Built with Claude Code", href: "/blog/built-with-claude-code" },
   { label: "Claude's Agent Mode", href: "/blog/claude-agent-mode-business-automation" },
+  { label: "Structuring Claude for Business", href: "/blog/structuring-claude-for-business" },
 ];
 
 const TOOL_LINKS = [

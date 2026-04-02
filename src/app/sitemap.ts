@@ -11,6 +11,7 @@ const BLOG_SLUGS = [
   "integrating-ai-into-your-company",
   "ai-powered-outreach-with-cowork",
   "claude-agent-mode-business-automation",
+  "structuring-claude-for-business",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

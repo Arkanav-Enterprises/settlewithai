@@ -18,6 +18,15 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "structuring-claude-for-business",
+    title:
+      "How to Structure Claude for Your Business: Skills, MCP, and the Instruction Architecture That Actually Scales",
+    description:
+      "Most companies dump everything into one Claude project and wonder why results are inconsistent. Here's the layered architecture that works at scale.",
+    date: "2026-04-02",
+    tag: "Guide",
+  },
+  {
     slug: "claude-agent-mode-business-automation",
     title:
       "Claude's Agent Mode Is Here — What It Means for Business Automation",
