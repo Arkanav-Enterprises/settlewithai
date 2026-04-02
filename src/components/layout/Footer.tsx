@@ -33,6 +33,7 @@ const BLOG_LINKS = [
   { label: "Built with Claude Code", href: "/blog/built-with-claude-code" },
   { label: "Claude's Agent Mode", href: "/blog/claude-agent-mode-business-automation" },
   { label: "Structuring Claude for Business", href: "/blog/structuring-claude-for-business" },
+  { label: "Why Claude Over Custom AI", href: "/blog/why-claude-over-custom-ai" },
 ];
 
 const TOOL_LINKS = [

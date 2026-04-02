@@ -18,6 +18,15 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "why-claude-over-custom-ai",
+    title:
+      "Why Your Enterprise Doesn't Need a Custom AI Model — It Needs Claude",
+    description:
+      "Most companies think they need fine-tuned models or custom LLMs. After deploying Claude across 49 use cases, I've found that 95% of enterprise workflows work better with structured Claude than with any custom solution.",
+    date: "2026-04-02",
+    tag: "Strategy",
+  },
+  {
     slug: "structuring-claude-for-business",
     title:
       "How to Structure Claude for Your Business: Skills, MCP, and the Instruction Architecture That Actually Scales",
