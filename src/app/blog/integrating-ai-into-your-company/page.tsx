@@ -150,41 +150,47 @@ export default function Article() {
         {/* Body */}
         <div className="prose-settle">
           <p>
-            There&apos;s a familiar pattern in how companies approach AI. A
-            vendor runs a demo. Everyone agrees it&apos;s impressive. Someone
-            creates a Slack channel called #ai-exploration. Three months
-            later, nothing has shipped.
+            A few months ago I watched a room full of senior managers nod
+            enthusiastically at an AI demo. Somebody summarised a contract
+            in ten seconds. Somebody else generated a marketing email that
+            was, frankly, better than what the team had been sending. By
+            the time I checked back in three months later, they&apos;d
+            created a Slack channel called #ai-exploration. It had four
+            messages in it. Nothing had shipped.
           </p>
           <p>
-            The problem is rarely the technology. AI tools — particularly
-            large language models like Claude — are remarkably capable. The
-            problem is deployment. The gap between &ldquo;this could
-            help&rdquo; and &ldquo;this is helping&rdquo; is wider than most
-            teams expect, and it&apos;s filled with questions that demos
-            don&apos;t answer.
+            Sound familiar?
           </p>
           <p>
-            Which workflows benefit most? How do you write instructions that
-            produce consistent output? What does a rollout actually look like
-            when you have seven departments and two hundred people? This is
-            the work that matters — and it&apos;s the work that gets skipped.
+            The technology wasn&apos;t the problem. AI tools, particularly
+            large language models like Claude, are remarkably capable right
+            now. The problem was everything that comes after the demo.
+            Which workflows do you target? How do you write instructions
+            that produce consistent output? What does a rollout actually
+            look like when you have seven departments and two hundred
+            people? That&apos;s the work that matters. And it&apos;s the
+            work that gets skipped.
           </p>
 
           <h2>The demo trap</h2>
           <p>
-            Demos create a dangerous illusion. They show AI at its best:
-            generating a perfect email, summarising a document, answering a
-            question with surprising accuracy. What they don&apos;t show is
-            what happens when you hand that same tool to a procurement
-            manager who needs to generate a bill of materials, or a service
-            engineer who needs to troubleshoot a printing press from a
-            customer&apos;s description.
+            Demos create a dangerous illusion. They show AI at its absolute
+            best: generating a perfect email, summarising a document,
+            answering a question with surprising accuracy. Beautiful.
+            Impressive. Completely misleading.
+          </p>
+          <p>
+            What they don&apos;t show is what happens when you hand that
+            same tool to a procurement manager who needs to generate a bill
+            of materials. Or a service engineer trying to troubleshoot a
+            printing press from a customer&apos;s vague description over
+            the phone.
           </p>
           <p>
             Generic prompts produce generic output. And generic output
             doesn&apos;t get adopted. People try the tool twice, get
-            mediocre results, and go back to doing things the old way.
-            The demo worked because it was carefully staged. Production
+            mediocre results, and go back to doing things the old way. The
+            demo worked because it was carefully staged. Production
             workflows aren&apos;t staged.
           </p>
 
@@ -192,52 +198,54 @@ export default function Article() {
           <p>
             Before you write a single instruction or configure a single
             project, you need to understand your workflows. Not at a high
-            level — at the task level. What does someone in your sales team
+            level. At the task level. What does someone in your sales team
             actually do on a Tuesday afternoon? What documents do they
-            create? What information do they look up? Where do errors happen?
+            create? What information do they look up? Where do the errors
+            happen?
           </p>
           <p>
-            This is discovery work, and it&apos;s the foundation of any
-            serious AI deployment. You&apos;re looking for three things:
+            This discovery work is the foundation of any serious AI
+            deployment. You&apos;re looking for three things:
           </p>
           <ul>
             <li>
-              <strong>Repetitive tasks</strong> — things people do the same
-              way, many times a week. Document generation, data entry,
+              <strong>Repetitive tasks</strong>, things people do the same
+              way many times a week. Document generation, data entry,
               templated communications.
             </li>
             <li>
-              <strong>Error-prone tasks</strong> — things where mistakes are
+              <strong>Error-prone tasks</strong>, things where mistakes are
               common and costly. Compliance checks, specification matching,
               quality control documentation.
             </li>
             <li>
-              <strong>High-volume tasks</strong> — things that eat hours
+              <strong>High-volume tasks</strong>, things that eat hours
               because of sheer quantity. Processing RFQs, categorising
               support tickets, translating between technical and commercial
               language.
             </li>
           </ul>
           <p>
-            The output of this phase isn&apos;t a strategy deck. It&apos;s a
-            prioritised use-case matrix — a concrete list of every workflow
-            worth automating, ranked by impact and feasibility. In one recent
-            engagement, we mapped 49 use cases across seven departments in a
-            manufacturing company. Not all of them were worth pursuing
-            immediately. But having the full map meant we could make
-            intelligent decisions about what to deploy first.
+            The output of this phase isn&apos;t a strategy deck. It&apos;s
+            a prioritised use-case matrix, a concrete list of every
+            workflow worth automating, ranked by impact and feasibility. In
+            one engagement, I mapped 49 use cases across seven departments
+            in a manufacturing company. Not all of them were worth pursuing
+            right away. But having the full map meant we could make
+            intelligent decisions about what to deploy first, instead of
+            guessing.
           </p>
 
-          <h2>Architecture: the rollout plan</h2>
+          <h2>The rollout plan</h2>
           <p>
             Once you know what&apos;s worth deploying, you need a structure
-            for actually doing it. This isn&apos;t project management in the
-            traditional sense — it&apos;s architecture. You&apos;re designing
-            a system where AI projects are categorised by tier, phased by
-            department, and tracked against real outcomes.
+            for actually doing it. I don&apos;t mean project management in
+            the traditional sense. I mean architecture. You&apos;re
+            designing a system where AI projects are categorised by tier,
+            phased by department, and tracked against real outcomes.
           </p>
           <p>
-            A good deployment architecture answers these questions:
+            Here are the questions a good deployment architecture answers:
           </p>
           <ul>
             <li>
@@ -258,20 +266,26 @@ export default function Article() {
             </li>
           </ul>
           <p>
-            The best format for this is an interactive dashboard — not a
-            static spreadsheet. A dashboard that shows which projects are in
-            progress, which are blocked, what&apos;s been deployed, and what
-            the measured impact is. It becomes the single source of truth for
-            the entire rollout.
+            I&apos;ve found the best format for this is an interactive
+            dashboard, not a static spreadsheet. Something that shows which
+            projects are in progress, which are blocked, what&apos;s been
+            deployed, and what the measured impact is. It becomes the
+            single source of truth for the entire rollout. When someone
+            asks &ldquo;where are we with AI?&rdquo; you point at the
+            dashboard instead of scheduling a meeting.
           </p>
 
-          <h2>Instruction engineering: the part everyone skips</h2>
+          <h2>Instruction engineering</h2>
           <p>
-            Here&apos;s where most deployments fall apart. Teams give people
-            access to an AI tool and say &ldquo;go use it.&rdquo; Without
-            structured instructions, every person writes their own prompts,
-            gets inconsistent results, and the tool becomes an expensive
-            novelty rather than a workflow component.
+            This is the part everyone skips. And it&apos;s the reason most
+            deployments fall apart.
+          </p>
+          <p>
+            Teams give people access to an AI tool and say &ldquo;go use
+            it.&rdquo; Without structured instructions, every person writes
+            their own prompts, gets inconsistent results, and the tool
+            becomes an expensive novelty rather than a workflow component.
+            I&apos;ve watched this happen at company after company.
           </p>
           <p>
             Instruction engineering is the discipline of writing
@@ -281,66 +295,67 @@ export default function Article() {
           </p>
           <ul>
             <li>
-              <strong>Structured workflows</strong> — step-by-step
+              <strong>Structured workflows</strong>, step-by-step
               instructions that guide the AI through a specific task, with
               defined inputs, processing steps, and output formats.
             </li>
             <li>
-              <strong>Knowledge files</strong> — company-specific reference
+              <strong>Knowledge files</strong>, company-specific reference
               material (product catalogues, pricing rules, compliance
               requirements, style guides) that the AI can reference to
               produce accurate, contextual output.
             </li>
             <li>
-              <strong>Review gates</strong> — checkpoints where the AI asks
-              for confirmation before proceeding, ensuring human oversight at
-              critical decision points.
+              <strong>Review gates</strong>, checkpoints where the AI asks
+              for confirmation before proceeding, ensuring human oversight
+              at critical decision points.
             </li>
             <li>
-              <strong>Safety rules</strong> — constraints that prevent the
-              AI from generating output in categories where it shouldn&apos;t
-              operate (financial advice, legal commitments, medical
-              recommendations).
+              <strong>Safety rules</strong>, constraints that prevent the
+              AI from generating output in categories where it
+              shouldn&apos;t operate (financial advice, legal commitments,
+              medical recommendations).
             </li>
             <li>
-              <strong>Output standards</strong> — formatting rules,
-              tone guidelines, and structural templates that ensure every
-              output is consistent and professional.
+              <strong>Output standards</strong>, formatting rules, tone
+              guidelines, and structural templates that ensure every output
+              is consistent and professional.
             </li>
           </ul>
           <p>
-            When instruction engineering is done well, the end user
-            doesn&apos;t need to understand how the AI works. They use the
-            tool the same way they&apos;d use any other business application:
-            provide an input, get a reliable output. The complexity is
-            absorbed by the instructions, not by the user.
+            When this is done well, the end user doesn&apos;t need to
+            understand how the AI works. They use it the same way
+            they&apos;d use any other business application: provide an
+            input, get a reliable output. The complexity is absorbed by the
+            instructions, not by the user.
           </p>
 
           <h2>Deploy in phases, not all at once</h2>
           <p>
-            The temptation with AI is to go big. Deploy everything, transform
-            the company, announce a new era of productivity. This almost
-            always fails. People get overwhelmed, edge cases pile up, and the
-            project collapses under its own ambition.
+            The temptation is to go big. Deploy everything, transform the
+            company, announce a new era of productivity. I get it. It&apos;s
+            exciting. It also almost always fails. People get overwhelmed,
+            edge cases pile up, and the project collapses under its own
+            ambition.
           </p>
           <p>
-            A phased deployment works differently:
+            A phased approach works differently:
           </p>
           <ul>
             <li>
-              <strong>Phase 1: Quick wins</strong> — deploy 3-5 use cases
+              <strong>Phase 1: Quick wins.</strong> Deploy 3-5 use cases
               that are simple, high-impact, and low-risk. Document
               generation, template creation, data formatting. These build
               confidence and demonstrate value within weeks.
             </li>
             <li>
-              <strong>Phase 2: Department rollouts</strong> — expand to
-              full departments, deploying the more complex use cases that
+              <strong>Phase 2: Department rollouts.</strong> Expand to full
+              departments, deploying the more complex use cases that
               require knowledge files and review gates. Train teams, gather
               feedback, iterate on instructions.
             </li>
             <li>
-              <strong>Phase 3: Integration</strong> — connect AI workflows
+              <strong>Phase 3: Integration.</strong> Connect AI workflows
               to existing business systems. ERP integration, automated
               reporting, cross-department workflows. This is where the
               compound effects start to show.
@@ -348,53 +363,61 @@ export default function Article() {
           </ul>
           <p>
             Each phase has its own success metrics. Quick wins might be
-            measured in time saved per task. Department rollouts in adoption
-            rates and error reduction. Integration in end-to-end process
-            efficiency. The point is to have concrete, measurable proof at
-            every stage — not just enthusiasm.
+            measured in time saved per task. Department rollouts in
+            adoption rates and error reduction. Integration in end-to-end
+            process efficiency. The point is concrete, measurable proof at
+            every stage. Not just enthusiasm.
           </p>
 
-          <h2>What good results look like</h2>
+          <h2>What this actually looked like</h2>
           <p>
-            In a recent deployment for a printing and packaging manufacturer,
-            we mapped 49 use cases across seven departments. Of the 18
-            projects we structured, 11 were deployed in the first engagement.
-            The range was wide: offer generation, bill of materials creation,
-            service troubleshooting guides, procurement specifications,
-            quality control checklists.
+            I want to share a specific example because I think abstract
+            advice only goes so far.
+          </p>
+          <p>
+            In a deployment for a printing and packaging manufacturer, I
+            mapped 49 use cases across seven departments. Of the 18
+            projects we structured, 11 were deployed in the first
+            engagement. The range was wide: offer generation, bill of
+            materials creation, service troubleshooting guides, procurement
+            specifications, quality control checklists.
           </p>
           <p>
             Document generation time dropped by 85%. Tasks that previously
             took four hours were completed in thirty minutes. And these
-            weren&apos;t demo results — they were production measurements,
-            taken after teams had been using the tools in their actual daily
-            work for weeks.
+            weren&apos;t demo results. They were production measurements,
+            taken after teams had been using the tools in their actual
+            daily work for weeks.
           </p>
           <p>
-            The phasing mattered. Quick wins shipped in the first few weeks,
-            which built momentum and credibility internally. Deeper
-            integrations — connecting AI outputs to ERP systems, building
-            cross-department workflows — followed over six months. Each phase
-            was planned before the previous one ended.
+            The phasing mattered more than I expected. Quick wins shipped
+            in the first few weeks, which built momentum and credibility
+            internally. People saw results and started asking when their
+            department was next. Deeper integrations, connecting AI outputs
+            to ERP systems and building cross-department workflows,
+            followed over six months. Each phase was planned before the
+            previous one ended.
           </p>
 
-          <h2>The gap is deployment, not technology</h2>
+          <h2>It&apos;s not a technology problem</h2>
           <p>
             AI tools are already capable enough to transform most knowledge
             work. The models are good. The interfaces are improving. The
-            cost is dropping. None of that matters if the deployment is
-            unstructured.
+            cost is dropping.
           </p>
           <p>
-            What matters is: do you know which workflows to target? Have you
-            written instructions that produce reliable output? Is there a
-            phased plan that your team can actually execute? Are you
-            measuring results at every stage?
+            None of that matters if the deployment is unstructured.
+          </p>
+          <p>
+            Do you know which workflows to target? Have you written
+            instructions that produce reliable output? Is there a phased
+            plan that your team can actually execute? Are you measuring
+            results at every stage?
           </p>
           <p>
             If the answer to any of those is no, you don&apos;t have an AI
             problem. You have a deployment problem. And that&apos;s a
-            solvable problem — with the right structure.
+            solvable one.
           </p>
 
           {/* Related */}

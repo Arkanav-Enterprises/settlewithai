@@ -159,7 +159,7 @@ export default function Article() {
         <div className="prose-settle">
           <h2>The playbook that started a conversation</h2>
           <p>
-            A few weeks ago, Ruben Hassid published{" "}
+            Last month a prospect forwarded me Ruben Hassid&apos;s{" "}
             <a
               href="https://x.com/rubenhassid/status/2031666815554736227"
               target="_blank"
@@ -168,62 +168,63 @@ export default function Article() {
             >
               &ldquo;How to set up Claude for your team in 7 days&rdquo;
             </a>
-            , and it went viral for good reason. It&apos;s clear, practical,
-            and gives small teams a genuine path from &ldquo;we should use
-            AI&rdquo; to &ldquo;we are using AI.&rdquo; If you haven&apos;t
-            read it, go read it. We&apos;re not here to argue with it.
+            {" "}and asked, &ldquo;Can we just do this?&rdquo; I told him
+            yes. Genuinely. It&apos;s one of the best Claude setup guides
+            I&apos;ve seen. Clear steps, real examples, no fluff. If you
+            haven&apos;t read it, stop here and go read it.
           </p>
           <p>
-            The guide walks through creating Claude projects, writing custom
-            instructions, uploading knowledge files, and gradually rolling out
-            access across a team. For a company of 10&ndash;30 people, mostly
+            The guide walks you through creating Claude projects, writing
+            custom instructions, uploading knowledge files, and gradually
+            rolling out access. For a team of 10 to 30 people, mostly
             knowledge workers, mostly comfortable with technology, it&apos;s
             an excellent framework. Day one: set up the workspace. Day three:
             write your first custom instructions. Day seven: your team is
             using Claude with real context.
           </p>
           <p>
-            We&apos;ve sent it to prospects. We&apos;ve referenced it in
-            conversations. It&apos;s genuinely useful.
+            I&apos;ve sent it to prospects myself. I reference it in almost
+            every sales conversation. It&apos;s genuinely useful.
           </p>
           <p>
-            But we also keep having the same follow-up conversation: &ldquo;We
-            tried something like this, and it didn&apos;t stick.&rdquo; Or:
-            &ldquo;This works for our marketing team, but what about the other
-            six departments?&rdquo; Or, most commonly: &ldquo;We don&apos;t
+            But here&apos;s the thing. I keep having the same follow-up
+            conversation, almost word for word. &ldquo;We tried something
+            like this, and it didn&apos;t stick.&rdquo; Or: &ldquo;This
+            works for our marketing team, but what about the other six
+            departments?&rdquo; Or (most commonly): &ldquo;We don&apos;t
             have anyone who can write instructions at this level.&rdquo;
           </p>
           <p>
-            This post is about where the DIY playbook ends and what comes
-            next.
+            So this is a post about where the DIY playbook ends and what
+            comes after it.
           </p>
 
           <h2>Where the 7-day approach works</h2>
           <p>
-            Let&apos;s be specific about who Ruben&apos;s guide is built for,
-            because it genuinely serves that audience well.
+            Ruben&apos;s guide is built for a specific kind of team, and it
+            serves that audience really well.
           </p>
           <p>
-            It works when your team is small enough that one person can be the
-            Claude champion. When most of your workflows are
-            text-based &mdash; writing, research, analysis, communication.
-            When your team already lives in modern tools like Slack, Notion,
-            and Google Workspace. When you don&apos;t have significant
-            compliance constraints. When the person writing the instructions
-            is also the person using them, or at least sits ten feet away.
+            It works when your team is small enough that one person can be
+            the Claude champion. When most of your workflows are text-based:
+            writing, research, analysis, communication. When your team
+            already lives in modern tools like Slack, Notion, and Google
+            Workspace. When you don&apos;t have significant compliance
+            constraints. When the person writing the instructions is also
+            the person using them, or at least sits ten feet away.
           </p>
           <p>
-            In that context, seven days is realistic. One motivated person can
-            set up a Claude Team workspace, write solid custom instructions
-            for three or four use cases, upload the relevant knowledge files,
-            and get a small team running. The feedback loop is tight. If the
-            instructions are wrong, someone notices within the hour and fixes
-            them.
+            In that world, seven days is realistic. One motivated person
+            sets up a Claude Team workspace, writes solid custom
+            instructions for three or four use cases, uploads the relevant
+            knowledge files, and gets a small team running. The feedback
+            loop is tight. If the instructions are wrong, someone notices
+            within the hour and fixes them.
           </p>
           <p>
-            This describes a lot of companies. Agencies, consulting firms,
-            early-stage startups, small professional services teams. For them,
-            the DIY route isn&apos;t just viable &mdash; it&apos;s probably
+            That describes a lot of companies. Agencies, consulting firms,
+            early-stage startups, small professional services teams. For
+            them, the DIY route isn&apos;t just viable, it&apos;s probably
             the right call. You don&apos;t need external help to set up
             Claude for a 15-person marketing agency. You need Ruben&apos;s
             guide and a free afternoon.
@@ -241,36 +242,37 @@ export default function Article() {
 
           <h2>Where it starts to break</h2>
           <p>
-            The cracks show up around three dimensions: organizational
-            complexity, technical complexity, and human complexity.
+            The cracks show up in three places. I didn&apos;t anticipate the
+            third one, and it turned out to be the biggest.
           </p>
 
           <h3>Organizational complexity</h3>
           <p>
             When a company has seven departments instead of two, the number
-            of workflows doesn&apos;t grow linearly &mdash; it grows
+            of workflows doesn&apos;t grow linearly. It grows
             combinatorially. Sales needs to generate offers. But those offers
             pull pricing from a master spreadsheet that lives with Finance,
             require terms and conditions that vary by country, and need to
-            match brand standards maintained by Marketing. A single Claude
-            project can&apos;t hold all of this context without becoming
-            bloated and unreliable.
+            match brand standards maintained by Marketing. Try stuffing all
+            of that into a single Claude project. It gets bloated fast, and
+            the outputs start drifting.
           </p>
           <p>
-            When we mapped workflows at{" "}
+            When I mapped workflows at{" "}
             <a
               href="/blog/orient-case-study"
               className="text-accent hover:underline"
             >
               Orient Printing &amp; Packaging
             </a>
-            , our first client, we found 49 distinct use cases across seven
-            departments. Organising by department &mdash; one project for
-            Sales, one for HR &mdash; didn&apos;t work, because use cases
-            within the same department often needed fundamentally different
-            context. We ended up structuring 18 separate projects, each with
-            its own instructions, knowledge files, and rules. That level of
-            architecture isn&apos;t something a 7-day sprint produces.
+            {" "}(our first client), I found 49 distinct use cases across
+            seven departments. My first instinct was to organize by
+            department: one project for Sales, one for HR. It didn&apos;t
+            work. Use cases within the same department often needed
+            fundamentally different context. I ended up structuring 18
+            separate projects, each with its own instructions, knowledge
+            files, and rules. That kind of architecture doesn&apos;t come
+            out of a 7-day sprint.
           </p>
 
           <h3>Technical complexity</h3>
@@ -288,8 +290,8 @@ export default function Article() {
             different terms for domestic versus international customers,
             safety rules that prevent internal cost data from leaking into
             customer-facing documents. This is instruction engineering, not
-            prompt writing. The difference is the same as the difference
-            between a script and a production system.
+            prompt writing. The difference matters the same way the
+            difference between a script and a production system matters.
           </p>
           <p>
             Anthropic has given us a remarkably capable model in Claude. But
@@ -299,58 +301,59 @@ export default function Article() {
 
           <h3>Human complexity</h3>
           <p>
-            This is the one that doesn&apos;t get enough attention.
+            This is the one I underestimated.
           </p>
           <p>
             In a 200-person manufacturer, the people who would benefit most
-            from AI are often the ones least equipped to set it up. A service
-            engineer who spends hours digging through physical manuals for
-            troubleshooting steps isn&apos;t going to write their own Claude
-            instructions. A procurement officer generating RFQs from scratch
-            every time doesn&apos;t know what a &ldquo;knowledge file&rdquo;
-            is. A floor supervisor in a factory outside a major city might
-            not work primarily in English.
+            from AI are often the ones least equipped to set it up. Think
+            about it: a service engineer who spends hours digging through
+            physical manuals for troubleshooting steps isn&apos;t going to
+            write their own Claude instructions. A procurement officer
+            generating RFQs from scratch every time doesn&apos;t know what
+            a &ldquo;knowledge file&rdquo; is. A floor supervisor in a
+            factory outside a major city might not work primarily in English.
           </p>
           <p>
             The 7-day playbook assumes the person setting up Claude and the
-            person using it are either the same person or very close to each
-            other. In a larger organisation, they&apos;re often separated by
-            several layers of hierarchy, different physical locations, and
-            sometimes different languages. Adoption isn&apos;t a matter of
-            sharing a project link. It&apos;s change management.
+            person using it are either the same person or sitting close
+            together. In a larger organisation, they&apos;re often separated
+            by several layers of hierarchy, different physical locations,
+            sometimes different languages. Adoption at that point isn&apos;t
+            a matter of sharing a project link. It&apos;s change management.
           </p>
 
           <h2>What structured deployment actually looks like</h2>
           <p>
-            We started Settle because we kept seeing the same gap. Companies
-            knew Claude could help. Some had even tried the DIY approach. But
-            they couldn&apos;t get from &ldquo;a few people experimenting&rdquo;
-            to &ldquo;the whole organisation using this daily.&rdquo;
+            I started Settle because I kept seeing the same gap. Companies
+            knew Claude could help. Some had even tried the DIY approach.
+            But they couldn&apos;t get from &ldquo;a few people
+            experimenting&rdquo; to &ldquo;the whole organisation using
+            this daily.&rdquo;
           </p>
           <p>
-            Our approach has four phases. They&apos;re not revolutionary. They&apos;re
-            just thorough.
+            My approach has four phases. Nothing revolutionary. Just
+            thorough.
           </p>
 
           <h3>Phase 1: Workflow mapping</h3>
           <p>
-            Before we write a single instruction, we map every repeatable
-            workflow in every department. Not at a strategy level &mdash; at
-            the task level. What does someone actually do, step by step, when
-            they create a purchase order? Where does the data come from?
-            Where do errors happen? Where does work pile up and wait?
+            Before I write a single instruction, I map every repeatable
+            workflow in every department. Not at a strategy level, but at
+            the task level. What does someone actually do, step by step,
+            when they create a purchase order? Where does the data come
+            from? Where do errors happen? Where does work pile up and wait?
           </p>
           <p>
             At Orient, this produced a matrix of 49 use cases, each scored
             by impact, feasibility, and dependencies. It took two weeks. The
-            output was a prioritised roadmap that told us exactly what to
+            output was a prioritised roadmap that told me exactly what to
             build, in what order, and why.
           </p>
           <p>
             This is the step most DIY deployments skip entirely. And
-            it&apos;s the step that determines whether the deployment
-            generates real value or becomes a novelty that fades after month
-            one.
+            honestly, it&apos;s the step that determines whether the whole
+            thing generates real value or becomes a novelty that fades
+            after month one.
           </p>
 
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -366,37 +369,37 @@ export default function Article() {
           <h3>Phase 2: Instruction engineering</h3>
           <p>
             Each project gets production-grade instructions. Not a paragraph
-            of guidance &mdash; a complete specification of how Claude should
+            of guidance, but a complete specification of how Claude should
             behave for that specific workflow.
           </p>
           <p>
-            For Orient&apos;s offer generator, the instructions encode their
-            entire pricing logic: five spreadsheets covering different press
-            configurations, formulas for calculating print heads based on
-            width and colour, add-on component pricing, installation costs,
-            and output formatting rules that match their 8-page branded
-            document template. The instructions also include safety
-            rules &mdash; never reveal internal costs or partner margins
-            &mdash; and review gates that require human confirmation before
-            finalising non-standard configurations.
+            Take Orient&apos;s offer generator. The instructions encode
+            their entire pricing logic: five spreadsheets covering different
+            press configurations, formulas for calculating print heads based
+            on width and colour, add-on component pricing, installation
+            costs, and output formatting rules that match their 8-page
+            branded document template. There are safety rules (never reveal
+            internal costs or partner margins) and review gates that require
+            human confirmation before finalising non-standard
+            configurations.
           </p>
           <p>
             That single project took a document that previously required
             3&ndash;4 hours of manual assembly down to 30 minutes. The
             instructions are several pages long. Writing them required
             understanding not just how Claude works, but how Orient&apos;s
-            pricing works, how their sales process works, and where the edge
-            cases are.
+            pricing works, how their sales process works, and where the
+            edge cases hide.
           </p>
           <p>
-            This is what instruction engineering means in practice. It&apos;s
-            the skill that turns Claude from a general-purpose assistant into
-            a tool that knows your business.
+            That&apos;s what instruction engineering means in practice.
+            It&apos;s the skill that turns Claude from a general-purpose
+            assistant into a tool that knows your business.
           </p>
 
           <h3>Phase 3: Tiered rollout</h3>
           <p>
-            Not everything ships at once. We design a phased rollout based
+            Not everything ships at once. I design a phased rollout based
             on implementation complexity:
           </p>
           <ul>
@@ -412,8 +415,7 @@ export default function Article() {
             </li>
             <li>
               <strong>Tier 3:</strong> Use cases that need integration with
-              existing systems &mdash; ERP connectors, database access, API
-              calls.
+              existing systems. ERP connectors, database access, API calls.
             </li>
             <li>
               <strong>Tier 4:</strong> Advanced capabilities. External
@@ -421,9 +423,9 @@ export default function Article() {
             </li>
           </ul>
           <p>
-            The tiering solves the adoption problem. By the time Tier 3
+            Here&apos;s why the tiering matters so much: by the time Tier 3
             rolls out, the team has already been using AI daily for months.
-            They&apos;re not sceptical &mdash; they&apos;re impatient for
+            They&apos;re not sceptical anymore. They&apos;re impatient for
             more.
           </p>
 
@@ -436,12 +438,13 @@ export default function Article() {
           <p>
             At Orient, after 90 days: 85% reduction in document generation
             time. 400+ hours saved per month across all departments. An
-            estimated $200,000+ in annual labour savings. Eleven projects in
-            production, with seven more in development.
+            estimated $200,000+ in annual labour savings. Eleven projects
+            in production, with seven more in development.
           </p>
           <p>
-            These aren&apos;t projections. They&apos;re measurements from
-            production use.
+            Those aren&apos;t projections. They&apos;re measurements from
+            production use. I was honestly surprised by some of those
+            numbers myself.
           </p>
 
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -456,66 +459,68 @@ export default function Article() {
 
           <h2>The instruction engineering gap</h2>
           <p>
-            If we had to name the single biggest reason DIY deployments
+            If I had to name the single biggest reason DIY deployments
             stall, it&apos;s this: writing good instructions is genuinely
-            hard. It looks easy. You open a Claude project, type some
-            guidance in the instructions field, and it seems to work.
+            hard.
           </p>
           <p>
-            Then you hit the first edge case. The pricing formula doesn&apos;t
-            account for the new product line. The output format breaks when
-            there are more than five line items. The instructions
-            contradict themselves when the user asks for something slightly
-            outside the happy path. The knowledge files are too large and
-            Claude starts hallucinating details from the wrong document.
+            It looks easy. You open a Claude project, type some guidance in
+            the instructions field, and it seems to work. Then you hit the
+            first edge case. The pricing formula doesn&apos;t account for
+            the new product line. The output format breaks when there are
+            more than five line items. The instructions contradict
+            themselves when the user asks for something slightly outside
+            the happy path. The knowledge files are too large and Claude
+            starts hallucinating details from the wrong document.
           </p>
           <p>
-            Good instruction engineering requires understanding both sides
-            of the equation: how Claude processes instructions (context
-            windows, knowledge file retrieval, instruction hierarchy) and
-            how the business actually works (edge cases, exceptions,
-            compliance rules, the things that only surface when you sit
-            with the person doing the job).
+            Sound familiar?
+          </p>
+          <p>
+            Good instruction engineering requires understanding both sides:
+            how Claude processes instructions (context windows, knowledge
+            file retrieval, instruction hierarchy) and how the business
+            actually works (edge cases, exceptions, compliance rules, the
+            things that only surface when you sit with the person doing the
+            job).
           </p>
           <p>
             It&apos;s a new skill. Anthropic has made incredible tools
-            available, and Claude is the most capable model we&apos;ve worked
-            with. But the gap between what the tools can do and what most
-            organisations can extract from them is still wide. That gap is
-            what we exist to close.
+            available, and Claude is the most capable model I&apos;ve
+            worked with. But the gap between what the tools can do and what
+            most organisations can extract from them is still wide. That
+            gap is what I exist to close.
           </p>
 
-          <h2>Being honest about where we are</h2>
+          <h2>Being honest about where I am</h2>
           <p>
-            We&apos;re early. Orient is our first client. We&apos;re a small
-            team. We don&apos;t have a roster of fifty case studies to point
-            to.
+            I&apos;m early. Orient is my first client. I don&apos;t have a
+            roster of fifty case studies to point to.
           </p>
           <p>
-            What we do have is a deployment that went from zero to 11
+            What I do have is a deployment that went from zero to 11
             production projects across seven departments, with real numbers
-            behind it. We have a methodology that worked at a 79-year-old
+            behind it. A methodology that worked at a 79-year-old
             manufacturer with a custom ERP, complex pricing logic,
             multi-country operations, and workers across a wide range of
             technical comfort levels.
           </p>
           <p>
-            And we have a clear-eyed view of who needs us and who
+            And I have a clear-eyed view of who needs me and who
             doesn&apos;t. If you&apos;re a 20-person agency, you probably
             don&apos;t. Follow Ruben&apos;s playbook. It&apos;s good. If
-            you&apos;re a 200-person manufacturer with seven departments and
-            a legacy ERP, and you&apos;ve tried the DIY approach and it
-            stalled after the first department &mdash; that&apos;s where we
-            come in.
+            you&apos;re a 200-person manufacturer with seven departments
+            and a legacy ERP, and you tried the DIY approach and it stalled
+            after the first department, that&apos;s where I come in.
           </p>
 
           <h2>The case for &ldquo;yes, and&rdquo;</h2>
           <p>
-            We think about Ruben&apos;s guide the way we think about a
-            great tutorial. It teaches you the right concepts. It gives you
-            real skills. And eventually, if your needs are complex enough,
-            you outgrow it &mdash; not because it was wrong, but because
-            your situation demands more.
+            I think about Ruben&apos;s guide the way I think about a great
+            tutorial. It teaches you the right concepts. It gives you real
+            skills. And eventually, if your needs are complex enough, you
+            outgrow it. Not because it was wrong, but because your
+            situation demands more.
           </p>
           <p>
             The 7-day playbook is how you learn to deploy Claude. Structured
@@ -527,9 +532,9 @@ export default function Article() {
             organisation-wide results.
           </p>
           <p>
-            If you&apos;re somewhere in between &mdash; past the tutorial,
-            not yet at scale &mdash; we&apos;d be happy to talk about what
-            the path forward looks like.{" "}
+            If you&apos;re somewhere in between (past the tutorial, not yet
+            at scale), I&apos;d genuinely enjoy talking through what the
+            path forward looks like for your company.{" "}
             <a
               href="/#contact"
               className="text-accent font-medium hover:underline"

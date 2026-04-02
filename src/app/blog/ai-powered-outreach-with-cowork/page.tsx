@@ -148,28 +148,31 @@ export default function Article() {
 
         <div className="prose-settle">
           <p>
-            We needed to reach companies in the printing and packaging
-            manufacturing space &mdash; the same industry as our first
-            client, Orient Printing &amp; Packaging. We had a case study
-            with hard numbers (49 use cases mapped, 11 projects deployed,
-            85% faster document generation) and wanted to put it in front of
-            the right people.
+            I had a Friday afternoon with nothing on the calendar. We&apos;d
+            just finished the Orient Printing &amp; Packaging deployment, had
+            a case study with real numbers (49 use cases mapped, 11 projects
+            deployed, 85% faster document generation), and I needed to get
+            it in front of similar companies. Printing and packaging
+            manufacturers, specifically.
           </p>
           <p>
-            The traditional approach would be: spend a day researching
+            Normally this would eat an entire week. A day researching
             companies, another day finding contacts, another day writing
-            personalised emails, and then manually scheduling follow-ups
-            over three weeks. We did all of it in a single Claude Cowork
-            session.
+            personalised emails, then manually scheduling follow-ups. I
+            decided to try doing the whole thing inside one Claude Cowork
+            session instead.
+          </p>
+          <p>
+            I honestly didn&apos;t think it would work end to end. It did.
           </p>
 
-          <h2>Step 1: Prospect research</h2>
+          <h2>Finding the right companies</h2>
           <p>
-            We gave Cowork a simple brief: find companies similar to Orient
-            &mdash; Indian printing and packaging machinery manufacturers,
-            100&ndash;500+ employees, established, multiple departments, not
-            yet AI-adopted. The kind of companies where the same use cases
-            we deployed for Orient would immediately resonate.
+            I gave Cowork a simple brief: find companies similar to
+            Orient. Indian printing and packaging machinery manufacturers,
+            100&ndash;500+ employees, established, multiple departments,
+            not yet AI-adopted. The kind of companies where the same use
+            cases we deployed for Orient would immediately resonate.
           </p>
           <p>
             Cowork searched the web, cross-referenced trade show exhibitor
@@ -179,40 +182,45 @@ export default function Article() {
             names, contact emails, and a rationale for why they fit.
           </p>
           <p>
+            Wait, did that actually work? I spot-checked three of them.
+            The company details were accurate. The contact names matched
+            LinkedIn. The rationale for each one made sense.
+          </p>
+          <p>
             It also tiered them by conversion probability. Tier 1 were
-            companies with nearly identical DNA to Orient &mdash; same
-            products, same scale, same operational patterns. Tier 2 were
-            larger companies in the broader packaging ecosystem. Tier 3 were
+            companies with nearly identical DNA to Orient, same products,
+            same scale, same operational patterns. Tier 2 were larger
+            companies in the broader packaging ecosystem. Tier 3 were
             adjacent industries with the same complexity profile.
           </p>
 
-          <h2>Step 2: Personalised outreach</h2>
+          <h2>Writing emails that don&apos;t sound like spam</h2>
           <p>
-            This is where most outreach breaks down. Generic emails get
+            This is where outreach usually falls apart. Generic emails get
             ignored. But writing truly personalised emails for 12 companies
             takes hours of research per prospect.
           </p>
           <p>
             Cowork drafted personalised initial emails for all 12 prospects.
-            Each one referenced something specific about the company &mdash;
-            a recent trade show, their product range, their global footprint
-            &mdash; and bridged it to the Orient case study. The hook
-            wasn&apos;t &ldquo;do you want AI?&rdquo; &mdash; it was
-            &ldquo;we did this for a company in your exact industry,
-            here&apos;s what it looked like, want us to map your use
-            cases?&rdquo;
+            Each one referenced something specific about the company (a
+            recent trade show, their product range, their global footprint)
+            and bridged it to the Orient case study. The hook wasn&apos;t
+            &ldquo;do you want AI?&rdquo; It was &ldquo;I did this for a
+            company in your exact industry, here&apos;s what it looked
+            like, want me to map your use cases?&rdquo;
           </p>
           <p>
-            We also had Cowork recalibrate the tone. The first drafts were
-            too salesy &mdash; words like &ldquo;incredible pace&rdquo; and
-            &ldquo;results were wild.&rdquo; We pulled those back to match
-            our brand voice: understated, warm, let the numbers speak.
-            Cowork redrafted the entire batch with the corrected tone.
+            The first drafts were too salesy though. Words like
+            &ldquo;incredible pace&rdquo; and &ldquo;results were wild.&rdquo;
+            Have you noticed how AI defaults to that breathless marketing
+            tone? I told Cowork to pull it back: understated, warm, let the
+            numbers speak. It redrafted the entire batch with the corrected
+            tone. Much better.
           </p>
 
-          <h2>Step 3: Full email sequences</h2>
+          <h2>Building the full sequences</h2>
           <p>
-            One email isn&apos;t a campaign. We had Cowork build a 4-touch
+            One email isn&apos;t a campaign. I had Cowork build a 4-touch
             sequence for each prospect:
           </p>
           <ul>
@@ -236,45 +244,47 @@ export default function Article() {
           </ul>
           <p>
             That&apos;s 48 emails total. Each one different. Each one
-            referencing something real about the prospect.
+            referencing something real about the prospect. I kept waiting
+            for the quality to drop off as the volume went up. It
+            didn&apos;t.
           </p>
 
-          <h2>Step 4: Gmail drafts and scheduling</h2>
+          <h2>Straight into Gmail</h2>
           <p>
-            Cowork connected to Gmail and created all 48 emails as drafts,
-            organised by prospect and sequence stage. We labelled them in
-            Gmail for visual clarity: <em>Settle/1-Initial</em>,{" "}
+            This is the part that surprised me most. Cowork connected to
+            Gmail and created all 48 emails as drafts, organised by
+            prospect and sequence stage. I labelled them for visual clarity:
+            <em>Settle/1-Initial</em>,{" "}
             <em>Settle/2-Day 3</em>, <em>Settle/3-Day 7</em>,{" "}
             <em>Settle/4-Day 14</em>.
           </p>
           <p>
-            Then Cowork built a send calendar &mdash; Tier 1 goes first on
-            Monday, Tier 2 on Wednesday, Tier 3 on Friday &mdash; with
-            follow-ups staggered across three weeks. It created scheduled
-            reminders at 9 AM IST for each send date, so we get a
-            notification, open Gmail, filter by label, and hit send.
+            Then Cowork built a send calendar. Tier 1 goes first on Monday,
+            Tier 2 on Wednesday, Tier 3 on Friday, with follow-ups
+            staggered across three weeks. It created scheduled reminders at
+            9 AM IST for each send date, so I get a notification, open
+            Gmail, filter by label, and hit send.
           </p>
           <p>
-            The entire outreach infrastructure &mdash; 12 prospects, 48
-            emails, a 3-week send calendar &mdash; was built in a single
-            conversation.
+            Twelve prospects, 48 emails, a 3-week send calendar. One
+            conversation. On a Friday afternoon.
           </p>
 
-          <h2>What this means for deployment</h2>
+          <h2>Why this matters beyond outreach</h2>
           <p>
-            This is exactly the kind of workflow we deploy for our clients.
-            Not a chatbot answering questions &mdash; a structured system
-            where AI does real operational work. The same approach that
-            built this outreach campaign is what we use to build offer
-            generators, RFQ systems, and troubleshooting assistants.
+            This is exactly the kind of workflow I deploy for clients. Not
+            a chatbot answering questions, but a structured system where AI
+            does real operational work. The same approach that built this
+            outreach campaign is what I use to build offer generators, RFQ
+            systems, and troubleshooting assistants.
           </p>
           <p>
-            The pattern is always the same: give the AI structured context
-            (our company brief, the Orient case study, the prospect list),
-            clear instructions (tone, sequence structure, personalisation
+            The pattern is the same every time: give the AI structured
+            context (company brief, case study, prospect list), clear
+            instructions (tone, sequence structure, personalisation
             requirements), and the right tools (web search, Gmail
             integration). The output is production-quality work that would
-            have taken a team days to produce manually.
+            have taken days to produce manually.
           </p>
           <p>
             That&apos;s what settling AI into a business actually looks

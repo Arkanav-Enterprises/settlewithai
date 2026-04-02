@@ -220,41 +220,41 @@ export default function Article() {
         <div className="prose-settle">
           <h2>The chatbot ceiling</h2>
           <p>
-            Here&apos;s a pattern we see in almost every company we work with.
-            Someone on the team discovers Claude, gets excited, and starts using
-            it for drafts, summaries, and brainstorming. Maybe they share it
-            with a few colleagues. Within a month, five or six people are using
-            it daily &mdash; and the company calls that &ldquo;AI adoption.&rdquo;
+            Last Tuesday, a VP of operations told me his company had
+            &ldquo;fully adopted AI.&rdquo; I asked what that meant. Turns
+            out, six people on his team use Claude to draft emails and
+            summarise meeting notes. That&apos;s it.
           </p>
           <p>
-            But nothing has actually changed. The same reports get compiled
-            manually. The same data gets copied between systems. The same
-            emails get written from scratch. Claude helped individuals go
-            faster, but the organisation&apos;s workflows stayed exactly the
-            same.
+            Sound familiar?
           </p>
           <p>
-            This is the chatbot ceiling. And it&apos;s where most companies are
-            stuck right now.
+            The same reports still get compiled by hand. The same data
+            gets copy-pasted between systems. The same emails get written
+            from scratch every morning. Claude made individuals faster,
+            sure. But the company&apos;s actual workflows? Untouched.
           </p>
           <p>
-            What changed in early 2026 is that Claude stopped being a chatbot.
+            I call this the chatbot ceiling. And almost every company I
+            talk to is stuck there right now. What changed in early 2026
+            is that Claude stopped being a chatbot entirely.
           </p>
 
-          <h2>What &ldquo;agent mode&rdquo; actually means</h2>
+          <h2>So what does &ldquo;agent mode&rdquo; actually mean?</h2>
           <p>
-            The word &ldquo;agent&rdquo; gets thrown around a lot in AI
-            marketing. Let&apos;s be specific about what it means for Claude.
+            The word &ldquo;agent&rdquo; gets thrown around constantly in AI
+            marketing, so I want to be precise.
           </p>
           <p>
             A chatbot takes a single input and produces a single output. You
             ask a question, you get an answer. An agent takes a <strong>goal</strong> and
             breaks it into steps. It gathers information, makes decisions,
-            takes actions, checks results, and adjusts course &mdash; all
+            takes actions, checks results, and adjusts course, all
             without you typing another prompt.
           </p>
           <p>
-            The difference is concrete. Here&apos;s the same task, both ways:
+            The difference feels abstract until you see the same task done
+            both ways:
           </p>
 
           <p><strong>Chatbot mode:</strong> &ldquo;Write me a follow-up email
@@ -269,48 +269,49 @@ export default function Article() {
             Gmail.&rdquo; Claude does all of it. You review and hit send.
           </p>
           <p>
-            That&apos;s not a hypothetical. We built exactly this workflow for
-            our own outreach using{" "}
+            That&apos;s not a hypothetical. I built exactly this workflow for
+            my own outreach using{" "}
             <a href="/blog/ai-powered-outreach-with-cowork">
               Claude&apos;s Cowork feature
             </a>
             . Twelve companies researched, 48 emails drafted, all in one session.
+            I honestly didn&apos;t think it would hold together that long, but
+            it ran the entire batch without a hiccup.
           </p>
 
-          <h2>The four capabilities that make agents possible</h2>
+          <h2>The four capabilities that make this work</h2>
           <p>
-            Claude&apos;s agent mode isn&apos;t a single feature. It&apos;s four
-            capabilities working together. Each one existed in some form before,
-            but Opus&nbsp;4.6 is the first model where all four are reliable
-            enough for production.
+            Claude&apos;s agent mode isn&apos;t one feature. It&apos;s four
+            capabilities that finally work well enough together for real
+            production use. Each one existed in some form before, but
+            Opus&nbsp;4.6 is where they all became reliable.
           </p>
 
           <h3>1. Tool use</h3>
           <p>
-            Claude can call external tools &mdash; APIs, calculators, search
-            engines, databases &mdash; as part of its reasoning process. When
-            it needs a piece of information or needs to take an action, it calls
-            the appropriate tool, reads the result, and continues.
+            Claude can call external tools (APIs, calculators, search
+            engines, databases) as part of its reasoning. When it needs
+            information or needs to take an action, it calls the right tool,
+            reads the result, and keeps going.
           </p>
           <p>
-            This is the foundation. Without tool use, Claude is limited to
-            what&apos;s in the conversation. With it, Claude can reach into
-            your systems and work with real data.
+            This is the foundation. Without it, Claude is stuck with whatever&apos;s
+            in the conversation window. With it, Claude reaches into your
+            systems and works with real data.
           </p>
 
           <h3>2. Model Context Protocol (MCP)</h3>
           <p>
             <a href="/blog/mcp-explained-for-business">MCP</a> is the open
             standard that connects Claude to your business systems. Think of it
-            as a universal adapter &mdash; a lightweight server that sits
+            as a universal adapter: a lightweight server that sits
             between Claude and your ERP, CRM, database, or internal tool.
           </p>
           <p>
-            We&apos;ve built MCP connectors for everything from SAP to Google
-            Sheets. Most take a few days to build. Once connected, Claude
-            doesn&apos;t just know about your business in the abstract &mdash;
-            it can read your actual data, pull real numbers, and write back
-            results.
+            I&apos;ve built MCP connectors for everything from SAP to Google
+            Sheets. Most take a few days. Once connected, Claude
+            doesn&apos;t just know about your business in theory. It can read
+            your actual data, pull real numbers, and write back results.
           </p>
           <p>
             MCP is what turns a general-purpose AI into <em>your</em> AI.
@@ -318,8 +319,9 @@ export default function Article() {
 
           <h3>3. Computer use</h3>
           <p>
-            Claude can now interact with software the way a human does &mdash;
-            clicking buttons, filling forms, navigating interfaces. Anthropic&apos;s{" "}
+            This one surprised me. Claude can now interact with software the
+            way a person does, clicking buttons, filling forms, navigating
+            interfaces. Anthropic&apos;s{" "}
             <a
               href="https://www.anthropic.com/news/vercept"
               target="_blank"
@@ -327,111 +329,110 @@ export default function Article() {
             >
               acquisition of Vercept
             </a>{" "}
-            in early 2026 accelerated this capability significantly.
+            in early 2026 accelerated this significantly.
           </p>
           <p>
-            Why does this matter? Because not every system has an API. Some
+            Why does this matter? Not every system has an API. Some
             legacy ERPs, government portals, and industry-specific tools only
-            have a GUI. Computer use means Claude can still automate those
-            workflows &mdash; no API required.
+            have a GUI. Computer use means Claude can automate those
+            workflows anyway.
           </p>
           <p>
-            For manufacturers running 15-year-old ERP systems, this is the
-            capability that changes the conversation from &ldquo;we&apos;d need
-            to rebuild our systems first&rdquo; to &ldquo;let&apos;s start
-            next week.&rdquo;
+            For manufacturers running 15-year-old ERP systems, this changes
+            the conversation from &ldquo;we&apos;d need to rebuild our
+            systems first&rdquo; to &ldquo;we can start next week.&rdquo;
           </p>
 
           <h3>4. Agent teams</h3>
           <p>
             Opus&nbsp;4.6 introduced the ability to run multiple Claude agents
-            in parallel, each with its own context and instructions, working on
+            in parallel, each with its own context and instructions, tackling
             different parts of the same problem.
           </p>
           <p>
-            Imagine a procurement workflow: one agent pulls vendor quotes from
+            Picture a procurement workflow: one agent pulls vendor quotes from
             email, another checks current inventory levels in the ERP, a third
             compares prices against historical data, and a coordinator agent
-            assembles the recommendation. They work simultaneously. What used
+            assembles the recommendation. They run simultaneously. What used
             to take a procurement analyst half a day takes fifteen minutes.
           </p>
 
-          <h2>What this looks like in production</h2>
+          <h2>What this actually looks like running</h2>
           <p>
-            Theory is easy. Let&apos;s talk about what we&apos;ve actually
-            deployed.
+            Theory is the easy part.
           </p>
           <p>
             At{" "}
             <a href="/blog/orient-case-study">Orient Printing &amp; Packaging</a>
-            , we mapped 49 use cases across 7 departments. Eleven of those are
-            now in production. Several of the more complex ones &mdash; the
+            , I mapped 49 use cases across 7 departments. Eleven are
+            now in production. The ones I&apos;m proudest of (the
             offer generator, the vendor analysis system, the service
-            troubleshooting assistant &mdash; are genuinely agentic. They
+            troubleshooting assistant) are genuinely agentic. They
             don&apos;t just respond to prompts. They execute multi-step
-            workflows.
+            workflows end to end.
           </p>
           <p>
-            Here&apos;s what the offer generator does, step by step:
+            The offer generator is a good example. Here&apos;s what happens
+            when a sales rep kicks it off:
           </p>
           <ol>
             <li>Sales rep enters the customer name and product requirements</li>
             <li>Claude pulls the customer&apos;s history and pricing tier from the system</li>
             <li>It retrieves current component costs and calculates margins</li>
-            <li>It generates the full offer document &mdash; technical specifications, pricing table, terms, delivery timeline</li>
-            <li>It formats the document to match Orient&apos;s template</li>
+            <li>It generates the full offer document: technical specifications, pricing table, terms, delivery timeline</li>
+            <li>It formats everything to match Orient&apos;s template</li>
             <li>The sales rep reviews, adjusts if needed, and sends</li>
           </ol>
           <p>
             Total time: 30 minutes. Previous time: 4 hours. That&apos;s not a
-            chatbot writing a draft. That&apos;s an agent executing a workflow
-            end-to-end with a human review gate at the end.
+            chatbot writing a draft you then have to fix. That&apos;s an agent
+            running the workflow with a human review gate at the end.
           </p>
 
           <h2>Why most companies aren&apos;t there yet</h2>
           <p>
             If these capabilities exist today, why isn&apos;t everyone using
-            them? Three reasons.
+            them?
           </p>
           <p>
             <strong>The instructions problem.</strong> An agent is only as good
             as its instructions. When Claude was a chatbot, a vague prompt
-            was fine &mdash; you&apos;d just rephrase if the answer
-            wasn&apos;t right. When Claude is an agent executing a 6-step
-            workflow autonomously, vague instructions create vague results. Or
-            worse, confident wrong results.
+            was fine because you&apos;d just rephrase if the answer was off.
+            But when Claude is an agent executing a 6-step
+            workflow on its own, vague instructions produce vague results. Or
+            worse, confidently wrong results.
           </p>
           <p>
-            This is why we spend more time on instruction engineering than
+            This is why I spend more time on instruction engineering than
             anything else. Production-grade instructions aren&apos;t prompts.
-            They&apos;re specifications &mdash; with edge cases, fallback
+            They&apos;re specifications, with edge cases, fallback
             behaviour, output formats, and review gates built in.
           </p>
           <p>
             <strong>The integration gap.</strong> Most companies don&apos;t
-            have MCP connectors. Their data lives in systems that Claude
+            have MCP connectors. Their data lives in systems Claude
             can&apos;t reach. Building those connectors isn&apos;t hard, but
             someone has to know what to build and how to structure the data
             flow.
           </p>
           <p>
             <strong>The trust gap.</strong> Giving an AI agent write access to
-            your business systems feels risky &mdash; because it is, if you
+            your business systems feels risky. And honestly, it is risky if you
             do it wrong. The companies that deploy agents successfully don&apos;t
             give Claude unrestricted access. They build guardrails: read-only
             access first, human approval for writes, logging on every action,
-            and gradual expansion as confidence builds.
+            gradual expansion as confidence builds.
           </p>
 
-          <h2>The deployment model that works</h2>
+          <h2>The deployment model that actually works</h2>
           <p>
-            We&apos;ve settled on a four-phase model for deploying agentic AI.
-            It&apos;s the same model we use for all{" "}
+            After several deployments, I&apos;ve settled on a four-phase model.
+            It&apos;s the same approach I use for all{" "}
             <a href="/blog/integrating-ai-into-your-company">AI integration</a>,
-            but with agents the middle phases become more important.
+            but with agents the middle phases carry more weight.
           </p>
           <p>
-            <strong>Phase 1: Discovery.</strong> Map every workflow. Identify
+            <strong>Phase 1: Discovery.</strong> Map every workflow. Figure out
             which ones are truly multi-step and repetitive enough to justify
             agentic automation. Not everything should be an agent. If a task
             takes two minutes and happens once a day, a chatbot is fine.
@@ -442,28 +443,28 @@ export default function Article() {
             <strong>Phase 2: Architecture.</strong> Design the agent&apos;s
             structure. What tools does it need? What MCP connectors? What are
             the decision points? Where do humans stay in the loop? This is the
-            blueprint &mdash; and it&apos;s where most DIY attempts fail,
-            because they skip straight to prompting.
+            part most DIY attempts skip entirely. They jump straight to
+            prompting, and it shows.
           </p>
           <p>
             <strong>Phase 3: Instruction engineering.</strong> Write the
             production-grade instructions. Test them against edge cases. Build
-            in safety rails. This is the difference between a demo that works
-            in a meeting and an agent that works on the 500th run at 2am on a
-            Tuesday.
+            in safety rails. This is the difference between a demo that
+            impresses in a meeting and an agent that works on the 500th run at
+            2am on a Tuesday.
           </p>
           <p>
             <strong>Phase 4: Deploy and expand.</strong> Start with read-only
             access. Graduate to supervised writes. Expand scope as confidence
             grows. Measure everything. An agent that saves 30 minutes per
-            task but introduces errors isn&apos;t an improvement &mdash;
-            it&apos;s a liability.
+            task but introduces errors isn&apos;t an improvement. It&apos;s
+            a liability.
           </p>
 
-          <h2>What to automate first</h2>
+          <h2>Where to start</h2>
           <p>
-            If you&apos;re thinking about where to start, here&apos;s the
-            pattern we&apos;ve seen work best. The ideal first agent has three
+            If you&apos;re wondering what to automate first, here&apos;s what
+            I&apos;ve seen work best. Your ideal first agent has three
             properties:
           </p>
           <ul>
@@ -480,22 +481,21 @@ export default function Article() {
 
           <h2>What&apos;s coming next</h2>
           <p>
-            We&apos;re still in the early days of agentic AI. A few things
-            we&apos;re watching closely:
+            We&apos;re still early. A few things I&apos;m watching:
           </p>
           <ul>
             <li><strong>Multi-agent orchestration</strong> is getting more sophisticated. Today, agent teams work best on parallel, independent tasks. Within the year, expect agents that can negotiate, hand off work, and coordinate complex workflows across departments.</li>
-            <li><strong>MCP adoption</strong> is accelerating. As more companies build connectors, a library of pre-built integrations is forming. The integration gap we described above is closing fast.</li>
+            <li><strong>MCP adoption</strong> is accelerating. As more companies build connectors, a library of pre-built integrations is forming. The integration gap I described above? It&apos;s closing fast.</li>
             <li><strong>Context windows keep growing.</strong> Opus&nbsp;4.6&apos;s 1M token context means an agent can hold an entire codebase, an entire customer history, or an entire regulatory framework in working memory. That changes what&apos;s possible for complex, context-heavy workflows.</li>
-            <li><strong>Costs are dropping.</strong> What cost $50 in API calls a year ago costs $5 today. The economics of running agents on routine business tasks are becoming hard to argue against.</li>
+            <li><strong>Costs are dropping.</strong> What cost $50 in API calls a year ago costs $5 today. The economics are becoming impossible to ignore.</li>
           </ul>
 
           <h2>The bottom line</h2>
           <p>
             Claude isn&apos;t a chatbot anymore. It&apos;s an agent platform.
             The companies that figure out how to deploy agents
-            properly &mdash; with structured instructions, real system
-            integrations, and thoughtful guardrails &mdash; are going to build
+            properly, with structured instructions, real system
+            integrations, and thoughtful guardrails, are going to build
             a compounding advantage over the ones still stuck at the chatbot
             ceiling.
           </p>
@@ -504,7 +504,7 @@ export default function Article() {
             deployment.
           </p>
           <p>
-            That&apos;s the gap we close.{" "}
+            That&apos;s the gap I close.{" "}
             <a
               href="/#contact"
               className="text-accent font-medium hover:underline"

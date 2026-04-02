@@ -181,63 +181,73 @@ export default function Article() {
         <div className="prose-settle">
           <h2>The starting point</h2>
           <p>
-            When we first sat down with Orient&apos;s director, Rishab Kohli,
-            the picture was familiar. A company with deep domain expertise,
-            decades of operational knowledge, and a growing sense that AI
-            could help &mdash; but no clear path from interest to
-            implementation.
+            I remember the first call with Rishab Kohli, Orient&apos;s
+            director. He pulled up a spreadsheet with about forty things his
+            team wanted AI to do. Marketing emails. Pricing calculators.
+            Troubleshooting guides. The list went on.
           </p>
           <p>
-            Orient isn&apos;t a startup. They have seven departments:
-            Marketing &amp; Sales, Design, Supply Chain, Production &amp;
-            Maintenance, Accounts, HR &amp; IT, and Servicing. They run a
-            custom-built ERP. Their product catalogue spans offset printing
-            presses, flexographic presses, inkjet digital presses, folder
-            gluers, and converting machines. The complexity is real.
+            I asked him a simple question: &ldquo;Which of these does
+            someone on your team spend the most time on every single
+            week?&rdquo; He paused. That pause told me everything I needed
+            to know. They had ideas. What they didn&apos;t have was a
+            starting point.
           </p>
           <p>
-            The question wasn&apos;t &ldquo;can AI help?&rdquo; &mdash; it
-            was &ldquo;where do we start, and how do we avoid the pilot that
-            goes nowhere?&rdquo;
+            Orient isn&apos;t a startup. They&apos;ve been manufacturing
+            printing presses since 1946. Seven departments: Marketing &amp;
+            Sales, Design, Supply Chain, Production &amp; Maintenance,
+            Accounts, HR &amp; IT, and Servicing. A custom-built ERP. A
+            product catalogue that spans offset printing presses,
+            flexographic presses, inkjet digital presses, folder gluers, and
+            converting machines. Over 20,000 units installed in 50+
+            countries.
+          </p>
+          <p>
+            The complexity is real. And honestly, that&apos;s what made it
+            exciting.
           </p>
 
-          <h2>Discovery: 49 use cases in 7 departments</h2>
+          <h2>Two weeks on the factory floor</h2>
           <p>
-            We started where we always start: mapping workflows. Not at a
-            strategy level &mdash; at the task level. What does someone in
-            procurement actually do when they need to source a component?
-            What does a sales engineer do when a customer asks for a quote on
-            a C-Series digital press? Where do errors happen? Where does work
-            pile up?
+            I didn&apos;t start with a strategy deck. I started by watching
+            people work.
           </p>
           <p>
-            Over two weeks, we documented every repeatable workflow across
-            all seven departments. The result was a use-case matrix of 49
-            distinct opportunities, each scored by impact, feasibility, and
+            What does someone in procurement actually do when they need to
+            source a component? What happens when a sales engineer gets a
+            call asking for a quote on a C-Series digital press? Where do
+            mistakes happen? Where does work pile up and sit there for days?
+          </p>
+          <p>
+            Over two weeks, I documented every repeatable workflow across
+            all seven departments. I talked to the people doing the work,
+            not just their managers. By the end, I had a matrix of 49
+            distinct use cases, each scored by impact, feasibility, and
             dependencies.
           </p>
           <p>
-            Some examples of what we found:
+            Some of what I found genuinely surprised me:
           </p>
           <ul>
             <li>
               <strong>Sales was spending 3&ndash;4 hours per offer
-              document</strong> &mdash; manually pulling pricing from
+              document.</strong> They were manually pulling pricing from
               spreadsheets, formatting specifications, attaching the right
               terms and conditions (different for domestic vs.
-              international), and assembling an 8-page branded PDF. They were
-              producing dozens of these per month.
+              international), and assembling an 8-page branded PDF. Dozens
+              of these per month. Every single one built from scratch.
             </li>
             <li>
               <strong>Supply Chain was writing RFQs from scratch</strong>{" "}
-              every time, despite 80% of the content being templatable.
-              Vendor comparison reports were manual Excel exercises that took
+              every time, even though 80% of the content was templatable.
+              Vendor comparison reports? Manual Excel exercises that ate up
               a full day.
             </li>
             <li>
               <strong>Service engineers were troubleshooting from
-              memory</strong>, calling senior colleagues, or digging through
-              physical manuals. There was no searchable knowledge base.
+              memory.</strong> Calling senior colleagues, flipping through
+              physical manuals. No searchable knowledge base existed.
             </li>
             <li>
               <strong>HR was writing job descriptions ad hoc</strong>,
@@ -252,126 +262,129 @@ export default function Article() {
             </li>
           </ul>
           <p>
-            None of these were unsolvable problems. But collectively, they
+            None of these were unsolvable problems. But collectively? They
             represented hundreds of hours per month of work that could be
             structured, accelerated, or eliminated entirely.
           </p>
 
-          <h2>Architecture: 18 projects, not 7</h2>
+          <h2>Why I split it into 18 projects instead of 7</h2>
           <p>
-            The instinct in most AI deployments is to organise by department:
-            one AI project for Sales, one for HR, one for Production. We
-            tried this initially and quickly found it didn&apos;t work.
+            My first instinct was to organise by department. One AI project
+            for Sales, one for HR, one for Production. Clean and simple.
           </p>
           <p>
-            The problem is that use cases within the same department often
-            need fundamentally different context. Marketing&apos;s &ldquo;Offer
+            It didn&apos;t work.
+          </p>
+          <p>
+            I honestly didn&apos;t expect this to be a problem, but the use
+            cases within the same department often need fundamentally
+            different context. Marketing&apos;s &ldquo;Offer
             Creation&rdquo; needs a pricing database and terms and conditions
             files. Marketing&apos;s &ldquo;SEO Workflow&rdquo; needs web
-            search access and keyword data. Cramming both into the same
-            project meant bloated context windows, confused instructions, and
-            unreliable output.
+            search access and keyword data. When I crammed both into the
+            same project, the context window got bloated, instructions got
+            confused, and the output became unreliable. Sound familiar?
           </p>
           <p>
-            So we split the rollout into 18 functional projects grouped by
+            So I restructured. 18 functional projects grouped by
             workflow cluster:
           </p>
           <ul>
             <li>
-              <strong>Sales Proposals &amp; Pricing</strong> &mdash; offer
+              <strong>Sales Proposals &amp; Pricing</strong>, covering offer
               creation, instant price generation, configuration
               recommendations
             </li>
             <li>
-              <strong>Sales Communications</strong> &mdash; CRM updates,
+              <strong>Sales Communications</strong>, covering CRM updates,
               automated follow-ups, outreach drafting
             </li>
             <li>
-              <strong>Vendor Management &amp; Procurement</strong> &mdash;
+              <strong>Vendor Management &amp; Procurement</strong>, covering
               vendor discovery, RFQ generation, purchase orders, cost analysis
             </li>
             <li>
-              <strong>Service &amp; Troubleshooting</strong> &mdash; AI
+              <strong>Service &amp; Troubleshooting</strong>, an AI
               troubleshooting assistant backed by technical manual knowledge
               base
             </li>
             <li>
-              <strong>Financial Operations</strong> &mdash; invoice
+              <strong>Financial Operations</strong>, covering invoice
               generation, MIS reports, Excel analysis
             </li>
             <li>
-              <strong>Recruitment &amp; Talent</strong> &mdash; job
+              <strong>Recruitment &amp; Talent</strong>, covering job
               descriptions, KRA/KPI generation
             </li>
             <li>
-              <strong>Payroll &amp; HR Operations</strong> &mdash; salary
+              <strong>Payroll &amp; HR Operations</strong>, handling salary
               sheet generation with Indian statutory compliance (PF, ESI,
               TDS)
             </li>
             <li>
-              <strong>ERP Development Assistant</strong> &mdash; coding
+              <strong>ERP Development Assistant</strong>, a coding
               assistant for their custom-built ERP system
             </li>
           </ul>
           <p>
             Each project got its own instructions, its own knowledge files,
-            and its own set of rules. This meant every project could be
-            optimised independently, tested independently, and deployed
-            independently.
+            and its own rules. That separation was the whole game. It meant
+            I could optimise, test, and deploy each one independently.
           </p>
 
-          <h2>The four-tier phased rollout</h2>
+          <h2>Rolling it out in tiers</h2>
           <p>
-            Not all 49 use cases could ship at once. Some needed nothing
+            49 use cases can&apos;t ship at once. Some needed nothing
             more than well-written instructions. Others required integration
             with Orient&apos;s custom ERP. A few depended on external systems
             that didn&apos;t exist yet.
           </p>
           <p>
-            We designed a four-tier rollout:
+            I designed a four-tier rollout, and the tiering turned out to
+            be one of the most important decisions of the whole engagement:
           </p>
           <ul>
             <li>
-              <strong>Tier 1: Quick Wins (Weeks 1&ndash;4)</strong> &mdash;
-              14 use cases that needed only project instructions and
+              <strong>Tier 1: Quick Wins (Weeks 1&ndash;4).</strong> 14 use
+              cases that needed only project instructions and
               knowledge files. No integrations, no custom development. Email
               writing across all departments, instant price calculations, job
               description generation, Excel analysis, ERP coding assistance.
             </li>
             <li>
               <strong>Tier 2: Structured Documents (Months
-              2&ndash;3)</strong> &mdash; 14 use cases requiring document
+              2&ndash;3).</strong> 14 use cases requiring document
               generation capabilities. Offer creation with branded PDFs, BOM
               generation, RFQ templates, vendor reports, production review
               presentations, payroll processing.
             </li>
             <li>
-              <strong>Tier 3: ERP Integration (Months 3&ndash;6)</strong>{" "}
-              &mdash; 14 use cases that needed a custom connector to
+              <strong>Tier 3: ERP Integration (Months 3&ndash;6).</strong>{" "}
+              14 use cases that needed a custom connector to
               Orient&apos;s ERP system. Purchase order creation, inventory
               tracking, invoice generation, sales forecasting, automated
               reorder alerts.
             </li>
             <li>
-              <strong>Tier 4: Advanced AI (Month 6+)</strong> &mdash; 7 use
+              <strong>Tier 4: Advanced AI (Month 6+).</strong> 7 use
               cases requiring external system integration. AutoCAD script
               generation, predictive maintenance from IoT sensors, AI travel
               desk with booking APIs, image and video generation.
             </li>
           </ul>
           <p>
-            This tiering was critical. It meant Orient could start seeing
-            results in the first month while the more complex integrations
-            were being developed. By the time Tier 3 rolled out, the team
-            had already been using AI daily for three months. Adoption
-            wasn&apos;t a problem &mdash; it was a habit.
+            Here&apos;s why the tiers mattered so much: Orient started
+            seeing results in the first month while the more complex
+            integrations were still being built. By the time Tier 3 rolled
+            out, the team had already been using AI daily for three months.
+            Adoption wasn&apos;t something I had to push. It was already a
+            habit.
           </p>
 
-          <h2>Instruction engineering: the offer generator</h2>
+          <h2>The offer generator (where it got personal)</h2>
           <p>
-            The offer generator became our flagship deployment &mdash; and
-            the best example of what instruction engineering actually looks
-            like in practice.
+            This became the flagship deployment, and it&apos;s the one I&apos;m
+            most proud of.
           </p>
           <p>
             Before AI, creating a customer offer for a digital press took
@@ -385,16 +398,16 @@ export default function Article() {
             8-page document.
           </p>
           <p>
-            After deployment, the same process takes 30 minutes.
+            After deployment? 30 minutes.
           </p>
           <p>
-            The system works in two steps. First, the sales engineer enters
-            the machine specification into a Claude project configured with
+            I built it in two steps. First, the sales engineer enters
+            the machine specification into a Claude project I configured with
             Orient&apos;s pricing logic, product knowledge base, and full
-            terms and conditions. Claude calculates the correct pricing
-            &mdash; including head count formulas, add-on components (unwind
+            terms and conditions. Claude calculates the correct pricing,
+            including head count formulas, add-on components (unwind
             systems, IR drying, coating units, RIP software, sheeters), and
-            installation costs &mdash; and outputs structured data across
+            installation costs. It outputs structured data across
             five sections: cover data, machine specification, equipment
             pricing, T&amp;C reference, and delivery terms.
           </p>
@@ -405,104 +418,108 @@ export default function Article() {
             press configuration diagrams) and the calculated pricing pages.
           </p>
           <p>
-            The instructions include safety rules: never reveal internal
-            costs or partner margins to the customer. Review gates require
-            confirmation before finalising pricing on non-standard
+            I also baked in safety rules: the system will never reveal
+            internal costs or partner margins to the customer. Review gates
+            require confirmation before finalising pricing on non-standard
             configurations. The output format is locked to Orient&apos;s
             brand standards.
           </p>
           <p>
-            This is what we mean by instruction engineering. It&apos;s not a
-            prompt. It&apos;s a production system.
+            This isn&apos;t a prompt. It&apos;s a production system. That
+            distinction matters more than anything else I could tell you
+            about instruction engineering.
           </p>
 
-          <h2>What shipped in the first engagement</h2>
+          <h2>Eleven projects live</h2>
           <p>
-            Eleven projects went live in the first phase:
+            By the end of the first engagement, eleven projects were in
+            production:
           </p>
           <ul>
             <li>
-              <strong>Offer Generator</strong> &mdash; 85% reduction in
+              <strong>Offer Generator.</strong> 85% reduction in
               document creation time. Previously 3&ndash;4 hours, now 30
               minutes. Dozens of offers generated per month.
             </li>
             <li>
-              <strong>Instant Price Calculator</strong> &mdash; real-time
+              <strong>Instant Price Calculator.</strong> Real-time
               pricing from natural language input. Sales engineers get
               accurate quotes in seconds instead of manually navigating
               pricing spreadsheets.
             </li>
             <li>
-              <strong>Configuration Suggestor</strong> &mdash; customers
+              <strong>Configuration Suggestor.</strong> Customers
               describe their printing requirements, the system recommends the
               optimal machine configuration. Reduced back-and-forth between
               sales and engineering.
             </li>
             <li>
-              <strong>Email Writer (all departments)</strong> &mdash;
-              context-aware email drafting tuned to Orient&apos;s tone and
+              <strong>Email Writer (all departments).</strong>
+              Context-aware email drafting tuned to Orient&apos;s tone and
               terminology. Deployed across Marketing, Supply Chain,
               Production, Accounts, HR, and Servicing.
             </li>
             <li>
-              <strong>RFQ Generator</strong> &mdash; templated request-for-quote
+              <strong>RFQ Generator.</strong> Templated request-for-quote
               documents generated from component specifications. Cut
               procurement preparation time by 60%.
             </li>
             <li>
-              <strong>Vendor Analysis Reports</strong> &mdash; automated
+              <strong>Vendor Analysis Reports.</strong> Automated
               vendor comparison reports from uploaded cost data. What used to
               take a full day now takes under an hour.
             </li>
             <li>
-              <strong>Service Troubleshooting Assistant</strong> &mdash;
+              <strong>Service Troubleshooting Assistant.</strong>
               AI-powered diagnostics backed by Orient&apos;s technical
               manuals. Engineers describe symptoms, get ranked root causes
               and diagnostic steps. Reduced average troubleshooting time and
               dependence on senior staff for routine issues.
             </li>
             <li>
-              <strong>BOM Generator</strong> &mdash; structured bills of
+              <strong>BOM Generator.</strong> Structured bills of
               materials from order specifications. Automated what was
               previously a manual, error-prone process.
             </li>
             <li>
-              <strong>Job Description Generator</strong> &mdash;
-              manufacturing-context job descriptions with consistent
+              <strong>Job Description Generator.</strong>
+              Manufacturing-context job descriptions with consistent
               formatting across all recruitment portals.
             </li>
             <li>
-              <strong>Excel AI Assistant</strong> &mdash; natural language
-              analysis of financial and operational spreadsheets. Accounts
+              <strong>Excel AI Assistant.</strong> Natural language
+              analysis of financial and operational spreadsheets. The Accounts
               team uses it daily for data analysis without writing formulas.
             </li>
             <li>
-              <strong>ERP Coding Assistant</strong> &mdash; development
+              <strong>ERP Coding Assistant.</strong> Development
               support for Orient&apos;s custom ERP system. The IT team loaded
               the ERP schema into the project&apos;s knowledge base, giving
               Claude full context on their codebase.
             </li>
           </ul>
 
-          <h2>The numbers</h2>
+          <h2>The numbers (after 90 days)</h2>
           <p>
-            After 90 days of production use:
+            I want to be straightforward about the results. These aren&apos;t
+            projections. This is what happened after 90 days of production
+            use:
           </p>
           <ul>
             <li>
-              <strong>Document generation time: 85% reduction</strong>{" "}
-              &mdash; offers, RFQs, BOMs, reports, and presentations that
+              <strong>Document generation time: 85% reduction.</strong>{" "}
+              Offers, RFQs, BOMs, reports, and presentations that
               previously took hours are now produced in minutes.
             </li>
             <li>
-              <strong>Estimated $200,000+ in annual labour savings</strong>{" "}
-              &mdash; calculated across all deployed use cases based on hours
+              <strong>Estimated $200,000+ in annual labour savings</strong>,
+              calculated across all deployed use cases based on hours
               saved per task multiplied by frequency and fully-loaded
               employee cost.
             </li>
             <li>
               <strong>400+ hours saved per month</strong> across all
-              departments &mdash; from eliminated manual document assembly,
+              departments, from eliminated manual document assembly,
               reduced troubleshooting time, automated procurement prep, and
               streamlined communications.
             </li>
@@ -513,8 +530,8 @@ export default function Article() {
               analysis, and production reporting.
             </li>
             <li>
-              <strong>Error reduction in pricing</strong> &mdash;
-              instruction-enforced calculation logic eliminated the manual
+              <strong>Error reduction in pricing.</strong>
+              Instruction-enforced calculation logic eliminated the manual
               errors that previously occurred when sales engineers navigated
               complex pricing spreadsheets by hand.
             </li>
@@ -528,30 +545,31 @@ export default function Article() {
 
           <h2>What&apos;s next</h2>
           <p>
-            Orient is now in Tier 3 &mdash; building a custom connector to
+            Orient is now in Tier 3, building a custom connector to
             their ERP system. This will unlock the remaining 14 use cases
             that require live data: automated purchase orders, inventory
             tracking, invoice generation, sales forecasting, and reorder
             alerts.
           </p>
           <p>
-            Tier 4 is on the horizon: AutoCAD script generation for the
+            Tier 4 is on the horizon. AutoCAD script generation for the
             Design team, predictive maintenance from machine sensor data, and
             an AI-powered travel desk for the Service team&apos;s field
             visits.
           </p>
           <p>
-            The longer-term vision is productisation. Orient plans to take
-            the use cases that delivered the strongest ROI internally and
-            rebuild them using the Claude API and Agent SDK &mdash; offering
-            them as AI-powered tools to other printing and packaging
-            companies worldwide.
+            But the part I find most interesting is the longer-term vision.
+            Orient plans to take the use cases that delivered the strongest
+            ROI internally and rebuild them using the Claude API and Agent
+            SDK, offering them as AI-powered tools to other printing and
+            packaging companies worldwide. They want to go from buyer of AI
+            to seller of it.
           </p>
           <p>
-            From a 79-year-old manufacturer that had never used AI to a
-            company deploying it across every department, with a roadmap to
-            productise it for their industry. That&apos;s what structured
-            deployment looks like.
+            When I started this engagement, I wasn&apos;t sure a 79-year-old
+            manufacturer could move this fast. I was wrong. They went from
+            zero AI to deploying it across every department in six months.
+            And they&apos;re not slowing down.
           </p>
 
           {/* Related */}

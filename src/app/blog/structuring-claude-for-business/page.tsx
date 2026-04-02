@@ -227,49 +227,48 @@ export default function Article() {
         <div className="prose-settle">
           <h2>The one-project trap</h2>
           <p>
-            Here&apos;s what the first week of Claude adoption looks like at
-            most companies. Someone creates a project called &ldquo;Company
-            AI&rdquo; or &ldquo;Marketing Assistant.&rdquo; They paste in the
-            company website, a few product descriptions, maybe a brand guide
-            PDF. They write a system prompt that says something like
-            &ldquo;You are a helpful assistant for [Company Name]. Use a
-            professional tone.&rdquo;
+            I watched it happen again last month. A company creates a Claude
+            project called &ldquo;Company AI&rdquo; or &ldquo;Marketing
+            Assistant.&rdquo; They paste in their website, a few product
+            descriptions, maybe a brand guide PDF. The system prompt says
+            something like &ldquo;You are a helpful assistant for [Company
+            Name]. Use a professional tone.&rdquo;
           </p>
           <p>
-            It works &mdash; sort of. Claude knows the basics. It can draft
-            emails that sound vaguely on-brand. But by week three, the cracks
-            appear:
+            And it works. Sort of. Claude knows the basics, drafts emails
+            that sound vaguely on-brand. But by week three? The cracks show:
           </p>
           <ul>
-            <li>Sales uses the same project for proposals, cold emails, and CRM summaries &mdash; and the instructions that help with one hurt the others</li>
+            <li>Sales uses the same project for proposals, cold emails, and CRM summaries, and the instructions that help with one hurt the others</li>
             <li>Someone updates the pricing sheet but forgets to update the knowledge file, so Claude quotes last quarter&apos;s rates</li>
             <li>The project instructions are now 3,000 words of accumulated patches, and nobody remembers which rules are still relevant</li>
             <li>Two departments have created their own projects with conflicting versions of the company description</li>
           </ul>
           <p>
-            This is the one-project trap. And it&apos;s why most companies
-            plateau at &ldquo;Claude is useful for drafts&rdquo; and never
-            reach &ldquo;Claude runs our workflows.&rdquo;
+            Have you noticed this at your company? I call it the one-project
+            trap. It&apos;s why most teams plateau at &ldquo;Claude is useful
+            for drafts&rdquo; and never reach &ldquo;Claude runs our
+            workflows.&rdquo;
           </p>
 
           <h2>The three-layer architecture</h2>
           <p>
-            The solution is the same pattern Katherine Yeh describes for
+            The fix is the same pattern Katherine Yeh describes for
             design work, adapted for business operations. Three layers, each
-            with a clear purpose.
+            with a clear job.
           </p>
 
           <h3>Layer 1: Reference knowledge</h3>
           <p>
             This is everything Claude needs to <em>know</em> about your
-            business. Not what to <em>do</em> &mdash; what to know. It&apos;s
-            the foundation that every workflow builds on.
+            business. Not what to <em>do</em>, just what to know. It&apos;s
+            the foundation every workflow builds on.
           </p>
           <p>
-            We split reference knowledge into two categories:
+            I split reference knowledge into two buckets:
           </p>
           <p>
-            <strong>Company-wide references</strong> are shared across every
+            <strong>Company-wide references</strong> get shared across every
             project and department:
           </p>
           <ul>
@@ -278,7 +277,7 @@ export default function Article() {
             <li><strong>Compliance and legal rails</strong> &mdash; What Claude must never say. What claims require disclaimers. What data can be shared externally. What regulatory language is mandatory in certain contexts.</li>
           </ul>
           <p>
-            <strong>Domain-specific references</strong> are shared within a
+            <strong>Domain-specific references</strong> stay within a
             department or function:
           </p>
           <ul>
@@ -288,20 +287,21 @@ export default function Article() {
             <li><strong>HR</strong>: job description standards, compensation bands, interview scoring rubrics</li>
           </ul>
           <p>
-            The critical principle: <strong>separate knowledge from
-            instructions.</strong> Yeh puts it well &mdash; specs answer
-            definitional questions (&ldquo;what is our return policy?&rdquo;)
-            while workflow instructions handle judgment calls (&ldquo;how
-            should we respond to this complaint?&rdquo;). Most companies
-            mash these together. Separating them means you can update a
-            policy without touching every workflow that references it.
+            Here&apos;s the principle that makes it all work: <strong>separate
+            knowledge from instructions.</strong> Yeh puts it well. Specs
+            answer definitional questions (&ldquo;what is our return
+            policy?&rdquo;) while workflow instructions handle judgment
+            calls (&ldquo;how should we respond to this
+            complaint?&rdquo;). Most companies mash these together.
+            Separating them means you can update a policy without touching
+            every workflow that references it.
           </p>
 
           <h3>Layer 2: Capability workflows</h3>
           <p>
             This is where Claude learns what to <em>do</em>. Each capability
-            is a specific, repeatable workflow &mdash; not a vague
-            description of a role.
+            is a specific, repeatable workflow, not a vague description of a
+            role.
           </p>
           <p>
             Bad: &ldquo;You are a helpful sales assistant.&rdquo;
@@ -314,7 +314,9 @@ export default function Article() {
             items that exceed the customer&apos;s credit limit.&rdquo;
           </p>
           <p>
-            A well-structured capability specifies:
+            See the difference? The second version tells Claude exactly what
+            &ldquo;done&rdquo; looks like. A well-structured capability
+            specifies:
           </p>
           <ul>
             <li><strong>Trigger</strong> &mdash; What initiates this workflow? A user request, a scheduled event, a data change?</li>
@@ -329,12 +331,12 @@ export default function Article() {
           <p>
             At{" "}
             <a href="/blog/orient-case-study">Orient Printing &amp; Packaging</a>
-            , we deployed 11 capabilities in the first engagement. Each one is a
-            distinct workflow with its own instructions, not a monolithic
-            &ldquo;Orient AI&rdquo; project. The offer generator references
-            the pricing knowledge file, the product spec sheet, and the
-            proposal template &mdash; but it doesn&apos;t know anything about
-            HR policies, because it doesn&apos;t need to.
+            , I deployed 11 capabilities in the first engagement. Each one is a
+            distinct workflow with its own instructions. There&apos;s no
+            monolithic &ldquo;Orient AI&rdquo; project. The offer generator
+            references the pricing knowledge file, the product spec sheet, and
+            the proposal template, but it doesn&apos;t know anything about HR
+            policies. It doesn&apos;t need to.
           </p>
 
           <h3>Layer 3: Connectors (MCP)</h3>
@@ -343,7 +345,7 @@ export default function Article() {
             that connect Claude to your actual business systems.
           </p>
           <p>
-            Common connectors we build:
+            Common connectors I build:
           </p>
           <ul>
             <li><strong>ERP connectors</strong> &mdash; Read inventory levels, production schedules, cost data. Write back order updates.</li>
@@ -353,15 +355,15 @@ export default function Article() {
             <li><strong>Custom databases</strong> &mdash; Any system with an API can become an MCP server.</li>
           </ul>
           <p>
-            The key insight about MCP is that it creates a clean boundary
+            The key insight about MCP is that it creates clean boundaries
             between <em>what Claude knows</em> (Layer 1), <em>what Claude
             does</em> (Layer 2), and <em>what Claude can reach</em>
-            (Layer 3). Changing your CRM from Salesforce to HubSpot means
-            rebuilding one connector &mdash; not rewriting every workflow
-            that touches customer data.
+            (Layer 3). Changing your CRM from Salesforce to HubSpot? Rebuild
+            one connector. Every workflow that touches customer data keeps
+            working without a single edit.
           </p>
           <p>
-            For a deeper dive on MCP, read our{" "}
+            For a deeper dive on MCP, read my{" "}
             <a href="/blog/mcp-explained-for-business">
               plain-English explainer
             </a>.
@@ -369,34 +371,36 @@ export default function Article() {
 
           <h2>Why the layers matter</h2>
           <p>
-            This architecture might seem like overkill for a company that
-            just wants Claude to help with emails. But the layers solve three
-            problems that kill every single-project deployment:
+            I know. This might feel like overkill if you just want Claude to
+            help with emails. But the layers solve three problems that kill
+            every single-project deployment I&apos;ve seen:
           </p>
           <p>
-            <strong>Problem 1: Drift.</strong> Without shared reference
-            files, every project slowly develops its own version of reality.
-            Sales says the product does X. Marketing says it does Y. Customer
-            service says something else entirely. The three-layer architecture
-            forces a single source of truth.
+            <strong>Drift.</strong> Without shared reference files, every
+            project slowly develops its own version of reality. Sales says
+            the product does X. Marketing says it does Y. Customer service
+            says something else entirely. A single reference layer forces one
+            source of truth.
           </p>
           <p>
-            <strong>Problem 2: Maintenance.</strong> When your pricing
-            changes, do you want to update one knowledge file, or hunt
-            through 15 projects to find every place the old price appears?
-            Layered architecture means one update cascades everywhere.
+            <strong>Maintenance.</strong> When your pricing changes, do you
+            want to update one knowledge file, or hunt through 15 projects
+            to find every place the old price appears?
           </p>
           <p>
-            <strong>Problem 3: Quality at scale.</strong> A prompt that works
-            for one use case breaks when you try to stretch it across five.
-            Separate capabilities with explicit specifications produce
-            consistent results on the 500th run, not just the first.
+            <strong>Quality at scale.</strong> A prompt that works for one
+            use case breaks when you stretch it across five. Separate
+            capabilities with explicit specifications produce consistent
+            results on the 500th run, not just the first. I learned this the
+            hard way, after watching a &ldquo;catch-all&rdquo; project
+            produce increasingly bizarre outputs as more teams piled their
+            needs into it.
           </p>
 
           <h2>What this looks like in practice</h2>
           <p>
-            Let&apos;s make this concrete. Here&apos;s a simplified version
-            of the architecture we deployed at a 200-person manufacturer:
+            Here&apos;s a simplified version of the architecture I deployed
+            at a 200-person manufacturer:
           </p>
 
           <div className="table-scroll-wrapper">
@@ -481,32 +485,35 @@ export default function Article() {
           </div>
 
           <p>
-            Notice the pattern: the offer generator (L2) references
+            Notice how it flows: the offer generator (L2) references
             the pricing rules and product catalogue (L1) and uses the ERP
             connector (L3) to pull real-time data. If the pricing rules
             change, the offer generator automatically uses the new numbers.
-            If we swap SAP for Oracle, we rebuild the connector but the
+            If you swap SAP for Oracle, you rebuild the connector but the
             workflow stays identical.
           </p>
 
-          <h2>How to get started</h2>
+          <h2>Getting started (without boiling the ocean)</h2>
           <p>
-            You don&apos;t need to build all three layers at once. Here&apos;s
-            the progression we recommend:
+            You don&apos;t need to build all three layers at once. That would
+            be overwhelming, and honestly, counterproductive. Here&apos;s the
+            progression I recommend:
           </p>
           <p>
             <strong>Week 1: Start with Layer 1.</strong> Gather your core
-            reference materials &mdash; brand guide, product information,
+            reference materials: brand guide, product information,
             compliance rules. Upload them to a Claude project as knowledge
             files. Even without workflows or connectors, this immediately
-            improves every conversation because Claude has accurate context.
+            makes every conversation better because Claude has accurate
+            context instead of guessing.
           </p>
           <p>
             <strong>Week 2: Build your first capability.</strong> Pick the
             workflow that eats the most time. Write explicit instructions
             following the trigger &rarr; inputs &rarr; references &rarr;
             steps &rarr; output &rarr; review pattern. Test it 20 times.
-            Find the edge cases. Refine.
+            Find the edge cases. Refine. This part is more tedious than it
+            sounds, but it&apos;s where the real value lives.
           </p>
           <p>
             <strong>Week 3+: Add connectors.</strong> Once a workflow is
@@ -517,40 +524,40 @@ export default function Article() {
           <p>
             <strong>Month 2: Scale.</strong> Add more capabilities, one at a
             time. Each new workflow builds on the reference knowledge you
-            already have. The marginal cost of each new capability drops
-            because the foundation is in place.
+            already have. The cost of each new capability drops because the
+            foundation is in place. This is where the compounding kicks in
+            and things start feeling almost unfair.
           </p>
 
-          <h2>The instruction engineering difference</h2>
+          <h2>Why instruction engineering matters more than you think</h2>
           <p>
-            Katherine Yeh&apos;s article demonstrates something
-            important: a designer with no coding experience built a
-            scalable Claude architecture in four weeks. The core skill
-            wasn&apos;t technical. It was architectural thinking &mdash;
-            deciding what goes where, what references what, and how pieces
-            compose.
+            Something in Katherine Yeh&apos;s article struck me. She&apos;s a
+            designer, no coding experience, and she built a scalable Claude
+            architecture in four weeks. The core skill wasn&apos;t technical.
+            It was architectural thinking: deciding what goes where, what
+            references what, and how pieces compose.
           </p>
           <p>
-            That&apos;s what we call instruction engineering. It&apos;s not
-            prompt writing. It&apos;s not software engineering. It&apos;s a
-            new discipline that sits between the two &mdash; understanding
-            your business well enough to decompose workflows into
-            structured specifications, and understanding Claude well enough
-            to write instructions that produce reliable results at scale.
+            That&apos;s what I call instruction engineering. It&apos;s not
+            prompt writing. It&apos;s not software engineering. It&apos;s
+            something new that sits between the two: understanding your
+            business deeply enough to decompose workflows into structured
+            specs, and understanding Claude well enough to write instructions
+            that produce reliable results at scale.
           </p>
           <p>
             The companies that figure this out build a compounding advantage.
             Every workflow they deploy makes the next one cheaper to build,
             because the reference layer grows and the connectors multiply.
-            The companies that don&apos;t end up with 20 disconnected Claude
-            projects and a team that says &ldquo;AI is useful but not
+          </p>
+          <p>
+            The companies that don&apos;t? They end up with 20 disconnected
+            Claude projects and a team that says &ldquo;AI is useful but not
             transformative.&rdquo;
           </p>
           <p>
-            The difference is architecture.
-          </p>
-          <p>
-            If you want help building yours, we&apos;d be happy to talk.{" "}
+            The difference is architecture. And it&apos;s a gap I&apos;d love
+            to help you close.{" "}
             <a
               href="/#contact"
               className="text-accent font-medium hover:underline"

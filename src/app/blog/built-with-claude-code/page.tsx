@@ -155,16 +155,16 @@ export default function Article() {
 
         {/* Body */}
         <div className="prose-settle">
-          <h2>The premise</h2>
+          <h2>Why build a site with a CLI tool?</h2>
           <p>
-            We&apos;re a Claude AI deployment studio. We help manufacturers
-            and mid-market companies integrate Claude into their operations.
-            So when it came time to build our own website, using Claude to
-            build it felt less like a marketing stunt and more like an
-            obvious decision.
+            I run a Claude AI deployment studio. I spend my days helping
+            manufacturers and mid-market companies integrate Claude into
+            their operations. So when I needed a website for Settle, the
+            question wasn&apos;t really whether to use Claude. It was how
+            far I could push it.
           </p>
           <p>
-            The tool we used was{" "}
+            The tool I used was{" "}
             <a
               href="https://docs.anthropic.com/en/docs/claude-code"
               target="_blank"
@@ -173,32 +173,28 @@ export default function Article() {
             >
               Claude Code
             </a>
-            &nbsp;&mdash; Anthropic&apos;s CLI agent for software development. Not
-            the web chat interface at claude.ai. Claude Code runs in your
+            , Anthropic&apos;s CLI agent for software development. Not
+            the web chat at claude.ai. Claude Code runs in your
             terminal, reads your codebase, writes files, runs commands, and
             commits to git. It operates on your actual project, not in an
             isolated sandbox.
           </p>
           <p>
-            The workflow looked like this: we would describe what we wanted,
-            Claude Code would write the components, we&apos;d review the
-            output in the browser, screenshot anything that needed fixing,
-            and Claude Code would iterate. The entire site &mdash; Next.js 16,
-            Tailwind CSS v4, D3.js, deployed on Vercel &mdash; was built this
-            way. Every commit in the git history was authored through Claude
-            Code sessions.
-          </p>
-          <p>
-            This post walks through the major features and what it was
-            actually like to build them.
+            My workflow was simple: describe what I wanted, let Claude Code
+            write the components, review the output in the browser,
+            screenshot anything broken, and paste it back. The entire
+            site (Next.js 16, Tailwind CSS v4, D3.js, deployed on Vercel)
+            was built this way. Every commit in the git history came from a
+            Claude Code session.
           </p>
 
-          <h2>The hero: a WebGL globe</h2>
+          <h2>Starting with the hardest thing first</h2>
           <p>
-            The first thing visitors see is an interactive 3D globe rotating
-            slowly on the hero section. It&apos;s rendered with WebGL, plots
-            geographic points representing global reach, and supports smooth
-            60fps rotation.
+            I wanted an interactive 3D globe on the hero section. Rotating
+            slowly, plotting geographic points, smooth 60fps. The kind of
+            thing that looks simple on a Dribbble shot but involves sphere
+            geometry, projection math, mouse interaction handlers, and
+            performance work to keep it smooth on older devices.
           </p>
 
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -212,39 +208,37 @@ export default function Article() {
           />
 
           <p>
-            Building a globe from scratch is a non-trivial task. You need
-            sphere geometry, projection math, mouse interaction handlers,
-            and performance optimisation to keep frame rates smooth on
-            lower-end devices. We described the visual we wanted &mdash; a
-            minimal, light-themed globe with country outlines and pin
-            markers &mdash; and Claude Code generated the component, including
-            the WebGL setup, the GeoJSON parsing, and the animation loop.
+            I described the visual I wanted: minimal, light-themed,
+            country outlines, pin markers. Claude Code generated the
+            component, including the WebGL setup, GeoJSON parsing, and the
+            animation loop. First try.
           </p>
           <p>
-            The first version had clipping issues where the globe would get
-            cut off by its container&apos;s <code>overflow-hidden</code>. We
-            screenshotted the problem, described it, and Claude Code fixed
-            it by restructuring the container hierarchy. The pin labels
+            Except the first try had clipping issues. The globe got cut off
+            by its container&apos;s <code>overflow-hidden</code>. I
+            screenshotted the problem, described it, and Claude Code
+            restructured the container hierarchy. Then the pin labels
             weren&apos;t rendering at the right scale on mobile. Another
-            screenshot, another fix. This back-and-forth was the pattern for
-            the whole project: describe, generate, review, screenshot, refine.
+            screenshot, another fix. That became the pattern for the entire
+            project: describe, generate, review, screenshot, refine. Nothing
+            worked perfectly the first time. Everything worked by the third
+            or fourth pass.
           </p>
 
           <h2>The Cowork demo</h2>
           <p>
-            This was the most ambitious section. We wanted to show what
-            Claude looks like when it&apos;s actually working inside a
-            manufacturing context &mdash; not a generic chat window, but
-            something that communicates the depth of what&apos;s possible.
+            This was the section I was most nervous about. I wanted to show
+            what Claude looks like when it&apos;s actually working inside a
+            manufacturing context. Not a generic chat window, but something
+            that communicates depth.
           </p>
           <p>
             The result is an interactive replica of Claude&apos;s Chat/Cowork
             UI from claude.ai, adapted for Settle&apos;s light theme and
-            contextualised for manufacturing. It features tab switching
-            between a BOM Template, a Vendor RFQ, and an SAP Connector.
-            Each tab has its own content. Hovering over elements reveals
-            tooltips. An animated progress panel shows deployment status with
-            blur effects.
+            contextualised for manufacturing. Tab switching between a BOM
+            Template, a Vendor RFQ, and an SAP Connector. Each tab has
+            its own content. Tooltips on hover. An animated progress panel
+            with blur effects showing deployment status.
           </p>
 
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -258,42 +252,43 @@ export default function Article() {
           />
 
           <p>
-            The implementation started from Anthropic&apos;s actual login
-            page source code. We gave Claude Code the reference HTML and
-            asked it to port the layout into React components, swap the dark
-            theme for our warm parchment palette, and replace the generic
-            content with manufacturing-specific artifacts. The tab
-            switching, hover states, animated progress bars, and backdrop
-            blur effects were all generated in a single session.
+            I started from Anthropic&apos;s actual login page source code.
+            I gave Claude Code the reference HTML and asked it to port the
+            layout into React components, swap the dark theme for our warm
+            parchment palette, and replace the generic content with
+            manufacturing-specific artifacts. The tab switching, hover
+            states, animated progress bars, and backdrop blur effects all
+            came out of a single session.
           </p>
           <p>
-            The trickiest part was getting the blur and layering right.
+            Then the z-index nightmare started.
+          </p>
+          <p>
             CSS <code>backdrop-filter</code> behaves differently depending
-            on stacking context, and the initial output had z-index
-            conflicts that made certain panels render on top of the
-            navigation. Claude Code resolved it by restructuring the
-            component tree and isolating the blur layers into their own
-            stacking contexts. That kind of CSS debugging &mdash; where the
-            fix requires understanding how the browser composites layers,
-            not just tweaking a number &mdash; is exactly the sort of thing
-            you&apos;d normally spend an hour on Stack Overflow for.
+            on stacking context, and the initial output had conflicts that
+            made certain panels render on top of the navigation. Have you
+            ever debugged a stacking context issue? It&apos;s the kind of
+            thing where the fix isn&apos;t tweaking a number. You have to
+            understand how the browser composites layers. Claude Code
+            resolved it by restructuring the component tree and isolating
+            the blur layers into their own stacking contexts. That fix
+            alone would have cost me an hour on Stack Overflow.
           </p>
 
-          <h2>The D3 force-directed mindmap</h2>
+          <h2>A D3 mindmap (and why force layouts are the worst)</h2>
           <p>
-            The Services section needed to communicate that our offering
-            spans four categories, each with multiple specific capabilities.
-            A static list would work but wouldn&apos;t be memorable. We
-            wanted something interactive.
+            The Services section needed to show four categories, each with
+            multiple specific capabilities. A static list would work. But I
+            wanted something people would actually interact with.
           </p>
           <p>
-            The solution was a D3 force-directed mindmap: a central node
+            I built a D3 force-directed mindmap: a central node
             with four category branches, each branching into four child
             nodes, for a total of 16 hoverable capabilities. Hovering over
-            a child node shows a tooltip describing that capability. And
-            here&apos;s the detail that ties the section together: hovering
-            over a service card on the left side of the page highlights the
-            corresponding category branch on the mindmap.
+            a child node shows a tooltip. And the detail I&apos;m happiest
+            about: hovering over a service card on the left side of the
+            page highlights the corresponding category branch on the
+            mindmap.
           </p>
 
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -309,51 +304,47 @@ export default function Article() {
           <p>
             D3 force simulations involve configuring charge forces, link
             distances, collision radii, and tick handlers that update SVG
-            positions on every animation frame. The initial prompt described
-            the data structure (four categories, four children each, with
-            descriptions) and the desired interaction pattern. Claude Code
-            produced the full D3 setup: force simulation configuration, SVG
-            rendering, hover handlers, tooltip positioning, and the
-            cross-component highlighting that connects the cards to the
-            graph.
+            positions on every animation frame. I described the data
+            structure (four categories, four children each, with
+            descriptions) and the interaction pattern I wanted. Claude Code
+            produced the full D3 setup: force simulation, SVG rendering,
+            hover handlers, tooltip positioning, and the cross-component
+            highlighting that connects the cards to the graph.
           </p>
           <p>
-            The original design was inspired by Anthropic&apos;s product
-            page, which uses a similar graph visualisation. We repurposed
-            the concept with Settle&apos;s service categories and let Claude
-            Code handle the D3 implementation details. Force-directed
-            layouts are notoriously finicky &mdash; nodes overlap, labels
-            collide, the simulation either converges too fast or oscillates
-            indefinitely. Getting the parameters right took several
-            iterations, but each iteration was just a sentence of feedback
-            and a new render from Claude Code.
+            Force-directed layouts are notoriously finicky. Nodes overlap,
+            labels collide, the simulation either converges too fast or
+            oscillates forever. I honestly didn&apos;t think Claude Code
+            could tune these parameters well, but it surprised me. Getting
+            it right took several iterations, sure. But each iteration was
+            just a sentence of feedback and a new render. The whole mindmap
+            was done in an afternoon.
           </p>
 
-          <h2>SEO infrastructure</h2>
+          <h2>The invisible work: SEO</h2>
           <p>
-            SEO is one of those areas where the work is invisible when done
-            right. We needed comprehensive structured data, crawler rules,
-            and performance optimisation &mdash; the kind of work that&apos;s
-            tedious but essential for a new site competing for search
-            visibility.
+            Nobody notices SEO when it&apos;s done well. But try launching
+            a new site without it.
           </p>
           <p>
-            Claude Code set up the entire SEO stack:
+            I needed structured data, crawler rules, performance
+            optimisation. The tedious-but-essential stuff. Claude Code set
+            up the entire stack:
           </p>
           <ul>
             <li>
-              <strong>JSON-LD schemas</strong> on every page &mdash;
+              <strong>JSON-LD schemas</strong> on every page:
               Organization, Service, FAQPage, Article, and BreadcrumbList
               types, each with the correct properties and nesting.
             </li>
             <li>
-              <strong>FAQ with FAQPage schema</strong> &mdash; built with
+              <strong>FAQ with FAQPage schema</strong>, built with
               native HTML5 <code>&lt;details&gt;</code>/<code>&lt;summary&gt;</code>{" "}
               elements for the accordion, with structured data that qualifies
               for Google rich results.
             </li>
             <li>
-              <strong>robots.txt with AI crawler rules</strong> &mdash;
+              <strong>robots.txt with AI crawler rules</strong>, including
               standard search engine directives plus explicit rules for AI
               training crawlers.
             </li>
@@ -382,28 +373,27 @@ export default function Article() {
           />
 
           <p>
-            The structured data alone would have taken hours to write
-            manually and debug against Google&apos;s validator. Claude Code
-            generated all of it from a description of our pages and
-            services, and updated it whenever we added new content.
+            The structured data alone would have taken me hours to write
+            by hand and debug against Google&apos;s validator. Claude Code
+            generated all of it from a description of the pages and
+            services, and updated it whenever I added new content. This
+            was one of those moments where the time savings felt absurd.
           </p>
 
           <h2>The blog system</h2>
           <p>
-            This blog you&apos;re reading is the sixth post on a system
-            that Claude Code built from scratch. Each post is a standalone
+            This post you&apos;re reading right now? It&apos;s on a blog
+            system Claude Code built from scratch. Each post is a standalone
             Next.js page with full Article schema, BreadcrumbList markup,
-            Open Graph metadata, and cross-links to related posts. The blog
-            index page pulls from a posts array and renders cards with tags,
-            dates, and descriptions.
+            Open Graph metadata, and cross-links to related posts.
           </p>
           <p>
-            We deliberately chose not to use a CMS or MDX. Each post is a
-            TSX file with prose content. This keeps the system simple &mdash;
-            no build pipeline for content, no API calls, no database. Claude
-            Code generates each post as a component that follows the
-            established pattern, including the metadata export, the JSON-LD
-            script tags, and the prose styling.
+            I deliberately chose not to use a CMS or MDX. Each post is a
+            TSX file with prose content. No build pipeline for content, no
+            API calls, no database. Simple. Claude Code generates each post
+            as a component that follows the established pattern, including
+            the metadata export, the JSON-LD script tags, and the prose
+            styling.
           </p>
           <p>
             Adding a new post means creating a directory, writing the page
@@ -411,89 +401,87 @@ export default function Article() {
             sitemap. Claude Code handles all four steps in a single session.
           </p>
 
-          <h2>Performance work</h2>
+          <h2>Performance details that matter</h2>
           <p>
-            Performance wasn&apos;t an afterthought. Claude Code handled the
-            optimisation passes that make the difference between a site that
-            feels fast and one that feels sluggish:
+            I didn&apos;t leave performance for the end. Claude Code
+            handled optimisation throughout the build:
           </p>
           <ul>
             <li>
-              <strong>WebP image conversion</strong> &mdash; the original
+              <strong>WebP image conversion.</strong> The original
               assets totalled 3.5MB. After conversion, 1.3MB. Claude Code
               identified the largest files, converted them, and updated all
               references.
             </li>
             <li>
-              <strong>Lazy loading</strong> &mdash; images below the fold
+              <strong>Lazy loading.</strong> Images below the fold
               use <code>loading=&quot;lazy&quot;</code> with
               explicit <code>width</code> and <code>height</code> attributes
               to prevent Cumulative Layout Shift.
             </li>
             <li>
-              <strong>Explicit image dimensions</strong> &mdash; every{" "}
-              <code>&lt;img&gt;</code> tag has width and height set, so the
-              browser can allocate space before the image loads. This is a
-              small detail that most AI-generated code misses.
+              <strong>Explicit image dimensions.</strong> Every{" "}
+              <code>&lt;img&gt;</code> tag has width and height set so the
+              browser can allocate space before the image loads. A small
+              detail that most AI-generated code misses.
             </li>
           </ul>
           <p>
-            These are the kinds of details that separate a proof-of-concept
-            from a production site. Claude Code applied them consistently
-            across every image and component because we could describe the
-            rule once and it would follow it everywhere.
+            These details separate a proof-of-concept from a production
+            site. I could describe the rule once and Claude Code would
+            follow it everywhere, consistently.
           </p>
 
-          <h2>What the workflow actually felt like</h2>
+          <h2>What it actually felt like</h2>
           <p>
-            Building a site this way is different from traditional
-            development, but not in the way most people assume. It&apos;s
-            not &ldquo;type a prompt and get a website.&rdquo; It&apos;s
-            closer to pair programming with an extremely fast partner who
-            has read every documentation page but needs visual feedback to
-            get the details right.
+            I want to be honest about this. Building a site with Claude Code
+            is not &ldquo;type a prompt and get a website.&rdquo; If you go
+            in expecting that, you&apos;ll be disappointed.
           </p>
           <p>
-            The cycle was tight: describe a feature, review the output,
-            screenshot the issues, get a fix. Most features went through
-            three to five iterations before they were right. The globe
+            It&apos;s closer to pair programming with a very fast partner
+            who has read every documentation page but needs visual feedback
+            to get the details right. The cycle was tight: describe a
+            feature, review the output, screenshot the issues, get a fix.
+            Most features went through three to five iterations. The globe
             needed clipping fixes. The Cowork demo needed z-index
-            restructuring. The mindmap needed force parameter tuning. None
-            of these were first-try successes &mdash; but each iteration
-            took minutes, not hours.
+            restructuring. The mindmap needed force parameter tuning.
           </p>
           <p>
-            Claude Code also handled the operational work that usually
+            Nothing was a first-try success. But each iteration took
+            minutes instead of hours. That adds up fast.
+          </p>
+          <p>
+            Claude Code also handled the operational stuff that usually
             slows projects down: git commits with meaningful messages,
             sitemap updates when new pages were added, metadata consistency
-            across all pages, and the Vercel deployment configuration. The
-            entire git history of this project is Claude Code sessions.
+            across all pages, the Vercel deployment configuration. The
+            entire git history is Claude Code sessions.
           </p>
           <p>
             The biggest advantage wasn&apos;t speed, though speed was
-            significant. It was scope. A solo designer could build a site
-            with a WebGL globe, D3 force simulations, production-grade SEO,
-            and interactive demos &mdash; features that would normally
-            require a frontend developer, a data visualisation specialist,
-            and an SEO engineer. Claude Code compressed that team into one
-            terminal window.
+            significant. It was scope. One person built a site with a WebGL
+            globe, D3 force simulations, production-grade SEO, and
+            interactive demos. Features that would normally require a
+            frontend developer, a data visualisation specialist, and an SEO
+            engineer. Claude Code compressed that team into one terminal
+            window.
           </p>
 
-          <h2>What this means for our clients</h2>
+          <h2>Why this matters beyond our site</h2>
           <p>
-            We built Settle&apos;s site this way because it&apos;s what we
-            do for our clients, just at a different layer. We deploy Claude
-            into manufacturing operations &mdash; writing the instructions,
-            structuring the knowledge files, mapping the workflows. The
-            principle is the same: Claude is remarkably capable when you
-            give it the right structure and context.
+            I built Settle&apos;s site this way because it&apos;s the same
+            thing I do for clients, just at a different layer. I deploy
+            Claude into manufacturing operations, writing instructions,
+            structuring knowledge files, mapping workflows. The principle
+            is the same: Claude is remarkably capable when you give it the
+            right structure and context.
           </p>
           <p>
-            For our clients, that structure is instruction engineering and
+            For my clients, that structure is instruction engineering and
             workflow mapping. For this site, it was a well-configured Claude
-            Code environment with clear visual feedback. In both cases, the
-            value isn&apos;t in the AI itself &mdash; it&apos;s in knowing
-            how to direct it.
+            Code environment with clear visual feedback. The value isn&apos;t
+            in the AI itself. It&apos;s in knowing how to direct it.
           </p>
           <p>
             The site you&apos;re reading this on is the proof. Every pixel,
