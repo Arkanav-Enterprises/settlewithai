@@ -59,6 +59,7 @@ Read the full case study: https://settlewithai.com/blog/orient-case-study
 - How to Actually Integrate AI Into Your Company: https://settlewithai.com/blog/integrating-ai-into-your-company
 - AI-Powered Outreach with Cowork: https://settlewithai.com/blog/ai-powered-outreach-with-cowork
 - Built with Claude Code: https://settlewithai.com/blog/built-with-claude-code
+- Claude's Agent Mode — What It Means for Business Automation: https://settlewithai.com/blog/claude-agent-mode-business-automation
 
 ## Free Tools
 

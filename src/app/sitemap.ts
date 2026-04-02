@@ -10,6 +10,7 @@ const BLOG_SLUGS = [
   "mcp-explained-for-business",
   "integrating-ai-into-your-company",
   "ai-powered-outreach-with-cowork",
+  "claude-agent-mode-business-automation",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

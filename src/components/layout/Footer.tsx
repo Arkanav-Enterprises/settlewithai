@@ -27,6 +27,7 @@ const BLOG_LINKS = [
   { label: "Integrating AI Into Your Company", href: "/blog/integrating-ai-into-your-company" },
   { label: "AI-Powered Outreach with Cowork", href: "/blog/ai-powered-outreach-with-cowork" },
   { label: "Built with Claude Code", href: "/blog/built-with-claude-code" },
+  { label: "Claude's Agent Mode", href: "/blog/claude-agent-mode-business-automation" },
 ];
 
 const TOOL_LINKS = [

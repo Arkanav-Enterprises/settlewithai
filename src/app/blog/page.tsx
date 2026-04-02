@@ -18,6 +18,15 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "claude-agent-mode-business-automation",
+    title:
+      "Claude's Agent Mode Is Here — What It Means for Business Automation",
+    description:
+      "Claude isn't just a chatbot anymore. With agent teams, tool use, MCP connectors, and computer use, it can now execute multi-step business workflows autonomously.",
+    date: "2026-04-02",
+    tag: "Guide",
+  },
+  {
     slug: "built-with-claude-code",
     title:
       "How We Built This Entire Site with Claude Code",
