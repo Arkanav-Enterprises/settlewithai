@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Footer } from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title:
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     url: "https://settlewithai.com/blog/built-with-claude-code",
     siteName: "Settle",
     publishedTime: "2026-03-30T00:00:00Z",
-    authors: ["Settle"],
+    authors: ["Pranav Ambwani"],
   },
   twitter: {
     card: "summary_large_image",
@@ -53,9 +54,14 @@ export default function Article() {
     dateModified: "2026-03-30T00:00:00Z",
     image: "https://settlewithai.com/og-image.png",
     author: {
-      "@type": "Organization",
-      name: "Settle",
+      "@type": "Person",
+      name: "Pranav Ambwani",
+      jobTitle: "Founder",
       url: "https://settlewithai.com",
+      worksFor: {
+        "@type": "Organization",
+        name: "Settle",
+      },
     },
     publisher: {
       "@type": "Organization",
@@ -139,7 +145,7 @@ export default function Article() {
             terminal sessions, screenshots, and iteration.
           </p>
           <div className="flex items-center gap-3 mt-6 text-sm text-text-faint">
-            <span>Settle</span>
+            <a href="/#contact" className="hover:text-accent transition-colors">Pranav Ambwani</a>
             <span>&middot;</span>
             <time dateTime="2026-03-30">March 2026</time>
             <span>&middot;</span>
@@ -509,6 +515,15 @@ export default function Article() {
             </div>
           </div>
 
+          {/* Author */}
+          <div className="mt-16 pt-8 border-t border-border-light flex items-start gap-4">
+            <div className="w-12 h-12 rounded-full bg-[#e8e6dc] flex items-center justify-center shrink-0 text-text font-medium text-lg" style={{ fontFamily: "Sentient, Georgia, serif" }}>P</div>
+            <div>
+              <a href="/#contact" className="font-medium text-text hover:text-accent transition-colors">Pranav Ambwani</a>
+              <p className="text-sm text-text-muted mt-1 leading-relaxed">Founder of Settle. Deploys Claude AI into mid-market companies and manufacturers &mdash; structured rollouts, production-grade instructions, real results.</p>
+            </div>
+          </div>
+
           {/* CTA */}
           <div className="mt-16 pt-10 border-t border-border-light">
             <h3>Want Claude deployed across your organisation?</h3>
@@ -527,20 +542,7 @@ export default function Article() {
         </div>
       </article>
 
-      {/* Footer */}
-      <footer className="bg-[#141413] text-[#e8e6dc]">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-12 flex items-center justify-between">
-          <span
-            className="text-[1rem] font-medium tracking-[-0.03em]"
-            style={{ fontFamily: "Sentient, Georgia, serif" }}
-          >
-            SETTLE
-          </span>
-          <span className="text-[rgba(232,230,220,0.4)] text-sm">
-            AI, thoughtfully deployed.
-          </span>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

@@ -42,6 +42,8 @@ const COMPANY_LINKS = [
   { label: "Home", href: "/" },
   { label: "Blog", href: "/blog" },
   { label: "Get Started", href: "/#contact" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Terms of Service", href: "/terms-of-service" },
 ];
 
 function FooterColumn({ title, links }: { title: string; links: { label: string; href: string }[] }) {
