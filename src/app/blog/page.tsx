@@ -105,7 +105,7 @@ export default function BlogIndex() {
       <div className="max-w-[860px] mx-auto px-6 lg:px-10 pt-24 md:pt-36 pb-24 md:pb-36">
         <h1
           className="text-[clamp(2.2rem,4.5vw,3.5rem)] font-medium leading-[1.08] mb-20"
-          style={{ fontFamily: "Sentient, Georgia, serif" }}
+          style={{ fontFamily: "var(--font-heading)" }}
         >
           Blog
         </h1>
@@ -136,7 +136,7 @@ export default function BlogIndex() {
               </div>
               <h2
                 className="text-[clamp(1.25rem,2.2vw,1.65rem)] font-medium leading-[1.3] mb-3 group-hover:text-accent transition-colors duration-200"
-                style={{ fontFamily: "Sentient, Georgia, serif" }}
+                style={{ fontFamily: "var(--font-heading)" }}
               >
                 {post.title}
               </h2>

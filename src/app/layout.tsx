@@ -1,6 +1,25 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const sentient = localFont({
+  src: [
+    { path: "../fonts/sentient-400.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/sentient-500.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/sentient-700.woff2", weight: "700", style: "normal" },
+  ],
+  display: "swap",
+  variable: "--font-sentient",
+});
 
 const siteUrl = "https://settlewithai.com";
 
@@ -239,7 +258,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className={`h-full antialiased ${inter.variable} ${sentient.variable}`}>
       <head>
         <script
           async
@@ -255,14 +274,6 @@ export default function RootLayout({
         <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://api.fontshare.com/v2/css?f[]=sentient@400,500,600,700&display=swap"
-          rel="stylesheet"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

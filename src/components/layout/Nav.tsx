@@ -5,7 +5,7 @@ export function Nav() {
         <a
           href="/"
           className="text-[1.15rem] font-semibold tracking-[-0.03em] text-text"
-          style={{ fontFamily: "Sentient, Georgia, serif" }}
+          style={{ fontFamily: "var(--font-heading)" }}
         >
           SETTLE
         </a>

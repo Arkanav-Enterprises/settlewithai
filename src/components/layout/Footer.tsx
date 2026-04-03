@@ -265,7 +265,7 @@ function FooterColumn({ title, links }: { title: string; links: { label: string;
     <div>
       <h3
         className="text-[0.8rem] font-semibold uppercase tracking-[0.08em] text-text mb-4"
-        style={{ fontFamily: "Sentient, Georgia, serif" }}
+        style={{ fontFamily: "var(--font-heading)" }}
       >
         {title}
       </h3>
@@ -305,7 +305,7 @@ export function Footer() {
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 min-h-16 py-4 sm:py-0 sm:h-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
           <span
             className="text-[0.95rem] font-medium tracking-[-0.03em] text-text"
-            style={{ fontFamily: "Sentient, Georgia, serif" }}
+            style={{ fontFamily: "var(--font-heading)" }}
           >
             SETTLE
           </span>

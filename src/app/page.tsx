@@ -187,7 +187,7 @@ export default function Home() {
             <SettleMark className="h-7 w-auto" />
             <span
               className="text-[1.15rem] font-semibold tracking-[-0.03em] text-text"
-              style={{ fontFamily: "Sentient, Georgia, serif" }}
+              style={{ fontFamily: "var(--font-heading)" }}
             >
               SETTLE
             </span>
@@ -284,7 +284,7 @@ export default function Home() {
                 <div
                   className="text-[clamp(1.5rem,3vw,2.5rem)] font-medium leading-none mb-2 text-text md:whitespace-nowrap"
                   style={{
-                    fontFamily: "Sentient, Georgia, serif",
+                    fontFamily: "var(--font-heading)",
                     letterSpacing: "-0.03em",
                   }}
                 >
@@ -358,7 +358,7 @@ export default function Home() {
           <h2
             className="text-[clamp(1.4rem,2.5vw,2rem)] font-medium leading-[1.2] mb-4 text-text-muted"
             style={{
-              fontFamily: "Sentient, Georgia, serif",
+              fontFamily: "var(--font-heading)",
               letterSpacing: "-0.03em",
             }}
           >
@@ -424,7 +424,7 @@ export default function Home() {
                   <div
                     className="text-accent text-[clamp(1.5rem,2.5vw,2.2rem)] font-medium leading-none mb-2"
                     style={{
-                      fontFamily: "Sentient, Georgia, serif",
+                      fontFamily: "var(--font-heading)",
                       letterSpacing: "-0.03em",
                     }}
                   >
@@ -640,7 +640,7 @@ export default function Home() {
                 <div className="max-w-md">
                   <span
                     className="text-text-muted text-[15px] font-medium block mb-4"
-                    style={{ fontFamily: "Sentient, Georgia, serif" }}
+                    style={{ fontFamily: "var(--font-heading)" }}
                   >
                     {p.num}
                   </span>
@@ -717,7 +717,7 @@ export default function Home() {
                     <div className="text-accent mb-3">{s.icon}</div>
                     <h3
                       className="text-[1rem] font-medium mb-2"
-                      style={{ fontFamily: "Sentient, Georgia, serif" }}
+                      style={{ fontFamily: "var(--font-heading)" }}
                     >
                       {s.title}
                     </h3>

@@ -19,7 +19,7 @@ export default function PrivacyPolicy() {
           <a
             href="/"
             className="text-[1.15rem] font-semibold tracking-[-0.03em] text-text"
-            style={{ fontFamily: "Sentient, Georgia, serif" }}
+            style={{ fontFamily: "var(--font-heading)" }}
           >
             SETTLE
           </a>
@@ -35,7 +35,7 @@ export default function PrivacyPolicy() {
       <main className="max-w-[720px] mx-auto px-6 lg:px-10 pt-32 pb-24 md:pt-40 md:pb-36">
         <h1
           className="text-[clamp(2rem,4.5vw,3.2rem)] font-medium leading-[1.12] mb-10"
-          style={{ fontFamily: "Sentient, Georgia, serif", letterSpacing: "-0.03em" }}
+          style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.03em" }}
         >
           Privacy Policy
         </h1>
@@ -43,7 +43,7 @@ export default function PrivacyPolicy() {
         <p className="text-text-faint text-sm mb-12">Last updated: April 2, 2026</p>
 
         <div className="prose prose-neutral max-w-none text-[17px] leading-[1.8] [&_h2]:text-[1.35rem] [&_h2]:font-medium [&_h2]:mt-12 [&_h2]:mb-4 [&_p]:mb-6 [&_ul]:mb-6 [&_ul]:ml-6 [&_li]:mb-2">
-          <h2 style={{ fontFamily: "Sentient, Georgia, serif" }}>Who we are</h2>
+          <h2 style={{ fontFamily: "var(--font-heading)" }}>Who we are</h2>
           <p>
             Settle (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) operates settlewithai.com.
             We are an AI deployment studio that helps businesses deploy Claude (by Anthropic) across
@@ -53,7 +53,7 @@ export default function PrivacyPolicy() {
             </a>.
           </p>
 
-          <h2 style={{ fontFamily: "Sentient, Georgia, serif" }}>Information we collect</h2>
+          <h2 style={{ fontFamily: "var(--font-heading)" }}>Information we collect</h2>
           <p>We collect information you voluntarily provide when you:</p>
           <ul className="list-disc">
             <li>Submit your email address through our contact form</li>
@@ -67,7 +67,7 @@ export default function PrivacyPolicy() {
             Analytics is cookie-free and privacy-focused.
           </p>
 
-          <h2 style={{ fontFamily: "Sentient, Georgia, serif" }}>How we use your information</h2>
+          <h2 style={{ fontFamily: "var(--font-heading)" }}>How we use your information</h2>
           <p>We use the information we collect to:</p>
           <ul className="list-disc">
             <li>Respond to your enquiries and schedule calls</li>
@@ -79,7 +79,7 @@ export default function PrivacyPolicy() {
             purposes.
           </p>
 
-          <h2 style={{ fontFamily: "Sentient, Georgia, serif" }}>Third-party services</h2>
+          <h2 style={{ fontFamily: "var(--font-heading)" }}>Third-party services</h2>
           <p>We use the following third-party services that may process your data:</p>
           <ul className="list-disc">
             <li>
@@ -96,7 +96,7 @@ export default function PrivacyPolicy() {
             </li>
           </ul>
 
-          <h2 style={{ fontFamily: "Sentient, Georgia, serif" }}>Data retention</h2>
+          <h2 style={{ fontFamily: "var(--font-heading)" }}>Data retention</h2>
           <p>
             We retain your contact information for as long as necessary to fulfil the purpose for
             which it was collected, or as required by applicable law. You may request deletion of your
@@ -106,7 +106,7 @@ export default function PrivacyPolicy() {
             </a>.
           </p>
 
-          <h2 style={{ fontFamily: "Sentient, Georgia, serif" }}>Your rights</h2>
+          <h2 style={{ fontFamily: "var(--font-heading)" }}>Your rights</h2>
           <p>
             Depending on your jurisdiction, you may have the right to access, correct, delete, or
             restrict the processing of your personal data. To exercise these rights, contact us at{" "}
@@ -115,20 +115,20 @@ export default function PrivacyPolicy() {
             </a>.
           </p>
 
-          <h2 style={{ fontFamily: "Sentient, Georgia, serif" }}>Children&apos;s privacy</h2>
+          <h2 style={{ fontFamily: "var(--font-heading)" }}>Children&apos;s privacy</h2>
           <p>
             Our services are not directed at individuals under the age of 18. We do not knowingly
             collect personal information from children.
           </p>
 
-          <h2 style={{ fontFamily: "Sentient, Georgia, serif" }}>Changes to this policy</h2>
+          <h2 style={{ fontFamily: "var(--font-heading)" }}>Changes to this policy</h2>
           <p>
             We may update this privacy policy from time to time. Changes will be posted on this page
             with an updated revision date. Continued use of the website after changes constitutes
             acceptance of the updated policy.
           </p>
 
-          <h2 style={{ fontFamily: "Sentient, Georgia, serif" }}>Contact</h2>
+          <h2 style={{ fontFamily: "var(--font-heading)" }}>Contact</h2>
           <p>
             If you have questions about this privacy policy, contact us at{" "}
             <a href="mailto:hi@settlewithai.com" className="text-accent hover:underline">

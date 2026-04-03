@@ -24,8 +24,8 @@
   --color-accent-border: var(--accent-border);
   --color-border: var(--border);
   --color-border-light: var(--border-light);
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-heading: "Sentient", Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-sentient), Georgia, "Times New Roman", serif;
 }
 
 html {
@@ -342,14 +342,14 @@ details[open] summary .faq-icon-v {
 .mindmap-tooltip h3 {
   font-size: 13px;
   font-weight: 600;
-  font-family: Sentient, Georgia, serif;
+  font-family: var(--font-heading);
   color: white;
 }
 .mindmap-tooltip p {
   font-size: 12px;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.7);
-  font-family: Inter, sans-serif;
+  font-family: var(--font-sans);
 }
 
 /* ─── Claude tooltip ──────────────────────── */
@@ -377,7 +377,7 @@ details[open] summary .faq-icon-v {
 .claude-tooltip h3 {
   font-size: 13px;
   font-weight: 600;
-  font-family: Sentient, Georgia, serif;
+  font-family: var(--font-heading);
   color: white;
   margin: 0;
 }
@@ -385,7 +385,7 @@ details[open] summary .faq-icon-v {
   font-size: 12px;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.7);
-  font-family: Inter, sans-serif;
+  font-family: var(--font-sans);
   margin: 0;
 }
 .claude-tooltip-link {

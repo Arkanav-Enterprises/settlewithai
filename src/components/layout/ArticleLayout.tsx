@@ -71,7 +71,7 @@ export function ArticleLayout({
           )}
           <h1
             className="text-[clamp(1.8rem,4vw,2.8rem)] font-semibold leading-[1.15] tracking-[-0.03em] text-text mb-4"
-            style={{ fontFamily: "Sentient, Georgia, serif" }}
+            style={{ fontFamily: "var(--font-heading)" }}
           >
             {title}
           </h1>
@@ -110,7 +110,7 @@ export function ArticleLayout({
         <section className="mt-20 lg:-mx-10 lg:px-10 py-14 bg-accent rounded-2xl text-center">
           <h2
             className="text-[clamp(1.4rem,3vw,2rem)] font-semibold leading-tight tracking-[-0.02em] text-white mb-3"
-            style={{ fontFamily: "Sentient, Georgia, serif" }}
+            style={{ fontFamily: "var(--font-heading)" }}
           >
             Ready to deploy Claude AI?
           </h2>
@@ -132,7 +132,7 @@ export function ArticleLayout({
           <section className="mt-16">
             <h2
               className="text-xl font-semibold tracking-[-0.02em] text-text mb-6"
-              style={{ fontFamily: "Sentient, Georgia, serif" }}
+              style={{ fontFamily: "var(--font-heading)" }}
             >
               Further reading
             </h2>

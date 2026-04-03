@@ -105,7 +105,7 @@ export default function Article() {
           <a
             href="/"
             className="text-[1.15rem] font-semibold tracking-[-0.03em] text-text"
-            style={{ fontFamily: "Sentient, Georgia, serif" }}
+            style={{ fontFamily: "var(--font-heading)" }}
           >
             SETTLE
           </a>
@@ -131,7 +131,7 @@ export default function Article() {
           <h1
             className="text-[clamp(2rem,4.5vw,3.2rem)] font-medium leading-[1.12] mt-8 mb-6"
             style={{
-              fontFamily: "Sentient, Georgia, serif",
+              fontFamily: "var(--font-heading)",
               letterSpacing: "-0.03em",
             }}
           >
@@ -505,7 +505,7 @@ export default function Article() {
 
           {/* Author */}
           <div className="mt-16 pt-8 border-t border-border-light flex items-start gap-4">
-            <div className="w-12 h-12 rounded-full bg-[#e8e6dc] flex items-center justify-center shrink-0 text-text font-medium text-lg" style={{ fontFamily: "Sentient, Georgia, serif" }}>P</div>
+            <div className="w-12 h-12 rounded-full bg-[#e8e6dc] flex items-center justify-center shrink-0 text-text font-medium text-lg" style={{ fontFamily: "var(--font-heading)" }}>P</div>
             <div>
               <a href="/#contact" className="font-medium text-text hover:text-accent transition-colors">Pranav Ambwani</a>
               <p className="text-sm text-text-muted mt-1 leading-relaxed">Founder of Settle. Deploys Claude AI into mid-market companies and manufacturers &mdash; structured rollouts, production-grade instructions, real results.</p>
