@@ -134,6 +134,84 @@ function ClaudeTooltip() {
   );
 }
 
+/* ─── Animated logo mark (CTA illustration) ───────────── */
+
+function AnimatedSettleMark() {
+  const ref = useRef<SVGSVGElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { threshold: 0.3 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  // Path lengths measured from the SVG geometry
+  const mainLen = 820;
+  const flick1Len = 30;
+  const flick2Len = 30;
+
+  return (
+    <svg
+      ref={ref}
+      viewBox="0 0 199 298"
+      fill="none"
+      className="w-full h-full"
+      style={visible ? { animation: "float-gentle 4s ease-in-out 3.5s infinite" } : undefined}
+    >
+      {/* Main calligraphic stroke */}
+      <path
+        d="M146.118 42.7126C134.632 77.172 157.605 100.145 180.578 65.6855C203.551 31.2261 192.064 -3.23338 157.605 8.2531C123.145 19.7396 79.1857 107.5 88.6857 157.577C98.1857 207.655 146.536 175.199 143.686 198C141.183 218.02 122.766 234.672 103.186 252.601C78.9328 274.809 48.99 295.263 29.4417 293.252C-6.69105 289.535 -2.97404 253.403 32.1474 231.455C67.2688 209.507 78.7483 239.9 54.095 266.576"
+        stroke="white"
+        strokeWidth="8.04054"
+        strokeLinecap="round"
+        strokeDasharray={mainLen}
+        strokeDashoffset={visible ? undefined : mainLen}
+        style={visible ? {
+          animation: `draw-on 2s cubic-bezier(0.16, 1, 0.3, 1) forwards`,
+          strokeDashoffset: mainLen,
+        } : { strokeDashoffset: mainLen }}
+      />
+      {/* Top flick */}
+      <path
+        d="M163.02 26.5102C169.912 15.0237 179.101 19.6183 174.507 33.4021"
+        stroke="white"
+        strokeWidth="5.74324"
+        strokeLinecap="round"
+        strokeDasharray={flick1Len}
+        style={visible ? {
+          animation: `draw-on 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.6s forwards`,
+          strokeDashoffset: flick1Len,
+        } : { strokeDashoffset: flick1Len }}
+      />
+      {/* Bottom flick */}
+      <path
+        d="M38.0201 243.892C44.9119 255.378 54.1011 250.784 49.5065 237"
+        stroke="white"
+        strokeWidth="5.74324"
+        strokeLinecap="round"
+        strokeDasharray={flick2Len}
+        style={visible ? {
+          animation: `draw-on 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards`,
+          strokeDashoffset: flick2Len,
+        } : { strokeDashoffset: flick2Len }}
+      />
+      {/* Accent dots — pop in after strokes */}
+      <circle cx="106.507" cy="248.486" r="11.4865" fill="white" opacity="0"
+        style={visible ? { animation: "dot-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.2s forwards", transformOrigin: "106.507px 248.486px" } : undefined} />
+      <circle cx="187.507" cy="11.4865" r="11.4865" fill="white" opacity="0"
+        style={visible ? { animation: "dot-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.5s forwards", transformOrigin: "187.507px 11.4865px" } : undefined} />
+      <circle cx="94.5065" cy="98.4865" r="11.4865" fill="white" opacity="0"
+        style={visible ? { animation: "dot-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.8s forwards", transformOrigin: "94.5065px 98.4865px" } : undefined} />
+    </svg>
+  );
+}
+
 /* ─── Logo mark ─────────────────────────────────────────── */
 
 function SettleMark({ className = "h-6 w-auto", stroke = "#141413" }: { className?: string; stroke?: string }) {
@@ -846,76 +924,80 @@ export default function Home() {
       {/* ── CTA ──────────────────────────────────────── */}
       <section id="contact" ref={ctaRef} className="bg-accent">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-28 md:py-40">
-          <div className="max-w-xl mx-auto text-center">
-            <div className="fade-up mb-10">
-              <div className="w-28 h-28 md:w-36 md:h-36 mx-auto rounded-2xl bg-[rgba(0,0,0,0.12)] flex items-center justify-center">
-                <SettleMark className="h-16 md:h-20 w-auto" stroke="white" />
+          <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+            {/* Left: text + form */}
+            <div className="text-center md:text-left">
+              <h2 className="fade-up text-[clamp(1.8rem,4vw,3.5rem)] font-medium leading-[1.1] mb-5 text-white">
+                Ready to settle in with AI?
+              </h2>
+              <p className="fade-up text-white/70 text-[17px] leading-relaxed mb-12">
+                Tell us about your team. We&apos;ll scope your rollout and come
+                back with a concrete plan &mdash; what ships first, what comes
+                next.
+              </p>
+              {submitted ? (
+                <div className="fade-up visible">
+                  <p className="text-white text-lg font-medium mb-2">
+                    Thanks — we&apos;ll be in touch.
+                  </p>
+                  <p className="text-white/50 text-sm">
+                    Expect a reply within 24 hours.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <form
+                    onSubmit={async (e) => {
+                      e.preventDefault();
+                      const res = await fetch("/api/contact", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email }),
+                      });
+                      if (res.ok) {
+                        setSubmitted(true);
+                      }
+                    }}
+                    className="fade-up flex flex-col sm:flex-row gap-3"
+                  >
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="you@company.com"
+                      className="flex-1 bg-white/10 border border-white/20 rounded-lg px-5 py-3.5 text-sm text-white placeholder-white/40 focus:border-white/40 focus:outline-none transition-colors duration-200"
+                    />
+                    <button
+                      type="submit"
+                      className="bg-white text-accent font-medium px-7 py-3.5 rounded-lg hover:bg-white/90 transition-colors duration-200 whitespace-nowrap text-[15px]"
+                    >
+                      Let&apos;s talk
+                    </button>
+                  </form>
+                  <p className="fade-up text-white/40 text-sm mt-5">
+                    We&apos;ll respond within 24 hours. Or{" "}
+                    <button
+                      type="button"
+                      data-cal-namespace="15min"
+                      data-cal-link="settle-ai/15min"
+                      data-cal-config='{"layout":"month_view"}'
+                      className="text-white/70 underline hover:text-white transition-colors"
+                    >
+                      book a 15-min call
+                    </button>
+                    .
+                  </p>
+                </>
+              )}
+            </div>
+            {/* Right: animated illustration */}
+            <div className="hidden md:flex justify-center items-center">
+              <div className="w-[320px] h-[480px] lg:w-[380px] lg:h-[570px] opacity-[0.15]">
+                <AnimatedSettleMark />
               </div>
             </div>
-            <h2 className="fade-up text-[clamp(1.8rem,4vw,3.5rem)] font-medium leading-[1.1] mb-5 text-white">
-              Ready to settle in with AI?
-            </h2>
-            <p className="fade-up text-white/70 text-[17px] leading-relaxed mb-12">
-              Tell us about your team. We&apos;ll scope your rollout and come
-              back with a concrete plan &mdash; what ships first, what comes
-              next.
-            </p>
-            {submitted ? (
-              <div className="fade-up visible">
-                <p className="text-white text-lg font-medium mb-2">
-                  Thanks — we&apos;ll be in touch.
-                </p>
-                <p className="text-white/50 text-sm">
-                  Expect a reply within 24 hours.
-                </p>
-              </div>
-            ) : (
-              <>
-                <form
-                  onSubmit={async (e) => {
-                    e.preventDefault();
-                    const res = await fetch("/api/contact", {
-                      method: "POST",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({ email }),
-                    });
-                    if (res.ok) {
-                      setSubmitted(true);
-                    }
-                  }}
-                  className="fade-up flex flex-col sm:flex-row gap-3"
-                >
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="you@company.com"
-                    className="flex-1 bg-white/10 border border-white/20 rounded-lg px-5 py-3.5 text-sm text-white placeholder-white/40 focus:border-white/40 focus:outline-none transition-colors duration-200"
-                  />
-                  <button
-                    type="submit"
-                    className="bg-white text-accent font-medium px-7 py-3.5 rounded-lg hover:bg-white/90 transition-colors duration-200 whitespace-nowrap text-[15px]"
-                  >
-                    Let&apos;s talk
-                  </button>
-                </form>
-                <p className="fade-up text-white/40 text-sm mt-5">
-                  We&apos;ll respond within 24 hours. Or{" "}
-                  <button
-                    type="button"
-                    data-cal-namespace="15min"
-                    data-cal-link="settle-ai/15min"
-                    data-cal-config='{"layout":"month_view"}'
-                    className="text-white/70 underline hover:text-white transition-colors"
-                  >
-                    book a 15-min call
-                  </button>
-                  .
-                </p>
-              </>
-            )}
           </div>
         </div>
       </section>
