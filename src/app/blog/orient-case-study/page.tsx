@@ -402,7 +402,7 @@ export default function Article() {
           </p>
           <p>
             I built it in two steps. First, the sales engineer enters
-            the machine specification into a Claude project I configured with
+            the machine specification into a <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude</a> project I configured with
             Orient&apos;s pricing logic, product knowledge base, and full
             terms and conditions. Claude calculates the correct pricing,
             including head count formulas, add-on components (unwind
@@ -427,7 +427,7 @@ export default function Article() {
           <p>
             This isn&apos;t a prompt. It&apos;s a production system. That
             distinction matters more than anything else I could tell you
-            about instruction engineering.
+            about <a href="https://docs.anthropic.com/en/docs/about-claude/models" target="_blank" rel="noopener noreferrer">instruction engineering</a>.
           </p>
 
           <h2>Eleven projects live</h2>
@@ -560,8 +560,8 @@ export default function Article() {
           <p>
             But the part I find most interesting is the longer-term vision.
             Orient plans to take the use cases that delivered the strongest
-            ROI internally and rebuild them using the Claude API and Agent
-            SDK, offering them as AI-powered tools to other printing and
+            ROI internally and rebuild them using the Claude API and <a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener noreferrer">Agent
+            SDK</a>, offering them as AI-powered tools to other printing and
             packaging companies worldwide. They want to go from buyer of AI
             to seller of it.
           </p>

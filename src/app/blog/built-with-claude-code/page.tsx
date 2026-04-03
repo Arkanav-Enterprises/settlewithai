@@ -173,7 +173,7 @@ export default function Article() {
             >
               Claude Code
             </a>
-            , Anthropic&apos;s CLI agent for software development. Not
+            , <a href="https://www.anthropic.com" target="_blank" rel="noopener noreferrer">Anthropic</a>&apos;s CLI agent for software development. Not
             the web chat at claude.ai. Claude Code runs in your
             terminal, reads your codebase, writes files, runs commands, and
             commits to git. It operates on your actual project, not in an
@@ -472,7 +472,7 @@ export default function Article() {
           <p>
             I built Settle&apos;s site this way because it&apos;s the same
             thing I do for clients, just at a different layer. I deploy
-            Claude into manufacturing operations, writing instructions,
+            <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude</a> into manufacturing operations, writing instructions,
             structuring knowledge files, mapping workflows. The principle
             is the same: Claude is remarkably capable when you give it the
             right structure and context.

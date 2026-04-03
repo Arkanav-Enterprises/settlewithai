@@ -98,7 +98,15 @@ export default async function ComparePage(props: {
     headline: entry.title,
     description: entry.description,
     datePublished: entry.date,
-    author: { "@type": "Organization", name: "Settle", url: SITE_URL },
+    dateModified: entry.date,
+    image: `${SITE_URL}/og-image.png`,
+    author: {
+      "@type": "Person",
+      name: "Pranav Ambwani",
+      jobTitle: "Founder",
+      url: SITE_URL,
+      worksFor: { "@type": "Organization", name: "Settle" },
+    },
     publisher: {
       "@type": "Organization",
       name: "Settle",

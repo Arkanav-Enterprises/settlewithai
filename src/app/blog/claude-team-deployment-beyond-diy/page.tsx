@@ -294,7 +294,7 @@ export default function Article() {
             difference between a script and a production system matters.
           </p>
           <p>
-            Anthropic has given us a remarkably capable model in Claude. But
+            <a href="https://www.anthropic.com" target="_blank" rel="noopener noreferrer">Anthropic</a> has given us a remarkably capable model in <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude</a>. But
             capability without structure is just a chat window. The structure
             is where the value lives.
           </p>
@@ -486,7 +486,7 @@ export default function Article() {
           </p>
           <p>
             It&apos;s a new skill. Anthropic has made incredible tools
-            available, and Claude is the most capable model I&apos;ve
+            available, and <a href="https://docs.anthropic.com/en/docs/about-claude/models" target="_blank" rel="noopener noreferrer">Claude is the most capable model</a> I&apos;ve
             worked with. But the gap between what the tools can do and what
             most organisations can extract from them is still wide. That
             gap is what I exist to close.

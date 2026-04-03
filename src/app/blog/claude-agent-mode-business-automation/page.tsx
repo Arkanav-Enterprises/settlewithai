@@ -302,8 +302,8 @@ export default function Article() {
 
           <h3>2. Model Context Protocol (MCP)</h3>
           <p>
-            <a href="/blog/mcp-explained-for-business">MCP</a> is the open
-            standard that connects Claude to your business systems. Think of it
+            <a href="/blog/mcp-explained-for-business">MCP</a> is the <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer">open
+            standard</a> that connects Claude to your business systems. Think of it
             as a universal adapter: a lightweight server that sits
             between Claude and your ERP, CRM, database, or internal tool.
           </p>
@@ -345,7 +345,7 @@ export default function Article() {
 
           <h3>4. Agent teams</h3>
           <p>
-            Opus&nbsp;4.6 introduced the ability to run multiple Claude agents
+            <a href="https://www.anthropic.com/news/claude-opus-4-6" target="_blank" rel="noopener noreferrer">Opus&nbsp;4.6</a> introduced the ability to run multiple Claude agents
             in parallel, each with its own context and instructions, tackling
             different parts of the same problem.
           </p>
@@ -403,7 +403,7 @@ export default function Article() {
             worse, confidently wrong results.
           </p>
           <p>
-            This is why I spend more time on instruction engineering than
+            This is why I spend more time on <a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener noreferrer">instruction engineering</a> than
             anything else. Production-grade instructions aren&apos;t prompts.
             They&apos;re specifications, with edge cases, fallback
             behaviour, output formats, and review gates built in.

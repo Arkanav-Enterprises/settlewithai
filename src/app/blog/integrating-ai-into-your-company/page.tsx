@@ -163,7 +163,7 @@ export default function Article() {
           </p>
           <p>
             The technology wasn&apos;t the problem. AI tools, particularly
-            large language models like Claude, are remarkably capable right
+            large language models like <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude</a>, are remarkably capable right
             now. The problem was everything that comes after the demo.
             Which workflows do you target? How do you write instructions
             that produce consistent output? What does a rollout actually
@@ -288,7 +288,7 @@ export default function Article() {
             I&apos;ve watched this happen at company after company.
           </p>
           <p>
-            Instruction engineering is the discipline of writing
+            <a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener noreferrer">Instruction engineering</a> is the discipline of writing
             production-grade instructions that turn an AI tool into a
             reliable workflow participant. This goes well beyond
             &ldquo;prompting.&rdquo; It includes:
@@ -402,7 +402,7 @@ export default function Article() {
           <h2>It&apos;s not a technology problem</h2>
           <p>
             AI tools are already capable enough to transform most knowledge
-            work. The models are good. The interfaces are improving. The
+            work. The <a href="https://docs.anthropic.com/en/docs/about-claude/models" target="_blank" rel="noopener noreferrer">models</a> are good. The interfaces are improving. The
             cost is dropping.
           </p>
           <p>

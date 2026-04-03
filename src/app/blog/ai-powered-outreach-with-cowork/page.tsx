@@ -159,7 +159,7 @@ export default function Article() {
             Normally this would eat an entire week. A day researching
             companies, another day finding contacts, another day writing
             personalised emails, then manually scheduling follow-ups. I
-            decided to try doing the whole thing inside one Claude Cowork
+            decided to try doing the whole thing inside one <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude</a> Cowork
             session instead.
           </p>
           <p>
@@ -168,7 +168,7 @@ export default function Article() {
 
           <h2>Finding the right companies</h2>
           <p>
-            I gave Cowork a simple brief: find companies similar to
+            I gave <a href="https://www.anthropic.com" target="_blank" rel="noopener noreferrer">Cowork</a> a simple brief: find companies similar to
             Orient. Indian printing and packaging machinery manufacturers,
             100&ndash;500+ employees, established, multiple departments,
             not yet AI-adopted. The kind of companies where the same use
@@ -281,7 +281,7 @@ export default function Article() {
           <p>
             The pattern is the same every time: give the AI structured
             context (company brief, case study, prospect list), clear
-            instructions (tone, sequence structure, personalisation
+            <a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener noreferrer">instructions</a> (tone, sequence structure, personalisation
             requirements), and the right tools (web search, Gmail
             integration). The output is production-quality work that would
             have taken days to produce manually.

@@ -180,12 +180,12 @@ export default function Article() {
             read what it needs, and write back when appropriate.
           </p>
           <p>
-            That&apos;s what MCP does.
+            That&apos;s what <a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener noreferrer">MCP</a> does.
           </p>
 
           <h2>What MCP is, in plain English</h2>
           <p>
-            MCP stands for Model Context Protocol. I know, the name sounds
+            MCP stands for <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer">Model Context Protocol</a>. I know, the name sounds
             intimidating. It&apos;s not. Think of it as a universal adapter
             between Claude and any data source your business uses.
           </p>
@@ -429,7 +429,7 @@ export default function Article() {
 
           <h2>The bottom line</h2>
           <p>
-            MCP is what turns Claude from a smart chat interface into a
+            MCP is what turns <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude</a> from a smart chat interface into a
             real business tool. It&apos;s not a product you buy. It&apos;s
             a connector you build, specific to your systems, your data, and
             your workflows.

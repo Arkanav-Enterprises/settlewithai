@@ -227,7 +227,7 @@ export default function Article() {
         <div className="prose-settle">
           <h2>The one-project trap</h2>
           <p>
-            I watched it happen again last month. A company creates a Claude
+            I watched it happen again last month. A company creates a <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude</a>
             project called &ldquo;Company AI&rdquo; or &ldquo;Marketing
             Assistant.&rdquo; They paste in their website, a few product
             descriptions, maybe a brand guide PDF. The system prompt says
@@ -341,7 +341,7 @@ export default function Article() {
 
           <h3>Layer 3: Connectors (MCP)</h3>
           <p>
-            This is the integration layer. Model Context Protocol servers
+            This is the integration layer. <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer">Model Context Protocol</a> servers
             that connect Claude to your actual business systems.
           </p>
           <p>
@@ -538,7 +538,7 @@ export default function Article() {
             references what, and how pieces compose.
           </p>
           <p>
-            That&apos;s what I call instruction engineering. It&apos;s not
+            That&apos;s what I call <a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener noreferrer">instruction engineering</a>. It&apos;s not
             prompt writing. It&apos;s not software engineering. It&apos;s
             something new that sits between the two: understanding your
             business deeply enough to decompose workflows into structured

@@ -233,7 +233,7 @@ export default function Article() {
             time. More money.
           </p>
           <p>
-            Meanwhile, Claude ships updates every few months that make the
+            Meanwhile, <a href="https://www.anthropic.com" target="_blank" rel="noopener noreferrer">Anthropic</a> ships Claude updates every few months that make the
             base model better at everything, for free.
           </p>
           <p>
@@ -399,7 +399,7 @@ export default function Article() {
             Claude stays on the rails.
           </p>
           <p>
-            <strong>Context window.</strong> Opus 4.6 supports up to 1
+            <strong>Context window.</strong> <a href="https://www.anthropic.com/news/claude-opus-4-6" target="_blank" rel="noopener noreferrer">Opus 4.6</a> supports up to 1
             million tokens. That&apos;s not a spec-sheet number. It means I
             can feed Claude an entire product catalogue, an entire
             compliance manual, and an entire customer history in a single
@@ -408,7 +408,7 @@ export default function Article() {
           </p>
           <p>
             <strong>MCP.</strong> This is the killer feature that nobody
-            talks about enough. Model Context Protocol gives Claude a
+            talks about enough. <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer">Model Context Protocol</a> gives Claude a
             standardized way to connect to your business systems. Your ERP,
             your CRM, your databases, your file storage. No other major
             model has a native integration protocol at this level. With
