@@ -167,12 +167,18 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [hoveredService, setHoveredService] = useState<string | null>(null);
 
+  const calLoaded = useRef(false);
   useEffect(() => {
-    (async function () {
-      const cal = await getCalApi({ namespace: "15min" });
-      cal("ui", { hideEventTypeDetails: false, layout: "month_view", cssVarsPerTheme: { light: { "cal-brand": "#141413" }, dark: { "cal-brand": "#141413" } } });
-    })();
-    const onScroll = () => setScrolled(window.scrollY > 400);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 400);
+      // Lazy-load Cal.com SDK when user scrolls past 60% of viewport
+      if (!calLoaded.current && window.scrollY > window.innerHeight * 0.6) {
+        calLoaded.current = true;
+        getCalApi({ namespace: "15min" }).then((cal) => {
+          cal("ui", { hideEventTypeDetails: false, layout: "month_view", cssVarsPerTheme: { light: { "cal-brand": "#141413" }, dark: { "cal-brand": "#141413" } } });
+        });
+      }
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -785,35 +791,35 @@ export default function Home() {
             {[
               {
                 q: "What is Claude AI, and why does Settle use it exclusively?",
-                a: "Claude is Anthropic\u2019s AI assistant \u2014 built for long, complex reasoning and safe enterprise use. We chose it exclusively because it handles multi-step business workflows (pricing, documentation, diagnostics) better than any model we\u2019ve tested. One model, deep expertise, no vendor sprawl.",
+                a: "Claude is Anthropic\u2019s AI assistant, purpose-built for long, complex reasoning and safe enterprise use. I chose to work exclusively with Claude because, after testing every major model in production business workflows, it consistently outperforms on the tasks that matter most: multi-step document generation, precise instruction following, and reliable output across hundreds of runs. At Orient Printing, for example, Claude handles everything from generating 8-page sales proposals with accurate pricing to troubleshooting industrial printing press issues from technical manuals. One model, deeply understood, produces better results than spreading across three or four.",
               },
               {
-                q: "We\u2019re a manufacturer \u2014 is AI realistic for us?",
-                a: "Yes. Our first client is a 79-year-old printing and packaging manufacturer. We mapped 49 use cases across 7 departments and deployed 11 in the first engagement \u2014 from offer generation to BOM creation to service troubleshooting. Traditional businesses often have the most to gain because their workflows are repeatable and documentation-heavy.",
+                q: "We\u2019re a manufacturer. Is AI realistic for us?",
+                a: "Absolutely. My first client is a 79-year-old printing and packaging manufacturer with 20,000+ units installed across 50 countries. Not exactly a Silicon Valley startup. I mapped 49 use cases across their 7 departments and deployed 11 in the first engagement, covering offer generation, RFQ drafting, BOM creation, service troubleshooting, and vendor analysis. Traditional businesses often have the most to gain from AI because their workflows are repeatable, documentation-heavy, and largely unchanged for years. The offer generator alone cut document creation time from 4 hours to 30 minutes. That\u2019s not incremental. It\u2019s a step change in how the team works.",
               },
               {
                 q: "How is Settle different from hiring a big consulting firm?",
-                a: "Large firms charge enterprise rates, move slowly, and usually hand you a strategy deck. We deploy working Claude projects your team uses from week one. We\u2019re built for the 50\u2013500 employee company that\u2019s too complex for DIY but doesn\u2019t need a six-month discovery phase.",
+                a: "Large consulting firms charge enterprise rates, take months to deliver a strategy deck, and then hand you a PDF that your team has to figure out how to implement. I do the opposite. Working Claude projects ship in the first two to three weeks. Your team is using AI from week one, not waiting for a 200-page assessment to get approved. Settle is built specifically for companies with 50 to 500 employees, the ones too complex for a DIY YouTube tutorial but too lean to justify a Big Four engagement. Every project I deploy comes with production-grade instructions, safety rules, and review gates. Not a strategy deck. Working tools.",
               },
               {
                 q: "What does a typical engagement look like?",
-                a: "Four phases: Discovery (we audit every department\u2019s workflows), Architecture (a prioritised rollout plan), Instruction Engineering (production-grade Claude projects with safety rules and review gates), and Deploy & Settle (training, launch, iteration). Quick wins ship in weeks; deeper integrations follow in phases.",
+                a: "Four phases. First, Discovery: I spend time with your team to audit every department\u2019s workflows and identify where AI will have the highest impact. Second, Architecture: I build a prioritised rollout plan that groups use cases by workflow cluster, not department, because that\u2019s what produces the best results. Third, Instruction Engineering: I write production-grade Claude project instructions with safety rules, edge case handling, review gates, and knowledge file specifications. Fourth, Deploy and Settle: projects go live, your team gets trained, and I iterate based on real usage. Quick wins typically ship in the first 2\u20133 weeks. Deeper integrations with your ERP or CRM follow in subsequent phases.",
               },
               {
                 q: "How long until we see results?",
-                a: "Most teams see their first working Claude project within 2\u20133 weeks. The full rollout depends on scope \u2014 Orient deployed 11 projects across 7 departments in about 6 months, with measurable time savings from month one.",
+                a: "Most teams see their first working Claude project within 2 to 3 weeks. These are typically high-volume, low-complexity tasks like email drafting, document generation, or knowledge base Q&A. The full rollout depends on your scope and how many departments are involved. Orient Printing deployed 11 projects across 7 departments over about 6 months, but they were measuring time savings from month one. The key is starting with a quick win that proves the value, then expanding from there. I\u2019ve found that once one department sees results, the others start asking when they\u2019re next.",
               },
               {
                 q: "What systems can Claude connect to?",
-                a: "Claude can read and write to ERPs, CRMs, databases, and internal tools via MCP (Model Context Protocol). If your system has an API or a structured data export, we can connect it. We\u2019ve built connectors for manufacturing-specific tools like BOM systems and service databases.",
+                a: "Claude connects to your business systems through MCP (Model Context Protocol), an open standard built by Anthropic specifically for this purpose. If your system has an API or structured data export, I can build a connector for it. I\u2019ve built MCP connectors for ERPs like SAP, CRMs like HubSpot and Salesforce, document stores like SharePoint and Google Drive, email systems, and custom internal databases. The connector is a lightweight server that sits between Claude and your system, translating data in both directions. Most connectors take a few days to build and test. Once connected, Claude doesn\u2019t just know about your business in theory. It can read real data, pull actual numbers, and write results back.",
               },
               {
                 q: "Do our employees need technical skills?",
-                a: "No. We engineer the instructions so your team interacts with Claude in plain language. They don\u2019t write prompts or configure anything \u2014 they use structured projects we\u2019ve built and tested for their specific workflows.",
+                a: "Not at all. I engineer the instructions so your team interacts with Claude in plain language, exactly the way they\u2019d talk to a knowledgeable colleague. They don\u2019t write prompts, configure settings, or understand anything about AI. They use structured Claude projects that I\u2019ve built and tested specifically for their workflows. A sales engineer types in a customer name and product requirements, and gets back a formatted offer document. A procurement manager describes what they need, and gets a complete RFQ. The complexity is in the instructions I write, not in what your team has to do.",
               },
               {
                 q: "Is our company data safe with Claude?",
-                a: "Yes. Claude is built by Anthropic with enterprise-grade security. Data sent to Claude via the API is not used for training. We configure every project with explicit safety rules, review gates, and output boundaries. Your proprietary processes stay private.",
+                a: "Yes. Claude is built by Anthropic, which leads the industry in AI safety research. Data sent to Claude via the API is not used for model training by default. Anthropic holds SOC 2 Type II certification and offers HIPAA-eligible plans for healthcare data. Beyond Anthropic\u2019s security, every project I deploy includes explicit safety rules, review gates, and output boundaries written into the instructions. Claude won\u2019t share data between departments unless configured to. It won\u2019t fabricate information. It won\u2019t take actions without human approval at checkpoints I define. Your proprietary processes, pricing, and customer data stay private.",
               },
             ].map((faq, i) => (
               <details key={i} className="fade-up group" style={{ animationDelay: `${i * 40}ms` }}>
