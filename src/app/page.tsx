@@ -446,8 +446,11 @@ export default function Home() {
               letterSpacing: "-0.03em",
             }}
           >
-            A glimpse of what Claude can do for your business.
+            Claude in action.
           </h2>
+          <p className="text-text-muted text-[15px] mb-6">
+            <a href="/blog/why-claude-over-custom-ai" className="text-accent hover:underline">Why Claude?</a>
+          </p>
           <CoworkDemo className="mx-auto w-full max-w-[900px] text-left" />
         </div>
       </section>

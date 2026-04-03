@@ -243,6 +243,18 @@ export default function Article() {
             custom model&rdquo; is much higher than most companies think.
           </p>
 
+          <figure className="my-10">
+            <img
+              src="https://cdn.sanity.io/images/4zrzovbb/website/5b3eb6e1368dfeeaa206fd0bee001f58d9e2ea36-1920x1080.png"
+              alt="Claude as a thinking partner, Anthropic's vision for AI that reasons alongside you"
+              className="rounded-lg w-full"
+              loading="lazy"
+            />
+            <figcaption className="text-sm text-text-faint mt-3 text-center">
+              Anthropic built Claude to reason alongside you, not just generate text. Image: Anthropic
+            </figcaption>
+          </figure>
+
           <h2>What I&apos;ve learned from actual deployments</h2>
           <p>
             At{" "}
@@ -426,6 +438,18 @@ export default function Article() {
             money? It&apos;s essential.
           </p>
 
+          <figure className="my-10">
+            <img
+              src="https://cdn.sanity.io/images/4zrzovbb/website/01d06528567e4bd22c3ddedc87f609ee5716a009-2400x1260.png"
+              alt="Claude Opus 4.6 announcement from Anthropic, the most capable model for enterprise AI"
+              className="rounded-lg w-full"
+              loading="lazy"
+            />
+            <figcaption className="text-sm text-text-faint mt-3 text-center">
+              Claude Opus 4.6 with its 1M token context window changed what&apos;s possible for enterprise deployment. Image: Anthropic
+            </figcaption>
+          </figure>
+
           <h2>The real cost comparison</h2>
           <p>
             People fixate on API pricing when they compare AI options. That&apos;s
@@ -523,6 +547,18 @@ export default function Article() {
             do this?&rdquo; It&apos;s &ldquo;have I given Claude the right
             instructions and context to do this well?&rdquo;
           </p>
+
+          <figure className="my-10">
+            <img
+              src="https://cdn.sanity.io/images/4zrzovbb/website/8c2855afe51fc0980596b5369b01b0b87eea7eaf-3840x2160.png"
+              alt="Claude model family product visual showing Anthropic's AI platform"
+              className="rounded-lg w-full"
+              loading="lazy"
+            />
+            <figcaption className="text-sm text-text-faint mt-3 text-center">
+              The Claude model family: different tiers for different tasks, all using the same instruction architecture. Image: Anthropic
+            </figcaption>
+          </figure>
 
           <h2>The instruction engineering gap</h2>
           <p>
