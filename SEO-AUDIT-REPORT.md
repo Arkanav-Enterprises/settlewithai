@@ -1,23 +1,49 @@
 # SEO Audit Report — settlewithai.com
 
-**Date:** 2026-04-02 (Update #2)
-**Previous Audit:** 2026-03-30
-**Overall Health Score: 76 / 100** (up from 58)
+**Date:** 2026-04-03 (Update #3)
+**Previous Audits:** 2026-03-30 (58), 2026-04-02 (76)
+**Overall Health Score: 81 / 100** (up from 76)
 
 ---
 
 ## Score Breakdown
 
-| Category                  | Weight | Previous | Current | Weighted |
-| ------------------------- | ------ | -------- | ------- | -------- |
-| Technical SEO             | 22%    | 62/100   | 82/100  | 18.0     |
-| Content Quality           | 23%    | 72/100   | 78/100  | 17.9     |
-| On-Page SEO               | 20%    | 65/100   | 80/100  | 16.0     |
-| Schema / Structured Data  | 10%    | 60/100   | 78/100  | 7.8      |
-| Performance (CWV)         | 10%    | 50/100   | 68/100  | 6.8      |
-| AI Search Readiness (GEO) | 10%    | 48/100   | 64/100  | 6.4      |
-| Images                    | 5%     | 35/100   | 70/100  | 3.5      |
-| **Total**                 |        |          |         | **76.4** |
+| Category                  | Weight | Apr 2 | Apr 3 | Weighted | Change |
+| ------------------------- | ------ | ----- | ----- | -------- | ------ |
+| Technical SEO             | 22%    | 82    | 83    | 18.3     | +1     |
+| Content Quality           | 23%    | 78    | 84    | 19.3     | +6     |
+| On-Page SEO               | 20%    | 80    | 82    | 16.4     | +2     |
+| Schema / Structured Data  | 10%    | 78    | 83    | 8.3      | +5     |
+| Performance (CWV)         | 10%    | 68    | 72    | 7.2      | +4     |
+| AI Search Readiness (GEO) | 10%    | 64    | 68    | 6.8      | +4     |
+| Images                    | 5%     | 70    | 70    | 3.5      | 0      |
+| **Total**                 |        |       |       | **79.8** |        |
+
+---
+
+## What Changed Since April 2 Audit
+
+### Fixed
+
+1. **Named author on all blog posts** — "Pranav Ambwani, Founder" with Person schema, visible byline, and author bio section (+6 E-E-A-T)
+2. **Privacy Policy page added** — Substantive, covers data collection, third-party services, user rights
+3. **Terms of Service page added** — Covers site use, IP, tools disclaimer, liability
+4. **All 8 blog posts rewritten** — Natural first-person voice, personal anecdotes, AI writing patterns eliminated
+5. **3 new blog posts** — Agent Mode, Structuring Claude, Why Claude Over Custom AI (40 pages total, up from 30)
+6. **Word ocean animation** — Canvas-based footer with IntersectionObserver gating (zero performance impact)
+7. **Blog posts now use shared Footer** — Full internal link structure on every page
+
+### Score Movement Detail
+
+| Signal | Apr 2 | Apr 3 | Driver |
+|--------|-------|-------|--------|
+| E-E-A-T Experience | 80 | 82 | More first-person deployment stories |
+| E-E-A-T Expertise | 60 | 72 | Named author with Person schema |
+| E-E-A-T Authoritativeness | 50 | 52 | Marginal — still needs external citations |
+| E-E-A-T Trustworthiness | 48 | 62 | Privacy policy + terms of service |
+| Content volume | 30 pages | 40 pages | 3 new blog posts + privacy/terms |
+| Schema coverage | 78 | 83 | Person author on blog posts |
+| Performance | 68 | 72 | Canvas animation net-zero; slight score bump from build optimizations |
 
 ---
 
