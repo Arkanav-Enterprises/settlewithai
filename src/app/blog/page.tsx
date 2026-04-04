@@ -18,6 +18,15 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "erp-crm-claude-connectors-2026",
+    title:
+      "Which ERPs and CRMs Best Connect with Claude in 2026?",
+    description:
+      "HubSpot, Salesforce, NetSuite, Sage Intacct, and more. A practical breakdown of every ERP and CRM that connects to Claude via native connectors, MCP servers, and middleware.",
+    date: "2026-04-04",
+    tag: "Guide",
+  },
+  {
     slug: "claude-best-invention-2026",
     title:
       "Why Claude Is the Best Invention of the 21st Century (And Why 2026 Changes Everything)",
