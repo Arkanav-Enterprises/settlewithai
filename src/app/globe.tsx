@@ -61,6 +61,9 @@ export default function Globe({ className = "" }: { className?: string }) {
     };
 
     resize();
+    // Fill with bg color immediately to prevent black flash before data loads
+    ctx.fillStyle = "#e8e6dc";
+    ctx.fillRect(0, 0, cw, ch);
     window.addEventListener("resize", resize);
     window.addEventListener(
       "scroll",
