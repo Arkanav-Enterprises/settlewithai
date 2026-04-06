@@ -26,6 +26,7 @@ const INDUSTRY_LINKS = [
 
 const BLOG_LINKS = [
   { label: "Orient Case Study", href: "/blog/orient-case-study" },
+  { label: "Orient AI Product Expert", href: "/blog/orient-product-experience" },
   { label: "Deploying Claude for Teams", href: "/blog/claude-team-deployment-beyond-diy" },
   { label: "MCP Explained for Business", href: "/blog/mcp-explained-for-business" },
   { label: "Integrating AI Into Your Company", href: "/blog/integrating-ai-into-your-company" },

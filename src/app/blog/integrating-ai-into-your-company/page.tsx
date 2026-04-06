@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
+import { BlogTOC } from "@/components/blog/BlogTOC";
 
 export const metadata: Metadata = {
   title: "How to Actually Integrate AI Into Your Company",
@@ -76,6 +77,7 @@ export default function Article() {
 
   return (
     <>
+      <BlogTOC />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

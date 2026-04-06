@@ -18,6 +18,15 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "orient-product-experience",
+    title:
+      "How We Engineered an AI Product Expert for The Printers House Orient",
+    description:
+      "Orient had decades of product knowledge locked in internal docs. We turned it into a public specs section and an AI chat widget — all from the same source of truth.",
+    date: "2026-04-07",
+    tag: "Case Study",
+  },
+  {
     slug: "erp-crm-claude-connectors-2026",
     title:
       "Which ERPs and CRMs Best Connect with Claude in 2026?",

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
+import { BlogTOC } from "@/components/blog/BlogTOC";
 
 export const metadata: Metadata = {
   title: "We Used Claude Cowork to Prospect 12 Companies and Draft 48 Emails in One Session",
@@ -75,6 +76,7 @@ export default function Article() {
 
   return (
     <>
+      <BlogTOC />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
