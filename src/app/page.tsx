@@ -694,27 +694,14 @@ export default function Home() {
 
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [ctaVisible, setCtaVisible] = useState(false);
   const [hoveredService, setHoveredService] = useState<string | null>(null);
 
-  // Hide Discovery Call button when CTA section is in view
-  const ctaObserverRef = useRef<IntersectionObserver | null>(null);
-  useEffect(() => {
-    const el = document.getElementById("contact");
-    if (!el) return;
-    ctaObserverRef.current = new IntersectionObserver(
-      ([entry]) => setCtaVisible(entry.isIntersecting),
-      { threshold: 0.15 }
-    );
-    ctaObserverRef.current.observe(el);
-    return () => ctaObserverRef.current?.disconnect();
-  }, []);
+  // Discovery Call button state/observer removed while the CTA is hidden.
+  // See the commented-out floating button below.
 
   const calLoaded = useRef(false);
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 400);
       // Lazy-load Cal.com SDK when user scrolls past 60% of viewport
       if (!calLoaded.current && window.scrollY > window.innerHeight * 0.6) {
         calLoaded.current = true;
@@ -1501,7 +1488,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Floating Discovery Call button ──────────────── */}
+      {/* ── Floating Discovery Call button (hidden for now) ──────────────── */}
+      {/*
       <button
         data-cal-namespace="15min"
         data-cal-link="settle-ai/15min"
@@ -1513,6 +1501,7 @@ export default function Home() {
         </svg>
         Discovery Call
       </button>
+      */}
 
       {/* ── Footer ───────────────────────────────────── */}
       <Footer />
