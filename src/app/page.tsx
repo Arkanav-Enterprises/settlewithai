@@ -777,7 +777,7 @@ export default function Home() {
 
         {/* Hero text — single liquid-glass card, centered on page */}
         <div className="relative max-w-[1280px] mx-auto px-6 lg:px-10 pt-36 md:pt-44">
-          <div className="liquid-glass mx-auto md:mx-0 max-w-[680px] px-8 md:px-14 py-10 md:py-14 text-center md:text-left">
+          <div className="liquid-glass mx-auto md:mx-0 max-w-[680px] px-5 md:px-14 py-10 md:py-14 text-center md:text-left">
             <h1 className="text-[clamp(2.4rem,4.8vw,4.2rem)] font-medium leading-[1.08] mb-8">
               AI, <span className="text-accent">thoughtfully</span> deployed.
             </h1>
@@ -1429,8 +1429,7 @@ export default function Home() {
                     Thanks — we&apos;ll be in touch.
                   </p>
                   <p className="text-white/50 text-sm">
-                    We&apos;re receiving a high volume of requests right now,
-                    so responses might be delayed.
+                    Expect a reply within 24 hours.
                   </p>
                 </div>
               ) : (
@@ -1466,7 +1465,8 @@ export default function Home() {
                     </button>
                   </form>
                   <p className="fade-up text-white/40 text-sm mt-5">
-                    We&apos;ll respond within 24 hours. Or{" "}
+                    We&apos;re receiving a high volume of requests right now,
+                    so responses might be delayed. Or{" "}
                     <button
                       type="button"
                       data-cal-namespace="15min"
