@@ -1466,17 +1466,7 @@ export default function Home() {
                   </form>
                   <p className="fade-up text-white/40 text-sm mt-5">
                     We&apos;re receiving a high volume of requests right now,
-                    so responses might be delayed. Or{" "}
-                    <button
-                      type="button"
-                      data-cal-namespace="15min"
-                      data-cal-link="settle-ai/15min"
-                      data-cal-config='{"layout":"month_view"}'
-                      className="text-white/70 underline hover:text-white transition-colors"
-                    >
-                      book a 15-min call
-                    </button>
-                    .
+                    so responses might be delayed.
                   </p>
                 </>
               )}
