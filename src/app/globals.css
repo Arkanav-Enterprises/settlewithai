@@ -24,7 +24,7 @@
   --color-accent-border: var(--accent-border);
   --color-border: var(--border);
   --color-border-light: var(--border-light);
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-sentient), Georgia, "Times New Roman", serif;
 }
 
@@ -54,6 +54,34 @@ h1, h2, h3 {
   50% { transform: scale(1.25); }
 }
 .animate-breathe { animation: breathe 2.5s ease-in-out infinite; }
+
+/* ─── Liquid glass surface ─────────────────────
+   Subtle frosted-glass treatment used on hero
+   subtitles, secondary CTAs, and any content
+   block that should sit visually above the page
+   without taking attention from the headline. */
+.liquid-glass {
+  background: rgba(0, 0, 0, 0.04);
+  background-image: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.04),
+    rgba(0, 0, 0, 0.02)
+  );
+  border-radius: 12px;
+  box-shadow:
+    inset 1px 1px 1px rgba(0, 0, 0, 0.1),
+    inset -1px -1px 1px rgba(255, 255, 255, 0.3),
+    0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* NOTE: backdrop-filter MUST live in its own rule block. When declared
+   alongside `background` + `background-image` in the same .liquid-glass rule,
+   Tailwind v4's Lightning CSS compiler strips it during its shorthand-merge
+   optimization pass. Keeping it isolated here preserves the declaration. */
+.liquid-glass {
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
 
 /* ─── Scrollbar ─────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }

@@ -161,16 +161,22 @@ export default function Globe({ className = "" }: { className?: string }) {
         ctx.lineJoin = "round";
         ctx.stroke();
 
-        /* ── Highlighted country ── */
+        /* ── Highlighted country ──
+           Highlight tone matches the bg of the section right below the hero
+           (#ddd9cc → rgb 221,217,204) for visual continuity. */
         const hi = FOCUS[highlightIdx];
         const feat = featuresById.get(hi.id);
         if (feat) {
           ctx.beginPath();
           pathGen(feat);
-          ctx.fillStyle = "rgba(217,119,87,0.2)";
+          ctx.fillStyle = "#ddd9cc";
           ctx.fill();
-          ctx.strokeStyle = "rgba(217,119,87,0.5)";
-          ctx.lineWidth = 0.8;
+          /* Re-stroke with the same dark border the other countries use,
+             since the fill covers the underlying land-pass outline. */
+          ctx.strokeStyle = "rgba(20,20,19,0.32)";
+          ctx.lineWidth = 0.55;
+          ctx.lineCap = "round";
+          ctx.lineJoin = "round";
           ctx.stroke();
 
           /* ── Pin + Label ── */
@@ -183,25 +189,25 @@ export default function Globe({ className = "" }: { className?: string }) {
               /* Pin dot */
               ctx.beginPath();
               ctx.arc(px, py, 3, 0, 2 * Math.PI);
-              ctx.fillStyle = "#d97757";
+              ctx.fillStyle = "#141413";
               ctx.fill();
 
               /* Pin line */
               ctx.beginPath();
               ctx.moveTo(px, py);
               ctx.lineTo(px, py - 18);
-              ctx.strokeStyle = "#d97757";
+              ctx.strokeStyle = "#141413";
               ctx.lineWidth = 1.5;
               ctx.stroke();
 
               /* Label background */
-              ctx.font = "600 10px Inter, system-ui, sans-serif";
+              ctx.font = "600 10px Geist, Inter, system-ui, sans-serif";
               const label = hi.name.toUpperCase();
               const tw = ctx.measureText(label).width;
               const lx = px - tw / 2;
               const ly = py - 24;
 
-              ctx.fillStyle = "rgba(217,119,87,0.9)";
+              ctx.fillStyle = "#141413";
               ctx.beginPath();
               ctx.roundRect(lx - 5, ly - 10, tw + 10, 16, 3);
               ctx.fill();

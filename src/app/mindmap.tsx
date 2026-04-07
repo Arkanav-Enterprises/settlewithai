@@ -18,14 +18,14 @@ const nodeDescriptions: Record<string, string> = {
   "Skill Mapping": "Match team capabilities to use cases and flag training needs.",
   "Kanban": "Execution board for managing deployment tasks across teams.",
   // Instruction Engineering
-  "Claude Instructions": "Production-grade prompts with structured workflows, not generic templates.",
-  "Knowledge Files": "Per-project reference documents that give Claude your business context.",
+  "Claude AI Instructions": "Production-grade prompts with structured workflows, not generic templates.",
+  "Knowledge Files": "Per-project reference documents that give Claude AI your business context.",
   "Safety Rules": "Review gates and guardrails that prevent errors before they reach your team.",
   "Output Standards": "Formatting rules so every output matches your internal conventions.",
   // Setup & Training
   "Configuration": "Project creation, tool connections, and environment setup.",
-  "Knowledge Prep": "Organise and structure the documents Claude needs to do its job.",
-  "Onboarding": "Hands-on training so your team uses Claude confidently from day one.",
+  "Knowledge Prep": "Organise and structure the documents Claude AI needs to do its job.",
+  "Onboarding": "Hands-on training so your team uses Claude AI confidently from day one.",
   "Iteration": "Ongoing refinement — we monitor, adjust, and expand as your needs evolve.",
 };
 
@@ -40,7 +40,7 @@ const categories: Record<string, { items: string[] }> = {
     items: ["Visualisation", "Tracking", "Skill Mapping", "Kanban"],
   },
   "Instruction Engineering": {
-    items: ["Claude Instructions", "Knowledge Files", "Safety Rules", "Output Standards"],
+    items: ["Claude AI Instructions", "Knowledge Files", "Safety Rules", "Output Standards"],
   },
   "Setup & Training": {
     items: ["Configuration", "Knowledge Prep", "Onboarding", "Iteration"],
@@ -761,7 +761,7 @@ export default function Mindmap({ className = "", highlightCategory }: { classNa
           .text(d.name)
           .attr("font-size", "11px")
           .attr("font-weight", "400")
-          .attr("font-family", "Inter, sans-serif")
+          .attr("font-family", "Geist, Inter, system-ui, sans-serif")
           .attr("text-anchor", "middle")
           .attr("x", d.x!)
           .attr("y", d.y! + 3)

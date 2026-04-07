@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { getCalApi } from "@calcom/embed-react";
 import { Footer } from "@/components/layout/Footer";
+import { BlogTOC } from "@/components/blog/BlogTOC";
 
 const Globe = dynamic(() => import("./globe"), { ssr: false });
 const Mindmap = dynamic(() => import("./mindmap"), { ssr: false });
@@ -93,7 +94,7 @@ function ClaudeTooltip() {
         className="inline-block w-[0.85em] h-[0.85em] mr-1 align-baseline animate-breathe"
         aria-hidden="true"
       />
-      Claude
+      Claude AI
       {open && (
         <a
           href="https://claude.ai"
@@ -110,7 +111,7 @@ function ClaudeTooltip() {
             className="w-8 h-8 rounded-md"
           />
           <div>
-            <h3>Claude</h3>
+            <h3>Claude AI</h3>
             <p>
               Anthropic&apos;s AI assistant &mdash; built to be helpful,
               harmless, and honest. The model we deploy for every client.
@@ -131,6 +132,445 @@ function ClaudeTooltip() {
         </a>
       )}
     </span>
+  );
+}
+
+/* ─── Hero subtitle typewriter ──────────────────────────
+   Types out the hero subtitle on first load. Every character
+   is rendered upfront at opacity:0 so the liquid-glass card
+   has its final size from frame one — no layout shift. The
+   <ClaudeTooltip /> in the middle is treated as a single
+   typing tick (with a slightly longer pause) so it pops in
+   between the prefix and suffix without breaking interactivity. */
+
+const HERO_PREFIX = "We settle ";
+const HERO_SUFFIX =
+  " into your team\u2019s actual workflows \u2014 structured rollouts, production-grade instructions, and real results.";
+const HERO_TOTAL = HERO_PREFIX.length + 1 + HERO_SUFFIX.length;
+
+function HeroSubtitle() {
+  const [i, setI] = useState(0);
+
+  useEffect(() => {
+    const reduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) {
+      setI(HERO_TOTAL);
+      return;
+    }
+
+    let cancelled = false;
+    let n = 0;
+    let timer: ReturnType<typeof setTimeout>;
+
+    const tick = () => {
+      if (cancelled) return;
+      n += 1;
+      setI(n);
+      if (n >= HERO_TOTAL) return;
+      // longer pause when the tooltip pops in (the "atom" tick)
+      const isTooltipTick = n === HERO_PREFIX.length;
+      timer = setTimeout(tick, isTooltipTick ? 140 : 22);
+    };
+
+    const start = setTimeout(tick, 280);
+    return () => {
+      cancelled = true;
+      clearTimeout(start);
+      clearTimeout(timer);
+    };
+  }, []);
+
+  return (
+    <p className="text-text text-[clamp(1rem,1.5vw,1.2rem)] leading-[1.7]">
+      {[...HERO_PREFIX].map((c, idx) => (
+        <span
+          key={`p${idx}`}
+          style={{ opacity: idx < i ? 1 : 0 }}
+          aria-hidden={idx < i ? undefined : true}
+        >
+          {c}
+        </span>
+      ))}
+      <span
+        style={{ opacity: i > HERO_PREFIX.length ? 1 : 0 }}
+        aria-hidden={i > HERO_PREFIX.length ? undefined : true}
+      >
+        <ClaudeTooltip />
+      </span>
+      {[...HERO_SUFFIX].map((c, idx) => (
+        <span
+          key={`s${idx}`}
+          style={{ opacity: idx + HERO_PREFIX.length + 1 < i ? 1 : 0 }}
+          aria-hidden={idx + HERO_PREFIX.length + 1 < i ? undefined : true}
+        >
+          {c}
+        </span>
+      ))}
+    </p>
+  );
+}
+
+/* ─── Orient case study card (expandable) ───────────────
+   Always-visible: header, pull quote, the three headline stats.
+   Plus button (top-right) reveals brochure-style detail below:
+   the challenge, what we did, and the missing 4hr→30m metric.
+   The reveal animates via grid-template-rows 0fr→1fr so the
+   inner content's natural height is honored without max-height
+   guesswork. */
+function OrientCaseStudyCard() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div
+      className={`fade-up rounded-xl p-8 md:p-12 lg:p-16 relative transition-colors duration-200 ${
+        !open ? "cursor-pointer hover:bg-[rgba(0,0,0,0.02)]" : ""
+      }`}
+      onClick={() => {
+        // Whole card opens the detail. Only opens — never auto-collapses,
+        // so users reading the expanded content can't close it by accident.
+        // The +/× button (which calls stopPropagation) handles collapsing.
+        if (!open) setOpen(true);
+      }}
+      role={!open ? "button" : undefined}
+      tabIndex={!open ? 0 : undefined}
+      onKeyDown={(e) => {
+        if (!open && (e.key === "Enter" || e.key === " ")) {
+          e.preventDefault();
+          setOpen(true);
+        }
+      }}
+      style={{
+        background: "rgba(0,0,0,0.04)",
+        backgroundImage:
+          "linear-gradient(135deg, rgba(0,0,0,0.04), rgba(0,0,0,0.02))",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
+        boxShadow:
+          "inset 1px 1px 1px rgba(0,0,0,0.1), inset -1px -1px 1px rgba(255,255,255,0.3), 0 4px 16px rgba(0,0,0,0.1)",
+        border: "1px solid rgba(0,0,0,0.1)",
+      }}
+    >
+      {/* Expand/collapse button */}
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          setOpen((o) => !o);
+        }}
+        aria-expanded={open}
+        aria-controls="orient-case-detail"
+        aria-label={open ? "Collapse case study details" : "Expand case study details"}
+        className="absolute top-5 right-5 md:top-6 md:right-6 w-10 h-10 rounded-full border border-[rgba(20,20,19,0.15)] bg-[rgba(255,255,255,0.45)] hover:bg-[rgba(255,255,255,0.75)] flex items-center justify-center transition-colors duration-200 z-10"
+      >
+        <span className="relative block w-4 h-4" aria-hidden="true">
+          {/* Horizontal bar — always visible (becomes the minus when open) */}
+          <span className="absolute top-1/2 left-0 w-full h-[1.5px] bg-text -translate-y-1/2 rounded-full" />
+          {/* Vertical bar — collapses to form the minus */}
+          <span
+            className="absolute top-0 left-1/2 h-full w-[1.5px] bg-text rounded-full origin-center transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            style={{
+              transform: open
+                ? "translateX(-50%) scaleY(0)"
+                : "translateX(-50%) scaleY(1)",
+            }}
+          />
+        </span>
+      </button>
+
+      {/* header */}
+      <div className="flex items-center gap-5 mb-10 pr-12">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/orient-logo.png"
+          alt="Orient Printing & Packaging"
+          width={259}
+          height={78}
+          loading="lazy"
+          className="h-10 w-auto"
+        />
+        <div>
+          <div className="font-medium text-[17px]">
+            Orient Printing & Packaging
+          </div>
+          <div className="text-sm text-text-faint mt-0.5">
+            Manufacturing · 79 years in operation · 50+ countries
+          </div>
+        </div>
+      </div>
+
+      {/* quote */}
+      <blockquote className="border-l-2 border-accent pl-6 md:pl-8 text-text-muted text-[clamp(1rem,1.5vw,1.15rem)] leading-[1.8] mb-12 max-w-3xl">
+        &ldquo;49 use cases mapped across 7 departments. 18 projects
+        structured. 11 deployed in the first engagement &mdash; from offer
+        generation to BOM creation to service troubleshooting. Phased from
+        quick wins to ERP integration over six months.&rdquo;
+      </blockquote>
+
+      {/* stats */}
+      <div className="grid grid-cols-3 gap-8 md:gap-12">
+        {[
+          { v: "49", l: "Use cases mapped" },
+          { v: "11", l: "Projects deployed" },
+          { v: "85%", l: "Time saved on docs" },
+        ].map((s) => (
+          <div key={s.l}>
+            <div
+              className="text-accent text-[clamp(1.5rem,2.5vw,2.2rem)] font-medium leading-none mb-2"
+              style={{
+                fontFamily: "var(--font-heading)",
+                letterSpacing: "-0.03em",
+              }}
+            >
+              {s.v}
+            </div>
+            <div className="text-text-faint text-xs uppercase tracking-[0.12em]">
+              {s.l}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Expandable detail — grid-rows 0fr→1fr trick */}
+      <div
+        id="orient-case-detail"
+        className="grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+        style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+      >
+        <div className="overflow-hidden">
+          <div
+            className="pt-12 mt-12 border-t border-[rgba(20,20,19,0.08)] transition-opacity duration-500"
+            style={{
+              opacity: open ? 1 : 0,
+              transitionDelay: open ? "120ms" : "0ms",
+            }}
+          >
+            {/* ── Section A: Featured case study (brochure page 4) ── */}
+            <div className="mb-16">
+              <div className="text-[11px] uppercase tracking-[0.15em] text-text-faint mb-4">
+                Featured case study
+              </div>
+              <h3
+                className="text-[clamp(1.5rem,2.6vw,2.1rem)] font-medium leading-[1.15] mb-10 max-w-2xl text-text"
+                style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.025em" }}
+              >
+                From manual offer-making to an AI-native operating layer.
+              </h3>
+              <div className="grid md:grid-cols-2 gap-10 md:gap-14 max-w-4xl">
+                <div>
+                  <h4
+                    className="text-text text-[14px] font-medium mb-3"
+                    style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
+                  >
+                    The challenge
+                  </h4>
+                  <p className="text-text-muted text-[14.5px] leading-[1.75]">
+                    Orient&rsquo;s sales engineers were spending half-days
+                    hand-building branded customer quotations across four machine
+                    lines, with pricing logic, terms, and configurations buried
+                    across spreadsheets and email threads. Marketing was running
+                    on instinct. Prospects had no way to self-serve product
+                    information after hours.
+                  </p>
+                </div>
+                <div>
+                  <h4
+                    className="text-text text-[14px] font-medium mb-3"
+                    style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
+                  >
+                    What we did
+                  </h4>
+                  <p className="text-text-muted text-[14.5px] leading-[1.75]">
+                    We mapped every repeatable workflow across seven departments,
+                    deployed eleven production-grade Claude projects starting
+                    with a fully branded Offer Generator, codified the brand and
+                    pricing logic into a single knowledge base, and surfaced that
+                    same knowledge base to prospects through a customer-facing
+                    landing page and chat widget.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* ── Section B: Inside the build (brochure page 5) ── */}
+            <div className="mb-16 pt-14 border-t border-[rgba(20,20,19,0.06)]">
+              <div className="text-[11px] uppercase tracking-[0.15em] text-text-faint mb-4">
+                Inside the build
+              </div>
+              <h3
+                className="text-[clamp(1.5rem,2.6vw,2.1rem)] font-medium leading-[1.15] mb-6 max-w-2xl text-text"
+                style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.025em" }}
+              >
+                Production-grade Claude. Not a ChatGPT subscription.
+              </h3>
+              <p
+                className="text-text text-[clamp(1rem,1.4vw,1.15rem)] leading-[1.55] max-w-2xl mb-10 italic"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                &ldquo;Capability without structure is just a chat window. The
+                structure is where the value lives.&rdquo;
+              </p>
+
+              {/* Claude frame screenshot */}
+              <div className="rounded-xl overflow-hidden border border-[rgba(20,20,19,0.1)] bg-bg shadow-[0_4px_24px_rgba(0,0,0,0.06)] mb-3">
+                <div className="flex items-center gap-1.5 px-4 py-2.5 bg-[rgba(20,20,19,0.04)] border-b border-[rgba(20,20,19,0.08)]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
+                  <div className="flex-1 text-center text-[11px] text-text-faint font-medium px-2 truncate">
+                    claude.ai · OrientPrint &mdash; Sales Proposals &amp; Pricing{" "}
+                    <span className="text-accent">/ Price generation</span>
+                  </div>
+                  <div className="w-12 shrink-0" />
+                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/orient/claude-pricing-output.png"
+                  alt="Real Claude-generated sales proposal for Orient with line items, GST, and an open question flagged"
+                  loading="lazy"
+                  className="w-full block"
+                />
+              </div>
+              <div className="flex items-start justify-between gap-4 mb-12 text-[12px]">
+                <div className="text-text-muted leading-snug">
+                  An actual proposal generated by Orient&rsquo;s Claude project.
+                  Branded line items. GST math. A flagged ambiguity.
+                </div>
+                <div className="text-accent font-semibold uppercase tracking-[0.08em] text-[10px] shrink-0 mt-0.5">
+                  Real output
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-10 md:gap-14 max-w-4xl">
+                <div>
+                  <h4
+                    className="text-text text-[14px] font-medium mb-3"
+                    style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
+                  >
+                    The structure behind it
+                  </h4>
+                  <p className="text-text-muted text-[14.5px] leading-[1.75]">
+                    Eight branded machine spec docs. Three knowledge files for
+                    pricing logic, domestic terms, and international terms. One
+                    project instructions file that wires it all together. Not a
+                    clever prompt &mdash; a production-grade Claude project
+                    trained on the entire sales surface of an eight-decade-old
+                    manufacturer.
+                  </p>
+                </div>
+                <div>
+                  <h4
+                    className="text-text text-[14px] font-medium mb-3"
+                    style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
+                  >
+                    What your team gets
+                  </h4>
+                  <p className="text-text-muted text-[14.5px] leading-[1.75]">
+                    Four-hour quotation work compressed to thirty minutes.
+                    Branded outputs that look like yours, not like a chatbot. An
+                    LLM that knows your products by name, your prices to the
+                    rupee, and your terms by version. And the safety to flag
+                    what it doesn&rsquo;t know instead of inventing it.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* ── Section C: Customer-facing layer (brochure page 6) ── */}
+            <div className="mb-12 pt-14 border-t border-[rgba(20,20,19,0.06)]">
+              <div className="text-[11px] uppercase tracking-[0.15em] text-text-faint mb-4">
+                The customer-facing layer
+              </div>
+              <h3
+                className="text-[clamp(1.15rem,1.9vw,1.55rem)] font-medium leading-[1.35] mb-10 max-w-3xl text-text-muted"
+                style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
+              >
+                An LLM specialist trained only on Orient&rsquo;s product
+                knowledge, embedded into a public site and exposed as a chat any
+                prospect can ask anything.
+              </h3>
+
+              {/* Browser frame screenshot */}
+              <div className="rounded-xl overflow-hidden border border-[rgba(20,20,19,0.1)] bg-bg shadow-[0_4px_24px_rgba(0,0,0,0.06)] mb-3">
+                <div className="flex items-center gap-1.5 px-4 py-2.5 bg-[rgba(20,20,19,0.04)] border-b border-[rgba(20,20,19,0.08)]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
+                  <div className="flex-1 text-center text-[11px] text-text-faint font-mono px-2 truncate">
+                    orient-landing-opal.vercel.app
+                  </div>
+                  <div className="w-12 shrink-0" />
+                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/orient/orient-landing-hero.png"
+                  alt="Orient landing page concept"
+                  loading="lazy"
+                  className="w-full block"
+                />
+              </div>
+              <div className="flex items-start justify-between gap-4 mb-12 text-[12px]">
+                <div className="text-text-muted leading-snug">
+                  Concept site · Next.js · Interactive globe · Embedded AI chat
+                </div>
+                <div className="text-accent font-semibold uppercase tracking-[0.08em] text-[10px] shrink-0 mt-0.5">
+                  Launching soon
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-[1fr_1.15fr] gap-10 md:gap-14 items-start">
+                <div>
+                  <div className="rounded-xl overflow-hidden border border-[rgba(20,20,19,0.1)] bg-bg shadow-[0_4px_24px_rgba(0,0,0,0.06)] mb-2">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/orient/orient-chat-response.png"
+                      alt="The Orient AI chat answering a real C-Series vs L&P Series comparison question with a structured table"
+                      loading="lazy"
+                      className="w-full block"
+                    />
+                  </div>
+                  <div className="text-[12px] text-text-faint">
+                    The same chat answering a real product question
+                  </div>
+                </div>
+                <div>
+                  <h4
+                    className="text-text text-[15px] font-medium mb-3"
+                    style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
+                  >
+                    One knowledge base. Three surfaces.
+                  </h4>
+                  <p className="text-text-muted text-[14.5px] leading-[1.75] mb-4">
+                    The same structured knowledge base that powers Orient&rsquo;s
+                    internal Offer Generator also feeds the public site and the
+                    embedded chat widget. One place to update. Three places it
+                    shows up. Always consistent.
+                  </p>
+                  <p className="text-text-faint text-[13.5px] leading-[1.7]">
+                    No hallucinated specs. No invented prices. Sub-second
+                    streaming responses across four machine lines, with
+                    guardrails for out-of-scope questions and pricing redirects.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Final read-more link */}
+            <div className="pt-8 border-t border-[rgba(20,20,19,0.06)]">
+              <a
+                href="/blog/orient-case-study"
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center gap-2 text-[14px] text-text font-medium underline decoration-text/20 underline-offset-[5px] hover:decoration-text/60 transition-colors"
+              >
+                Read the full case study
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -238,7 +678,9 @@ export default function Home() {
   const quotesRef = useFadeIn();
   const audienceRef = useFadeIn();
   const faqRef = useFadeIn();
+  const founderRef = useFadeIn();
   const ctaRef = useFadeIn();
+  const whyClaudeRef = useFadeIn();
 
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -277,8 +719,18 @@ export default function Home() {
 
   return (
     <main className="min-h-screen">
+      <BlogTOC
+        headings={[
+          { id: "problem", text: "The problem" },
+          { id: "case-study", text: "Case study" },
+          { id: "process", text: "How we work" },
+          { id: "services", text: "Services" },
+          { id: "founder", text: "Who builds this" },
+          { id: "contact", text: "Get in touch" },
+        ]}
+      />
       {/* ── Nav ──────────────────────────────────────── */}
-      <nav className={`fixed top-0 w-full z-50 backdrop-blur-xl bg-[#e8e6dc]/80 transition-transform duration-300 ${scrolled ? "translate-y-0" : "-translate-y-full"}`}>
+      <nav className="fixed top-0 w-full z-50 backdrop-blur-xl bg-[#e8e6dc]/80">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 h-[4.25rem] flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2.5">
@@ -324,43 +776,22 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Hero text */}
+        {/* Hero text — single liquid-glass card, centered on page */}
         <div className="relative max-w-[1280px] mx-auto px-6 lg:px-10 pt-36 md:pt-44">
-          <h1
-            className="text-[clamp(2.8rem,5.5vw,5rem)] font-medium leading-[1.08] mb-8 max-w-[560px]"
-          >
-            AI, <span className="text-accent">thoughtfully</span> deployed.
-          </h1>
-          <p className="text-text-muted text-[clamp(1rem,1.5vw,1.2rem)] max-w-[420px] leading-[1.7] mb-10">
-            We settle{" "}
-            <ClaudeTooltip />{" "}
-            into your team&apos;s actual workflows &mdash;
-            structured rollouts, production-grade instructions, and real
-            results.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <a
-              href="#contact"
-              className="group inline-flex items-center text-[15px] font-medium bg-text text-bg px-6 py-3 rounded-lg hover:bg-[#30302e] transition-colors duration-200"
-            >
-              Start a conversation
-              <Arrow />
-            </a>
-            <a
-              href="#process"
-              className="group inline-flex items-center text-[15px] font-medium text-text px-6 py-3 rounded-lg hover:border-[rgba(20,20,19,0.2)] transition-all duration-200"
-              style={{
-                background: "rgba(0,0,0,0.04)",
-                backgroundImage: "linear-gradient(135deg, rgba(0,0,0,0.04), rgba(0,0,0,0.02))",
-                backdropFilter: "blur(6px)",
-                WebkitBackdropFilter: "blur(6px)",
-                boxShadow: "inset 1px 1px 1px rgba(0,0,0,0.1), inset -1px -1px 1px rgba(255,255,255,0.3), 0 2px 8px rgba(0,0,0,0.06)",
-                border: "1px solid rgba(0,0,0,0.1)",
-              }}
-            >
-              See how it works
-              <Arrow />
-            </a>
+          <div className="liquid-glass mx-auto md:mx-0 max-w-[680px] px-8 md:px-14 py-10 md:py-14 text-center md:text-left">
+            <h1 className="text-[clamp(2.4rem,4.8vw,4.2rem)] font-medium leading-[1.08] mb-8">
+              AI, <span className="text-accent">thoughtfully</span> deployed.
+            </h1>
+            <HeroSubtitle />
+            <div className="mt-8 flex justify-end">
+              <a
+                href="#contact"
+                className="group inline-flex items-center text-[15px] font-medium text-text hover:text-text/70 transition-colors duration-200"
+              >
+                Start a conversation
+                <Arrow />
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -397,8 +828,15 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Case Study: Orient ────────────────────────── */}
+      <section id="case-study" ref={caseRef}>
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-20">
+          <OrientCaseStudyCard />
+        </div>
+      </section>
+
       {/* ── Problem ──────────────────────────────────── */}
-      <section ref={problemRef}>
+      <section id="problem" ref={problemRef}>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36 relative">
           <div className="flex items-start justify-between mb-16">
             <div className="max-w-[70%] sm:max-w-2xl">
@@ -407,7 +845,7 @@ export default function Home() {
               </h2>
               <p className="fade-up text-text-muted text-[17px] leading-relaxed">
                 The gap isn&apos;t tools &mdash; it&apos;s deployment.
-                Here&apos;s how we deploy Claude differently.
+                Here&apos;s how we close it.
               </p>
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -450,174 +888,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Claude Mind Map ──────────────────────────── */}
-      <section>
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24 text-center">
-          <h2
-            className="text-[clamp(1.4rem,2.5vw,2rem)] font-medium leading-[1.2] mb-4 text-text-muted"
-            style={{
-              fontFamily: "var(--font-heading)",
-              letterSpacing: "-0.03em",
-            }}
-          >
-            Claude in action.
+      {/* ── Why Claude ───────────────────────────────── */}
+      <section ref={whyClaudeRef}>
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 pt-6 md:pt-10 pb-16 md:pb-24">
+          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-5 text-center">
+            Built for production, not demos.
           </h2>
-          <p className="text-text-muted text-[15px] mb-6">
-            <a href="/blog/why-claude-over-custom-ai" className="text-accent hover:underline">Why Claude?</a>
-          </p>
-          <CoworkDemo className="mx-auto w-full max-w-[900px] text-left" />
-        </div>
-      </section>
-
-      {/* ── Case Study: Orient ────────────────────────── */}
-      <section ref={caseRef}>
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
-          <div
-            className="fade-up rounded-xl p-8 md:p-12 lg:p-16"
-            style={{
-              background: "rgba(0,0,0,0.04)",
-              backgroundImage:
-                "linear-gradient(135deg, rgba(0,0,0,0.04), rgba(0,0,0,0.02))",
-              backdropFilter: "blur(6px)",
-              WebkitBackdropFilter: "blur(6px)",
-              boxShadow:
-                "inset 1px 1px 1px rgba(0,0,0,0.1), inset -1px -1px 1px rgba(255,255,255,0.3), 0 4px 16px rgba(0,0,0,0.1)",
-              border: "1px solid rgba(0,0,0,0.1)",
-            }}
+          <p
+            className="fade-up text-text-muted text-[17px] leading-relaxed mb-12 text-center max-w-3xl mx-auto"
+            style={{ animationDelay: "60ms" }}
           >
-            {/* header */}
-            <div className="flex items-center gap-5 mb-10">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/orient-logo.png"
-                alt="Orient Printing & Packaging"
-                width={259}
-                height={78}
-                loading="lazy"
-                className="h-10 w-auto"
-              />
-              <div>
-                <div className="font-medium text-[17px]">
-                  Orient Printing & Packaging
-                </div>
-                <div className="text-sm text-text-faint mt-0.5">
-                  Manufacturing · 79 years in operation · 50+ countries
-                </div>
-              </div>
-            </div>
-
-            {/* quote */}
-            <blockquote className="border-l-2 border-accent pl-6 md:pl-8 text-text-muted text-[clamp(1rem,1.5vw,1.15rem)] leading-[1.8] mb-12 max-w-3xl">
-              &ldquo;49 use cases mapped across 7 departments. 18 projects
-              structured. 11 deployed in the first engagement &mdash; from offer
-              generation to BOM creation to service troubleshooting. Phased from
-              quick wins to ERP integration over six months.&rdquo;
-            </blockquote>
-
-            {/* stats */}
-            <div className="grid grid-cols-3 gap-8 md:gap-12">
-              {[
-                { v: "49", l: "Use cases mapped" },
-                { v: "11", l: "Projects deployed" },
-                { v: "85%", l: "Time saved on docs" },
-              ].map((s) => (
-                <div key={s.l}>
-                  <div
-                    className="text-accent text-[clamp(1.5rem,2.5vw,2.2rem)] font-medium leading-none mb-2"
-                    style={{
-                      fontFamily: "var(--font-heading)",
-                      letterSpacing: "-0.03em",
-                    }}
-                  >
-                    {s.v}
-                  </div>
-                  <div className="text-text-faint text-xs uppercase tracking-[0.12em]">
-                    {s.l}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Customer Quotes ─────────────────────────── */}
-      <section ref={quotesRef} className="bg-[#ddd9cc]">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
-          <p className="fade-up text-xs uppercase tracking-[0.15em] text-text-faint mb-4">
-            Voices from South Asia
+            Most AI models are great in a sandbox and unpredictable in
+            production. Claude is the opposite. It treats your instructions as
+            a contract, not a suggestion &mdash; so the offer template stays
+            branded, the chat agent stays in scope, and your rollout
+            doesn&rsquo;t quietly drift over time.
           </p>
-          <h2
-            className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-16 max-w-3xl text-text"
-            style={{ animationDelay: "80ms" }}
-          >
-            What business leaders are saying about AI adoption.
-          </h2>
 
-          <div className="grid md:grid-cols-3 gap-px bg-border-light rounded-2xl overflow-hidden">
+          <div className="grid md:grid-cols-3 gap-px bg-border-light rounded-2xl overflow-hidden stagger mb-16">
             {[
               {
-                q: "My worry isn\u2019t intentional harm but unexamined assumptions being scaled through automation.",
-                attr: "Entrepreneur, India",
-                span: "md:row-span-2",
-                featured: true,
+                title: "Same output. Every time.",
+                body: "When your offer document needs to land identically on attempt #1 and attempt #1,000 — that\u2019s Claude.",
               },
               {
-                q: "I\u2019m a father, small business owner in a small town in India \u2014 not rich, not Ivy League. I tried building an app in a programming language I\u2019d never touched\u2026 in 2 days with an AI tool, I had the app. It would have taken at least 2 months before.",
-                attr: "Entrepreneur, India",
+                title: "Stays in scope.",
+                body: "Customer-facing chat that won\u2019t go off-script, brand voice that won\u2019t drift, guardrails that actually hold.",
               },
               {
-                q: "It\u2019s not AI giving me ideas \u2014 it\u2019s me discovering ideas myself, as AI writes the code. Since I could think faster than I could build, my range of ideas has grown.",
-                attr: "Entrepreneur, India",
+                title: "Works inside your stack.",
+                body: "Cowork, Claude Projects, Skills, MCP — Claude ships with the deployment surfaces other models are still building.",
               },
-              {
-                q: "A laptop crash wiped three months of work \u2014 my website, gone. I rebuilt it in four languages within five weeks\u2026 then built a financial data tool for a charity in four days. I don\u2019t see any limit anymore.",
-                attr: "Entrepreneur, India",
-              },
-              {
-                q: "I was finding ways to earn, and accidentally AI gave me the idea of a new business\u2026 so I can marry the love of my life, retire my family, and help people in Balochistan and Sindh with food, schools, and hospitals.",
-                attr: "Entrepreneur, Pakistan",
-              },
-            ].map((quote, i) => (
-              <div
-                key={i}
-                className={`fade-up bg-bg p-8 md:p-10 flex flex-col justify-between ${
-                  quote.span ?? ""
-                }`}
-                style={{ animationDelay: `${i * 80}ms` }}
-              >
-                <blockquote
-                  className={`leading-[1.7] mb-8 ${
-                    quote.featured
-                      ? "text-[clamp(1.1rem,1.8vw,1.35rem)] text-text"
-                      : "text-[clamp(0.95rem,1.2vw,1.05rem)] text-text-muted"
-                  }`}
-                  style={{
-                    fontFamily: quote.featured
-                      ? "Sentient, Georgia, serif"
-                      : "inherit",
-                  }}
-                >
-                  &ldquo;{quote.q}&rdquo;
-                </blockquote>
-                <div className="text-xs text-text-faint uppercase tracking-[0.08em]">
-                  {quote.attr}
-                </div>
+            ].map((c) => (
+              <div key={c.title} className="fade-up bg-bg p-7 md:p-8">
+                <h3 className="text-text font-medium text-[16px] mb-3">
+                  {c.title}
+                </h3>
+                <p className="text-text-muted text-[14.5px] leading-[1.7]">
+                  {c.body}
+                </p>
               </div>
             ))}
           </div>
-          <p className="text-xs text-text-faint mt-6 max-w-2xl">
-            Quotes sampled from Anthropic&rsquo;s{" "}
-            <a
-              href="https://www.anthropic.com/features/81k-interviews#quotes"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:text-text-muted transition-colors"
-            >
-              81,000 Conversations About AI
-            </a>
-            , filtered by South Asia. Edited for clarity.
-          </p>
+
+          <CoworkDemo className="mx-auto w-full max-w-[900px] text-left" />
         </div>
       </section>
 
@@ -738,7 +1052,26 @@ export default function Home() {
                   p.align === "right" ? "md:flex md:justify-end" : ""
                 }`}
               >
-                <div className="max-w-md">
+                <div
+                  className="max-w-md px-9 py-10 md:px-12 md:py-12"
+                  style={{
+                    /* Rounded frosted-glass card that dissipates into the
+                       background: translucent radial fill, backdrop-filter
+                       blur, a wide ellipse mask that produces a rounded-
+                       rectangle shape with feathered edges (no hard border),
+                       and an explicit border-radius so the underlying shape
+                       is rounded even before the mask softens it. */
+                    backgroundImage:
+                      "radial-gradient(ellipse 95% 90% at center, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.3) 55%, rgba(255,255,255,0) 100%)",
+                    backdropFilter: "blur(14px)",
+                    WebkitBackdropFilter: "blur(14px)",
+                    borderRadius: "32px",
+                    WebkitMaskImage:
+                      "radial-gradient(ellipse 95% 88% at center, #000 55%, transparent 100%)",
+                    maskImage:
+                      "radial-gradient(ellipse 95% 88% at center, #000 55%, transparent 100%)",
+                  }}
+                >
                   <span
                     className="text-text-muted text-[15px] font-medium block mb-4"
                     style={{ fontFamily: "var(--font-heading)" }}
@@ -872,6 +1205,86 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Customer Quotes ─────────────────────────── */}
+      <section ref={quotesRef} className="bg-[#ddd9cc]">
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
+          <p className="fade-up text-xs uppercase tracking-[0.15em] text-text-faint mb-4">
+            Voices from South Asia
+          </p>
+          <h2
+            className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-16 max-w-3xl text-text"
+            style={{ animationDelay: "80ms" }}
+          >
+            What business leaders are saying about AI adoption.
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-px bg-border-light rounded-2xl overflow-hidden">
+            {[
+              {
+                q: "My worry isn\u2019t intentional harm but unexamined assumptions being scaled through automation.",
+                attr: "Entrepreneur, India",
+                span: "md:row-span-2",
+                featured: true,
+              },
+              {
+                q: "I\u2019m a father, small business owner in a small town in India \u2014 not rich, not Ivy League. I tried building an app in a programming language I\u2019d never touched\u2026 in 2 days with an AI tool, I had the app. It would have taken at least 2 months before.",
+                attr: "Entrepreneur, India",
+              },
+              {
+                q: "It\u2019s not AI giving me ideas \u2014 it\u2019s me discovering ideas myself, as AI writes the code. Since I could think faster than I could build, my range of ideas has grown.",
+                attr: "Entrepreneur, India",
+              },
+              {
+                q: "A laptop crash wiped three months of work \u2014 my website, gone. I rebuilt it in four languages within five weeks\u2026 then built a financial data tool for a charity in four days. I don\u2019t see any limit anymore.",
+                attr: "Entrepreneur, India",
+              },
+              {
+                q: "I was finding ways to earn, and accidentally AI gave me the idea of a new business\u2026 so I can marry the love of my life, retire my family, and help people in Balochistan and Sindh with food, schools, and hospitals.",
+                attr: "Entrepreneur, Pakistan",
+              },
+            ].map((quote, i) => (
+              <div
+                key={i}
+                className={`fade-up bg-bg p-8 md:p-10 flex flex-col justify-between ${
+                  quote.span ?? ""
+                }`}
+                style={{ animationDelay: `${i * 80}ms` }}
+              >
+                <blockquote
+                  className={`leading-[1.7] mb-8 ${
+                    quote.featured
+                      ? "text-[clamp(1.1rem,1.8vw,1.35rem)] text-text"
+                      : "text-[clamp(0.95rem,1.2vw,1.05rem)] text-text-muted"
+                  }`}
+                  style={{
+                    fontFamily: quote.featured
+                      ? "Sentient, Georgia, serif"
+                      : "inherit",
+                  }}
+                >
+                  &ldquo;{quote.q}&rdquo;
+                </blockquote>
+                <div className="text-xs text-text-faint uppercase tracking-[0.08em]">
+                  {quote.attr}
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-text-faint mt-6 max-w-2xl">
+            Quotes sampled from Anthropic&rsquo;s{" "}
+            <a
+              href="https://www.anthropic.com/features/81k-interviews#quotes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-text-muted transition-colors"
+            >
+              81,000 Conversations About AI
+            </a>
+            , filtered by South Asia. Edited for clarity.
+          </p>
+        </div>
+      </section>
+
       {/* ── FAQ ──────────────────────────────────────── */}
       <section ref={faqRef}>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
@@ -934,6 +1347,65 @@ export default function Home() {
                 </div>
               </details>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Founder ──────────────────────────────────── */}
+      <section id="founder" ref={founderRef} className="bg-[#ddd9cc]">
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
+          <div className="max-w-[860px] mx-auto">
+            <span className="fade-up block text-[10px] font-medium uppercase tracking-[0.18em] text-text-faint mb-5">
+              Who builds this
+            </span>
+            <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-14 max-w-2xl">
+              One operator. Every project.
+            </h2>
+
+            <div className="grid sm:grid-cols-[180px_1fr] gap-8 sm:gap-12 items-start">
+              {/* Photo */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/pranav-ambwani.jpg"
+                alt="Pranav Ambwani, Founder of Settle"
+                width={360}
+                height={360}
+                loading="lazy"
+                className="fade-up w-[140px] sm:w-[180px] h-[140px] sm:h-[180px] rounded-full object-cover border border-border-light"
+                style={{ filter: "grayscale(0.15) contrast(1.02)" }}
+              />
+
+              {/* Bio */}
+              <div className="fade-up">
+                <div
+                  className="text-[clamp(1.4rem,2vw,1.8rem)] font-medium leading-[1.15] mb-1"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  Pranav Ambwani
+                </div>
+                <div className="text-[11px] font-medium uppercase tracking-[0.14em] text-accent mb-6">
+                  Founder · Settle
+                </div>
+                <p className="text-text-muted text-[16px] md:text-[17px] leading-[1.7] mb-4">
+                  Pranav holds a BS in Electrical Engineering from the University
+                  of Southern California and spent nine years in Los Angeles
+                  before returning home to Delhi. Settle runs through him
+                  directly &mdash; discovery, deployment, iteration. No account
+                  managers, no junior hand-offs.
+                </p>
+                <a
+                  href="https://www.linkedin.com/in/pranavambwani/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block text-accent text-[14px] font-medium hover:underline mt-2"
+                >
+                  Connect on LinkedIn &rarr;
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
