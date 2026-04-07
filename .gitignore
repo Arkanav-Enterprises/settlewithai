@@ -45,3 +45,15 @@ settle-process.png
 settle-process-2.png
 settle-v2-full.png
 settle-v2-visible.png
+
+# private business documents (MOU, MCA filings, brochure, internal playbooks)
+/docs/
+
+# test artifacts and debug screenshots
+/.playwright-mcp/
+/screenshots/
+# any new PNG dropped at the repo root (existing tracked ones are unaffected)
+/*.png
+
+# next.js build cache that sometimes lands inside /public during dev
+/public/.next/
