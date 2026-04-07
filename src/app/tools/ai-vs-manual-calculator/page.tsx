@@ -138,7 +138,7 @@ export default function AiVsManualCalculatorPage() {
               },
               {
                 q: "How does Claude AI reduce task time so significantly?",
-                a: "Claude handles the repetitive, structured portions — drafting, summarizing, comparing data, generating first versions. Humans review and refine, which is faster than creating from scratch.",
+                a: "Claude AI handles the repetitive, structured portions — drafting, summarizing, comparing data, generating first versions. Humans review and refine, which is faster than creating from scratch.",
               },
               {
                 q: "What real-world results have businesses seen?",

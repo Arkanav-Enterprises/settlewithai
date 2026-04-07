@@ -404,9 +404,9 @@ export default function Article() {
           </p>
           <p>
             I built it in two steps. First, the sales engineer enters
-            the machine specification into a <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude</a> project I configured with
+            the machine specification into a <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude AI</a> project I configured with
             Orient&apos;s pricing logic, product knowledge base, and full
-            terms and conditions. Claude calculates the correct pricing,
+            terms and conditions. Claude AI calculates the correct pricing,
             including head count formulas, add-on components (unwind
             systems, IR drying, coating units, RIP software, sheeters), and
             installation costs. It outputs structured data across
@@ -497,7 +497,7 @@ export default function Article() {
               <strong>ERP Coding Assistant.</strong> Development
               support for Orient&apos;s custom ERP system. The IT team loaded
               the ERP schema into the project&apos;s knowledge base, giving
-              Claude full context on their codebase.
+              Claude AI full context on their codebase.
             </li>
           </ul>
 
@@ -583,8 +583,8 @@ export default function Article() {
                 <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">A structured, phase-by-phase approach to deploying AI across your team&apos;s real workflows.</p>
               </a>
               <a href="/blog/mcp-explained-for-business" className="group">
-                <p className="font-medium group-hover:text-[#d97757] transition-colors">MCP Explained: Connect Your ERP, CRM, and Systems to Claude</p>
-                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">How Model Context Protocol lets Claude read and write to your business systems.</p>
+                <p className="font-medium group-hover:text-[#d97757] transition-colors">MCP Explained: Connect Your ERP, CRM, and Systems to Claude AI</p>
+                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">How Model Context Protocol lets Claude AI read and write to your business systems.</p>
               </a>
             </div>
           </div>

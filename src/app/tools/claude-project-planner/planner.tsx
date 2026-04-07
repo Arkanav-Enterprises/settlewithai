@@ -194,8 +194,8 @@ export function Planner() {
 
     return (
       <div>
-        <h2 className="text-xl font-semibold tracking-[-0.02em] text-text font-heading mb-1">Your Claude Project Blueprint</h2>
-        <p className="text-text-muted text-[0.9375rem] leading-relaxed mb-8">Here is everything you need to set up this project in Claude.</p>
+        <h2 className="text-xl font-semibold tracking-[-0.02em] text-text font-heading mb-1">Your Claude AI Project Blueprint</h2>
+        <p className="text-text-muted text-[0.9375rem] leading-relaxed mb-8">Here is everything you need to set up this project in Claude AI.</p>
 
         <div className="border border-border-light rounded-xl bg-[#fdfcfa] p-6 sm:p-8 space-y-6">
           <div>
@@ -291,7 +291,7 @@ export function Planner() {
       {step === 0 && (
         <div className="space-y-6">
           <h2 className="text-xl font-semibold tracking-[-0.02em] text-text font-heading mb-1">What&apos;s the workflow?</h2>
-          <p className="text-text-muted text-[0.9375rem] leading-relaxed mb-6">Describe the task you want Claude to help with.</p>
+          <p className="text-text-muted text-[0.9375rem] leading-relaxed mb-6">Describe the task you want Claude AI to help with.</p>
           <div>
             <label htmlFor="workflowName" className={labelCls}>Workflow name</label>
             <input id="workflowName" type="text" value={data.workflowName} onChange={(e) => set("workflowName", e.target.value)} placeholder="e.g., Customer proposal generation" className={inputCls} />
@@ -314,14 +314,14 @@ export function Planner() {
       {/* Step 2 */}
       {step === 1 && (
         <div className="space-y-6">
-          <h2 className="text-xl font-semibold tracking-[-0.02em] text-text font-heading mb-1">What does Claude need to know?</h2>
-          <p className="text-text-muted text-[0.9375rem] leading-relaxed mb-6">Help Claude understand what goes in and what rules to follow.</p>
+          <h2 className="text-xl font-semibold tracking-[-0.02em] text-text font-heading mb-1">What does Claude AI need to know?</h2>
+          <p className="text-text-muted text-[0.9375rem] leading-relaxed mb-6">Help Claude AI understand what goes in and what rules to follow.</p>
           <div>
             <label htmlFor="inputFields" className={labelCls}>What information does the user provide each time?</label>
             <textarea id="inputFields" value={data.inputFields} onChange={(e) => set("inputFields", e.target.value)} placeholder="e.g., Customer name, product specs, pricing tier" rows={3} className={textareaCls} />
           </div>
           <div>
-            <span className={labelCls}>What reference materials does Claude need?</span>
+            <span className={labelCls}>What reference materials does Claude AI need?</span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
               {REFERENCE_FILES.map((file) => (
                 <label key={file} className="flex items-center gap-3 rounded-lg border border-border-light px-4 py-3 cursor-pointer hover:border-accent/40 transition-colors has-[:checked]:border-accent has-[:checked]:bg-accent/5">
@@ -332,7 +332,7 @@ export function Planner() {
             </div>
           </div>
           <div>
-            <label htmlFor="rules" className={labelCls}>Are there rules Claude must follow?</label>
+            <label htmlFor="rules" className={labelCls}>Are there rules Claude AI must follow?</label>
             <textarea id="rules" value={data.rules} onChange={(e) => set("rules", e.target.value)} placeholder="e.g., Never promise delivery dates, always include disclaimer, use formal tone" rows={3} className={textareaCls} />
           </div>
         </div>

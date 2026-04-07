@@ -58,10 +58,10 @@ const FURTHER_READING = [
       "49 use cases mapped, 11 projects deployed, 85% faster document generation.",
   },
   {
-    title: "MCP Explained: Connect Your ERP, CRM, and Tools to Claude",
+    title: "MCP Explained: Connect Your ERP, CRM, and Tools to Claude AI",
     href: "/blog/mcp-explained-for-business",
     description:
-      "How Model Context Protocol lets Claude read and write to your existing systems.",
+      "How Model Context Protocol lets Claude AI read and write to your existing systems.",
   },
 ];
 

@@ -63,7 +63,7 @@ const faqSchema = {
       name: "How is the estimated hours saved calculated?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Estimated hours saved is based on how often the workflow runs, how long it takes, and how structured it is. Highly structured workflows see the greatest reduction because Claude can handle templated, rule-based tasks with minimal human oversight.",
+        text: "Estimated hours saved is based on how often the workflow runs, how long it takes, and how structured it is. Highly structured workflows see the greatest reduction because Claude AI can handle templated, rule-based tasks with minimal human oversight.",
       },
     },
     {
@@ -140,7 +140,7 @@ export default function WorkflowAutomationQuizPage() {
               },
               {
                 q: "How are estimated hours saved calculated?",
-                a: "Based on frequency, duration, and structure level. Highly structured workflows see the greatest reduction because Claude handles templated, rule-based tasks with minimal human oversight.",
+                a: "Based on frequency, duration, and structure level. Highly structured workflows see the greatest reduction because Claude AI handles templated, rule-based tasks with minimal human oversight.",
               },
               {
                 q: "What should I do after seeing my results?",

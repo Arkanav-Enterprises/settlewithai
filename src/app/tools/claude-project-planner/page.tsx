@@ -9,9 +9,9 @@ const SITE_URL = "https://settlewithai.com";
 
 export const metadata: Metadata = {
   title:
-    "Claude Project Planner — Design Your First AI Project in 5 Minutes",
+    "Claude AI Project Planner — Design Your First AI Project in 5 Minutes",
   description:
-    "Use this guided wizard to plan your first Claude Project. Define the workflow, knowledge files, safety rules, and get a ready-to-build blueprint with complexity rating and setup estimate.",
+    "Use this guided wizard to plan your first Claude AI Project. Define the workflow, knowledge files, safety rules, and get a ready-to-build blueprint with complexity rating and setup estimate.",
   keywords: [
     "claude ai project template",
     "ai project planning",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    title: "Claude Project Planner | Settle",
+    title: "Claude AI Project Planner | Settle",
     description:
       "Design your first Claude AI project in 5 minutes. Guided wizard with blueprint output.",
     url: `${SITE_URL}/tools/claude-project-planner`,
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Claude Project Planner | Settle",
+    title: "Claude AI Project Planner | Settle",
     description:
       "Design your first Claude AI project in 5 minutes. Guided wizard with blueprint output.",
   },
@@ -44,15 +44,15 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "What is a Claude Project?",
+      name: "What is a Claude AI Project?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A Claude Project is a persistent workspace in Anthropic's Claude that bundles custom instructions, knowledge files, and safety rules together. Instead of re-explaining context every conversation, the project remembers your setup — so Claude produces consistent, on-brand output every time.",
+        text: "A Claude AI Project is a persistent workspace in Anthropic's Claude AI that bundles custom instructions, knowledge files, and safety rules together. Instead of re-explaining context every conversation, the project remembers your setup — so Claude AI produces consistent, on-brand output every time.",
       },
     },
     {
       "@type": "Question",
-      name: "How many Claude Projects does a typical company need?",
+      name: "How many Claude AI Projects does a typical company need?",
       acceptedAnswer: {
         "@type": "Answer",
         text: "Settle typically maps 15 to 49 use cases per company during a discovery engagement. Each distinct workflow — proposal generation, customer email drafts, compliance checks — becomes its own project with tailored instructions and knowledge files.",
@@ -60,10 +60,10 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      name: "What knowledge files should I upload to a Claude Project?",
+      name: "What knowledge files should I upload to a Claude AI Project?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Upload any reference material Claude needs to produce accurate output: company policies, product catalogs, pricing sheets, SOPs, templates, and style guides. The planner helps you identify which files your specific workflow requires.",
+        text: "Upload any reference material Claude AI needs to produce accurate output: company policies, product catalogs, pricing sheets, SOPs, templates, and style guides. The planner helps you identify which files your specific workflow requires.",
       },
     },
     {
@@ -71,7 +71,7 @@ const faqSchema = {
       name: "Can Settle build these projects for my team?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. Settle's core service is mapping your workflows, building Claude Projects with proper instructions and knowledge files, and training your team to use them. The planner gives you a preview of what one project looks like — Settle builds the full system.",
+        text: "Yes. Settle's core service is mapping your workflows, building Claude AI Projects with proper instructions and knowledge files, and training your team to use them. The planner gives you a preview of what one project looks like — Settle builds the full system.",
       },
     },
   ],
@@ -85,7 +85,7 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       position: 2,
-      name: "Claude Project Planner",
+      name: "Claude AI Project Planner",
       item: `${SITE_URL}/tools/claude-project-planner`,
     },
   ],
@@ -102,7 +102,7 @@ export default function ClaudeProjectPlannerPage() {
           items={[
             { label: "Tools", href: "/tools/ai-readiness" },
             {
-              label: "Claude Project Planner",
+              label: "Claude AI Project Planner",
               href: "/tools/claude-project-planner",
             },
           ]}
@@ -113,10 +113,10 @@ export default function ClaudeProjectPlannerPage() {
             Free Tool
           </span>
           <h1 className="text-[clamp(1.8rem,4vw,2.8rem)] font-semibold leading-[1.15] tracking-[-0.03em] text-text mb-4 font-heading">
-            Claude Project Planner
+            Claude AI Project Planner
           </h1>
           <p className="text-text-muted text-[1.05rem] leading-relaxed">
-            Design your first Claude Project in about 5 minutes. Answer a few
+            Design your first Claude AI Project in about 5 minutes. Answer a few
             questions about your workflow and get a ready-to-build blueprint
             with instructions, knowledge file list, and complexity estimate.
           </p>
@@ -131,8 +131,8 @@ export default function ClaudeProjectPlannerPage() {
           <div className="space-y-4">
             {[
               {
-                q: "What is a Claude Project?",
-                a: "A persistent workspace in Anthropic's Claude that bundles custom instructions, knowledge files, and safety rules. Instead of re-explaining context every conversation, the project remembers your setup for consistent output.",
+                q: "What is a Claude AI Project?",
+                a: "A persistent workspace in Anthropic's Claude AI that bundles custom instructions, knowledge files, and safety rules. Instead of re-explaining context every conversation, the project remembers your setup for consistent output.",
               },
               {
                 q: "How many projects does a typical company need?",
@@ -140,11 +140,11 @@ export default function ClaudeProjectPlannerPage() {
               },
               {
                 q: "What knowledge files should I upload?",
-                a: "Any reference material Claude needs for accurate output: company policies, product catalogs, pricing sheets, SOPs, templates, and style guides. This planner helps you identify which files your workflow requires.",
+                a: "Any reference material Claude AI needs for accurate output: company policies, product catalogs, pricing sheets, SOPs, templates, and style guides. This planner helps you identify which files your workflow requires.",
               },
               {
                 q: "Can Settle build these projects for my team?",
-                a: "Yes. Settle maps your workflows, builds Claude Projects with proper instructions and knowledge files, and trains your team. This planner previews one project — Settle builds the full system.",
+                a: "Yes. Settle maps your workflows, builds Claude AI Projects with proper instructions and knowledge files, and trains your team. This planner previews one project — Settle builds the full system.",
               },
             ].map((faq) => (
               <details

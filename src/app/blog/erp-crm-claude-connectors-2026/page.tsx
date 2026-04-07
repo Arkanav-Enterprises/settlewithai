@@ -4,22 +4,22 @@ import { BlogTOC } from "@/components/blog/BlogTOC";
 
 export const metadata: Metadata = {
   title:
-    "Which ERPs and CRMs Best Connect with Claude in 2026? The Definitive Connector Guide",
+    "Which ERPs and CRMs Best Connect with Claude AI in 2026? The Definitive Connector Guide",
   description:
-    "HubSpot, Salesforce, NetSuite, Sage Intacct, and more. A practical breakdown of every ERP and CRM that connects to Claude via native connectors, MCP servers, and middleware in 2026.",
+    "HubSpot, Salesforce, NetSuite, Sage Intacct, and more. A practical breakdown of every ERP and CRM that connects to Claude AI via native connectors, MCP servers, and middleware in 2026.",
   keywords: [
-    "Claude ERP integration",
-    "Claude CRM connector",
-    "HubSpot Claude connector",
-    "Salesforce Claude Agentforce",
-    "NetSuite MCP Claude",
+    "Claude AI ERP integration",
+    "Claude AI CRM connector",
+    "HubSpot Claude AI connector",
+    "Salesforce Claude AI Agentforce",
+    "NetSuite MCP Claude AI",
     "Sage Intacct MCP server",
-    "Claude MCP connectors 2026",
+    "Claude AI MCP connectors 2026",
     "ERP AI integration",
     "CRM AI connector",
     "Claude AI business systems",
     "Anthropic MCP protocol",
-    "Claude enterprise integration",
+    "Claude AI enterprise integration",
   ],
   alternates: {
     canonical:
@@ -28,9 +28,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     title:
-      "Which ERPs and CRMs Best Connect with Claude in 2026?",
+      "Which ERPs and CRMs Best Connect with Claude AI in 2026?",
     description:
-      "HubSpot, Salesforce, NetSuite, Sage Intacct, and more. A practical breakdown of every ERP and CRM connector for Claude.",
+      "HubSpot, Salesforce, NetSuite, Sage Intacct, and more. A practical breakdown of every ERP and CRM connector for Claude AI.",
     url: "https://settlewithai.com/blog/erp-crm-claude-connectors-2026",
     siteName: "Settle",
     publishedTime: "2026-04-04T00:00:00Z",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Which ERPs and CRMs Best Connect with Claude in 2026?",
+      "Which ERPs and CRMs Best Connect with Claude AI in 2026?",
     description:
       "HubSpot, Salesforce, NetSuite, Sage Intacct, and more. The definitive connector guide for 2026.",
   },
@@ -50,9 +50,9 @@ export default function Article() {
     "@context": "https://schema.org",
     "@type": "Article",
     headline:
-      "Which ERPs and CRMs Best Connect with Claude in 2026? The Definitive Connector Guide",
+      "Which ERPs and CRMs Best Connect with Claude AI in 2026? The Definitive Connector Guide",
     description:
-      "HubSpot, Salesforce, NetSuite, Sage Intacct, and more. A practical breakdown of every ERP and CRM that connects to Claude via native connectors, MCP servers, and middleware in 2026.",
+      "HubSpot, Salesforce, NetSuite, Sage Intacct, and more. A practical breakdown of every ERP and CRM that connects to Claude AI via native connectors, MCP servers, and middleware in 2026.",
     datePublished: "2026-04-04T00:00:00Z",
     dateModified: "2026-04-04T00:00:00Z",
     image: "https://settlewithai.com/og-image.png",
@@ -97,7 +97,7 @@ export default function Article() {
             itemListElement: [
               { "@type": "ListItem", position: 1, name: "Home", item: "https://settlewithai.com" },
               { "@type": "ListItem", position: 2, name: "Blog", item: "https://settlewithai.com/blog" },
-              { "@type": "ListItem", position: 3, name: "ERP & CRM Claude Connectors 2026", item: "https://settlewithai.com/blog/erp-crm-claude-connectors-2026" },
+              { "@type": "ListItem", position: 3, name: "ERP & CRM Claude AI Connectors 2026", item: "https://settlewithai.com/blog/erp-crm-claude-connectors-2026" },
             ],
           }),
         }}
@@ -139,10 +139,10 @@ export default function Article() {
               letterSpacing: "-0.03em",
             }}
           >
-            Which ERPs and CRMs Best Connect with Claude in 2026?
+            Which ERPs and CRMs Best Connect with Claude AI in 2026?
           </h1>
           <p className="text-text-muted text-[17px] leading-relaxed">
-            Six months ago, connecting Claude to your business systems meant
+            Six months ago, connecting Claude AI to your business systems meant
             custom API code and a developer on retainer. Today, native connectors
             and MCP servers have changed the game. Here&apos;s what actually works,
             what&apos;s half-baked, and where the gaps still are.
@@ -162,18 +162,18 @@ export default function Article() {
           <h2>The connector landscape shifted fast</h2>
           <p>
             When I wrote about MCP for business back in March, most ERP and CRM
-            connections to Claude required middleware like Zapier or custom-built
+            connections to Claude AI required middleware like Zapier or custom-built
             bridges. That was eight weeks ago. Since then, HubSpot launched the
-            first native CRM connector for Claude. Oracle built an official MCP
+            first native CRM connector for Claude AI. Oracle built an official MCP
             server for NetSuite. Sage shipped one for Intacct. Salesforce deepened
-            its Agentforce integration so Claude can read and act on CRM data
+            its Agentforce integration so Claude AI can read and act on CRM data
             inside Slack.
           </p>
           <p>
             The pace is accelerating because of one protocol: MCP (Model Context
             Protocol). It&apos;s the USB-C of AI integrations. Instead of building
             a custom connector for every AI model, vendors build one MCP server
-            and it works with Claude, ChatGPT, Copilot, and anything else that
+            and it works with Claude AI, ChatGPT, Copilot, and anything else that
             speaks the protocol. That single standard is why we&apos;re seeing more
             enterprise connectors in the first quarter of 2026 than in all of 2025.
           </p>
@@ -181,26 +181,26 @@ export default function Article() {
           <figure className="my-10">
             <img
               src="https://cdn.prod.website-files.com/68a44d4040f98a4adf2207b6/6905137f403a1564673d63ca_og_claude-code-remote-mcp.jpg"
-              alt="Claude integrations announcement showing remote MCP connections to business tools"
+              alt="Claude AI integrations announcement showing remote MCP connections to business tools"
               className="rounded-lg w-full"
               loading="lazy"
             />
             <figcaption className="text-sm text-text-faint mt-3 text-center">
-              Claude now connects to business systems through native connectors and remote MCP servers. Image: Anthropic
+              Claude AI now connects to business systems through native connectors and remote MCP servers. Image: Anthropic
             </figcaption>
           </figure>
 
-          <h2>How Claude connects to business systems</h2>
+          <h2>How Claude AI connects to business systems</h2>
           <p>
             Before diving into specific platforms, it helps to understand the three
             connection tiers. Not all integrations are created equal, and the tier
-            determines what Claude can actually do with your data.
+            determines what Claude AI can actually do with your data.
           </p>
 
           <p>
             <strong>Tier 1: Native connectors.</strong> These are built by the
-            vendor (HubSpot, Oracle) and show up directly in Claude&apos;s interface.
-            You authenticate once and Claude can read your data, create records,
+            vendor (HubSpot, Oracle) and show up directly in Claude AI&apos;s interface.
+            You authenticate once and Claude AI can read your data, create records,
             and trigger actions without any middleware. This is the gold standard.
           </p>
 
@@ -214,7 +214,7 @@ export default function Article() {
 
           <p>
             <strong>Tier 3: Middleware bridges.</strong> Platforms like Zapier,
-            Make, or n8n sit between Claude and the business system. You get
+            Make, or n8n sit between Claude AI and the business system. You get
             flexibility but add a layer of latency, cost, and potential failure
             points. This is the fallback for systems that don&apos;t have native
             support yet.
@@ -225,20 +225,20 @@ export default function Article() {
           <h3>HubSpot: the first native CRM connector</h3>
           <p>
             HubSpot made history by launching the first CRM connector built
-            specifically for Claude. It&apos;s not a third-party integration or a
+            specifically for Claude AI. It&apos;s not a third-party integration or a
             Zapier bridge. It&apos;s a first-party connector that shows up directly
-            in Claude&apos;s chat interface on web, desktop, and mobile.
+            in Claude AI&apos;s chat interface on web, desktop, and mobile.
           </p>
 
           <figure className="my-10">
             <img
               src="https://www.hubspot.com/hubfs/Anthropic-Connector-Logo-Lockup-Tan.png"
-              alt="HubSpot and Anthropic partnership logo for the first CRM connector for Claude"
+              alt="HubSpot and Anthropic partnership logo for the first CRM connector for Claude AI"
               className="rounded-lg w-full"
               loading="lazy"
             />
             <figcaption className="text-sm text-text-faint mt-3 text-center">
-              HubSpot became the first CRM platform to ship a native connector for Claude. Image: HubSpot
+              HubSpot became the first CRM platform to ship a native connector for Claude AI. Image: HubSpot
             </figcaption>
           </figure>
 
@@ -257,14 +257,14 @@ export default function Article() {
           </p>
           <p>
             <strong>Who gets it:</strong> All HubSpot customers across all tiers
-            with a paid Claude subscription (Pro, Max, Team, or Enterprise). No
-            additional cost beyond your Claude plan.
+            with a paid Claude AI subscription (Pro, Max, Team, or Enterprise). No
+            additional cost beyond your Claude AI plan.
           </p>
           <p>
             <strong>Why it matters:</strong> HubSpot also shipped an official MCP
             server through their developer portal, making them the first major CRM
             to offer both a native connector and a production-grade MCP integration.
-            If you&apos;re on HubSpot, the Claude integration story is the best in
+            If you&apos;re on HubSpot, the Claude AI integration story is the best in
             the industry right now.
           </p>
 
@@ -277,10 +277,10 @@ export default function Article() {
             protected by Salesforce security controls.
           </p>
           <p>
-            <strong>How it connects:</strong> Claude is a preferred model inside
+            <strong>How it connects:</strong> Claude AI is a preferred model inside
             Salesforce&apos;s Agentforce platform. MCP Apps enable bidirectional
             extensions, starting with Slack and expanding across Agentforce 360.
-            Teams can explore ideas in Claude and trigger Salesforce-native
+            Teams can explore ideas in Claude AI and trigger Salesforce-native
             Agentforce actions without leaving the conversation.
           </p>
 
@@ -292,68 +292,68 @@ export default function Article() {
               loading="lazy"
             />
             <figcaption className="text-sm text-text-faint mt-3 text-center">
-              Anthropic and Salesforce&apos;s expanded partnership brings Claude into regulated industries through Agentforce. Image: Anthropic
+              Anthropic and Salesforce&apos;s expanded partnership brings Claude AI into regulated industries through Agentforce. Image: Anthropic
             </figcaption>
           </figure>
 
           <p>
             <strong>What it can do:</strong> AI-powered agents for regulated
             industries including financial services, healthcare, cybersecurity,
-            and life sciences. Claude is available inside Slack through a deepened
+            and life sciences. Claude AI is available inside Slack through a deepened
             integration. Agentforce 360 extensions let customers take action in
-            Claude by triggering Salesforce-native workflows.
+            Claude AI by triggering Salesforce-native workflows.
           </p>
           <p>
             <strong>Limitations:</strong> There&apos;s no standalone &ldquo;Salesforce
-            connector&rdquo; you can add in Claude&apos;s settings the way you can with
+            connector&rdquo; you can add in Claude AI&apos;s settings the way you can with
             HubSpot. The integration lives inside Salesforce&apos;s ecosystem, which
             means you need Agentforce licensing plus a Claude Team or Enterprise
             plan. It&apos;s powerful but not plug-and-play.
           </p>
           <p>
             <strong>Why it matters:</strong> If you&apos;re a Salesforce shop in a
-            regulated industry, this is the most secure way to use Claude with
+            regulated industry, this is the most secure way to use Claude AI with
             your CRM data. The trust boundary is a genuine differentiator that
             no other CRM-to-AI integration can match.
           </p>
 
           <h3>Microsoft Dynamics 365: through the M365 ecosystem</h3>
           <p>
-            There&apos;s no dedicated &ldquo;Dynamics 365 Claude connector.&rdquo; Instead,
+            There&apos;s no dedicated &ldquo;Dynamics 365 Claude AI connector.&rdquo; Instead,
             access comes through two paths: the official Microsoft 365 connector
-            for Claude (available on Team and Enterprise plans globally) and the
+            for Claude AI (available on Team and Enterprise plans globally) and the
             Dataverse MCP server, which exposes the same knowledge surfaces to
-            Claude that you use with Copilot Studio.
+            Claude AI that you use with Copilot Studio.
           </p>
           <p>
             <strong>What this means in practice:</strong> If your CRM data lives
-            in Dataverse (which it does if you&apos;re on Dynamics 365), Claude can
+            in Dataverse (which it does if you&apos;re on Dynamics 365), Claude AI can
             query it through the M365 connector. It&apos;s not as polished as the
             HubSpot experience, but it works. The Dataverse MCP server is the
             bridge that makes it possible.
           </p>
           <p>
             <strong>Best for:</strong> Companies already deep in the Microsoft
-            ecosystem who want Claude as an alternative or complement to Copilot.
+            ecosystem who want Claude AI as an alternative or complement to Copilot.
           </p>
 
           <h3>Zoho and Pipedrive: middleware only</h3>
           <p>
             Neither Zoho CRM nor Pipedrive has a native connector or official MCP
-            server for Claude. Both are available through Zapier, Make, n8n,
+            server for Claude AI. Both are available through Zapier, Make, n8n,
             and other automation platforms.
           </p>
           <p>
             For Zoho, you can use Zoho Flow, Integrately, or Zapier to trigger
-            Claude when a module entry is created or updated. For Pipedrive,
+            Claude AI when a module entry is created or updated. For Pipedrive,
             the same middleware options apply, plus Pabbly Connect, IFTTT,
             and Albato.
           </p>
           <p>
             <strong>The honest take:</strong> These work for simple trigger-action
-            workflows (new deal created, ask Claude to score it). But they don&apos;t
-            give Claude the rich, contextual access that native connectors
-            provide. If you&apos;re on Zoho or Pipedrive and want deep Claude
+            workflows (new deal created, ask Claude AI to score it). But they don&apos;t
+            give Claude AI the rich, contextual access that native connectors
+            provide. If you&apos;re on Zoho or Pipedrive and want deep Claude AI
             integration, you&apos;re either waiting for a native connector or building
             a custom MCP server.
           </p>
@@ -362,11 +362,11 @@ export default function Article() {
 
           <h3>Oracle NetSuite: the most mature ERP integration</h3>
           <p>
-            NetSuite has the most complete Claude integration of any ERP platform.
+            NetSuite has the most complete Claude AI integration of any ERP platform.
             Oracle&apos;s own development team built an MCP Standard Tools SuiteApp
-            that lets Claude interact with NetSuite data through the Model Context
+            that lets Claude AI interact with NetSuite data through the Model Context
             Protocol. There&apos;s also a native AI Connector that shows up directly
-            in Claude&apos;s connector settings.
+            in Claude AI&apos;s connector settings.
           </p>
           <p>
             <strong>Two ways to connect:</strong>
@@ -377,12 +377,12 @@ export default function Article() {
               Tools SuiteApp, enable Server SuiteScript and OAuth 2.0. You get
               natural language queries against your NetSuite data, with actions
               respecting your user&apos;s role and permissions. Or use the NetSuite AI
-              Connector directly from Claude&apos;s connector settings with a Pro plan
+              Connector directly from Claude AI&apos;s connector settings with a Pro plan
               or higher.
             </li>
             <li>
               <strong>CData Connect AI:</strong> A third-party MCP server that
-              acts as a bridge between Claude and NetSuite using token-based
+              acts as a bridge between Claude AI and NetSuite using token-based
               authentication. No SuiteApp installation required, but the
               open-source version is read-only. Full CRUD requires a paid CData
               Connect AI license.
@@ -396,17 +396,17 @@ export default function Article() {
           </p>
           <p>
             <strong>Why it matters:</strong> NetSuite is the ERP of choice for
-            mid-market companies, which is exactly where Claude deployment is
-            accelerating fastest. If your operations run on NetSuite, the Claude
+            mid-market companies, which is exactly where Claude AI deployment is
+            accelerating fastest. If your operations run on NetSuite, the Claude AI
             connection story is strong.
           </p>
 
           <h3>SAP: indirect but functional</h3>
           <p>
-            SAP&apos;s relationship with Claude is mediated through Amazon Bedrock.
-            SAP&apos;s Joule AI assistant uses Claude models (including Sonnet 4.5
+            SAP&apos;s relationship with Claude AI is mediated through Amazon Bedrock.
+            SAP&apos;s Joule AI assistant uses Claude AI models (including Sonnet 4.5
             and Haiku 4.5) via Bedrock, and the SAP generative AI hub lets
-            customers choose Claude for specific use cases.
+            customers choose Claude AI for specific use cases.
           </p>
           <p>
             <strong>What this looks like:</strong> SAP Joule for Consultants
@@ -417,13 +417,13 @@ export default function Article() {
           </p>
           <p>
             <strong>The gap:</strong> There&apos;s no direct Anthropic-SAP partnership.
-            Claude access is always mediated through AWS Bedrock, which adds a
-            layer of indirection. If you&apos;re an SAP shop, you can use Claude, but
+            Claude AI access is always mediated through AWS Bedrock, which adds a
+            layer of indirection. If you&apos;re an SAP shop, you can use Claude AI, but
             the integration isn&apos;t as tight as NetSuite&apos;s.
           </p>
           <p>
             <strong>Best for:</strong> SAP customers already on AWS who want to
-            bring Claude into their Joule workflows without replacing their
+            bring Claude AI into their Joule workflows without replacing their
             existing AI infrastructure.
           </p>
 
@@ -432,7 +432,7 @@ export default function Article() {
             Sage made a smart move in November 2025 by launching AI Developer
             Solutions with Intacct as the first product. They built an official
             MCP server on top of Sage Intacct REST APIs, which means third-party
-            AI agents including Claude can integrate directly into the Sage
+            AI agents including Claude AI can integrate directly into the Sage
             ecosystem.
           </p>
           <p>
@@ -445,20 +445,20 @@ export default function Article() {
           <p>
             <strong>Why it matters:</strong> Sage Intacct is the go-to accounting
             ERP for companies that have outgrown QuickBooks. Having an official
-            MCP server means Claude can query financial data, run reports, and
+            MCP server means Claude AI can query financial data, run reports, and
             assist with close processes without custom development.
           </p>
 
           <h3>Odoo: third-party modules with official support coming</h3>
           <p>
-            Odoo doesn&apos;t have an official Claude connector yet, but the ecosystem
-            is filling the gap. The Odoo Apps Store has multiple Claude integration
+            Odoo doesn&apos;t have an official Claude AI connector yet, but the ecosystem
+            is filling the gap. The Odoo Apps Store has multiple Claude AI integration
             modules for version 19.0, including <code>ai_claude</code> and{" "}
             <code>ai_claude_anthropic</code> with RAG support. CData Connect and
             Make also offer Odoo-to-Claude bridges.
           </p>
           <p>
-            Odoo is reportedly working on integrating Claude directly into
+            Odoo is reportedly working on integrating Claude AI directly into
             Odoo.sh, which would make this a Tier 1 integration when it ships.
             For now, the third-party modules get the job done for teams that
             want context-aware AI responses inside their Odoo workflows.
@@ -474,7 +474,7 @@ export default function Article() {
           <p>
             <strong>Best for:</strong> Companies that want vendor flexibility.
             The BYOLLM model means you&apos;re not locked into a single AI provider,
-            and switching between Claude, GPT, or others doesn&apos;t require
+            and switching between Claude AI, GPT, or others doesn&apos;t require
             rearchitecting your ERP integration.
           </p>
 
@@ -482,20 +482,20 @@ export default function Article() {
           <p>
             For any ERP or CRM that doesn&apos;t have a native connector, the
             middleware layer fills the gap. Here&apos;s how the three major platforms
-            compare for Claude integrations:
+            compare for Claude AI integrations:
           </p>
 
           <p>
             <strong>Zapier</strong> has the broadest reach with 8,000+ connected
-            apps and an official Claude integration. Their MCP server now works
-            with Anthropic&apos;s Messages API, letting Claude trigger real-world
-            actions across nearly any business app. Claude usage on Zapier grew
+            apps and an official Claude AI integration. Their MCP server now works
+            with Anthropic&apos;s Messages API, letting Claude AI trigger real-world
+            actions across nearly any business app. Claude AI usage on Zapier grew
             10x year-over-year.
           </p>
 
           <p>
             <strong>Make (formerly Integromat)</strong> offers visual automation
-            with a Claude module. It&apos;s more flexible for complex, multi-step
+            with a Claude AI module. It&apos;s more flexible for complex, multi-step
             workflows than Zapier, with native connections to NetSuite, HubSpot,
             Pipedrive, Odoo, and hundreds more.
           </p>
@@ -511,7 +511,7 @@ export default function Article() {
 
           <h2>The scorecard: how every platform stacks up</h2>
           <p>
-            I&apos;ve been deploying Claude into mid-market companies for the past
+            I&apos;ve been deploying Claude AI into mid-market companies for the past
             year. Here&apos;s my honest assessment of each platform&apos;s connector
             maturity, based on what I&apos;ve seen work in production:
           </p>
@@ -604,9 +604,9 @@ export default function Article() {
           </p>
           <p>
             <strong>Agent-to-agent coordination</strong> is on the Q3 roadmap.
-            This will let Claude agents hand off tasks to other AI agents, which
+            This will let Claude AI agents hand off tasks to other AI agents, which
             matters when your ERP workflow involves multiple systems (e.g.,
-            Claude reads from NetSuite, acts in Salesforce, and reports in Slack).
+            Claude AI reads from NetSuite, acts in Salesforce, and reports in Slack).
           </p>
           <p>
             <strong>A curated MCP Registry with security audits</strong> is
@@ -615,20 +615,20 @@ export default function Article() {
             can approve without reviewing source code.
           </p>
           <p>
-            The trajectory is clear. By the end of 2026, connecting Claude to your
+            The trajectory is clear. By the end of 2026, connecting Claude AI to your
             ERP or CRM won&apos;t be a technical project. It&apos;ll be a settings toggle.
           </p>
 
           <h2>How to choose the right integration path</h2>
           <p>
-            After deploying Claude into dozens of business systems, here&apos;s the
+            After deploying Claude AI into dozens of business systems, here&apos;s the
             decision framework I use with clients:
           </p>
 
           <p>
             <strong>If you&apos;re on HubSpot or NetSuite:</strong> Use the native
             connector. It&apos;s the fastest path to value and requires zero
-            developer time. You&apos;ll be running Claude queries against your live
+            developer time. You&apos;ll be running Claude AI queries against your live
             data within the hour.
           </p>
           <p>
@@ -664,14 +664,14 @@ export default function Article() {
           <p>
             Everything else is functional but requires more assembly. The good
             news is that the MCP standard means every platform is moving toward
-            native Claude support. The question isn&apos;t <em>if</em> your ERP or CRM
-            will connect to Claude, it&apos;s <em>when</em>.
+            native Claude AI support. The question isn&apos;t <em>if</em> your ERP or CRM
+            will connect to Claude AI, it&apos;s <em>when</em>.
           </p>
           <p>
             If you&apos;re evaluating which systems to connect first, start where
-            your team spends the most time. The highest-value Claude deployments
+            your team spends the most time. The highest-value Claude AI deployments
             I&apos;ve seen aren&apos;t the ones with the most connectors. They&apos;re the
-            ones where Claude has context on the work that matters most.
+            ones where Claude AI has context on the work that matters most.
           </p>
 
           {/* Related */}
@@ -679,12 +679,12 @@ export default function Article() {
             <h3 className="text-lg font-medium mb-6">Related</h3>
             <div className="grid sm:grid-cols-2 gap-6">
               <a href="/blog/mcp-explained-for-business" className="group">
-                <p className="font-medium group-hover:text-[#d97757] transition-colors">MCP Explained: Connect Your ERP, CRM, and Internal Systems to Claude</p>
-                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">Model Context Protocol lets Claude read and write to your business systems. Here&apos;s what it is and how any company can build one.</p>
+                <p className="font-medium group-hover:text-[#d97757] transition-colors">MCP Explained: Connect Your ERP, CRM, and Internal Systems to Claude AI</p>
+                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">Model Context Protocol lets Claude AI read and write to your business systems. Here&apos;s what it is and how any company can build one.</p>
               </a>
               <a href="/blog/claude-agent-mode-business-automation" className="group">
-                <p className="font-medium group-hover:text-[#d97757] transition-colors">Claude&apos;s Agent Mode Is Here</p>
-                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">With agent teams, tool use, MCP, and computer use, Claude can now execute multi-step business workflows autonomously.</p>
+                <p className="font-medium group-hover:text-[#d97757] transition-colors">Claude AI&apos;s Agent Mode Is Here</p>
+                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">With agent teams, tool use, MCP, and computer use, Claude AI can now execute multi-step business workflows autonomously.</p>
               </a>
             </div>
           </div>
@@ -700,12 +700,12 @@ export default function Article() {
 
           {/* CTA */}
           <div className="mt-16 pt-10 border-t border-border-light">
-            <h3>Need help connecting Claude to your ERP or CRM?</h3>
+            <h3>Need help connecting Claude AI to your ERP or CRM?</h3>
             <p>
-              We deploy Claude into mid-market business systems with native
+              We deploy Claude AI into mid-market business systems with native
               connectors, MCP servers, and structured rollouts. Whether you&apos;re
               on NetSuite, HubSpot, Salesforce, or something else entirely, we&apos;ll
-              get Claude connected to your actual data.{" "}
+              get Claude AI connected to your actual data.{" "}
               <a
                 href="/#contact"
                 className="text-accent font-medium hover:underline"

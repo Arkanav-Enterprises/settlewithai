@@ -4,21 +4,21 @@ import { BlogTOC } from "@/components/blog/BlogTOC";
 
 export const metadata: Metadata = {
   title:
-    "Claude's Agent Mode Is Here — What It Means for Business Automation",
+    "Claude AI's Agent Mode Is Here — What It Means for Business Automation",
   description:
-    "Claude isn't just a chatbot anymore. With agent teams, tool use, MCP connectors, and computer use, Claude can now execute multi-step business workflows autonomously. Here's what that actually looks like in production.",
+    "Claude AI isn't just a chatbot anymore. With agent teams, tool use, MCP connectors, and computer use, Claude AI can now execute multi-step business workflows autonomously. Here's what that actually looks like in production.",
   keywords: [
-    "Claude agent mode",
+    "Claude AI agent mode",
     "Claude AI automation",
     "agentic AI for business",
-    "Claude tool use",
-    "Claude MCP business",
+    "Claude AI tool use",
+    "Claude AI MCP business",
     "AI agents enterprise",
     "Claude Opus 4.6 agents",
     "business process automation AI",
-    "Claude computer use",
+    "Claude AI computer use",
     "AI workflow automation",
-    "Claude Agent SDK",
+    "Claude AI Agent SDK",
     "agentic AI deployment",
   ],
   alternates: {
@@ -28,9 +28,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     title:
-      "Claude's Agent Mode Is Here — What It Means for Business Automation",
+      "Claude AI's Agent Mode Is Here — What It Means for Business Automation",
     description:
-      "Claude can now execute multi-step business workflows autonomously. Here's what agentic AI actually looks like in production.",
+      "Claude AI can now execute multi-step business workflows autonomously. Here's what agentic AI actually looks like in production.",
     url: "https://settlewithai.com/blog/claude-agent-mode-business-automation",
     siteName: "Settle",
     publishedTime: "2026-04-02T00:00:00Z",
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Claude's Agent Mode Is Here — What It Means for Business Automation",
+      "Claude AI's Agent Mode Is Here — What It Means for Business Automation",
     description:
-      "Claude can now execute multi-step business workflows autonomously. Here's what agentic AI actually looks like in production.",
+      "Claude AI can now execute multi-step business workflows autonomously. Here's what agentic AI actually looks like in production.",
   },
 };
 
@@ -50,9 +50,9 @@ export default function Article() {
     "@context": "https://schema.org",
     "@type": "Article",
     headline:
-      "Claude's Agent Mode Is Here — What It Means for Business Automation",
+      "Claude AI's Agent Mode Is Here — What It Means for Business Automation",
     description:
-      "Claude isn't just a chatbot anymore. With agent teams, tool use, MCP connectors, and computer use, Claude can now execute multi-step business workflows autonomously.",
+      "Claude AI isn't just a chatbot anymore. With agent teams, tool use, MCP connectors, and computer use, Claude AI can now execute multi-step business workflows autonomously.",
     datePublished: "2026-04-02T00:00:00Z",
     dateModified: "2026-04-02T00:00:00Z",
     image: "https://settlewithai.com/og-image.png",
@@ -97,7 +97,7 @@ export default function Article() {
             itemListElement: [
               { "@type": "ListItem", position: 1, name: "Home", item: "https://settlewithai.com" },
               { "@type": "ListItem", position: 2, name: "Blog", item: "https://settlewithai.com/blog" },
-              { "@type": "ListItem", position: 3, name: "Claude's Agent Mode", item: "https://settlewithai.com/blog/claude-agent-mode-business-automation" },
+              { "@type": "ListItem", position: 3, name: "Claude AI's Agent Mode", item: "https://settlewithai.com/blog/claude-agent-mode-business-automation" },
             ],
           }),
         }}
@@ -111,18 +111,18 @@ export default function Article() {
             mainEntity: [
               {
                 "@type": "Question",
-                name: "What is Claude's agent mode?",
+                name: "What is Claude AI's agent mode?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Agent mode refers to Claude's ability to operate autonomously across multi-step workflows — reading data from business systems via MCP, using tools to take actions, coordinating with other agents, and executing tasks without human intervention at every step. Unlike a chatbot, an agent doesn't just answer questions — it completes work.",
+                  text: "Agent mode refers to Claude AI's ability to operate autonomously across multi-step workflows — reading data from business systems via MCP, using tools to take actions, coordinating with other agents, and executing tasks without human intervention at every step. Unlike a chatbot, an agent doesn't just answer questions — it completes work.",
                 },
               },
               {
                 "@type": "Question",
-                name: "How is agentic AI different from using Claude as a chatbot?",
+                name: "How is agentic AI different from using Claude AI as a chatbot?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "A chatbot responds to a single prompt. An agent breaks a goal into steps, gathers information from multiple sources, makes decisions, takes actions, and verifies results — all autonomously. The difference is between asking Claude to write an email versus having Claude pull data from your CRM, draft personalised emails for 50 prospects, and queue them in your outbox.",
+                  text: "A chatbot responds to a single prompt. An agent breaks a goal into steps, gathers information from multiple sources, makes decisions, takes actions, and verifies results — all autonomously. The difference is between asking Claude AI to write an email versus having Claude AI pull data from your CRM, draft personalised emails for 50 prospects, and queue them in your outbox.",
                 },
               },
               {
@@ -130,15 +130,15 @@ export default function Article() {
                 name: "What is MCP and why does it matter for agents?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Model Context Protocol (MCP) is an open standard that lets Claude connect to your business systems — ERPs, CRMs, databases, file systems, and APIs. MCP is what turns Claude from a general-purpose AI into an agent that understands your specific business context and can read from and write to your actual tools.",
+                  text: "Model Context Protocol (MCP) is an open standard that lets Claude AI connect to your business systems — ERPs, CRMs, databases, file systems, and APIs. MCP is what turns Claude AI from a general-purpose AI into an agent that understands your specific business context and can read from and write to your actual tools.",
                 },
               },
               {
                 "@type": "Question",
-                name: "Can Claude agents work with our existing ERP or CRM?",
+                name: "Can Claude AI agents work with our existing ERP or CRM?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Yes. Through MCP connectors, Claude can read from and write to virtually any system with an API — including SAP, Oracle, Salesforce, HubSpot, custom databases, and internal tools. The connector is a lightweight server that translates between Claude and your system. Most can be built in a few days.",
+                  text: "Yes. Through MCP connectors, Claude AI can read from and write to virtually any system with an API — including SAP, Oracle, Salesforce, HubSpot, custom databases, and internal tools. The connector is a lightweight server that translates between Claude AI and your system. Most can be built in a few days.",
                 },
               },
               {
@@ -154,7 +154,7 @@ export default function Article() {
                 name: "What's the difference between Claude Code and the Agent SDK?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Claude Code is Anthropic's CLI tool that acts as an agent for software development — it reads codebases, writes code, runs tests, and manages files. The Agent SDK is a framework for developers to build custom agents powered by Claude for any domain — customer support, data analysis, document processing, or workflow automation. Claude Code is a finished product; the Agent SDK is a toolkit for building your own.",
+                  text: "Claude Code is Anthropic's CLI tool that acts as an agent for software development — it reads codebases, writes code, runs tests, and manages files. The Agent SDK is a framework for developers to build custom agents powered by Claude AI for any domain — customer support, data analysis, document processing, or workflow automation. Claude Code is a finished product; the Agent SDK is a toolkit for building your own.",
                 },
               },
             ],
@@ -198,15 +198,15 @@ export default function Article() {
               letterSpacing: "-0.03em",
             }}
           >
-            Claude&apos;s Agent Mode Is Here &mdash; What It Means for Business
+            Claude AI&apos;s Agent Mode Is Here &mdash; What It Means for Business
             Automation
           </h1>
           <p className="text-text-muted text-[17px] leading-relaxed">
-            For the past year, most businesses have used Claude the same way
+            For the past year, most businesses have used Claude AI the same way
             they used ChatGPT: type a question, get an answer, copy it
             somewhere. That was useful. But it wasn&apos;t automation. With
             Opus&nbsp;4.6, agent teams, MCP connectors, and computer use,
-            Claude has crossed a line. It doesn&apos;t just answer
+            Claude AI has crossed a line. It doesn&apos;t just answer
             anymore &mdash; it does.
           </p>
           <div className="flex items-center gap-3 mt-6 text-sm text-text-faint">
@@ -224,7 +224,7 @@ export default function Article() {
           <p>
             Last Tuesday, a VP of operations told me his company had
             &ldquo;fully adopted AI.&rdquo; I asked what that meant. Turns
-            out, six people on his team use Claude to draft emails and
+            out, six people on his team use Claude AI to draft emails and
             summarise meeting notes. That&apos;s it.
           </p>
           <p>
@@ -233,13 +233,13 @@ export default function Article() {
           <p>
             The same reports still get compiled by hand. The same data
             gets copy-pasted between systems. The same emails get written
-            from scratch every morning. Claude made individuals faster,
+            from scratch every morning. Claude AI made individuals faster,
             sure. But the company&apos;s actual workflows? Untouched.
           </p>
           <p>
             I call this the chatbot ceiling. And almost every company I
             talk to is stuck there right now. What changed in early 2026
-            is that Claude stopped being a chatbot entirely.
+            is that Claude AI stopped being a chatbot entirely.
           </p>
 
           <h2>So what does &ldquo;agent mode&rdquo; actually mean?</h2>
@@ -260,7 +260,7 @@ export default function Article() {
           </p>
 
           <p><strong>Chatbot mode:</strong> &ldquo;Write me a follow-up email
-            to a prospect who downloaded our pricing guide.&rdquo; Claude
+            to a prospect who downloaded our pricing guide.&rdquo; Claude AI
             writes a generic follow-up. You paste it into Gmail. You do this
             50 times.
           </p>
@@ -268,13 +268,13 @@ export default function Article() {
             downloaded the pricing guide this week from HubSpot. Check which
             ones opened the initial email. Draft personalised follow-ups
             based on their company size and industry. Queue the drafts in
-            Gmail.&rdquo; Claude does all of it. You review and hit send.
+            Gmail.&rdquo; Claude AI does all of it. You review and hit send.
           </p>
           <p>
             That&apos;s not a hypothetical. I built exactly this workflow for
             my own outreach using{" "}
             <a href="/blog/ai-powered-outreach-with-cowork">
-              Claude&apos;s Cowork feature
+              Claude AI&apos;s Cowork feature
             </a>
             . Twelve companies researched, 48 emails drafted, all in one session.
             I honestly didn&apos;t think it would hold together that long, but
@@ -283,7 +283,7 @@ export default function Article() {
 
           <h2>The four capabilities that make this work</h2>
           <p>
-            Claude&apos;s agent mode isn&apos;t one feature. It&apos;s four
+            Claude AI&apos;s agent mode isn&apos;t one feature. It&apos;s four
             capabilities that finally work well enough together for real
             production use. Each one existed in some form before, but
             Opus&nbsp;4.6 is where they all became reliable.
@@ -291,27 +291,27 @@ export default function Article() {
 
           <h3>1. Tool use</h3>
           <p>
-            Claude can call external tools (APIs, calculators, search
+            Claude AI can call external tools (APIs, calculators, search
             engines, databases) as part of its reasoning. When it needs
             information or needs to take an action, it calls the right tool,
             reads the result, and keeps going.
           </p>
           <p>
-            This is the foundation. Without it, Claude is stuck with whatever&apos;s
-            in the conversation window. With it, Claude reaches into your
+            This is the foundation. Without it, Claude AI is stuck with whatever&apos;s
+            in the conversation window. With it, Claude AI reaches into your
             systems and works with real data.
           </p>
 
           <h3>2. Model Context Protocol (MCP)</h3>
           <p>
             <a href="/blog/mcp-explained-for-business">MCP</a> is the <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer">open
-            standard</a> that connects Claude to your business systems. Think of it
+            standard</a> that connects Claude AI to your business systems. Think of it
             as a universal adapter: a lightweight server that sits
-            between Claude and your ERP, CRM, database, or internal tool.
+            between Claude AI and your ERP, CRM, database, or internal tool.
           </p>
           <p>
             I&apos;ve built MCP connectors for everything from SAP to Google
-            Sheets. Most take a few days. Once connected, Claude
+            Sheets. Most take a few days. Once connected, Claude AI
             doesn&apos;t just know about your business in theory. It can read
             your actual data, pull real numbers, and write back results.
           </p>
@@ -321,7 +321,7 @@ export default function Article() {
 
           <h3>3. Computer use</h3>
           <p>
-            This one surprised me. Claude can now interact with software the
+            This one surprised me. Claude AI can now interact with software the
             way a person does, clicking buttons, filling forms, navigating
             interfaces. Anthropic&apos;s{" "}
             <a
@@ -336,7 +336,7 @@ export default function Article() {
           <p>
             Why does this matter? Not every system has an API. Some
             legacy ERPs, government portals, and industry-specific tools only
-            have a GUI. Computer use means Claude can automate those
+            have a GUI. Computer use means Claude AI can automate those
             workflows anyway.
           </p>
           <p>
@@ -347,7 +347,7 @@ export default function Article() {
 
           <h3>4. Agent teams</h3>
           <p>
-            <a href="https://www.anthropic.com/news/claude-opus-4-6" target="_blank" rel="noopener noreferrer">Opus&nbsp;4.6</a> introduced the ability to run multiple Claude agents
+            <a href="https://www.anthropic.com/news/claude-opus-4-6" target="_blank" rel="noopener noreferrer">Opus&nbsp;4.6</a> introduced the ability to run multiple Claude AI agents
             in parallel, each with its own context and instructions, tackling
             different parts of the same problem.
           </p>
@@ -379,7 +379,7 @@ export default function Article() {
           </p>
           <ol>
             <li>Sales rep enters the customer name and product requirements</li>
-            <li>Claude pulls the customer&apos;s history and pricing tier from the system</li>
+            <li>Claude AI pulls the customer&apos;s history and pricing tier from the system</li>
             <li>It retrieves current component costs and calculates margins</li>
             <li>It generates the full offer document: technical specifications, pricing table, terms, delivery timeline</li>
             <li>It formats everything to match Orient&apos;s template</li>
@@ -398,9 +398,9 @@ export default function Article() {
           </p>
           <p>
             <strong>The instructions problem.</strong> An agent is only as good
-            as its instructions. When Claude was a chatbot, a vague prompt
+            as its instructions. When Claude AI was a chatbot, a vague prompt
             was fine because you&apos;d just rephrase if the answer was off.
-            But when Claude is an agent executing a 6-step
+            But when Claude AI is an agent executing a 6-step
             workflow on its own, vague instructions produce vague results. Or
             worse, confidently wrong results.
           </p>
@@ -412,7 +412,7 @@ export default function Article() {
           </p>
           <p>
             <strong>The integration gap.</strong> Most companies don&apos;t
-            have MCP connectors. Their data lives in systems Claude
+            have MCP connectors. Their data lives in systems Claude AI
             can&apos;t reach. Building those connectors isn&apos;t hard, but
             someone has to know what to build and how to structure the data
             flow.
@@ -421,7 +421,7 @@ export default function Article() {
             <strong>The trust gap.</strong> Giving an AI agent write access to
             your business systems feels risky. And honestly, it is risky if you
             do it wrong. The companies that deploy agents successfully don&apos;t
-            give Claude unrestricted access. They build guardrails: read-only
+            give Claude AI unrestricted access. They build guardrails: read-only
             access first, human approval for writes, logging on every action,
             gradual expansion as confidence builds.
           </p>
@@ -494,7 +494,7 @@ export default function Article() {
 
           <h2>The bottom line</h2>
           <p>
-            Claude isn&apos;t a chatbot anymore. It&apos;s an agent platform.
+            Claude AI isn&apos;t a chatbot anymore. It&apos;s an agent platform.
             The companies that figure out how to deploy agents
             properly, with structured instructions, real system
             integrations, and thoughtful guardrails, are going to build
@@ -524,8 +524,8 @@ export default function Article() {
                 <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">49 use cases mapped. 18 projects structured. 11 deployed. 85% faster document generation.</p>
               </a>
               <a href="/blog/mcp-explained-for-business" className="group">
-                <p className="font-medium group-hover:text-[#d97757] transition-colors">MCP Explained: Connect Your ERP, CRM, and Systems to Claude</p>
-                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">How Model Context Protocol lets Claude read and write to your business systems.</p>
+                <p className="font-medium group-hover:text-[#d97757] transition-colors">MCP Explained: Connect Your ERP, CRM, and Systems to Claude AI</p>
+                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">How Model Context Protocol lets Claude AI read and write to your business systems.</p>
               </a>
             </div>
           </div>

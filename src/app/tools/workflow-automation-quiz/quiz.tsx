@@ -147,22 +147,22 @@ function getRecommendation(
   structureScore: number,
 ): string {
   if (score >= 15 && structureScore >= 3) {
-    return "High frequency + structured output = perfect for Claude Projects with templated instructions.";
+    return "High frequency + structured output = perfect for Claude AI Projects with templated instructions.";
   }
   if (score >= 15 && w.output === "Document") {
-    return "Document-heavy and frequent — ideal for automated generation with Claude and MCP integrations.";
+    return "Document-heavy and frequent — ideal for automated generation with Claude AI and MCP integrations.";
   }
   if (score >= 15) {
-    return "Strong automation candidate across the board. Deploy Claude with clear SOPs for fast ROI.";
+    return "Strong automation candidate across the board. Deploy Claude AI with clear SOPs for fast ROI.";
   }
   if (score >= 10 && structureScore >= 3) {
-    return "Structured enough for automation — start with a Claude Project and refine the template over time.";
+    return "Structured enough for automation — start with a Claude AI Project and refine the template over time.";
   }
   if (score >= 10 && w.output === "Email") {
-    return "Repetitive email workflows respond well to Claude drafting with human review in the loop.";
+    return "Repetitive email workflows respond well to Claude AI drafting with human review in the loop.";
   }
   if (score >= 10) {
-    return "Solid candidate. Document the workflow steps first, then automate with Claude for consistent output.";
+    return "Solid candidate. Document the workflow steps first, then automate with Claude AI for consistent output.";
   }
   if (structureScore <= 1) {
     return "Too freeform for full automation right now. Standardize the process first, then revisit.";

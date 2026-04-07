@@ -158,7 +158,7 @@ export default function Article() {
             Orient didn&apos;t need any of that.
           </p>
           <p>
-            During the <a href="/blog/orient-case-study">earlier AI deployment engagement</a>, I&apos;d already structured their internal knowledge base across 49 use cases. The sales team was using Claude daily to generate customer offers from machine specification templates, pricing logic documentation, and structured terms and conditions files. That knowledge base was clean, accurate, and maintained because the team relied on it every single day.
+            During the <a href="/blog/orient-case-study">earlier AI deployment engagement</a>, I&apos;d already structured their internal knowledge base across 49 use cases. The sales team was using Claude AI daily to generate customer offers from machine specification templates, pricing logic documentation, and structured terms and conditions files. That knowledge base was clean, accurate, and maintained because the team relied on it every single day.
           </p>
           <p>
             The question was simple: what if we took that same knowledge and pointed it at the customer?
@@ -176,7 +176,7 @@ export default function Article() {
               <strong>Pricing logic documentation</strong> covering how different configurations (C-Series vs L&amp;P, 600 dpi vs 1200 dpi, Kyocera vs Epson heads) map to capabilities
             </li>
             <li>
-              <strong>Offer generation instructions</strong> that their team already used with Claude to produce customer-facing quotations
+              <strong>Offer generation instructions</strong> that their team already used with Claude AI to produce customer-facing quotations
             </li>
             <li>
               <strong>Brand guidelines</strong> covering colours, typography, tone of voice, and visual identity
@@ -255,7 +255,7 @@ export default function Article() {
             This is where it got interesting.
           </p>
           <p>
-            I took the same machine specification knowledge and fed it into a scoped <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude</a> system prompt. Now, instead of browsing a table and guessing which machine fits their needs, a customer can just ask:
+            I took the same machine specification knowledge and fed it into a scoped <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude AI</a> system prompt. Now, instead of browsing a table and guessing which machine fits their needs, a customer can just ask:
           </p>
           <ul>
             <li>&ldquo;What&apos;s the max print width on the C-Series?&rdquo;</li>
@@ -280,7 +280,7 @@ export default function Article() {
             The AI responds in 2-4 factual sentences, drawing from the exact same spec data. If someone asks about pricing, it redirects to the sales team. Helpful without exposing internal numbers.
           </p>
           <p>
-            Technical details: the chat uses Claude&apos;s Haiku model for sub-second response times, streams tokens in real-time so the user sees the answer being typed out, and runs stateless. No database, no session storage. Just the conversation in the current browser tab.
+            Technical details: the chat uses Claude AI&apos;s Haiku model for sub-second response times, streams tokens in real-time so the user sees the answer being typed out, and runs stateless. No database, no session storage. Just the conversation in the current browser tab.
           </p>
           <p>
             I genuinely didn&apos;t expect how natural this would feel. You land on a product page, see the spec table, and if anything&apos;s unclear, you just... ask. It sounds simple, but I&apos;ve never seen a B2B machinery site do this before.
@@ -291,7 +291,7 @@ export default function Article() {
             The key insight is that Orient&apos;s knowledge base now serves three surfaces:
           </p>
           <ol>
-            <li><strong>Internal team</strong> uses Claude project instructions for offer generation, BOM creation, and troubleshooting</li>
+            <li><strong>Internal team</strong> uses Claude AI project instructions for offer generation, BOM creation, and troubleshooting</li>
             <li><strong>Website</strong> shows static spec tables pulled from the same source of truth</li>
             <li><strong>AI chat</strong> gives conversational access to the same knowledge, scoped for customer-appropriate responses</li>
           </ol>
@@ -326,7 +326,7 @@ export default function Article() {
           <ol>
             <li>Browse machine specs visually (tabbed comparison)</li>
             <li>Ask specific questions in natural language (AI chat)</li>
-            <li>Get answers in real-time, 24/7, in any language Claude supports</li>
+            <li>Get answers in real-time, 24/7, in any language Claude AI supports</li>
             <li>Reach sales when they&apos;re ready, not before</li>
           </ol>
           <p>

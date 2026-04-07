@@ -87,7 +87,7 @@ const QUESTIONS: Question[] = [
     id: "data",
     question: "How accessible is your business data?",
     subtitle:
-      "Claude works best when it can connect to your systems (ERP, CRM, databases).",
+      "Claude AI works best when it can connect to your systems (ERP, CRM, databases).",
     options: [
       { label: "Mostly in people's heads or scattered files", score: 1 },
       { label: "In systems, but siloed and hard to extract", score: 2 },
@@ -149,7 +149,7 @@ function getResult(score: number, answers: Record<string, number>): Result {
   // Add specific recommendations based on weak areas
   if (answers.documentation <= 2) {
     base.details.push(
-      "Process documentation is a gap. Even basic SOPs dramatically improve AI deployment — Claude works best with clear workflow definitions.",
+      "Process documentation is a gap. Even basic SOPs dramatically improve AI deployment — Claude AI works best with clear workflow definitions.",
     );
   }
   if (answers.leadership <= 2) {
@@ -159,7 +159,7 @@ function getResult(score: number, answers: Record<string, number>): Result {
   }
   if (answers.data <= 2) {
     base.details.push(
-      "Data accessibility is limited. Start by identifying which systems have APIs or export capabilities — Claude connects via MCP (Model Context Protocol).",
+      "Data accessibility is limited. Start by identifying which systems have APIs or export capabilities — Claude AI connects via MCP (Model Context Protocol).",
     );
   }
   if (answers.ai_usage <= 1) {
@@ -169,7 +169,7 @@ function getResult(score: number, answers: Record<string, number>): Result {
   }
   if (answers.standardization <= 2) {
     base.details.push(
-      "Workflow standardization is low. AI deployment actually helps here — structured Claude projects enforce consistency that manual processes don't.",
+      "Workflow standardization is low. AI deployment actually helps here — structured Claude AI projects enforce consistency that manual processes don't.",
     );
   }
   if (answers.capacity <= 1) {

@@ -7,15 +7,25 @@ interface Heading {
   text: string;
 }
 
-export function BlogTOC() {
-  const [headings, setHeadings] = useState<Heading[]>([]);
+interface BlogTOCProps {
+  /**
+   * Optional explicit headings list. If provided, auto-discovery is skipped.
+   * Use this when mounting the TOC on a non-blog page (like the homepage)
+   * where you want full control over labels and target IDs.
+   */
+  headings?: Heading[];
+}
+
+export function BlogTOC({ headings: providedHeadings }: BlogTOCProps = {}) {
+  const [headings, setHeadings] = useState<Heading[]>(providedHeadings ?? []);
   const [activeId, setActiveId] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
   const tocRef = useRef<HTMLDivElement>(null);
   const isScrolling = useRef(false);
 
-  // Discover h2 headings and assign IDs
+  // Discover h2 headings and assign IDs (skipped when explicit headings provided)
   useEffect(() => {
+    if (providedHeadings) return;
     const prose = document.querySelector("article .prose-settle");
     if (!prose) return;
 
@@ -31,7 +41,7 @@ export function BlogTOC() {
       found.push({ id: node.id, text: node.textContent ?? "" });
     });
     setHeadings(found);
-  }, []);
+  }, [providedHeadings]);
 
   // Track active heading via scroll listener
   useEffect(() => {

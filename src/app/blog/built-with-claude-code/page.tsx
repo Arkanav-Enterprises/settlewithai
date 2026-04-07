@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     "Claude Code",
     "Anthropic CLI",
     "AI web development",
-    "Next.js Claude",
+    "Next.js Claude AI",
     "Claude Code case study",
     "AI built website",
     "D3 force directed graph",
@@ -160,9 +160,9 @@ export default function Article() {
           <h2>Why build a site with a CLI tool?</h2>
           <p>
             I run a Claude AI deployment studio. I spend my days helping
-            manufacturers and mid-market companies integrate Claude into
+            manufacturers and mid-market companies integrate Claude AI into
             their operations. So when I needed a website for Settle, the
-            question wasn&apos;t really whether to use Claude. It was how
+            question wasn&apos;t really whether to use Claude AI. It was how
             far I could push it.
           </p>
           <p>
@@ -230,12 +230,12 @@ export default function Article() {
           <h2>The Cowork demo</h2>
           <p>
             This was the section I was most nervous about. I wanted to show
-            what Claude looks like when it&apos;s actually working inside a
+            what Claude AI looks like when it&apos;s actually working inside a
             manufacturing context. Not a generic chat window, but something
             that communicates depth.
           </p>
           <p>
-            The result is an interactive replica of Claude&apos;s Chat/Cowork
+            The result is an interactive replica of Claude AI&apos;s Chat/Cowork
             UI from claude.ai, adapted for Settle&apos;s light theme and
             contextualised for manufacturing. Tab switching between a BOM
             Template, a Vendor RFQ, and an SAP Connector. Each tab has
@@ -246,7 +246,7 @@ export default function Article() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/blog/site-cowork-full.png"
-            alt="Interactive Cowork demo showing Claude's chat interface adapted for manufacturing with BOM Template, Vendor RFQ, and SAP Connector tabs"
+            alt="Interactive Cowork demo showing Claude AI's chat interface adapted for manufacturing with BOM Template, Vendor RFQ, and SAP Connector tabs"
             width={1512}
             height={782}
             loading="lazy"
@@ -474,14 +474,14 @@ export default function Article() {
           <p>
             I built Settle&apos;s site this way because it&apos;s the same
             thing I do for clients, just at a different layer. I deploy
-            <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude</a> into manufacturing operations, writing instructions,
+            <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude AI</a> into manufacturing operations, writing instructions,
             structuring knowledge files, mapping workflows. The principle
-            is the same: Claude is remarkably capable when you give it the
+            is the same: Claude AI is remarkably capable when you give it the
             right structure and context.
           </p>
           <p>
             For my clients, that structure is instruction engineering and
-            workflow mapping. For this site, it was a well-configured Claude
+            workflow mapping. For this site, it was a well-configured Claude AI
             Code environment with clear visual feedback. The value isn&apos;t
             in the AI itself. It&apos;s in knowing how to direct it.
           </p>
@@ -499,8 +499,8 @@ export default function Article() {
                 <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">49 use cases mapped. 18 projects structured. 11 deployed. 85% faster document generation.</p>
               </a>
               <a href="/blog/ai-powered-outreach-with-cowork" className="group">
-                <p className="font-medium group-hover:text-[#d97757] transition-colors">We Used Claude Cowork to Prospect 12 Companies in One Session</p>
-                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">How we used Claude&apos;s Cowork feature to research prospects, personalise outreach, and build a send calendar.</p>
+                <p className="font-medium group-hover:text-[#d97757] transition-colors">We Used Claude AI Cowork to Prospect 12 Companies in One Session</p>
+                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">How we used Claude AI&apos;s Cowork feature to research prospects, personalise outreach, and build a send calendar.</p>
               </a>
             </div>
           </div>
@@ -516,9 +516,9 @@ export default function Article() {
 
           {/* CTA */}
           <div className="mt-16 pt-10 border-t border-border-light">
-            <h3>Want Claude deployed across your organisation?</h3>
+            <h3>Want Claude AI deployed across your organisation?</h3>
             <p>
-              We help manufacturers and mid-market companies integrate Claude
+              We help manufacturers and mid-market companies integrate Claude AI
               into their daily operations &mdash; structured rollouts,
               production-grade instructions, and measurable results.{" "}
               <a

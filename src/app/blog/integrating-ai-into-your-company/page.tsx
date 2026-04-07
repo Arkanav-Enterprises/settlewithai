@@ -165,7 +165,7 @@ export default function Article() {
           </p>
           <p>
             The technology wasn&apos;t the problem. AI tools, particularly
-            large language models like <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude</a>, are remarkably capable right
+            large language models like <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude AI</a>, are remarkably capable right
             now. The problem was everything that comes after the demo.
             Which workflows do you target? How do you write instructions
             that produce consistent output? What does a rollout actually
@@ -431,8 +431,8 @@ export default function Article() {
                 <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">49 use cases mapped, 18 projects structured, 11 deployed in the first engagement.</p>
               </a>
               <a href="/blog/mcp-explained-for-business" className="group">
-                <p className="font-medium group-hover:text-[#d97757] transition-colors">MCP Explained: Connect Your ERP, CRM, and Systems to Claude</p>
-                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">How Model Context Protocol lets Claude read and write to your business systems.</p>
+                <p className="font-medium group-hover:text-[#d97757] transition-colors">MCP Explained: Connect Your ERP, CRM, and Systems to Claude AI</p>
+                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">How Model Context Protocol lets Claude AI read and write to your business systems.</p>
               </a>
             </div>
           </div>

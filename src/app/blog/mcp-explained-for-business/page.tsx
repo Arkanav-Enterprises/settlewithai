@@ -4,18 +4,18 @@ import { BlogTOC } from "@/components/blog/BlogTOC";
 
 export const metadata: Metadata = {
   title:
-    "MCP Explained: How to Connect Your ERP, CRM, and Internal Systems to Claude",
+    "MCP Explained: How to Connect Your ERP, CRM, and Internal Systems to Claude AI",
   description:
-    "Model Context Protocol (MCP) lets Claude read and write to your business systems. Here's what it is, why it matters, and how any company can build one — explained without the jargon.",
+    "Model Context Protocol (MCP) lets Claude AI read and write to your business systems. Here's what it is, why it matters, and how any company can build one — explained without the jargon.",
   keywords: [
     "MCP explained",
     "Model Context Protocol",
-    "Claude MCP",
+    "Claude AI MCP",
     "connect ERP to AI",
     "Claude API integration",
     "MCP for business",
     "AI ERP integration",
-    "Claude enterprise integration",
+    "Claude AI enterprise integration",
     "custom MCP server",
     "AI data connector",
     "MCP tutorial",
@@ -28,9 +28,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     title:
-      "MCP Explained: How to Connect Your ERP, CRM, and Internal Systems to Claude",
+      "MCP Explained: How to Connect Your ERP, CRM, and Internal Systems to Claude AI",
     description:
-      "Model Context Protocol lets Claude read and write to your business systems. Here's what it is and how to build one.",
+      "Model Context Protocol lets Claude AI read and write to your business systems. Here's what it is and how to build one.",
     url: "https://settlewithai.com/blog/mcp-explained-for-business",
     siteName: "Settle",
     publishedTime: "2026-03-29T00:00:00Z",
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "MCP Explained: How to Connect Your ERP, CRM, and Internal Systems to Claude",
+      "MCP Explained: How to Connect Your ERP, CRM, and Internal Systems to Claude AI",
     description:
-      "Model Context Protocol lets Claude read and write to your business systems. No jargon. Real examples.",
+      "Model Context Protocol lets Claude AI read and write to your business systems. No jargon. Real examples.",
   },
 };
 
@@ -50,7 +50,7 @@ export default function Article() {
     "@context": "https://schema.org",
     "@type": "Article",
     headline:
-      "MCP Explained: How to Connect Your ERP, CRM, and Internal Systems to Claude",
+      "MCP Explained: How to Connect Your ERP, CRM, and Internal Systems to Claude AI",
     description:
       "A practical guide to Model Context Protocol for business leaders — what it is, why it matters, and how to build custom connectors for your internal systems.",
     datePublished: "2026-03-29T00:00:00Z",
@@ -139,10 +139,10 @@ export default function Article() {
             }}
           >
             MCP Explained: How to Connect Your ERP, CRM, and Internal
-            Systems to Claude
+            Systems to Claude AI
           </h1>
           <p className="text-text-muted text-[17px] leading-relaxed">
-            Model Context Protocol is the bridge between Claude and your
+            Model Context Protocol is the bridge between Claude AI and your
             business systems. Here&apos;s what it is, why it matters, and
             how any company can build one &mdash; explained without the
             jargon.
@@ -157,16 +157,16 @@ export default function Article() {
         </header>
 
         <div className="prose-settle">
-          <h2>The problem: Claude is smart but isolated</h2>
+          <h2>The problem: Claude AI is smart but isolated</h2>
           <p>
             Last Tuesday, a procurement manager at one of our client sites
-            asked Claude to generate a purchase order. Claude wrote a
+            asked Claude AI to generate a purchase order. Claude AI wrote a
             beautiful PO. Perfect formatting, professional language, all
             the right fields. One problem: every single number in it was
             made up.
           </p>
           <p>
-            That&apos;s the core issue. Out of the box, Claude can write,
+            That&apos;s the core issue. Out of the box, Claude AI can write,
             analyse, summarise, and reason, but it can&apos;t see your
             data. It doesn&apos;t know what&apos;s in your ERP. It
             can&apos;t pull your latest inventory levels or look up a
@@ -178,7 +178,7 @@ export default function Article() {
             You can copy-paste data into a conversation, sure. But that
             doesn&apos;t scale. You can upload files, but those go stale
             the moment the source data changes. What you actually need is a
-            live connection, a way for Claude to reach into your systems,
+            live connection, a way for Claude AI to reach into your systems,
             read what it needs, and write back when appropriate.
           </p>
           <p>
@@ -189,19 +189,19 @@ export default function Article() {
           <p>
             MCP stands for <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer">Model Context Protocol</a>. I know, the name sounds
             intimidating. It&apos;s not. Think of it as a universal adapter
-            between Claude and any data source your business uses.
+            between Claude AI and any data source your business uses.
           </p>
           <p>
             Your ERP, CRM, database, or spreadsheet has data. That data
             lives behind some kind of access layer (an API, a database
             connection, a file system). MCP is a standardised wrapper that
-            translates between that access layer and Claude. So when Claude
+            translates between that access layer and Claude AI. So when Claude AI
             needs to answer &ldquo;what&apos;s the current price for a
             C-Series 600 press?&rdquo; it actually pulls the real number
             from your real system.
           </p>
           <p>
-            Without MCP, Claude is guessing or relying on whatever you
+            Without MCP, Claude AI is guessing or relying on whatever you
             paste in. With MCP, it&apos;s working with live data.
           </p>
 
@@ -217,22 +217,22 @@ export default function Article() {
             </li>
             <li>
               <strong>The MCP server</strong>, a small piece of software
-              that sits between your system and Claude. It defines what
-              Claude can read (queries, lookups, searches) and what it can
+              that sits between your system and Claude AI. It defines what
+              Claude AI can read (queries, lookups, searches) and what it can
               write (create records, update fields, trigger actions). This
               is the piece you build.
             </li>
             <li>
-              <strong>Claude</strong>, the AI layer your team interacts
-              with. Claude calls the MCP server when it needs data, and the
+              <strong>Claude AI</strong>, the AI layer your team interacts
+              with. Claude AI calls the MCP server when it needs data, and the
               server returns structured results. Your team never sees any
-              of this plumbing. They just talk to Claude and get accurate,
+              of this plumbing. They just talk to Claude AI and get accurate,
               live answers.
             </li>
           </ul>
           <p>
             The MCP server is the key piece. It&apos;s essentially a
-            contract: here are the things Claude is allowed to do with this
+            contract: here are the things Claude AI is allowed to do with this
             system, here&apos;s the data format for each action, and here
             are the guardrails.
           </p>
@@ -254,7 +254,7 @@ export default function Article() {
             I honestly wasn&apos;t sure we could make it work. Their
             documentation was sparse. The API was partially undocumented.
             But without connecting to this system, 14 of their 49
-            identified use cases were completely blocked. Claude could
+            identified use cases were completely blocked. Claude AI could
             generate offers but not pull live pricing. It could draft
             purchase orders but not assign PO numbers. It could analyse
             financial data, but only from manually exported spreadsheets.
@@ -263,7 +263,7 @@ export default function Article() {
             So we built the connector. And it unlocked everything.
           </p>
           <p>
-            Claude could now:
+            Claude AI could now:
           </p>
           <ul>
             <li>
@@ -291,8 +291,8 @@ export default function Article() {
           </ul>
           <p>
             Each of these is a &ldquo;tool&rdquo; defined in the MCP
-            server. When a procurement manager asks Claude to &ldquo;create
-            a purchase order for 500 units of component X,&rdquo; Claude
+            server. When a procurement manager asks Claude AI to &ldquo;create
+            a purchase order for 500 units of component X,&rdquo; Claude AI
             calls the right tool, gets the next PO number, pulls the
             current price, and assembles the document. All from live data.
             No more made-up numbers.
@@ -310,28 +310,28 @@ export default function Article() {
             </li>
             <li>
               <strong>CRM platforms</strong> like Salesforce, HubSpot,
-              Zoho. Claude can read customer data, update deal stages,
+              Zoho. Claude AI can read customer data, update deal stages,
               create follow-up tasks.
             </li>
             <li>
               <strong>Databases</strong> like PostgreSQL, MySQL, MongoDB.
-              Claude can query and write to your database directly (with
+              Claude AI can query and write to your database directly (with
               appropriate read/write permissions).
             </li>
             <li>
               <strong>Spreadsheets and file systems</strong> like Google
-              Sheets, shared drives, document repositories. Claude can read
+              Sheets, shared drives, document repositories. Claude AI can read
               the latest data without anyone manually uploading anything.
             </li>
             <li>
               <strong>Communication tools</strong> like Slack, email,
-              messaging platforms. Claude can send notifications, draft
+              messaging platforms. Claude AI can send notifications, draft
               messages, or respond to queries in-channel.
             </li>
             <li>
               <strong>Industry-specific tools</strong>, accounting
               software, project management systems, ticketing platforms,
-              booking engines. If it has an API, Claude can use it.
+              booking engines. If it has an API, Claude AI can use it.
             </li>
           </ul>
 
@@ -343,22 +343,22 @@ export default function Article() {
           </p>
           <ul>
             <li>
-              <strong>Tools</strong>, the actions Claude can take. Each
+              <strong>Tools</strong>, the actions Claude AI can take. Each
               tool has a name (like &ldquo;get_inventory_level&rdquo;), a
-              description so Claude knows when to use it, the inputs it
+              description so Claude AI knows when to use it, the inputs it
               needs, and the outputs it returns.
             </li>
             <li>
-              <strong>Resources</strong>, read-only data that Claude can
+              <strong>Resources</strong>, read-only data that Claude AI can
               access. Think product catalogues, pricing tables, policy
-              documents. Claude can look these up but not modify them.
+              documents. Claude AI can look these up but not modify them.
             </li>
             <li>
-              <strong>Permissions</strong>, guardrails on what Claude can
+              <strong>Permissions</strong>, guardrails on what Claude AI can
               and cannot do. Read-only access to financial data. Write
               access to create draft purchase orders but not approve them.
               No access to salary information. These rules are enforced at
-              the MCP layer, not by politely asking Claude to behave.
+              the MCP layer, not by politely asking Claude AI to behave.
             </li>
           </ul>
           <p>
@@ -372,7 +372,7 @@ export default function Article() {
           <h2>Why should you care?</h2>
           <p>
             Have you noticed how many AI pilots quietly die? I see it
-            constantly. A team tries Claude, gets generic results because
+            constantly. A team tries Claude AI, gets generic results because
             it&apos;s working without any context about their business, and
             concludes that AI isn&apos;t ready for their workflows.
           </p>
@@ -381,7 +381,7 @@ export default function Article() {
             couldn&apos;t see anything.
           </p>
           <p>
-            MCP changes that equation. When Claude can read your pricing
+            MCP changes that equation. When Claude AI can read your pricing
             rules, query your inventory, and pull from your knowledge base,
             it stops being a generic assistant and starts being a workflow
             participant. The output goes from &ldquo;here&apos;s a template
@@ -404,7 +404,7 @@ export default function Article() {
           </p>
           <ul>
             <li>
-              <strong>Start with read-only.</strong> Connect Claude to your
+              <strong>Start with read-only.</strong> Connect Claude AI to your
               most-referenced data sources (pricing, product specs,
               customer history) with read-only access. No risk, immediate
               value.
@@ -418,7 +418,7 @@ export default function Article() {
             <li>
               <strong>Automate with guardrails.</strong> For
               high-confidence, repetitive actions (reorder alerts, status
-              updates, notification triggers), allow Claude to act
+              updates, notification triggers), allow Claude AI to act
               autonomously within defined boundaries.
             </li>
           </ul>
@@ -431,7 +431,7 @@ export default function Article() {
 
           <h2>The bottom line</h2>
           <p>
-            MCP is what turns <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude</a> from a smart chat interface into a
+            MCP is what turns <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude AI</a> from a smart chat interface into a
             real business tool. It&apos;s not a product you buy. It&apos;s
             a connector you build, specific to your systems, your data, and
             your workflows.
@@ -471,7 +471,7 @@ export default function Article() {
           {/* CTA */}
           <div className="mt-16 pt-10 border-t border-border-light">
             <h3>
-              Ready to connect your systems to Claude?
+              Ready to connect your systems to Claude AI?
             </h3>
             <p>
               We build custom MCP connectors as part of our deployment

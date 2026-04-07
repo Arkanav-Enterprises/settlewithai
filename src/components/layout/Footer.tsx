@@ -27,14 +27,14 @@ const INDUSTRY_LINKS = [
 const BLOG_LINKS = [
   { label: "Orient Case Study", href: "/blog/orient-case-study" },
   { label: "Orient AI Product Expert", href: "/blog/orient-product-experience" },
-  { label: "Deploying Claude for Teams", href: "/blog/claude-team-deployment-beyond-diy" },
+  { label: "Deploying Claude AI for Teams", href: "/blog/claude-team-deployment-beyond-diy" },
   { label: "MCP Explained for Business", href: "/blog/mcp-explained-for-business" },
   { label: "Integrating AI Into Your Company", href: "/blog/integrating-ai-into-your-company" },
   { label: "AI-Powered Outreach with Cowork", href: "/blog/ai-powered-outreach-with-cowork" },
   { label: "Built with Claude Code", href: "/blog/built-with-claude-code" },
-  { label: "Claude's Agent Mode", href: "/blog/claude-agent-mode-business-automation" },
-  { label: "Structuring Claude for Business", href: "/blog/structuring-claude-for-business" },
-  { label: "Why Claude Over Custom AI", href: "/blog/why-claude-over-custom-ai" },
+  { label: "Claude AI's Agent Mode", href: "/blog/claude-agent-mode-business-automation" },
+  { label: "Structuring Claude AI for Business", href: "/blog/structuring-claude-for-business" },
+  { label: "Why Claude AI Over Custom AI", href: "/blog/why-claude-over-custom-ai" },
 ];
 
 const TOOL_LINKS = [
@@ -43,7 +43,7 @@ const TOOL_LINKS = [
   { label: "Use Case Finder", href: "/tools/use-case-finder" },
   { label: "Workflow Automation Quiz", href: "/tools/workflow-automation-quiz" },
   { label: "AI vs Manual Calculator", href: "/tools/ai-vs-manual-calculator" },
-  { label: "Claude Project Planner", href: "/tools/claude-project-planner" },
+  { label: "Claude AI Project Planner", href: "/tools/claude-project-planner" },
 ];
 
 const COMPANY_LINKS = [
@@ -242,7 +242,7 @@ function BoatWithClaude() {
   return (
     <div ref={containerRef} className="relative h-[180px] sm:h-[220px] overflow-hidden">
       <WordOcean onFrame={handleFrame} />
-      {/* Boat + Claude tamagotchi */}
+      {/* Boat + Claude AI tamagotchi */}
       <div
         ref={boatRef}
         className="absolute top-0 left-0 pointer-events-none"
@@ -253,7 +253,7 @@ function BoatWithClaude() {
           <line x1="587" y1="162" x2="412" y2="580" stroke="#54596E" strokeWidth="22" strokeLinecap="round"/>
           {/* Hull */}
           <path d="M700 570H37V430H788L700 570Z" fill="#C88654" stroke="#54596E" strokeWidth="22" strokeLinecap="round" strokeLinejoin="round"/>
-          {/* Claude body */}
+          {/* Claude AI body */}
           <path fillRule="evenodd" clipRule="evenodd" d="M397.591 289.502H449V342.623H397.625V394.478H372.16V444.5H346.25V394.478H320.785V444.5H294.875V394.478H192.125V444.5H166.232V394.478H140.75V444.5H114.84V394.478H89.375V342.606H38V289.519H89.375V187.625H397.591V289.502ZM140.75 289.502H166.232V240.747H140.75V289.502ZM320.734 289.502H346.25V240.747H320.734V289.502Z" fill="#D97757"/>
         </svg>
       </div>
@@ -311,12 +311,12 @@ export function Footer() {
             SETTLE
           </span>
           <span className="text-text-faint text-sm">
-            AI, thoughtfully deployed. Built on Claude by Anthropic.
+            AI, thoughtfully deployed. Built on Claude AI by Anthropic.
           </span>
         </div>
       </div>
 
-      {/* Word ocean with Claude boat */}
+      {/* Word ocean with Claude AI boat */}
       <BoatWithClaude />
     </footer>
   );

@@ -6,18 +6,18 @@ export const metadata: Metadata = {
   title:
     "Beyond the 7-Day Playbook: Deploying Claude AI Across a Real Organization",
   description:
-    "Ruben Hassid's viral Claude team setup guide works beautifully for small teams. Here's what changes when you're deploying across 7 departments, 200+ people, legacy ERP systems, and compliance requirements.",
+    "Ruben Hassid's viral Claude AI team setup guide works beautifully for small teams. Here's what changes when you're deploying across 7 departments, 200+ people, legacy ERP systems, and compliance requirements.",
   keywords: [
     "Claude AI team deployment",
-    "Claude for enterprise",
+    "Claude AI for enterprise",
     "AI deployment manufacturing",
     "instruction engineering",
-    "Anthropic Claude business",
+    "Anthropic Claude AI business",
     "AI team rollout",
     "Claude AI setup guide",
     "enterprise AI implementation",
     "AI workflow automation",
-    "Claude deployment studio",
+    "Claude AI deployment studio",
   ],
   alternates: {
     canonical:
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title:
       "Beyond the 7-Day Playbook: Deploying Claude AI Across a Real Organization",
     description:
-      "The DIY playbook works for small teams. Here's what happens when you need to deploy Claude across 7 departments, legacy systems, and 200+ people.",
+      "The DIY playbook works for small teams. Here's what happens when you need to deploy Claude AI across 7 departments, legacy systems, and 200+ people.",
     url: "https://settlewithai.com/blog/claude-team-deployment-beyond-diy",
     siteName: "Settle",
     publishedTime: "2026-03-30T00:00:00Z",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     title:
       "Beyond the 7-Day Playbook: Deploying Claude AI Across a Real Organization",
     description:
-      "The DIY playbook works for small teams. Here's what happens when you need to deploy Claude across 7 departments, legacy systems, and 200+ people.",
+      "The DIY playbook works for small teams. Here's what happens when you need to deploy Claude AI across 7 departments, legacy systems, and 200+ people.",
   },
 };
 
@@ -50,7 +50,7 @@ export default function Article() {
     headline:
       "Beyond the 7-Day Playbook: Deploying Claude AI Across a Real Organization",
     description:
-      "Ruben Hassid's viral Claude team setup guide is an excellent starting point. Here's what changes when deploying across 7 departments, 200+ people, legacy systems, and compliance requirements.",
+      "Ruben Hassid's viral Claude AI team setup guide is an excellent starting point. Here's what changes when deploying across 7 departments, 200+ people, legacy systems, and compliance requirements.",
     datePublished: "2026-03-30T00:00:00Z",
     dateModified: "2026-03-30T00:00:00Z",
     image: "https://settlewithai.com/og-image.png",
@@ -141,7 +141,7 @@ export default function Article() {
             Organization
           </h1>
           <p className="text-text-muted text-[17px] leading-relaxed">
-            Ruben Hassid&apos;s viral guide to setting up Claude for your team
+            Ruben Hassid&apos;s viral guide to setting up Claude AI for your team
             is one of the best starting points we&apos;ve seen. But what
             happens when your team isn&apos;t 10 people in a Notion-native
             startup &mdash; it&apos;s 200 people across 7 departments, with a
@@ -168,21 +168,21 @@ export default function Article() {
               rel="noopener noreferrer"
               className="text-accent hover:underline"
             >
-              &ldquo;How to set up Claude for your team in 7 days&rdquo;
+              &ldquo;How to set up Claude AI for your team in 7 days&rdquo;
             </a>
             {" "}and asked, &ldquo;Can we just do this?&rdquo; I told him
-            yes. Genuinely. It&apos;s one of the best Claude setup guides
+            yes. Genuinely. It&apos;s one of the best Claude AI setup guides
             I&apos;ve seen. Clear steps, real examples, no fluff. If you
             haven&apos;t read it, stop here and go read it.
           </p>
           <p>
-            The guide walks you through creating Claude projects, writing
+            The guide walks you through creating Claude AI projects, writing
             custom instructions, uploading knowledge files, and gradually
             rolling out access. For a team of 10 to 30 people, mostly
             knowledge workers, mostly comfortable with technology, it&apos;s
             an excellent framework. Day one: set up the workspace. Day three:
             write your first custom instructions. Day seven: your team is
-            using Claude with real context.
+            using Claude AI with real context.
           </p>
           <p>
             I&apos;ve sent it to prospects myself. I reference it in almost
@@ -208,7 +208,7 @@ export default function Article() {
           </p>
           <p>
             It works when your team is small enough that one person can be
-            the Claude champion. When most of your workflows are text-based:
+            the Claude AI champion. When most of your workflows are text-based:
             writing, research, analysis, communication. When your team
             already lives in modern tools like Slack, Notion, and Google
             Workspace. When you don&apos;t have significant compliance
@@ -228,14 +228,14 @@ export default function Article() {
             early-stage startups, small professional services teams. For
             them, the DIY route isn&apos;t just viable, it&apos;s probably
             the right call. You don&apos;t need external help to set up
-            Claude for a 15-person marketing agency. You need Ruben&apos;s
+            Claude AI for a 15-person marketing agency. You need Ruben&apos;s
             guide and a free afternoon.
           </p>
 
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/blog/projects-dashboard.webp"
-            alt="Claude Projects dashboard showing OrientPrint Sales Proposals, Vendor Finder, and other deployed projects"
+            alt="Claude AI Projects dashboard showing OrientPrint Sales Proposals, Vendor Finder, and other deployed projects"
             width={1512}
             height={782}
             loading="lazy"
@@ -256,7 +256,7 @@ export default function Article() {
             pull pricing from a master spreadsheet that lives with Finance,
             require terms and conditions that vary by country, and need to
             match brand standards maintained by Marketing. Try stuffing all
-            of that into a single Claude project. It gets bloated fast, and
+            of that into a single Claude AI project. It gets bloated fast, and
             the outputs start drifting.
           </p>
           <p>
@@ -286,7 +286,7 @@ export default function Article() {
             follow brand templates that took someone weeks to build.
           </p>
           <p>
-            Claude can work with all of this. But the instructions need to
+            Claude AI can work with all of this. But the instructions need to
             encode real business logic: head count formulas based on print
             width and colour configuration, 20% gross margin calculations,
             different terms for domestic versus international customers,
@@ -296,7 +296,7 @@ export default function Article() {
             difference between a script and a production system matters.
           </p>
           <p>
-            <a href="https://www.anthropic.com" target="_blank" rel="noopener noreferrer">Anthropic</a> has given us a remarkably capable model in <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude</a>. But
+            <a href="https://www.anthropic.com" target="_blank" rel="noopener noreferrer">Anthropic</a> has given us a remarkably capable model in <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude AI</a>. But
             capability without structure is just a chat window. The structure
             is where the value lives.
           </p>
@@ -310,13 +310,13 @@ export default function Article() {
             from AI are often the ones least equipped to set it up. Think
             about it: a service engineer who spends hours digging through
             physical manuals for troubleshooting steps isn&apos;t going to
-            write their own Claude instructions. A procurement officer
+            write their own Claude AI instructions. A procurement officer
             generating RFQs from scratch every time doesn&apos;t know what
             a &ldquo;knowledge file&rdquo; is. A floor supervisor in a
             factory outside a major city might not work primarily in English.
           </p>
           <p>
-            The 7-day playbook assumes the person setting up Claude and the
+            The 7-day playbook assumes the person setting up Claude AI and the
             person using it are either the same person or sitting close
             together. In a larger organisation, they&apos;re often separated
             by several layers of hierarchy, different physical locations,
@@ -327,7 +327,7 @@ export default function Article() {
           <h2>What structured deployment actually looks like</h2>
           <p>
             I started Settle because I kept seeing the same gap. Companies
-            knew Claude could help. Some had even tried the DIY approach.
+            knew Claude AI could help. Some had even tried the DIY approach.
             But they couldn&apos;t get from &ldquo;a few people
             experimenting&rdquo; to &ldquo;the whole organisation using
             this daily.&rdquo;
@@ -371,7 +371,7 @@ export default function Article() {
           <h3>Phase 2: Instruction engineering</h3>
           <p>
             Each project gets production-grade instructions. Not a paragraph
-            of guidance, but a complete specification of how Claude should
+            of guidance, but a complete specification of how Claude AI should
             behave for that specific workflow.
           </p>
           <p>
@@ -389,13 +389,13 @@ export default function Article() {
             That single project took a document that previously required
             3&ndash;4 hours of manual assembly down to 30 minutes. The
             instructions are several pages long. Writing them required
-            understanding not just how Claude works, but how Orient&apos;s
+            understanding not just how Claude AI works, but how Orient&apos;s
             pricing works, how their sales process works, and where the
             edge cases hide.
           </p>
           <p>
             That&apos;s what instruction engineering means in practice.
-            It&apos;s the skill that turns Claude from a general-purpose
+            It&apos;s the skill that turns Claude AI from a general-purpose
             assistant into a tool that knows your business.
           </p>
 
@@ -452,7 +452,7 @@ export default function Article() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/blog/orient-pricing-output.webp"
-            alt="Claude generating a real pricing breakdown for an OrientJet L&P Series press — head count calculations, component pricing, GST, and a safety flag about an unconfirmed line item"
+            alt="Claude AI generating a real pricing breakdown for an OrientJet L&P Series press — head count calculations, component pricing, GST, and a safety flag about an unconfirmed line item"
             width={1512}
             height={782}
             loading="lazy"
@@ -466,13 +466,13 @@ export default function Article() {
             hard.
           </p>
           <p>
-            It looks easy. You open a Claude project, type some guidance in
+            It looks easy. You open a Claude AI project, type some guidance in
             the instructions field, and it seems to work. Then you hit the
             first edge case. The pricing formula doesn&apos;t account for
             the new product line. The output format breaks when there are
             more than five line items. The instructions contradict
             themselves when the user asks for something slightly outside
-            the happy path. The knowledge files are too large and Claude
+            the happy path. The knowledge files are too large and Claude AI
             starts hallucinating details from the wrong document.
           </p>
           <p>
@@ -480,7 +480,7 @@ export default function Article() {
           </p>
           <p>
             Good instruction engineering requires understanding both sides:
-            how Claude processes instructions (context windows, knowledge
+            how Claude AI processes instructions (context windows, knowledge
             file retrieval, instruction hierarchy) and how the business
             actually works (edge cases, exceptions, compliance rules, the
             things that only surface when you sit with the person doing the
@@ -488,7 +488,7 @@ export default function Article() {
           </p>
           <p>
             It&apos;s a new skill. Anthropic has made incredible tools
-            available, and <a href="https://docs.anthropic.com/en/docs/about-claude/models" target="_blank" rel="noopener noreferrer">Claude is the most capable model</a> I&apos;ve
+            available, and <a href="https://docs.anthropic.com/en/docs/about-claude/models" target="_blank" rel="noopener noreferrer">Claude AI is the most capable model</a> I&apos;ve
             worked with. But the gap between what the tools can do and what
             most organisations can extract from them is still wide. That
             gap is what I exist to close.
@@ -525,8 +525,8 @@ export default function Article() {
             situation demands more.
           </p>
           <p>
-            The 7-day playbook is how you learn to deploy Claude. Structured
-            deployment is how you deploy Claude at scale.
+            The 7-day playbook is how you learn to deploy Claude AI. Structured
+            deployment is how you deploy Claude AI at scale.
           </p>
           <p>
             Both are necessary. The first builds conviction that AI can
@@ -573,7 +573,7 @@ export default function Article() {
           <div className="mt-16 pt-10 border-t border-border-light">
             <h3>Ready to go beyond the playbook?</h3>
             <p>
-              We help manufacturers and mid-market companies deploy Claude
+              We help manufacturers and mid-market companies deploy Claude AI
               across every department &mdash; structured rollouts,
               production-grade instructions, and measurable results.{" "}
               <a

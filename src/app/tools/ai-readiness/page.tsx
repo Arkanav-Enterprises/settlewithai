@@ -141,7 +141,7 @@ export default function AiReadinessPage() {
               },
               {
                 q: "Is this specific to Claude AI?",
-                a: "The assessment measures general AI deployment readiness, but recommendations are tailored to Claude (Anthropic) since that's what Settle deploys. The readiness factors apply to any enterprise AI initiative.",
+                a: "The assessment measures general AI deployment readiness, but recommendations are tailored to Claude AI (Anthropic) since that's what Settle deploys. The readiness factors apply to any enterprise AI initiative.",
               },
             ].map((faq) => (
               <details

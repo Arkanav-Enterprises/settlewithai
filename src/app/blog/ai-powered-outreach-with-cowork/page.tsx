@@ -3,18 +3,18 @@ import { Footer } from "@/components/layout/Footer";
 import { BlogTOC } from "@/components/blog/BlogTOC";
 
 export const metadata: Metadata = {
-  title: "We Used Claude Cowork to Prospect 12 Companies and Draft 48 Emails in One Session",
+  title: "We Used Claude AI Cowork to Prospect 12 Companies and Draft 48 Emails in One Session",
   description:
-    "How we used Claude's Cowork feature to research prospects, personalise outreach, create Gmail drafts, and build a 3-week send calendar — without leaving the conversation.",
+    "How we used Claude AI's Cowork feature to research prospects, personalise outreach, create Gmail drafts, and build a 3-week send calendar — without leaving the conversation.",
   keywords: [
-    "Claude Cowork",
+    "Claude AI Cowork",
     "AI sales outreach",
     "AI prospecting",
     "automated email outreach",
     "Claude AI for sales",
     "AI business development",
     "sales automation AI",
-    "Claude Gmail integration",
+    "Claude AI Gmail integration",
   ],
   alternates: {
     canonical:
@@ -22,9 +22,9 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "article",
-    title: "We Used Claude Cowork to Prospect 12 Companies and Draft 48 Emails in One Session",
+    title: "We Used Claude AI Cowork to Prospect 12 Companies and Draft 48 Emails in One Session",
     description:
-      "Research, personalise, draft, schedule — all in one Claude Cowork session.",
+      "Research, personalise, draft, schedule — all in one Claude AI Cowork session.",
     url: "https://settlewithai.com/blog/ai-powered-outreach-with-cowork",
     siteName: "Settle",
     publishedTime: "2026-03-29T00:00:00Z",
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "We Used Claude Cowork to Prospect 12 Companies and Draft 48 Emails in One Session",
+    title: "We Used Claude AI Cowork to Prospect 12 Companies and Draft 48 Emails in One Session",
     description:
-      "Research, personalise, draft, schedule — all in one Claude Cowork session.",
+      "Research, personalise, draft, schedule — all in one Claude AI Cowork session.",
   },
 };
 
@@ -43,9 +43,9 @@ export default function Article() {
     "@context": "https://schema.org",
     "@type": "Article",
     headline:
-      "We Used Claude Cowork to Prospect 12 Companies and Draft 48 Emails in One Session",
+      "We Used Claude AI Cowork to Prospect 12 Companies and Draft 48 Emails in One Session",
     description:
-      "How we used Claude Cowork to automate prospect research, personalised outreach, Gmail draft creation, and send scheduling.",
+      "How we used Claude AI Cowork to automate prospect research, personalised outreach, Gmail draft creation, and send scheduling.",
     datePublished: "2026-03-29T00:00:00Z",
     dateModified: "2026-03-29T00:00:00Z",
     image: "https://settlewithai.com/og-image.png",
@@ -131,7 +131,7 @@ export default function Article() {
               letterSpacing: "-0.03em",
             }}
           >
-            We Used Claude Cowork to Prospect 12 Companies and Draft 48
+            We Used Claude AI Cowork to Prospect 12 Companies and Draft 48
             Emails in One Session
           </h1>
           <p className="text-text-muted text-[17px] leading-relaxed">
@@ -161,7 +161,7 @@ export default function Article() {
             Normally this would eat an entire week. A day researching
             companies, another day finding contacts, another day writing
             personalised emails, then manually scheduling follow-ups. I
-            decided to try doing the whole thing inside one <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude</a> Cowork
+            decided to try doing the whole thing inside one <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude AI</a> Cowork
             session instead.
           </p>
           <p>
