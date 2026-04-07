@@ -222,36 +222,45 @@ function HeroSubtitle() {
 function OrientCaseStudyCard() {
   const [open, setOpen] = useState(false);
 
+  /* The .fade-up wrapper is intentionally a separate element from the card
+     itself. useFadeIn() imperatively adds a `visible` class via classList.add
+     to trigger the opacity-0 → opacity-1 transition. If we put fade-up on the
+     same element whose className React re-renders based on `open` state,
+     React would overwrite the imperative `visible` class on every re-render
+     and the card would snap back to opacity 0 (disappearing on click).
+     Splitting them keeps the fade-up wrapper's className stable so React
+     never touches it. */
   return (
-    <div
-      className={`fade-up rounded-xl p-8 md:p-12 lg:p-16 relative transition-colors duration-200 ${
-        !open ? "cursor-pointer hover:bg-[rgba(0,0,0,0.02)]" : ""
-      }`}
-      onClick={() => {
-        // Whole card opens the detail. Only opens — never auto-collapses,
-        // so users reading the expanded content can't close it by accident.
-        // The +/× button (which calls stopPropagation) handles collapsing.
-        if (!open) setOpen(true);
-      }}
-      role={!open ? "button" : undefined}
-      tabIndex={!open ? 0 : undefined}
-      onKeyDown={(e) => {
-        if (!open && (e.key === "Enter" || e.key === " ")) {
-          e.preventDefault();
-          setOpen(true);
-        }
-      }}
-      style={{
-        background: "rgba(0,0,0,0.04)",
-        backgroundImage:
-          "linear-gradient(135deg, rgba(0,0,0,0.04), rgba(0,0,0,0.02))",
-        backdropFilter: "blur(6px)",
-        WebkitBackdropFilter: "blur(6px)",
-        boxShadow:
-          "inset 1px 1px 1px rgba(0,0,0,0.1), inset -1px -1px 1px rgba(255,255,255,0.3), 0 4px 16px rgba(0,0,0,0.1)",
-        border: "1px solid rgba(0,0,0,0.1)",
-      }}
-    >
+    <div className="fade-up">
+      <div
+        className={`rounded-xl p-8 md:p-12 lg:p-16 relative transition-colors duration-200 ${
+          !open ? "cursor-pointer hover:bg-[rgba(0,0,0,0.02)]" : ""
+        }`}
+        onClick={() => {
+          // Whole card opens the detail. Only opens — never auto-collapses,
+          // so users reading the expanded content can't close it by accident.
+          // The +/× button (which calls stopPropagation) handles collapsing.
+          if (!open) setOpen(true);
+        }}
+        role={!open ? "button" : undefined}
+        tabIndex={!open ? 0 : undefined}
+        onKeyDown={(e) => {
+          if (!open && (e.key === "Enter" || e.key === " ")) {
+            e.preventDefault();
+            setOpen(true);
+          }
+        }}
+        style={{
+          background: "rgba(0,0,0,0.04)",
+          backgroundImage:
+            "linear-gradient(135deg, rgba(0,0,0,0.04), rgba(0,0,0,0.02))",
+          backdropFilter: "blur(6px)",
+          WebkitBackdropFilter: "blur(6px)",
+          boxShadow:
+            "inset 1px 1px 1px rgba(0,0,0,0.1), inset -1px -1px 1px rgba(255,255,255,0.3), 0 4px 16px rgba(0,0,0,0.1)",
+          border: "1px solid rgba(0,0,0,0.1)",
+        }}
+      >
       {/* Expand/collapse button */}
       <button
         type="button"
@@ -569,6 +578,7 @@ function OrientCaseStudyCard() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
