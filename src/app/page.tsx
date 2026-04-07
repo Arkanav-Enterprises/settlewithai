@@ -288,8 +288,10 @@ function OrientCaseStudyCard() {
         </span>
       </button>
 
-      {/* header */}
-      <div className="flex items-center gap-5 mb-10 pr-12">
+      {/* header — stack on mobile so the title doesn't squish next to the logo.
+         items-start prevents the <img> from stretching to full width when the
+         flex container is in column mode (default align-items: stretch). */}
+      <div className="flex flex-col items-start sm:flex-row sm:items-center gap-4 sm:gap-5 mb-10 pr-12">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/orient-logo.png"
@@ -1427,7 +1429,8 @@ export default function Home() {
                     Thanks — we&apos;ll be in touch.
                   </p>
                   <p className="text-white/50 text-sm">
-                    Expect a reply within 24 hours.
+                    We&apos;re receiving a high volume of requests right now,
+                    so responses might be delayed.
                   </p>
                 </div>
               ) : (
