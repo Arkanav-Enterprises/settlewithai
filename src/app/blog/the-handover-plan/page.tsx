@@ -404,22 +404,70 @@ export default function Article() {
           <h2>The handover is the product</h2>
           <p>
             One last detail. The handover plan isn&apos;t a one-off Google
-            Doc. It lives inside our internal dashboard alongside every
-            other meeting we&apos;ve run for that client. Each entry is its
-            own working document. The index page has a single line at the
-            top that&apos;s the closest thing we have to a mission
-            statement: <em>Sessions, in sequence.</em>
+            Doc. It lives inside our internal dashboard, and the dashboard
+            has a few zoom levels worth showing. Bear with me &mdash; this
+            is the only place in the post I&apos;ll talk about the
+            machinery behind the meeting.
+          </p>
+          <p>
+            Zoom level one. Every client we run a handover for has their
+            own page that lists every meeting we&apos;ve had with them, in
+            order. Each row is its own working document. The headline at
+            the top is the closest thing we have to a mission statement:{" "}
+            <em>Sessions, in sequence.</em>
           </p>
 
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/blog/rollout-meetings.webp"
-            alt="The Settle dashboard's Rollout Meetings index page, showing each handover meeting as its own entry in a sequenced list."
-            width={1434}
-            height={969}
+            alt="A client's Rollout Meetings index page inside the Settle dashboard. Headline: 'Sessions, in sequence.' One row listed: '01 — AI, thoughtfully deployed.' dated 8 April 2026."
+            width={1600}
+            height={816}
             loading="lazy"
             className="rounded-xl border border-[rgba(20,20,19,0.1)] my-10"
           />
+
+          <p>
+            Zoom level two. Each of those clients has a full rollout
+            dashboard underneath the meetings list. This is where we
+            track every use case, every project, every skill, every
+            blocker, every gap. The meeting plan I&apos;ve been describing
+            for the last 1,500 words is one tab in this thing. Everything
+            else &mdash; all the architecture and instruction work that
+            happens before handover day &mdash; lives here.
+          </p>
+
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/blog/dashboard-detail.webp"
+            alt="The Settle rollout dashboard for a client. Headline: 'AI Integration Rollout — Claude Enterprise deployment across 7 departments with 49 use cases.' Three large stat cards (20 Ready to Deploy, 23 Needs Work, 7 Blockers and Risks) above a Skill Readiness by Tier chart with four tier rows."
+            width={1600}
+            height={816}
+            loading="lazy"
+            className="rounded-xl border border-[rgba(20,20,19,0.1)] my-10"
+          />
+
+          <p>
+            Zoom level three. And those rollouts all live inside one
+            top-level index. New rollouts get added here. Old ones get
+            archived here. It&apos;s the &ldquo;all clients&rdquo; view I
+            open first thing in the morning to see what&apos;s in flight.
+          </p>
+
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/blog/dashboards-landing.webp"
+            alt="The Settle dashboards index. Headline: 'Dashboards, settled.' One client rollout listed below."
+            width={1600}
+            height={816}
+            loading="lazy"
+            className="rounded-xl border border-[rgba(20,20,19,0.1)] my-10"
+          />
+
+          <p>
+            I&apos;m showing you all of this so the next paragraph lands
+            properly.
+          </p>
 
           <p>
             For a long time I thought the product was the instructions.
