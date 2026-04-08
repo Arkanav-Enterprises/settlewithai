@@ -220,7 +220,7 @@ function HeroSubtitle() {
    inner content's natural height is honored without max-height
    guesswork. */
 function OrientCaseStudyCard() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   /* The .fade-up wrapper is intentionally a separate element from the card
      itself. useFadeIn() imperatively adds a `visible` class via classList.add
