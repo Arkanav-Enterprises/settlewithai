@@ -147,60 +147,107 @@ export function BlogTOC({ headings: providedHeadings }: BlogTOCProps = {}) {
         </div>
       </div>
 
-      {/* ── Mobile: FAB + slide-over (needs React state for tap) ── */}
+      {/* ── Mobile: morphing FAB → bottom sheet ──
+         One container morphs (width, height, border-radius) from a 48px
+         circle into a rounded rectangle. Two layered inset-0 children cross-
+         fade: the hamburger icon (when closed) and the TOC list (when open).
+         Direction-dependent transitionDelay keeps the icon and list from
+         appearing while the container is still the "wrong" shape. */}
       <div ref={tocRef} className="xl:hidden">
-        <button
-          onClick={() => setMobileOpen((v) => !v)}
-          className={`fixed right-4 bottom-6 z-[70] w-10 h-10 rounded-full bg-text text-bg flex items-center justify-center shadow-lg transition-opacity duration-200 ${mobileOpen ? "opacity-0 pointer-events-none" : ""}`}
-          aria-label="Table of contents"
-        >
-          <svg width="18" height="14" viewBox="0 0 18 14" fill="none">
-            <path d="M0 1h18M0 7h12M0 13h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          </svg>
-        </button>
-
+        {/* Backdrop — captures outside taps, dims the page */}
         <div
-          className={`
-            fixed right-0 top-0 z-[70] h-full
-            w-[280px] max-w-[80vw]
-            bg-[#141413] backdrop-blur-xl
-            border-l border-white/10 shadow-2xl
-            transition-transform duration-300 ease-out
-            ${mobileOpen ? "translate-x-0" : "translate-x-full"}
-          `}
-        >
-          <div className="flex items-center justify-between px-5 pt-5 pb-2">
-            <span className="text-xs font-medium uppercase tracking-[0.1em] text-white/50">
-              On this page
-            </span>
-            <button onClick={() => setMobileOpen(false)} className="text-white/50 hover:text-white p-1" aria-label="Close">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
-            </button>
-          </div>
+          onClick={() => setMobileOpen(false)}
+          className={`fixed inset-0 z-[65] bg-black/30 transition-opacity duration-300 ${
+            mobileOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+          aria-hidden="true"
+        />
 
-          <nav className="px-5 py-4 overflow-y-auto max-h-[80vh]">
-            <ul className="space-y-0.5">
-              {headings.map((h) => (
-                <li key={h.id}>
-                  <button
-                    type="button"
-                    onClick={() => tocGoTo(h.id)}
-                    className={`
-                      block w-full text-left py-1.5 text-[13px] leading-snug cursor-pointer transition-colors duration-200
-                      ${activeId === h.id
-                        ? "text-accent font-medium"
-                        : "text-white/60 hover:text-white"
-                      }
-                    `}
-                  >
-                    {h.text}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </nav>
+        {/* Morphing container */}
+        <div
+          className="fixed right-4 bottom-6 z-[70] bg-[#141413] shadow-2xl overflow-hidden"
+          style={{
+            width: mobileOpen ? "min(calc(100vw - 2rem), 20rem)" : "3rem",
+            height: mobileOpen
+              ? `min(${headings.length * 36 + 76}px, 70vh)`
+              : "3rem",
+            borderRadius: mobileOpen ? "1.25rem" : "9999px",
+            transition:
+              "width 450ms cubic-bezier(0.16,1,0.3,1), height 450ms cubic-bezier(0.16,1,0.3,1), border-radius 450ms cubic-bezier(0.16,1,0.3,1)",
+          }}
+        >
+          {/* Closed-state hamburger icon */}
+          <button
+            type="button"
+            onClick={() => setMobileOpen(true)}
+            aria-label="Open table of contents"
+            className="absolute inset-0 flex items-center justify-center text-bg"
+            style={{
+              opacity: mobileOpen ? 0 : 1,
+              pointerEvents: mobileOpen ? "none" : "auto",
+              transition: "opacity 180ms ease",
+              transitionDelay: mobileOpen ? "0ms" : "260ms",
+            }}
+          >
+            <svg width="18" height="14" viewBox="0 0 18 14" fill="none">
+              <path
+                d="M0 1h18M0 7h12M0 13h8"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+
+          {/* Open-state list panel */}
+          <div
+            className="absolute inset-0 flex flex-col"
+            style={{
+              opacity: mobileOpen ? 1 : 0,
+              pointerEvents: mobileOpen ? "auto" : "none",
+              transition: "opacity 220ms ease",
+              transitionDelay: mobileOpen ? "230ms" : "0ms",
+            }}
+          >
+            <div className="flex items-center justify-between px-5 pt-5 pb-2 shrink-0">
+              <span className="text-[10px] font-medium uppercase tracking-[0.12em] text-white/50">
+                On this page
+              </span>
+              <button
+                onClick={() => setMobileOpen(false)}
+                className="text-white/50 hover:text-white p-1 -mr-1"
+                aria-label="Close"
+              >
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M4 4l8 8M12 4l-8 8"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </button>
+            </div>
+            <nav className="px-5 pb-4 pt-1 overflow-y-auto flex-1">
+              <ul className="space-y-0.5">
+                {headings.map((h) => (
+                  <li key={h.id}>
+                    <button
+                      type="button"
+                      onClick={() => tocGoTo(h.id)}
+                      className={`block w-full text-left py-1.5 text-[13px] leading-snug cursor-pointer transition-colors duration-200 ${
+                        activeId === h.id
+                          ? "text-accent font-medium"
+                          : "text-white/60 hover:text-white"
+                      }`}
+                    >
+                      {h.text}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
     </>

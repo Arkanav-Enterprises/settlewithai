@@ -145,7 +145,7 @@ function ClaudeTooltip() {
 
 const HERO_PREFIX = "We settle ";
 const HERO_SUFFIX =
-  " into your team\u2019s actual workflows \u2014 structured rollouts, production-grade instructions, and real results.";
+  " into your team\u2019s actual workflows \u2014 structured rollouts, production-grade instructions, and real results. No AI expertise required on your end.";
 const HERO_TOTAL = HERO_PREFIX.length + 1 + HERO_SUFFIX.length;
 
 function HeroSubtitle() {
@@ -798,7 +798,7 @@ export default function Home() {
         <div className="relative max-w-[1280px] mx-auto px-6 lg:px-10 pt-36 md:pt-44">
           <div className="liquid-glass mx-auto md:mx-0 max-w-[680px] px-5 md:px-14 py-10 md:py-14 text-center md:text-left">
             <h1 className="text-[clamp(2.4rem,4.8vw,4.2rem)] font-medium leading-[1.08] mb-8">
-              AI, <span className="text-accent">thoughtfully</span> deployed.
+              Your business, made <span className="text-accent whitespace-nowrap">AI-native</span>.
             </h1>
             <HeroSubtitle />
             <div className="mt-8 flex justify-end">
@@ -939,7 +939,7 @@ export default function Home() {
           </h2>
 
           <div className="relative">
-            {/* ── Pulsating curvy path ── */}
+            {/* ── Desktop: pulsating curvy path ── */}
             <svg
               className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
               viewBox="0 0 1000 1000"
@@ -971,6 +971,58 @@ export default function Home() {
               <circle cx="920" cy="250" r="4" fill="#d97757" opacity="0.3" />
               <circle cx="80" cy="500" r="4" fill="#d97757" opacity="0.3" />
               <circle cx="920" cy="750" r="4" fill="#d97757" opacity="0.3" />
+            </svg>
+
+            {/* ── Mobile: straight vertical dotted arrow ──
+               Split into two SVGs: a stretched stem (preserveAspectRatio=none
+               so it fills the full column height) and a fixed-size arrowhead
+               pinned at the bottom so the triangle doesn't get vertically
+               elongated by the stretch. Same fuse animation as desktop — the
+               pathLength="1" normalization makes it length-independent. */}
+            <svg
+              className="absolute left-0 top-0 w-8 pointer-events-none md:hidden"
+              style={{ height: "calc(100% - 18px)" }}
+              viewBox="0 0 32 1000"
+              preserveAspectRatio="none"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M 16,20 L 16,980"
+                stroke="#d97757"
+                strokeWidth="1.5"
+                strokeDasharray="6 10"
+                strokeLinecap="round"
+                opacity="0.2"
+                vectorEffect="non-scaling-stroke"
+              />
+              <path
+                d="M 16,20 L 16,980"
+                stroke="#d97757"
+                strokeWidth="2"
+                strokeLinecap="round"
+                opacity="0.4"
+                vectorEffect="non-scaling-stroke"
+                pathLength="1"
+                strokeDasharray="0.08 0.92"
+                className="path-fuse"
+              />
+              <circle cx="16" cy="20" r="4" fill="#d97757" opacity="0.3" />
+            </svg>
+            <svg
+              className="absolute left-0 bottom-0 w-8 h-5 pointer-events-none md:hidden"
+              viewBox="0 0 32 20"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M 8,4 L 16,18 L 24,4"
+                stroke="#d97757"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                opacity="0.45"
+              />
             </svg>
 
             {[
@@ -1034,7 +1086,7 @@ export default function Home() {
             ].map((p) => (
               <div
                 key={p.num}
-                className={`fade-up relative py-10 md:py-14 ${
+                className={`fade-up relative py-10 md:py-14 pl-8 md:pl-0 ${
                   p.align === "right" ? "md:flex md:justify-end" : ""
                 }`}
               >
