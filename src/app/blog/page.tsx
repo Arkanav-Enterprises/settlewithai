@@ -18,6 +18,15 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "the-handover-plan",
+    title:
+      "The Handover Plan: Anatomy of an AI Rollout Working Session",
+    description:
+      "Every Settle Claude rollout ends with a single-page document. Eight rows, four modes, a progress bar at the bottom, and one line at the top that does more work than the rest of the page combined.",
+    date: "2026-04-08",
+    tag: "Deployment",
+  },
+  {
     slug: "orient-product-experience",
     title:
       "How We Engineered an AI Product Expert for The Printers House Orient",
