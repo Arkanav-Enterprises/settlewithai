@@ -319,25 +319,45 @@ function OrientCaseStudyCard() {
         quick wins to ERP integration over six months.&rdquo;
       </blockquote>
 
-      {/* stats */}
-      <div className="grid grid-cols-3 gap-8 md:gap-12">
+      {/* stats — 4-up bordered strip, identical to the homepage band that
+         used to live above this card. Hairline dividers form a 2×2 cross on
+         mobile and a single row of verticals on desktop so the four metrics
+         read as one cohesive object. */}
+      <div className="grid grid-cols-2 md:grid-cols-4 items-stretch">
         {[
-          { v: "49", l: "Use cases mapped" },
-          { v: "11", l: "Projects deployed" },
-          { v: "85%", l: "Time saved on docs" },
-        ].map((s) => (
-          <div key={s.l}>
+          { value: "85%", label: "Faster document generation" },
+          { value: "11", label: "Projects deployed" },
+          { value: "49", label: "Use cases mapped" },
+          {
+            value: (
+              <>
+                4hrs <span className="text-accent">→</span> 30min
+              </>
+            ),
+            label: "Task time reduction",
+          },
+        ].map((s, i) => (
+          <div
+            key={s.label}
+            className={[
+              "text-center px-3 py-6 md:py-4 flex flex-col justify-center",
+              "border-[rgba(20,20,19,0.12)]",
+              i % 2 === 1 ? "border-l" : "",
+              i >= 2 ? "border-t md:border-t-0" : "",
+              i >= 1 ? "md:border-l" : "",
+            ].join(" ")}
+          >
             <div
-              className="text-accent text-[clamp(1.5rem,2.5vw,2.2rem)] font-medium leading-none mb-2"
+              className="text-[clamp(1.6rem,3.4vw,2.4rem)] font-medium leading-none mb-3 text-text whitespace-nowrap"
               style={{
                 fontFamily: "var(--font-heading)",
                 letterSpacing: "-0.03em",
               }}
             >
-              {s.v}
+              {s.value}
             </div>
-            <div className="text-text-faint text-xs uppercase tracking-[0.12em]">
-              {s.l}
+            <div className="text-text-muted text-[10.5px] md:text-[11px] uppercase tracking-[0.16em] leading-relaxed">
+              {s.label}
             </div>
           </div>
         ))}
@@ -682,7 +702,6 @@ function SettleMark({ className = "h-6 w-auto", stroke = "#141413" }: { classNam
 /* ─── Page ──────────────────────────────────────────────── */
 
 export default function Home() {
-  const statsRef = useFadeIn();
   const problemRef = useFadeIn();
   const processRef = useFadeIn();
   const servicesRef = useFadeIn();
@@ -791,38 +810,6 @@ export default function Home() {
                 <Arrow />
               </a>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Stats ────────────────────────────────────── */}
-      <section ref={statsRef} className="bg-[#ddd9cc]">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-10 md:py-12">
-          <p className="text-xs text-text-faint uppercase tracking-[0.12em] text-center mb-6">
-            From our first engagement &mdash; Orient Printing &amp; Packaging
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-8 items-start stagger">
-            {[
-              { value: "85%", label: "Faster document generation" },
-              { value: "11", label: "Projects deployed" },
-              { value: "49", label: "Use cases mapped" },
-              { value: "4hrs → 30min", label: "Task time reduction" },
-            ].map((s) => (
-              <div key={s.label} className="fade-up text-center">
-                <div
-                  className="text-[clamp(1.5rem,3vw,2.5rem)] font-medium leading-none mb-2 text-text md:whitespace-nowrap"
-                  style={{
-                    fontFamily: "var(--font-heading)",
-                    letterSpacing: "-0.03em",
-                  }}
-                >
-                  {s.value}
-                </div>
-                <div className="text-text-muted text-[11px] uppercase tracking-[0.12em] leading-relaxed">
-                  {s.label}
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
