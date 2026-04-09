@@ -79,7 +79,7 @@ export default function ProcessScroll() {
       {/* Rotating circle with content attached */}
       <div
         ref={circleRef}
-        className="absolute pointer-events-none left-[-70vw] md:left-[-65vw] lg:left-[-580px]"
+        className="absolute pointer-events-none left-[-85vw] md:left-[-65vw] lg:left-[-580px]"
         style={{
           width: circleSize,
           height: circleSize,
@@ -121,10 +121,11 @@ export default function ProcessScroll() {
              to stay upright. */
           const counterRotation = rotation;
 
-          /* How "active" is this phase — based on how close to center */
+          /* Binary active state — the phase closest to current rotation is fully active */
           const phaseCenter = i * PHASE_ANGLE;
           const dist = Math.abs(rotation - phaseCenter);
-          const activeness = Math.max(0, 1 - dist / (PHASE_ANGLE * 2));
+          const isClosest = dist <= PHASE_ANGLE / 2;
+          const activeness = isClosest ? 1 : Math.max(0, 0.15 - dist / (PHASE_ANGLE * 8));
 
           return (
             <div
@@ -204,7 +205,7 @@ export default function ProcessScroll() {
       </div>
 
       {/* Spacer for scroll room */}
-      <div className="relative z-10 h-[150vh] md:h-[180vh]" />
+      <div className="relative z-10 h-[220vh] md:h-[180vh]" />
     </section>
   );
 }
