@@ -180,7 +180,7 @@ export default function ProcessScroll() {
       </div>
 
       {/* Spacer for scroll room */}
-      <div className="relative z-10 h-[180vh] md:h-[100vh]" />
+      <div className="relative z-10 h-[130vh] md:h-[100vh]" />
     </section>
   );
 }
