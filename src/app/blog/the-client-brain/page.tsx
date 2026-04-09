@@ -489,6 +489,15 @@ export default function Article() {
             </div>
           </div>
         </div>
+
+        {/* Author */}
+        <div className="mt-16 pt-8 border-t border-border-light flex items-start gap-4">
+          <div className="w-12 h-12 rounded-full bg-[#e8e6dc] flex items-center justify-center shrink-0 text-text font-medium text-lg" style={{ fontFamily: "var(--font-heading)" }}>P</div>
+          <div>
+            <a href="/#contact" className="font-medium text-text hover:text-accent transition-colors">Pranav Ambwani</a>
+            <p className="text-sm text-text-muted mt-1 leading-relaxed">Founder of Settle. Deploys Claude AI into mid-market companies and manufacturers — structured rollouts, production-grade instructions, real results.</p>
+          </div>
+        </div>
       </article>
 
       <Footer />

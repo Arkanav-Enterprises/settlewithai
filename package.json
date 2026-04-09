@@ -11,10 +11,12 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.86.1",
     "@calcom/embed-react": "^1.5.3",
+    "@gsap/react": "^2.1.2",
     "@vercel/analytics": "^2.0.1",
     "d3": "^7.9.0",
     "d3-geo": "^3.1.1",
     "gray-matter": "^4.0.3",
+    "gsap": "^3.14.2",
     "next": "16.2.1",
     "next-mdx-remote": "^6.0.0",
     "pretext": "^0.3.0",

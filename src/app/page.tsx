@@ -11,6 +11,7 @@ import { AskClaude } from "@/components/AskClaude";
 const Globe = dynamic(() => import("./globe"), { ssr: false });
 const Mindmap = dynamic(() => import("./mindmap"), { ssr: false });
 const CoworkDemo = dynamic(() => import("./cowork-demo"), { ssr: false });
+const ProcessScroll = dynamic(() => import("./process-scroll"), { ssr: false });
 
 /* ─── Scroll-triggered fade-in ──────────────────────────── */
 
@@ -1167,231 +1168,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Process ────────────────────────────────────
-         Card wrapper vertical padding tightened on desktop
-         (py-14 → py-6) so the four cards feel like one
-         connected sequence instead of four isolated islands. */}
-      <section
-        id="process"
-        ref={processRef}
-        className="bg-[#ddd9cc] relative overflow-hidden"
-      >
-        {/* Cave art background */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/cave-art.webp"
-          alt=""
-          width={1024}
-          height={1024}
-          loading="lazy"
-          className="absolute right-0 top-0 w-[500px] md:w-[700px] lg:w-[800px] h-auto opacity-[0.04] md:opacity-[0.06] pointer-events-none select-none"
-        />
-        <div className="relative max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24">
-          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-14 max-w-2xl text-text">
-            From zero to settled in four phases.
-          </h2>
-
-          <div className="relative">
-            {/* ── Desktop: pulsating curvy path ── */}
-            <svg
-              className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
-              viewBox="0 0 1000 1000"
-              preserveAspectRatio="none"
-              fill="none"
-            >
-              <path
-                d="M 80,60 C 80,140 920,100 920,250 S 80,340 80,500 S 920,600 920,750 S 80,850 80,940"
-                stroke="#d97757"
-                strokeWidth="1.5"
-                strokeDasharray="6 10"
-                strokeLinecap="round"
-                opacity="0.2"
-                vectorEffect="non-scaling-stroke"
-              />
-              {/* Fuse glow that travels along the path */}
-              <path
-                d="M 80,60 C 80,140 920,100 920,250 S 80,340 80,500 S 920,600 920,750 S 80,850 80,940"
-                stroke="#d97757"
-                strokeWidth="2"
-                strokeLinecap="round"
-                opacity="0.4"
-                vectorEffect="non-scaling-stroke"
-                pathLength="1"
-                strokeDasharray="0.08 0.92"
-                className="path-fuse"
-              />
-              <circle cx="80" cy="60" r="4" fill="#d97757" opacity="0.3" />
-              <circle cx="920" cy="250" r="4" fill="#d97757" opacity="0.3" />
-              <circle cx="80" cy="500" r="4" fill="#d97757" opacity="0.3" />
-              <circle cx="920" cy="750" r="4" fill="#d97757" opacity="0.3" />
-            </svg>
-
-            {/* ── Mobile: straight vertical dotted arrow ──
-               Split into two SVGs: a stretched stem (preserveAspectRatio=none
-               so it fills the full column height) and a fixed-size arrowhead
-               pinned at the bottom so the triangle doesn't get vertically
-               elongated by the stretch. Same fuse animation as desktop — the
-               pathLength="1" normalization makes it length-independent. */}
-            <svg
-              className="absolute left-0 top-0 w-8 pointer-events-none md:hidden"
-              style={{ height: "calc(100% - 18px)" }}
-              viewBox="0 0 32 1000"
-              preserveAspectRatio="none"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M 16,20 L 16,980"
-                stroke="#d97757"
-                strokeWidth="1.5"
-                strokeDasharray="6 10"
-                strokeLinecap="round"
-                opacity="0.2"
-                vectorEffect="non-scaling-stroke"
-              />
-              <path
-                d="M 16,20 L 16,980"
-                stroke="#d97757"
-                strokeWidth="2"
-                strokeLinecap="round"
-                opacity="0.4"
-                vectorEffect="non-scaling-stroke"
-                pathLength="1"
-                strokeDasharray="0.08 0.92"
-                className="path-fuse"
-              />
-              <circle cx="16" cy="20" r="4" fill="#d97757" opacity="0.3" />
-            </svg>
-            <svg
-              className="absolute left-0 bottom-0 w-8 h-5 pointer-events-none md:hidden"
-              viewBox="0 0 32 20"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M 8,4 L 16,18 L 24,4"
-                stroke="#d97757"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                opacity="0.45"
-              />
-            </svg>
-
-            {[
-              {
-                num: "01",
-                title: "Discovery",
-                desc: "We map every repeatable workflow across your team. What eats time, what\u2019s error-prone, what\u2019s high-volume.",
-                detail:
-                  "You get a prioritised use-case matrix, not a pitch deck.",
-                align: "left" as const,
-                examples: [
-                  "Offer generation",
-                  "Vendor RFQs",
-                  "Troubleshooting",
-                  "Payroll processing",
-                  "BOM creation",
-                ],
-              },
-              {
-                num: "02",
-                title: "Architecture",
-                desc: "Your entire rollout \u2014 use cases, departments, timelines, gaps, and skills \u2014 in one interactive dashboard.",
-                detail:
-                  "Live project tracking. Tier-based phasing. Gap analysis built in.",
-                align: "right" as const,
-                examples: [
-                  "18 functional projects",
-                  "4-tier phased rollout",
-                  "Dependency mapping",
-                  "Skills gap analysis",
-                ],
-              },
-              {
-                num: "03",
-                title: "Instruction Engineering",
-                desc: "We write production-grade Claude project instructions for every use case. Not prompts \u2014 structured workflows with review gates, safety rules, and knowledge files.",
-                detail:
-                  "Your team uses Claude. They don\u2019t need to understand the engineering behind it.",
-                align: "left" as const,
-                examples: [
-                  "Pricing calculator",
-                  "Config suggestor",
-                  "Email writer",
-                  "RFQ template builder",
-                  "Service diagnostics",
-                ],
-              },
-              {
-                num: "04",
-                title: "Deploy & Settle",
-                desc: "We deploy, train your team, and iterate. Quick wins ship in weeks. Deeper integrations follow in phases.",
-                detail: "A roadmap you can actually execute.",
-                align: "right" as const,
-                examples: [
-                  "85% faster docs",
-                  "400+ hrs/mo saved",
-                  "$200K+ annual savings",
-                  "11 projects live",
-                ],
-              },
-            ].map((p) => (
-              <div
-                key={p.num}
-                className={`fade-up parallax-card relative py-8 md:py-6 pl-8 md:pl-0 ${
-                  p.align === "right" ? "md:flex md:justify-end" : ""
-                }`}
-              >
-                <div
-                  className="max-w-md md:max-w-xl px-9 py-10 md:px-12 md:py-12"
-                  style={{
-                    /* Rounded frosted-glass card that dissipates into the
-                       background: translucent radial fill, backdrop-filter
-                       blur, a wide ellipse mask that produces a rounded-
-                       rectangle shape with feathered edges (no hard border),
-                       and an explicit border-radius so the underlying shape
-                       is rounded even before the mask softens it. */
-                    backgroundImage:
-                      "radial-gradient(ellipse 95% 90% at center, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.3) 55%, rgba(255,255,255,0) 100%)",
-                    backdropFilter: "blur(14px)",
-                    WebkitBackdropFilter: "blur(14px)",
-                    borderRadius: "32px",
-                    WebkitMaskImage:
-                      "radial-gradient(ellipse 95% 88% at center, #000 55%, transparent 100%)",
-                    maskImage:
-                      "radial-gradient(ellipse 95% 88% at center, #000 55%, transparent 100%)",
-                  }}
-                >
-                  <span
-                    className="text-text-muted text-[15px] font-medium block mb-4"
-                    style={{ fontFamily: "var(--font-heading)" }}
-                  >
-                    {p.num}
-                  </span>
-                  <h3 className="text-accent text-[clamp(1.5rem,2.5vw,2rem)] font-medium mb-4">
-                    {p.title}
-                  </h3>
-                  <p className="text-text-muted leading-[1.75] mb-3">
-                    {p.desc}
-                  </p>
-                  <p className="text-text-faint text-sm mb-5">{p.detail}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {p.examples.map((ex) => (
-                      <span
-                        key={ex}
-                        className="text-xs font-medium px-3 py-1.5 rounded-full bg-[rgba(20,20,19,0.06)] text-text border border-[rgba(20,20,19,0.1)]"
-                      >
-                        {ex}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── Process (scroll-pinned) ──────────────────── */}
+      <div id="process" ref={processRef}>
+        <ProcessScroll />
+      </div>
 
       {/* ── Who it's for ─────────────────────────────── */}
       <section ref={audienceRef}>
@@ -1444,14 +1224,14 @@ export default function Home() {
          one card fills the viewport and on desktop ~3 cards sit
          alongside each other. Edge fade via mask-image lets cards
          dissolve instead of clipping hard at the section gutter. */}
-      <section ref={quotesRef} className="bg-[#ddd9cc]">
+      <section ref={quotesRef} className="bg-[#1a1a19]">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-14 md:py-20">
           <div className="fade-up flex items-end justify-between gap-6 mb-8 md:mb-10">
             <div>
-              <p className="text-[10.5px] uppercase tracking-[0.15em] text-text-faint mb-2.5">
+              <p className="text-[10.5px] uppercase tracking-[0.15em] text-[rgba(255,255,255,0.25)] mb-2.5">
                 Voices from South Asia
               </p>
-              <h2 className="text-[clamp(1rem,1.4vw,1.2rem)] font-medium leading-[1.35] max-w-xl text-text-muted">
+              <h2 className="text-[clamp(1rem,1.4vw,1.2rem)] font-medium leading-[1.35] max-w-xl text-[rgba(255,255,255,0.5)]">
                 What business leaders are saying about AI.
               </h2>
             </div>
@@ -1461,7 +1241,7 @@ export default function Home() {
                 type="button"
                 aria-label="Previous quote"
                 onClick={() => scrollQuotes(-1)}
-                className="w-9 h-9 rounded-full border border-[rgba(20,20,19,0.18)] bg-bg hover:bg-[rgba(20,20,19,0.04)] hover:border-[rgba(20,20,19,0.3)] transition-colors flex items-center justify-center text-text cursor-pointer"
+                className="w-9 h-9 rounded-full border border-[rgba(255,255,255,0.15)] bg-transparent hover:bg-[rgba(255,255,255,0.05)] hover:border-[rgba(255,255,255,0.25)] transition-colors flex items-center justify-center text-white cursor-pointer"
               >
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path
@@ -1477,7 +1257,7 @@ export default function Home() {
                 type="button"
                 aria-label="Next quote"
                 onClick={() => scrollQuotes(1)}
-                className="w-9 h-9 rounded-full border border-[rgba(20,20,19,0.18)] bg-bg hover:bg-[rgba(20,20,19,0.04)] hover:border-[rgba(20,20,19,0.3)] transition-colors flex items-center justify-center text-text cursor-pointer"
+                className="w-9 h-9 rounded-full border border-[rgba(255,255,255,0.15)] bg-transparent hover:bg-[rgba(255,255,255,0.05)] hover:border-[rgba(255,255,255,0.25)] transition-colors flex items-center justify-center text-white cursor-pointer"
               >
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path
@@ -1530,25 +1310,25 @@ export default function Home() {
               <div
                 key={i}
                 data-quote-card
-                className="snap-start shrink-0 w-[min(85vw,340px)] flex flex-col justify-between py-1"
+                className="snap-start shrink-0 w-[min(85vw,340px)] md:w-[320px] flex flex-col justify-between py-1"
               >
-                <blockquote className="text-[13.5px] leading-[1.7] text-text-muted mb-4">
+                <blockquote className="text-[13.5px] leading-[1.7] text-[rgba(255,255,255,0.5)] mb-4">
                   &ldquo;{quote.q}&rdquo;
                 </blockquote>
-                <div className="text-[10.5px] text-text-faint uppercase tracking-[0.08em]">
+                <div className="text-[10.5px] text-[rgba(255,255,255,0.25)] uppercase tracking-[0.08em]">
                   {quote.attr}
                 </div>
               </div>
             ))}
           </div>
 
-          <p className="text-[10.5px] text-text-faint mt-8 max-w-2xl">
+          <p className="text-[10.5px] text-[rgba(255,255,255,0.2)] mt-8 max-w-2xl">
             From Anthropic&rsquo;s{" "}
             <a
               href="https://www.anthropic.com/features/81k-interviews#quotes"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline hover:text-text-muted transition-colors"
+              className="underline hover:text-[rgba(255,255,255,0.4)] transition-colors"
             >
               81,000 Conversations About AI
             </a>
@@ -1695,7 +1475,7 @@ export default function Home() {
       </section>
 
       {/* ── CTA ──────────────────────────────────────── */}
-      <section id="contact" ref={ctaRef} className="bg-accent">
+      <section id="contact" ref={ctaRef} className="bg-[#1a1a19]">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-28 md:py-40">
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
             {/* Left: text + form */}
