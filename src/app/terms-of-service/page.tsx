@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
+import { Nav } from "@/components/layout/Nav";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
@@ -14,23 +15,7 @@ export const metadata: Metadata = {
 export default function TermsOfService() {
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-bg/90 backdrop-blur-md border-b border-border-light">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 h-[4.25rem] flex items-center justify-between">
-          <a
-            href="/"
-            className="text-[1.15rem] font-semibold tracking-[-0.03em] text-text"
-            style={{ fontFamily: "var(--font-heading)" }}
-          >
-            SETTLE
-          </a>
-          <a
-            href="/#contact"
-            className="text-[14px] font-medium bg-text text-bg px-5 py-2.5 rounded-full hover:bg-[#30302e] transition-colors duration-200"
-          >
-            Get Started
-          </a>
-        </div>
-      </nav>
+      <Nav />
 
       <main className="max-w-[720px] mx-auto px-6 lg:px-10 pt-32 pb-24 md:pt-40 md:pb-36">
         <h1
