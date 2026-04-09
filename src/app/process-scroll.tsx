@@ -38,12 +38,12 @@ export default function ProcessScroll() {
   const circleRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const [rotation, setRotation] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    const mobile = window.matchMedia("(max-width: 767px)").matches;
-    setIsMobile(mobile);
-    if (mobile) return;
+    const desktop = window.matchMedia("(min-width: 768px)").matches;
+    setIsDesktop(desktop);
+    if (!desktop) return;
 
     const section = sectionRef.current;
     if (!section) return;
@@ -70,8 +70,8 @@ export default function ProcessScroll() {
     return () => trigger.kill();
   }, []);
 
-  /* Mobile: simple vertical stack */
-  if (isMobile) {
+  /* Mobile (default): simple vertical stack */
+  if (!isDesktop) {
     return (
       <section className="bg-[#ddd9cc] relative overflow-hidden">
         <div className="relative max-w-[1280px] mx-auto px-6 py-16">
