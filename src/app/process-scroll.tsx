@@ -179,6 +179,17 @@ export default function ProcessScroll() {
         })}
       </div>
 
+      {/* Cave art background — desktop only */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/cave-art.webp"
+        alt=""
+        width={1024}
+        height={1024}
+        loading="lazy"
+        className="absolute right-0 top-0 w-[700px] lg:w-[800px] h-auto opacity-[0.04] md:opacity-[0.06] pointer-events-none select-none hidden md:block"
+      />
+
       {/* Spacer for scroll room */}
       <div className="relative z-10 h-[130vh] md:h-[100vh]" />
     </section>
