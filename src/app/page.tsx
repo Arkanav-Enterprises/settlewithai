@@ -845,7 +845,15 @@ export default function Home() {
 
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  /* Services highlight state. `hoveredService` is the transient preview
+     that fires on pointer enter/leave. `pinnedService` is the sticky
+     selection set by clicking a pill — it persists until the same pill
+     is clicked again (unpin) or a different pill replaces it. Hover
+     wins over pin for the duration of the hover so you can preview
+     other branches without losing your baseline. */
   const [hoveredService, setHoveredService] = useState<string | null>(null);
+  const [pinnedService, setPinnedService] = useState<string | null>(null);
+  const activeServiceCategory = hoveredService ?? pinnedService;
 
   // Discovery Call button state/observer removed while the CTA is hidden.
   // See the commented-out floating button below.
@@ -878,8 +886,8 @@ export default function Home() {
         headings={[
           { id: "case-study", text: "Case study" },
           { id: "problem", text: "The problem" },
-          { id: "process", text: "How we work" },
           { id: "services", text: "Services" },
+          { id: "process", text: "How we work" },
           { id: "founder", text: "Who builds this" },
           { id: "contact", text: "Get in touch" },
         ]}
@@ -1085,7 +1093,98 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Process ──────────────────────────────────── */}
+      {/* ── Services — pill rail above full-width mindmap ────
+         Pills are above the mindmap on every device. Click toggles a
+         sticky pin; hover still previews any branch without losing the
+         pinned baseline. Same data drives both the pill label row and
+         the mindmap's highlight state via the shared category key. */}
+      <section id="services" ref={servicesRef}>
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
+          <div className="h-px bg-border-light" />
+        </div>
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-20 md:py-28">
+          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-10">
+            What we deliver.
+          </h2>
+
+          {/* Pill rail */}
+          <div className="fade-up flex flex-wrap gap-2.5 mb-10 md:mb-12">
+            {[
+              {
+                title: "The audit",
+                category: "The audit",
+                desc: "A week inside your business.",
+              },
+              {
+                title: "Teaching the AI your business",
+                category: "Teaching the AI",
+                desc: "Answers the way your best employee would.",
+              },
+              {
+                title: "Rolling it out",
+                category: "Rolling it out",
+                desc: "We stay until every team uses it.",
+              },
+              {
+                title: "Training your team",
+                category: "Training your team",
+                desc: "On-site for a month, one-on-one.",
+              },
+            ].map((s) => {
+              const active = pinnedService === s.category;
+              return (
+                <button
+                  key={s.title}
+                  type="button"
+                  aria-pressed={active}
+                  onClick={() =>
+                    setPinnedService((p) =>
+                      p === s.category ? null : s.category,
+                    )
+                  }
+                  onMouseEnter={() => setHoveredService(s.category)}
+                  onMouseLeave={() => setHoveredService(null)}
+                  className={[
+                    "inline-flex items-center gap-2.5 rounded-full pl-4 pr-5 py-2.5 border transition-all duration-200 cursor-pointer",
+                    active
+                      ? "bg-[rgba(217,119,87,0.1)] border-[rgba(217,119,87,0.4)]"
+                      : "bg-bg border-[rgba(20,20,19,0.12)] hover:border-[rgba(20,20,19,0.25)] hover:bg-[rgba(20,20,19,0.03)]",
+                  ].join(" ")}
+                >
+                  <span
+                    className="text-[13px] font-medium text-text"
+                    style={{ fontFamily: "var(--font-heading)" }}
+                  >
+                    {s.title}
+                  </span>
+                  <span className="text-text-faint text-[12px] hidden sm:inline">
+                    ·
+                  </span>
+                  <span className="text-text-muted text-[12.5px] hidden sm:inline">
+                    {s.desc}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Full-width mindmap.
+             Explicit height is required because the Mindmap reads
+             container.clientHeight on mount/resize — without a fixed
+             height the component would render at 0 and never lay out. */}
+          <div className="fade-up w-full h-[520px] md:h-[640px]">
+            <Mindmap
+              className="w-full h-full"
+              highlightCategory={activeServiceCategory}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── Process ────────────────────────────────────
+         Card wrapper vertical padding tightened on desktop
+         (py-14 → py-6) so the four cards feel like one
+         connected sequence instead of four isolated islands. */}
       <section
         id="process"
         ref={processRef}
@@ -1254,7 +1353,7 @@ export default function Home() {
             ].map((p) => (
               <div
                 key={p.num}
-                className={`fade-up relative py-10 md:py-14 pl-8 md:pl-0 ${
+                className={`fade-up relative py-8 md:py-6 pl-8 md:pl-0 ${
                   p.align === "right" ? "md:flex md:justify-end" : ""
                 }`}
               >
@@ -1304,73 +1403,6 @@ export default function Home() {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Services — text left + mindmap right ─── */}
-      <section id="services" ref={servicesRef}>
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
-          <div className="h-px bg-border-light" />
-        </div>
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
-          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-16">
-            What we deliver.
-          </h2>
-
-          <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
-            {/* Left column — text (compact) */}
-            <div
-              className="lg:w-[30%] lg:shrink-0 rounded-2xl p-6 md:p-8"
-              style={{ backgroundColor: "#DED9CC" }}
-            >
-              {[
-                {
-                  title: "The audit",
-                  category: "The audit",
-                  desc: "A week inside your business.",
-                },
-                {
-                  title: "Teaching the AI your business",
-                  category: "Teaching the AI",
-                  desc: "Answers the way your best employee would.",
-                },
-                {
-                  title: "Rolling it out",
-                  category: "Rolling it out",
-                  desc: "We stay until every team uses it.",
-                },
-                {
-                  title: "Training your team",
-                  category: "Training your team",
-                  desc: "On-site for a month, one-on-one.",
-                },
-              ].map((s, i) => (
-                <div
-                  key={s.title}
-                  onMouseEnter={() => setHoveredService(s.category)}
-                  onMouseLeave={() => setHoveredService(null)}
-                >
-                  {i > 0 && <div className="h-px bg-border-light my-5" />}
-                  <div className="fade-up cursor-default">
-                    <h3
-                      className="text-[1rem] font-medium mb-1.5"
-                      style={{ fontFamily: "var(--font-heading)" }}
-                    >
-                      {s.title}
-                    </h3>
-                    <p className="text-text-muted text-[13px] leading-[1.5] whitespace-nowrap overflow-hidden text-ellipsis">
-                      {s.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Right column — mindmap (primary visual, sticky) */}
-            <div className="lg:flex-1 lg:sticky lg:top-24 lg:self-start">
-              <Mindmap className="w-full" highlightCategory={hoveredService} />
-            </div>
           </div>
         </div>
       </section>
