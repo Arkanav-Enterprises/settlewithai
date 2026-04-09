@@ -19,6 +19,15 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "ai-chat-on-your-website",
+    title:
+      "We Added a Custom AI Chat to Our Website in One Afternoon",
+    description:
+      "Every business has the same FAQ problem. Visitors have questions, the answers exist, but nobody reads a FAQ page. We built an AI that answers them live — and we can do it for any business.",
+    date: "2026-04-10",
+    tag: "Product",
+  },
+  {
     slug: "the-client-brain",
     title:
       "The Client Brain: An LLM Wiki System Inspired by Andrej Karpathy",
