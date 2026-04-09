@@ -26,6 +26,7 @@ export function AskClaude() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const isNearBottom = useRef(true);
+  const hasMessages = messages.length > 0;
 
   /* Check if scroll is near the bottom (within 80px) */
   const checkNearBottom = useCallback(() => {
@@ -79,7 +80,6 @@ export function AskClaude() {
     setMessages(history);
     setInput("");
     setStreaming(true);
-    /* Re-engage auto-scroll on new send */
     isNearBottom.current = true;
     setUserScrolledUp(false);
 
@@ -87,7 +87,10 @@ export function AskClaude() {
 
     /* Smooth-scroll the chat container into view after expansion */
     setTimeout(() => {
-      containerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      containerRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
     }, 100);
 
     try {
@@ -129,12 +132,10 @@ export function AskClaude() {
     }
   }
 
-  const hasMessages = messages.length > 0;
-
   return (
     <section
       id="ask"
-      className="relative z-10 max-w-[1280px] mx-auto px-6 lg:px-10 py-20 md:py-28"
+      className="relative z-20 max-w-[1280px] mx-auto px-6 lg:px-10 py-20 md:py-28"
     >
       <div className="max-w-[960px] mx-auto">
         {/* Header */}
@@ -161,7 +162,7 @@ export function AskClaude() {
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className={`absolute inset-0 space-y-5 pr-1 ${hasMessages ? "overflow-y-auto overscroll-contain" : "overflow-hidden"}`}
+            className={`absolute inset-0 space-y-5 pr-1 ${hasMessages ? "overflow-y-auto" : "overflow-hidden"}`}
             style={{
               scrollbarWidth: "thin",
               scrollbarColor: "rgba(217,119,87,0.4) transparent",

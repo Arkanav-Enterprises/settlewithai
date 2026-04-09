@@ -978,6 +978,10 @@ export default function Home() {
       {/* ── Ask Claude ─────────────────────────────────── */}
       <AskClaude />
 
+      <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
+        <div className="h-px bg-border-light" />
+      </div>
+
       {/* ── Problem ──────────────────────────────────── */}
       <section id="problem" ref={problemRef}>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-12 md:py-16 relative">
