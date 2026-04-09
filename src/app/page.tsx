@@ -36,7 +36,7 @@ function useFadeIn() {
             obs.unobserve(e.target);
           }
         }),
-      { threshold: 0.05, rootMargin: "0px 0px 50px 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px 50px 0px" },
     );
     targets.forEach((t) => {
       if (!t.classList.contains("visible")) obs.observe(t);
@@ -220,7 +220,7 @@ function HeroSubtitle() {
    inner content's natural height is honored without max-height
    guesswork. */
 function OrientCaseStudyCard() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   /* The .fade-up wrapper is intentionally a separate element from the card
      itself. useFadeIn() imperatively adds a `visible` class via classList.add
@@ -261,346 +261,392 @@ function OrientCaseStudyCard() {
           border: "1px solid rgba(0,0,0,0.1)",
         }}
       >
-      {/* Expand/collapse button */}
-      <button
-        type="button"
-        onClick={(e) => {
-          e.stopPropagation();
-          setOpen((o) => !o);
-        }}
-        aria-expanded={open}
-        aria-controls="orient-case-detail"
-        aria-label={open ? "Collapse case study details" : "Expand case study details"}
-        className="absolute top-5 right-5 md:top-6 md:right-6 w-10 h-10 rounded-full border border-[rgba(20,20,19,0.15)] bg-[rgba(255,255,255,0.45)] hover:bg-[rgba(255,255,255,0.75)] flex items-center justify-center transition-colors duration-200 z-10"
-      >
-        <span className="relative block w-4 h-4" aria-hidden="true">
-          {/* Horizontal bar — always visible (becomes the minus when open) */}
-          <span className="absolute top-1/2 left-0 w-full h-[1.5px] bg-text -translate-y-1/2 rounded-full" />
-          {/* Vertical bar — collapses to form the minus */}
-          <span
-            className="absolute top-0 left-1/2 h-full w-[1.5px] bg-text rounded-full origin-center transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
-            style={{
-              transform: open
-                ? "translateX(-50%) scaleY(0)"
-                : "translateX(-50%) scaleY(1)",
-            }}
-          />
-        </span>
-      </button>
+        {/* Expand/collapse button */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setOpen((o) => !o);
+          }}
+          aria-expanded={open}
+          aria-controls="orient-case-detail"
+          aria-label={
+            open ? "Collapse case study details" : "Expand case study details"
+          }
+          className="absolute top-5 right-5 md:top-6 md:right-6 w-10 h-10 rounded-full border border-[rgba(20,20,19,0.15)] bg-[rgba(255,255,255,0.45)] hover:bg-[rgba(255,255,255,0.75)] flex items-center justify-center transition-colors duration-200 z-10"
+        >
+          <span className="relative block w-4 h-4" aria-hidden="true">
+            {/* Horizontal bar — always visible (becomes the minus when open) */}
+            <span className="absolute top-1/2 left-0 w-full h-[1.5px] bg-text -translate-y-1/2 rounded-full" />
+            {/* Vertical bar — collapses to form the minus */}
+            <span
+              className="absolute top-0 left-1/2 h-full w-[1.5px] bg-text rounded-full origin-center transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              style={{
+                transform: open
+                  ? "translateX(-50%) scaleY(0)"
+                  : "translateX(-50%) scaleY(1)",
+              }}
+            />
+          </span>
+        </button>
 
-      {/* header — stack on mobile so the title doesn't squish next to the logo.
+        {/* header — stack on mobile so the title doesn't squish next to the logo.
          items-start prevents the <img> from stretching to full width when the
          flex container is in column mode (default align-items: stretch). */}
-      <div className="flex flex-col items-start sm:flex-row sm:items-center gap-4 sm:gap-5 mb-10 pr-12">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/orient-logo.png"
-          alt="Orient Printing & Packaging"
-          width={259}
-          height={78}
-          loading="lazy"
-          className="h-10 w-auto"
-        />
-        <div>
-          <div className="font-medium text-[17px]">
-            Orient Printing & Packaging
-          </div>
-          <div className="text-sm text-text-faint mt-0.5">
-            Manufacturing · 79 years in operation · 50+ countries
+        <div className="flex flex-col items-start sm:flex-row sm:items-center gap-4 sm:gap-5 mb-10 pr-12">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/orient-logo.png"
+            alt="Orient Printing & Packaging"
+            width={259}
+            height={78}
+            loading="lazy"
+            className="h-10 w-auto"
+          />
+          <div>
+            <div className="font-medium text-[17px]">
+              Orient Printing & Packaging
+            </div>
+            <div className="text-sm text-text-faint mt-0.5">
+              Manufacturing · 79 years in operation · 50+ countries
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* quote */}
-      <blockquote className="border-l-2 border-accent pl-6 md:pl-8 text-text-muted text-[clamp(1rem,1.5vw,1.15rem)] leading-[1.8] mb-12 max-w-3xl">
-        &ldquo;49 use cases mapped across 7 departments. 18 projects
-        structured. 11 deployed in the first engagement &mdash; from offer
-        generation to BOM creation to service troubleshooting. Phased from
-        quick wins to ERP integration over six months.&rdquo;
-      </blockquote>
+        {/* quote */}
+        <blockquote className="border-l-2 border-accent pl-6 md:pl-8 text-text-muted text-[clamp(1rem,1.5vw,1.15rem)] leading-[1.8] mb-12 max-w-3xl">
+          &ldquo;49 use cases mapped across 7 departments. 18 projects
+          structured. 11 deployed in the first engagement &mdash; from offer
+          generation to BOM creation to service troubleshooting. Phased from
+          quick wins to ERP integration over six months.&rdquo;
+        </blockquote>
 
-      {/* stats — 4-up bordered strip, identical to the homepage band that
+        {/* stats — 4-up bordered strip, identical to the homepage band that
          used to live above this card. Hairline dividers form a 2×2 cross on
          mobile and a single row of verticals on desktop so the four metrics
          read as one cohesive object. */}
-      <div className="grid grid-cols-2 md:grid-cols-4 items-stretch">
-        {[
-          { value: "85%", label: "Faster document generation" },
-          { value: "11", label: "Projects deployed" },
-          { value: "49", label: "Use cases mapped" },
-          {
-            value: (
-              <>
-                4hrs <span className="text-accent">→</span> 30min
-              </>
-            ),
-            label: "Task time reduction",
-          },
-        ].map((s, i) => (
-          <div
-            key={s.label}
-            className={[
-              "text-center px-3 py-6 md:py-4 flex flex-col justify-center",
-              "border-[rgba(20,20,19,0.12)]",
-              i % 2 === 1 ? "border-l" : "",
-              i >= 2 ? "border-t md:border-t-0" : "",
-              i >= 1 ? "md:border-l" : "",
-            ].join(" ")}
-          >
+        <div className="grid grid-cols-2 md:grid-cols-4 items-stretch">
+          {[
+            {
+              key: "docs",
+              value: "85%",
+              label: "Faster document generation" as React.ReactNode,
+            },
+            {
+              key: "projects",
+              value: "11",
+              label: "Projects deployed" as React.ReactNode,
+            },
+            {
+              key: "usecases",
+              value: "49",
+              label: "Use cases mapped" as React.ReactNode,
+            },
+            {
+              key: "tasktime",
+              value: "8×",
+              label: (
+                <>
+                  Faster task time
+                  <span className="block mt-1 text-text-faint normal-case tracking-[0.12em] text-[9.5px] md:text-[10px]">
+                    4h <span className="text-accent">→</span> 30m
+                  </span>
+                </>
+              ),
+            },
+          ].map((s, i) => (
             <div
-              className="text-[clamp(1.6rem,3.4vw,2.4rem)] font-medium leading-none mb-3 text-text whitespace-nowrap"
+              key={s.key}
+              className={[
+                "text-center px-3 py-6 md:py-4 flex flex-col justify-center",
+                "border-[rgba(20,20,19,0.12)]",
+                i % 2 === 1 ? "border-l" : "",
+                i >= 2 ? "border-t md:border-t-0" : "",
+                i >= 1 ? "md:border-l" : "",
+              ].join(" ")}
+            >
+              <div
+                className="text-[clamp(1.5rem,3.4vw,2.4rem)] font-medium leading-[1.15] mb-3 text-text"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  letterSpacing: "-0.03em",
+                }}
+              >
+                {s.value}
+              </div>
+              <div className="text-text-muted text-[10.5px] md:text-[11px] uppercase tracking-[0.16em] leading-relaxed">
+                {s.label}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Expandable detail — grid-rows 0fr→1fr trick */}
+        <div
+          id="orient-case-detail"
+          className="grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+        >
+          <div className="overflow-hidden">
+            <div
+              className="pt-12 mt-12 border-t border-[rgba(20,20,19,0.08)] transition-opacity duration-500"
               style={{
-                fontFamily: "var(--font-heading)",
-                letterSpacing: "-0.03em",
+                opacity: open ? 1 : 0,
+                transitionDelay: open ? "120ms" : "0ms",
               }}
             >
-              {s.value}
-            </div>
-            <div className="text-text-muted text-[10.5px] md:text-[11px] uppercase tracking-[0.16em] leading-relaxed">
-              {s.label}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Expandable detail — grid-rows 0fr→1fr trick */}
-      <div
-        id="orient-case-detail"
-        className="grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
-        style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
-      >
-        <div className="overflow-hidden">
-          <div
-            className="pt-12 mt-12 border-t border-[rgba(20,20,19,0.08)] transition-opacity duration-500"
-            style={{
-              opacity: open ? 1 : 0,
-              transitionDelay: open ? "120ms" : "0ms",
-            }}
-          >
-            {/* ── Section A: Featured case study (brochure page 4) ── */}
-            <div className="mb-16">
-              <div className="text-[11px] uppercase tracking-[0.15em] text-text-faint mb-4">
-                Featured case study
-              </div>
-              <h3
-                className="text-[clamp(1.5rem,2.6vw,2.1rem)] font-medium leading-[1.15] mb-10 max-w-2xl text-text"
-                style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.025em" }}
-              >
-                From manual offer-making to an AI-native operating layer.
-              </h3>
-              <div className="grid md:grid-cols-2 gap-10 md:gap-14 max-w-4xl">
-                <div>
-                  <h4
-                    className="text-text text-[14px] font-medium mb-3"
-                    style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
-                  >
-                    The challenge
-                  </h4>
-                  <p className="text-text-muted text-[14.5px] leading-[1.75]">
-                    Orient&rsquo;s sales engineers were spending half-days
-                    hand-building branded customer quotations across four machine
-                    lines, with pricing logic, terms, and configurations buried
-                    across spreadsheets and email threads. Marketing was running
-                    on instinct. Prospects had no way to self-serve product
-                    information after hours.
-                  </p>
+              {/* ── Section A: Featured case study (brochure page 4) ── */}
+              <div className="mb-16">
+                <div className="text-[11px] uppercase tracking-[0.15em] text-text-faint mb-4">
+                  Featured case study
                 </div>
-                <div>
-                  <h4
-                    className="text-text text-[14px] font-medium mb-3"
-                    style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
-                  >
-                    What we did
-                  </h4>
-                  <p className="text-text-muted text-[14.5px] leading-[1.75]">
-                    We mapped every repeatable workflow across seven departments,
-                    deployed eleven production-grade Claude projects starting
-                    with a fully branded Offer Generator, codified the brand and
-                    pricing logic into a single knowledge base, and surfaced that
-                    same knowledge base to prospects through a customer-facing
-                    landing page and chat widget.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* ── Section B: Inside the build (brochure page 5) ── */}
-            <div className="mb-16 pt-14 border-t border-[rgba(20,20,19,0.06)]">
-              <div className="text-[11px] uppercase tracking-[0.15em] text-text-faint mb-4">
-                Inside the build
-              </div>
-              <h3
-                className="text-[clamp(1.5rem,2.6vw,2.1rem)] font-medium leading-[1.15] mb-6 max-w-2xl text-text"
-                style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.025em" }}
-              >
-                Production-grade Claude. Not a ChatGPT subscription.
-              </h3>
-              <p
-                className="text-text text-[clamp(1rem,1.4vw,1.15rem)] leading-[1.55] max-w-2xl mb-10 italic"
-                style={{ fontFamily: "var(--font-heading)" }}
-              >
-                &ldquo;Capability without structure is just a chat window. The
-                structure is where the value lives.&rdquo;
-              </p>
-
-              {/* Claude frame screenshot */}
-              <div className="rounded-xl overflow-hidden border border-[rgba(20,20,19,0.1)] bg-bg shadow-[0_4px_24px_rgba(0,0,0,0.06)] mb-3">
-                <div className="flex items-center gap-1.5 px-4 py-2.5 bg-[rgba(20,20,19,0.04)] border-b border-[rgba(20,20,19,0.08)]">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
-                  <div className="flex-1 text-center text-[11px] text-text-faint font-medium px-2 truncate">
-                    claude.ai · OrientPrint &mdash; Sales Proposals &amp; Pricing{" "}
-                    <span className="text-accent">/ Price generation</span>
+                <h3
+                  className="text-[clamp(1.5rem,2.6vw,2.1rem)] font-medium leading-[1.15] mb-10 max-w-2xl text-text"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    letterSpacing: "-0.025em",
+                  }}
+                >
+                  From manual offer-making to an AI-native operating layer.
+                </h3>
+                <div className="grid md:grid-cols-2 gap-10 md:gap-14 max-w-4xl">
+                  <div>
+                    <h4
+                      className="text-text text-[14px] font-medium mb-3"
+                      style={{
+                        fontFamily: "var(--font-heading)",
+                        letterSpacing: "-0.02em",
+                      }}
+                    >
+                      The challenge
+                    </h4>
+                    <p className="text-text-muted text-[14.5px] leading-[1.75]">
+                      Orient&rsquo;s sales engineers were spending half-days
+                      hand-building branded customer quotations across four
+                      machine lines, with pricing logic, terms, and
+                      configurations buried across spreadsheets and email
+                      threads. Marketing was running on instinct. Prospects had
+                      no way to self-serve product information after hours.
+                    </p>
                   </div>
-                  <div className="w-12 shrink-0" />
-                </div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/orient/claude-pricing-output.png"
-                  alt="Real Claude-generated sales proposal for Orient with line items, GST, and an open question flagged"
-                  loading="lazy"
-                  className="w-full block"
-                />
-              </div>
-              <div className="flex items-start justify-between gap-4 mb-12 text-[12px]">
-                <div className="text-text-muted leading-snug">
-                  An actual proposal generated by Orient&rsquo;s Claude project.
-                  Branded line items. GST math. A flagged ambiguity.
-                </div>
-                <div className="text-accent font-semibold uppercase tracking-[0.08em] text-[10px] shrink-0 mt-0.5">
-                  Real output
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-10 md:gap-14 max-w-4xl">
-                <div>
-                  <h4
-                    className="text-text text-[14px] font-medium mb-3"
-                    style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
-                  >
-                    The structure behind it
-                  </h4>
-                  <p className="text-text-muted text-[14.5px] leading-[1.75]">
-                    Eight branded machine spec docs. Three knowledge files for
-                    pricing logic, domestic terms, and international terms. One
-                    project instructions file that wires it all together. Not a
-                    clever prompt &mdash; a production-grade Claude project
-                    trained on the entire sales surface of an eight-decade-old
-                    manufacturer.
-                  </p>
-                </div>
-                <div>
-                  <h4
-                    className="text-text text-[14px] font-medium mb-3"
-                    style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
-                  >
-                    What your team gets
-                  </h4>
-                  <p className="text-text-muted text-[14.5px] leading-[1.75]">
-                    Four-hour quotation work compressed to thirty minutes.
-                    Branded outputs that look like yours, not like a chatbot. An
-                    LLM that knows your products by name, your prices to the
-                    rupee, and your terms by version. And the safety to flag
-                    what it doesn&rsquo;t know instead of inventing it.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* ── Section C: Customer-facing layer (brochure page 6) ── */}
-            <div className="mb-12 pt-14 border-t border-[rgba(20,20,19,0.06)]">
-              <div className="text-[11px] uppercase tracking-[0.15em] text-text-faint mb-4">
-                The customer-facing layer
-              </div>
-              <h3
-                className="text-[clamp(1.15rem,1.9vw,1.55rem)] font-medium leading-[1.35] mb-10 max-w-3xl text-text-muted"
-                style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
-              >
-                An LLM specialist trained only on Orient&rsquo;s product
-                knowledge, embedded into a public site and exposed as a chat any
-                prospect can ask anything.
-              </h3>
-
-              {/* Browser frame screenshot */}
-              <div className="rounded-xl overflow-hidden border border-[rgba(20,20,19,0.1)] bg-bg shadow-[0_4px_24px_rgba(0,0,0,0.06)] mb-3">
-                <div className="flex items-center gap-1.5 px-4 py-2.5 bg-[rgba(20,20,19,0.04)] border-b border-[rgba(20,20,19,0.08)]">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
-                  <div className="flex-1 text-center text-[11px] text-text-faint font-mono px-2 truncate">
-                    orient-landing-opal.vercel.app
-                  </div>
-                  <div className="w-12 shrink-0" />
-                </div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/orient/orient-landing-hero.png"
-                  alt="Orient landing page concept"
-                  loading="lazy"
-                  className="w-full block"
-                />
-              </div>
-              <div className="flex items-start justify-between gap-4 mb-12 text-[12px]">
-                <div className="text-text-muted leading-snug">
-                  Concept site · Next.js · Interactive globe · Embedded AI chat
-                </div>
-                <div className="text-accent font-semibold uppercase tracking-[0.08em] text-[10px] shrink-0 mt-0.5">
-                  Launching soon
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-[1fr_1.15fr] gap-10 md:gap-14 items-start">
-                <div>
-                  <div className="rounded-xl overflow-hidden border border-[rgba(20,20,19,0.1)] bg-bg shadow-[0_4px_24px_rgba(0,0,0,0.06)] mb-2">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="/orient/orient-chat-response.png"
-                      alt="The Orient AI chat answering a real C-Series vs L&P Series comparison question with a structured table"
-                      loading="lazy"
-                      className="w-full block"
-                    />
-                  </div>
-                  <div className="text-[12px] text-text-faint">
-                    The same chat answering a real product question
+                  <div>
+                    <h4
+                      className="text-text text-[14px] font-medium mb-3"
+                      style={{
+                        fontFamily: "var(--font-heading)",
+                        letterSpacing: "-0.02em",
+                      }}
+                    >
+                      What we did
+                    </h4>
+                    <p className="text-text-muted text-[14.5px] leading-[1.75]">
+                      We mapped every repeatable workflow across seven
+                      departments, deployed eleven production-grade Claude
+                      projects starting with a fully branded Offer Generator,
+                      codified the brand and pricing logic into a single
+                      knowledge base, and surfaced that same knowledge base to
+                      prospects through a customer-facing landing page and chat
+                      widget.
+                    </p>
                   </div>
                 </div>
-                <div>
-                  <h4
-                    className="text-text text-[15px] font-medium mb-3"
-                    style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
-                  >
-                    One knowledge base. Three surfaces.
-                  </h4>
-                  <p className="text-text-muted text-[14.5px] leading-[1.75] mb-4">
-                    The same structured knowledge base that powers Orient&rsquo;s
-                    internal Offer Generator also feeds the public site and the
-                    embedded chat widget. One place to update. Three places it
-                    shows up. Always consistent.
-                  </p>
-                  <p className="text-text-faint text-[13.5px] leading-[1.7]">
-                    No hallucinated specs. No invented prices. Sub-second
-                    streaming responses across four machine lines, with
-                    guardrails for out-of-scope questions and pricing redirects.
-                  </p>
+              </div>
+
+              {/* ── Section B: Inside the build (brochure page 5) ── */}
+              <div className="mb-16 pt-14 border-t border-[rgba(20,20,19,0.06)]">
+                <div className="text-[11px] uppercase tracking-[0.15em] text-text-faint mb-4">
+                  Inside the build
+                </div>
+                <h3
+                  className="text-[clamp(1.5rem,2.6vw,2.1rem)] font-medium leading-[1.15] mb-6 max-w-2xl text-text"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    letterSpacing: "-0.025em",
+                  }}
+                >
+                  Production-grade Claude. Not a ChatGPT subscription.
+                </h3>
+                <p
+                  className="text-text text-[clamp(1rem,1.4vw,1.15rem)] leading-[1.55] max-w-2xl mb-10 italic"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  &ldquo;Capability without structure is just a chat window. The
+                  structure is where the value lives.&rdquo;
+                </p>
+
+                {/* Claude frame screenshot */}
+                <div className="rounded-xl overflow-hidden border border-[rgba(20,20,19,0.1)] bg-bg shadow-[0_4px_24px_rgba(0,0,0,0.06)] mb-3">
+                  <div className="flex items-center gap-1.5 px-4 py-2.5 bg-[rgba(20,20,19,0.04)] border-b border-[rgba(20,20,19,0.08)]">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
+                    <div className="flex-1 text-center text-[11px] text-text-faint font-medium px-2 truncate">
+                      claude.ai · OrientPrint &mdash; Sales Proposals &amp;
+                      Pricing{" "}
+                      <span className="text-accent">/ Price generation</span>
+                    </div>
+                    <div className="w-12 shrink-0" />
+                  </div>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/orient/claude-pricing-output.png"
+                    alt="Real Claude-generated sales proposal for Orient with line items, GST, and an open question flagged"
+                    loading="lazy"
+                    className="w-full block"
+                  />
+                </div>
+                <div className="flex items-start justify-between gap-4 mb-12 text-[12px]">
+                  <div className="text-text-muted leading-snug">
+                    An actual proposal generated by Orient&rsquo;s Claude
+                    project. Branded line items. GST math. A flagged ambiguity.
+                  </div>
+                  <div className="text-accent font-semibold uppercase tracking-[0.08em] text-[10px] shrink-0 mt-0.5">
+                    Real output
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-10 md:gap-14 max-w-4xl">
+                  <div>
+                    <h4
+                      className="text-text text-[14px] font-medium mb-3"
+                      style={{
+                        fontFamily: "var(--font-heading)",
+                        letterSpacing: "-0.02em",
+                      }}
+                    >
+                      The structure behind it
+                    </h4>
+                    <p className="text-text-muted text-[14.5px] leading-[1.75]">
+                      Eight branded machine spec docs. Three knowledge files for
+                      pricing logic, domestic terms, and international terms.
+                      One project instructions file that wires it all together.
+                      Not a clever prompt &mdash; a production-grade Claude
+                      project trained on the entire sales surface of an
+                      eight-decade-old manufacturer.
+                    </p>
+                  </div>
+                  <div>
+                    <h4
+                      className="text-text text-[14px] font-medium mb-3"
+                      style={{
+                        fontFamily: "var(--font-heading)",
+                        letterSpacing: "-0.02em",
+                      }}
+                    >
+                      What your team gets
+                    </h4>
+                    <p className="text-text-muted text-[14.5px] leading-[1.75]">
+                      Four-hour quotation work compressed to thirty minutes.
+                      Branded outputs that look like yours, not like a chatbot.
+                      An LLM that knows your products by name, your prices to
+                      the rupee, and your terms by version. And the safety to
+                      flag what it doesn&rsquo;t know instead of inventing it.
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Final read-more link */}
-            <div className="pt-8 border-t border-[rgba(20,20,19,0.06)]">
-              <a
-                href="/blog/orient-case-study"
-                onClick={(e) => e.stopPropagation()}
-                className="inline-flex items-center gap-2 text-[14px] text-text font-medium underline decoration-text/20 underline-offset-[5px] hover:decoration-text/60 transition-colors"
-              >
-                Read the full case study
-                <span aria-hidden="true">→</span>
-              </a>
+              {/* ── Section C: Customer-facing layer (brochure page 6) ── */}
+              <div className="mb-12 pt-14 border-t border-[rgba(20,20,19,0.06)]">
+                <div className="text-[11px] uppercase tracking-[0.15em] text-text-faint mb-4">
+                  The customer-facing layer
+                </div>
+                <h3
+                  className="text-[clamp(1.15rem,1.9vw,1.55rem)] font-medium leading-[1.35] mb-10 max-w-3xl text-text-muted"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  An LLM specialist trained only on Orient&rsquo;s product
+                  knowledge, embedded into a public site and exposed as a chat
+                  any prospect can ask anything.
+                </h3>
+
+                {/* Browser frame screenshot */}
+                <div className="rounded-xl overflow-hidden border border-[rgba(20,20,19,0.1)] bg-bg shadow-[0_4px_24px_rgba(0,0,0,0.06)] mb-3">
+                  <div className="flex items-center gap-1.5 px-4 py-2.5 bg-[rgba(20,20,19,0.04)] border-b border-[rgba(20,20,19,0.08)]">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
+                    <div className="flex-1 text-center text-[11px] text-text-faint font-mono px-2 truncate">
+                      orient-landing-opal.vercel.app
+                    </div>
+                    <div className="w-12 shrink-0" />
+                  </div>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/orient/orient-landing-hero.png"
+                    alt="Orient landing page concept"
+                    loading="lazy"
+                    className="w-full block"
+                  />
+                </div>
+                <div className="flex items-start justify-between gap-4 mb-12 text-[12px]">
+                  <div className="text-text-muted leading-snug">
+                    Concept site · Next.js · Interactive globe · Embedded AI
+                    chat
+                  </div>
+                  <div className="text-accent font-semibold uppercase tracking-[0.08em] text-[10px] shrink-0 mt-0.5">
+                    Launching soon
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-[1fr_1.15fr] gap-10 md:gap-14 items-start">
+                  <div>
+                    <div className="rounded-xl overflow-hidden border border-[rgba(20,20,19,0.1)] bg-bg shadow-[0_4px_24px_rgba(0,0,0,0.06)] mb-2">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src="/orient/orient-chat-response.png"
+                        alt="The Orient AI chat answering a real C-Series vs L&P Series comparison question with a structured table"
+                        loading="lazy"
+                        className="w-full block"
+                      />
+                    </div>
+                    <div className="text-[12px] text-text-faint">
+                      The same chat answering a real product question
+                    </div>
+                  </div>
+                  <div>
+                    <h4
+                      className="text-text text-[15px] font-medium mb-3"
+                      style={{
+                        fontFamily: "var(--font-heading)",
+                        letterSpacing: "-0.02em",
+                      }}
+                    >
+                      One knowledge base. Three surfaces.
+                    </h4>
+                    <p className="text-text-muted text-[14.5px] leading-[1.75] mb-4">
+                      The same structured knowledge base that powers
+                      Orient&rsquo;s internal Offer Generator also feeds the
+                      public site and the embedded chat widget. One place to
+                      update. Three places it shows up. Always consistent.
+                    </p>
+                    <p className="text-text-faint text-[13.5px] leading-[1.7]">
+                      No hallucinated specs. No invented prices. Sub-second
+                      streaming responses across four machine lines, with
+                      guardrails for out-of-scope questions and pricing
+                      redirects.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Final read-more link */}
+              <div className="pt-8 border-t border-[rgba(20,20,19,0.06)]">
+                <a
+                  href="/blog/orient-case-study"
+                  onClick={(e) => e.stopPropagation()}
+                  className="inline-flex items-center gap-2 text-[14px] text-text font-medium underline decoration-text/20 underline-offset-[5px] hover:decoration-text/60 transition-colors"
+                >
+                  Read the full case study
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
     </div>
   );
@@ -616,8 +662,13 @@ function AnimatedSettleMark() {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
-      { threshold: 0.3 }
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.3 },
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -634,7 +685,11 @@ function AnimatedSettleMark() {
       viewBox="0 0 199 298"
       fill="none"
       className="w-full h-full"
-      style={visible ? { animation: "float-gentle 4s ease-in-out 3.5s infinite" } : undefined}
+      style={
+        visible
+          ? { animation: "float-gentle 4s ease-in-out 3.5s infinite" }
+          : undefined
+      }
     >
       {/* Main calligraphic stroke */}
       <path
@@ -644,10 +699,14 @@ function AnimatedSettleMark() {
         strokeLinecap="round"
         strokeDasharray={mainLen}
         strokeDashoffset={visible ? undefined : mainLen}
-        style={visible ? {
-          animation: `draw-on 2s cubic-bezier(0.16, 1, 0.3, 1) forwards`,
-          strokeDashoffset: mainLen,
-        } : { strokeDashoffset: mainLen }}
+        style={
+          visible
+            ? {
+                animation: `draw-on 2s cubic-bezier(0.16, 1, 0.3, 1) forwards`,
+                strokeDashoffset: mainLen,
+              }
+            : { strokeDashoffset: mainLen }
+        }
       />
       {/* Top flick */}
       <path
@@ -656,10 +715,14 @@ function AnimatedSettleMark() {
         strokeWidth="5.74324"
         strokeLinecap="round"
         strokeDasharray={flick1Len}
-        style={visible ? {
-          animation: `draw-on 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.6s forwards`,
-          strokeDashoffset: flick1Len,
-        } : { strokeDashoffset: flick1Len }}
+        style={
+          visible
+            ? {
+                animation: `draw-on 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.6s forwards`,
+                strokeDashoffset: flick1Len,
+              }
+            : { strokeDashoffset: flick1Len }
+        }
       />
       {/* Bottom flick */}
       <path
@@ -668,33 +731,100 @@ function AnimatedSettleMark() {
         strokeWidth="5.74324"
         strokeLinecap="round"
         strokeDasharray={flick2Len}
-        style={visible ? {
-          animation: `draw-on 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards`,
-          strokeDashoffset: flick2Len,
-        } : { strokeDashoffset: flick2Len }}
+        style={
+          visible
+            ? {
+                animation: `draw-on 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards`,
+                strokeDashoffset: flick2Len,
+              }
+            : { strokeDashoffset: flick2Len }
+        }
       />
       {/* Accent dots — pop in after strokes */}
-      <circle cx="106.507" cy="248.486" r="11.4865" fill="white" opacity="0"
-        style={visible ? { animation: "dot-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.2s forwards", transformOrigin: "106.507px 248.486px" } : undefined} />
-      <circle cx="187.507" cy="11.4865" r="11.4865" fill="white" opacity="0"
-        style={visible ? { animation: "dot-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.5s forwards", transformOrigin: "187.507px 11.4865px" } : undefined} />
-      <circle cx="94.5065" cy="98.4865" r="11.4865" fill="white" opacity="0"
-        style={visible ? { animation: "dot-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.8s forwards", transformOrigin: "94.5065px 98.4865px" } : undefined} />
+      <circle
+        cx="106.507"
+        cy="248.486"
+        r="11.4865"
+        fill="white"
+        opacity="0"
+        style={
+          visible
+            ? {
+                animation:
+                  "dot-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.2s forwards",
+                transformOrigin: "106.507px 248.486px",
+              }
+            : undefined
+        }
+      />
+      <circle
+        cx="187.507"
+        cy="11.4865"
+        r="11.4865"
+        fill="white"
+        opacity="0"
+        style={
+          visible
+            ? {
+                animation:
+                  "dot-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.5s forwards",
+                transformOrigin: "187.507px 11.4865px",
+              }
+            : undefined
+        }
+      />
+      <circle
+        cx="94.5065"
+        cy="98.4865"
+        r="11.4865"
+        fill="white"
+        opacity="0"
+        style={
+          visible
+            ? {
+                animation:
+                  "dot-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.8s forwards",
+                transformOrigin: "94.5065px 98.4865px",
+              }
+            : undefined
+        }
+      />
     </svg>
   );
 }
 
 /* ─── Logo mark ─────────────────────────────────────────── */
 
-function SettleMark({ className = "h-6 w-auto", stroke = "#141413" }: { className?: string; stroke?: string }) {
+function SettleMark({
+  className = "h-6 w-auto",
+  stroke = "#141413",
+}: {
+  className?: string;
+  stroke?: string;
+}) {
   return (
     <svg viewBox="0 0 199 298" fill="none" className={className}>
-      <path d="M146.118 42.7126C134.632 77.172 157.605 100.145 180.578 65.6855C203.551 31.2261 192.064 -3.23338 157.605 8.2531C123.145 19.7396 79.1857 107.5 88.6857 157.577C98.1857 207.655 146.536 175.199 143.686 198C141.183 218.02 122.766 234.672 103.186 252.601C78.9328 274.809 48.99 295.263 29.4417 293.252C-6.69105 289.535 -2.97404 253.403 32.1474 231.455C67.2688 209.507 78.7483 239.9 54.095 266.576" stroke={stroke} strokeWidth="8.04054" strokeLinecap="round"/>
-      <path d="M163.02 26.5102C169.912 15.0237 179.101 19.6183 174.507 33.4021" stroke={stroke} strokeWidth="5.74324" strokeLinecap="round"/>
-      <path d="M38.0201 243.892C44.9119 255.378 54.1011 250.784 49.5065 237" stroke={stroke} strokeWidth="5.74324" strokeLinecap="round"/>
-      <circle cx="106.507" cy="248.486" r="11.4865" fill="#D97757"/>
-      <circle cx="187.507" cy="11.4865" r="11.4865" fill="#D97757"/>
-      <circle cx="94.5065" cy="98.4865" r="11.4865" fill="#D97757"/>
+      <path
+        d="M146.118 42.7126C134.632 77.172 157.605 100.145 180.578 65.6855C203.551 31.2261 192.064 -3.23338 157.605 8.2531C123.145 19.7396 79.1857 107.5 88.6857 157.577C98.1857 207.655 146.536 175.199 143.686 198C141.183 218.02 122.766 234.672 103.186 252.601C78.9328 274.809 48.99 295.263 29.4417 293.252C-6.69105 289.535 -2.97404 253.403 32.1474 231.455C67.2688 209.507 78.7483 239.9 54.095 266.576"
+        stroke={stroke}
+        strokeWidth="8.04054"
+        strokeLinecap="round"
+      />
+      <path
+        d="M163.02 26.5102C169.912 15.0237 179.101 19.6183 174.507 33.4021"
+        stroke={stroke}
+        strokeWidth="5.74324"
+        strokeLinecap="round"
+      />
+      <path
+        d="M38.0201 243.892C44.9119 255.378 54.1011 250.784 49.5065 237"
+        stroke={stroke}
+        strokeWidth="5.74324"
+        strokeLinecap="round"
+      />
+      <circle cx="106.507" cy="248.486" r="11.4865" fill="#D97757" />
+      <circle cx="187.507" cy="11.4865" r="11.4865" fill="#D97757" />
+      <circle cx="94.5065" cy="98.4865" r="11.4865" fill="#D97757" />
     </svg>
   );
 }
@@ -727,7 +857,14 @@ export default function Home() {
       if (!calLoaded.current && window.scrollY > window.innerHeight * 0.6) {
         calLoaded.current = true;
         getCalApi({ namespace: "15min" }).then((cal) => {
-          cal("ui", { hideEventTypeDetails: false, layout: "month_view", cssVarsPerTheme: { light: { "cal-brand": "#141413" }, dark: { "cal-brand": "#141413" } } });
+          cal("ui", {
+            hideEventTypeDetails: false,
+            layout: "month_view",
+            cssVarsPerTheme: {
+              light: { "cal-brand": "#141413" },
+              dark: { "cal-brand": "#141413" },
+            },
+          });
         });
       }
     };
@@ -785,26 +922,25 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* ── Hero + Globe ─────────────────────────────── */}
-      <section className="relative min-h-screen overflow-hidden">
-        {/* Globe background — on mobile, push to bottom edge */}
-        <div className="absolute inset-0 flex items-end md:items-center justify-center">
-          <div className="w-[min(110vw,900px)] h-[min(110vw,900px)] translate-y-[30%] md:translate-y-0 md:mt-16">
-            <Globe className="w-full h-full" />
-          </div>
-        </div>
-
-        {/* Hero text — single liquid-glass card, centered on page */}
-        <div className="relative max-w-[1280px] mx-auto px-6 lg:px-10 pt-36 md:pt-44">
-          <div className="liquid-glass mx-auto md:mx-0 max-w-[680px] px-5 md:px-14 py-10 md:py-14 text-center md:text-left">
+      {/* ── Hero + Globe ───────────────────────────────
+         Flex-column in flow: text card on top, globe below taking
+         whatever space is left. Globe is anchored to the TOP of its
+         container so its north pole sits directly under the card,
+         and the card's negative bottom margin lets it visually rest
+         on the pole. Same layout at every breakpoint by design. */}
+      <section className="relative min-h-screen overflow-hidden flex flex-col">
+        {/* Hero text — no glass card, type sits directly on the bg */}
+        <div className="relative z-10 max-w-[1280px] mx-auto w-full px-6 pt-28">
+          <div className="mx-auto max-w-[640px] text-center">
             <h1 className="text-[clamp(2.4rem,4.8vw,4.2rem)] font-medium leading-[1.08] mb-8">
-              Your business, made <span className="text-accent whitespace-nowrap">AI-native</span>.
+              Your business, made{" "}
+              <span className="text-accent whitespace-nowrap">AI-native</span>.
             </h1>
             <HeroSubtitle />
-            <div className="mt-8 flex justify-end">
+            <div className="mt-8 flex justify-center">
               <a
                 href="#contact"
-                className="group inline-flex items-center text-[15px] font-medium text-text hover:text-text/70 transition-colors duration-200"
+                className="group inline-flex items-center text-[14px] font-medium bg-text text-bg px-5 py-2.5 rounded-lg hover:bg-[#30302e] transition-colors duration-200"
               >
                 Start a conversation
                 <Arrow />
@@ -812,11 +948,32 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        {/* Globe fills the remaining viewport height. The square canvas
+           is anchored to the top so its north pole starts right below
+           the text card; the rest of the sphere falls off-screen and
+           gets clipped by the section's overflow-hidden. */}
+        <div className="relative flex-1 flex justify-center items-start">
+          {/* The sphere sits at a ~2% inset from the canvas top (sphere
+             radius = ch * 0.48, centered in the square canvas). Pull the
+             wrapper up by (2% of canvas width − 2px) so the north pole
+             lands exactly 2px below the text edge at every viewport. */}
+          <div className="w-[min(150vw,1100px)] aspect-square shrink-0 mt-[calc(2px-min(150vw,1100px)*0.02)]">
+            <Globe className="w-full h-full" />
+          </div>
+        </div>
       </section>
 
-      {/* ── Case Study: Orient ────────────────────────── */}
-      <section id="case-study" ref={caseRef}>
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-20">
+      {/* ── Case Study: Orient ──────────────────────────
+         Pulled up with a negative top margin so the card overlaps
+         the lower curve of the hero globe. `relative z-10` keeps it
+         stacked above the hero section that precedes it. */}
+      <section
+        id="case-study"
+        ref={caseRef}
+        className="relative z-10 -mt-[60vh] md:-mt-[100vh]"
+      >
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 pb-16 md:pb-20">
           <OrientCaseStudyCard />
         </div>
       </section>
@@ -835,7 +992,14 @@ export default function Home() {
               </p>
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/settle-char-1.svg" alt="" width={1000} height={1000} loading="lazy" className="w-[100px] md:w-[160px] lg:w-[220px] shrink-0 ml-4 md:ml-8 lg:ml-12 -mt-4" />
+            <img
+              src="/settle-char-1.svg"
+              alt=""
+              width={1000}
+              height={1000}
+              loading="lazy"
+              className="w-[100px] md:w-[160px] lg:w-[220px] shrink-0 ml-4 md:ml-8 lg:ml-12 -mt-4"
+            />
           </div>
 
           <div className="grid sm:grid-cols-2 gap-px bg-border-light rounded-2xl overflow-hidden stagger">
@@ -885,8 +1049,8 @@ export default function Home() {
             style={{ animationDelay: "60ms" }}
           >
             Most AI models are great in a sandbox and unpredictable in
-            production. Claude is the opposite. It treats your instructions as
-            a contract, not a suggestion &mdash; so the offer template stays
+            production. Claude is the opposite. It treats your instructions as a
+            contract, not a suggestion &mdash; so the offer template stays
             branded, the chat agent stays in scope, and your rollout
             doesn&rsquo;t quietly drift over time.
           </p>
@@ -922,7 +1086,11 @@ export default function Home() {
       </section>
 
       {/* ── Process ──────────────────────────────────── */}
-      <section id="process" ref={processRef} className="bg-[#ddd9cc] relative overflow-hidden">
+      <section
+        id="process"
+        ref={processRef}
+        className="bg-[#ddd9cc] relative overflow-hidden"
+      >
         {/* Cave art background */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -1152,28 +1320,89 @@ export default function Home() {
 
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
             {/* Left column — text (compact) */}
-            <div className="lg:w-[30%] lg:shrink-0 rounded-2xl p-6 md:p-8" style={{ backgroundColor: "#DED9CC" }}>
+            <div
+              className="lg:w-[30%] lg:shrink-0 rounded-2xl p-6 md:p-8"
+              style={{ backgroundColor: "#DED9CC" }}
+            >
               {[
                 {
-                  icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>,
+                  icon: (
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 6v6l4 2" />
+                    </svg>
+                  ),
                   title: "AI Readiness Assessment",
                   category: "AI Readiness",
                   desc: "We audit every department\u2019s workflows, discover use cases, and build a tier-based rollout map with blocker analysis.",
                 },
                 {
-                  icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>,
+                  icon: (
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <rect x="3" y="3" width="18" height="18" rx="2" />
+                      <path d="M3 9h18" />
+                      <path d="M9 21V9" />
+                    </svg>
+                  ),
                   title: "Deployment Dashboard",
                   category: "Deployment Dashboard",
                   desc: "Interactive rollout visualisation with project-level tracking, skill mapping, and a kanban board for execution.",
                 },
                 {
-                  icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>,
+                  icon: (
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                    </svg>
+                  ),
                   title: "Instruction Engineering",
                   category: "Instruction Engineering",
                   desc: "Production-grade Claude instructions with knowledge file specs, review gates, safety rules, and output standards.",
                 },
                 {
-                  icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+                  icon: (
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                  ),
                   title: "Setup & Training",
                   category: "Setup & Training",
                   desc: "Project creation, knowledge file preparation, team onboarding, and ongoing iteration support.",
@@ -1193,7 +1422,9 @@ export default function Home() {
                     >
                       {s.title}
                     </h3>
-                    <p className="text-text-muted text-[13px] leading-[1.65]">{s.desc}</p>
+                    <p className="text-text-muted text-[13px] leading-[1.65]">
+                      {s.desc}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -1218,7 +1449,14 @@ export default function Home() {
               Who we work with.
             </h2>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/settle-char-3.svg" alt="" width={1000} height={1000} loading="lazy" className="w-[70px] md:w-[100px] lg:w-[140px] shrink-0 ml-4 md:ml-8 lg:ml-12 -mt-4" />
+            <img
+              src="/settle-char-3.svg"
+              alt=""
+              width={1000}
+              height={1000}
+              loading="lazy"
+              className="w-[70px] md:w-[100px] lg:w-[140px] shrink-0 ml-4 md:ml-8 lg:ml-12 -mt-4"
+            />
           </div>
 
           <div className="grid md:grid-cols-2 gap-px bg-border-light rounded-2xl overflow-hidden stagger">
@@ -1368,7 +1606,11 @@ export default function Home() {
                 a: "Yes. Claude is built by Anthropic, which leads the industry in AI safety research. Data sent to Claude via the API is not used for model training by default. Anthropic holds SOC 2 Type II certification and offers HIPAA-eligible plans for healthcare data. Beyond Anthropic\u2019s security, every project I deploy includes explicit safety rules, review gates, and output boundaries written into the instructions. Claude won\u2019t share data between departments unless configured to. It won\u2019t fabricate information. It won\u2019t take actions without human approval at checkpoints I define. Your proprietary processes, pricing, and customer data stay private.",
               },
             ].map((faq, i) => (
-              <details key={i} className="fade-up group" style={{ animationDelay: `${i * 40}ms` }}>
+              <details
+                key={i}
+                className="fade-up group"
+                style={{ animationDelay: `${i * 40}ms` }}
+              >
                 <summary className="flex items-center justify-between gap-6 py-6 cursor-pointer select-none">
                   <span className="text-[clamp(1rem,1.5vw,1.1rem)] font-medium leading-snug">
                     {faq.q}
@@ -1428,11 +1670,11 @@ export default function Home() {
                   Founder · Settle
                 </div>
                 <p className="text-text-muted text-[16px] md:text-[17px] leading-[1.7] mb-4">
-                  Pranav holds a BS in Electrical Engineering from the University
-                  of Southern California and spent nine years in Los Angeles
-                  before returning home to Delhi. Settle runs through him
-                  directly &mdash; discovery, deployment, iteration. No account
-                  managers, no junior hand-offs.
+                  Pranav holds a BS in Electrical Engineering from the
+                  University of Southern California and spent nine years in Los
+                  Angeles before returning home to Delhi. Settle runs through
+                  him directly &mdash; discovery, deployment, iteration. No
+                  account managers, no junior hand-offs.
                 </p>
                 <a
                   href="https://www.linkedin.com/in/pranavambwani/"
@@ -1504,8 +1746,8 @@ export default function Home() {
                     </button>
                   </form>
                   <p className="fade-up text-white/40 text-sm mt-5">
-                    We&apos;re receiving a high volume of requests right now,
-                    so responses might be delayed.
+                    We&apos;re receiving a high volume of requests right now, so
+                    responses might be delayed.
                   </p>
                 </>
               )}

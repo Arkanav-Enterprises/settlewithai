@@ -162,14 +162,14 @@ export default function Globe({ className = "" }: { className?: string }) {
         ctx.stroke();
 
         /* ── Highlighted country ──
-           Highlight tone matches the bg of the section right below the hero
-           (#ddd9cc → rgb 221,217,204) for visual continuity. */
+           Very soft accent tint — the same orange used for CTAs, dropped
+           to ~15% alpha so it reads as a warm highlight rather than a fill. */
         const hi = FOCUS[highlightIdx];
         const feat = featuresById.get(hi.id);
         if (feat) {
           ctx.beginPath();
           pathGen(feat);
-          ctx.fillStyle = "#ddd9cc";
+          ctx.fillStyle = "rgba(217, 119, 87, 0.15)";
           ctx.fill();
           /* Re-stroke with the same dark border the other countries use,
              since the fill covers the underlying land-pass outline. */
