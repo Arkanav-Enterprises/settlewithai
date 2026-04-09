@@ -17,16 +17,51 @@ const SUGGESTIONS = [
   "What departments can use AI?",
 ];
 
+const STORAGE_KEY = "settle-chat-messages";
+
+function loadMessages(): Message[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveMessages(msgs: Message[]) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(msgs));
+    document.cookie = `${STORAGE_KEY}=${encodeURIComponent(JSON.stringify(msgs.slice(-4)))};path=/;max-age=604800;SameSite=Lax`;
+  } catch {
+    /* storage full or blocked — fail silently */
+  }
+}
+
 export function AskClaude() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [streaming, setStreaming] = useState(false);
   const [userScrolledUp, setUserScrolledUp] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const inputWrapRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const isNearBottom = useRef(true);
   const hasMessages = messages.length > 0;
+
+  /* Hydrate from localStorage on mount */
+  useEffect(() => {
+    const saved = loadMessages();
+    if (saved.length) setMessages(saved);
+    setHydrated(true);
+  }, []);
+
+  /* Persist to localStorage + cookie on change */
+  useEffect(() => {
+    if (hydrated) saveMessages(messages);
+  }, [messages, hydrated]);
 
   /* Check if scroll is near the bottom (within 80px) */
   const checkNearBottom = useCallback(() => {
@@ -85,13 +120,13 @@ export function AskClaude() {
 
     setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
 
-    /* Smooth-scroll the chat container into view after expansion */
+    /* Scroll input into view after the container finishes expanding (500ms transition) */
     setTimeout(() => {
-      containerRef.current?.scrollIntoView({
+      inputWrapRef.current?.scrollIntoView({
         behavior: "smooth",
-        block: "center",
+        block: "end",
       });
-    }, 100);
+    }, 550);
 
     try {
       const res = await fetch("/api/chat", {
@@ -140,16 +175,43 @@ export function AskClaude() {
       <div className="max-w-[960px] mx-auto">
         {/* Header */}
         <div className="text-center mb-6">
-          <h2
-            className="text-[clamp(1.6rem,3vw,2.4rem)] font-medium leading-[1.12] mb-3"
-            style={{ fontFamily: "var(--font-heading)" }}
-          >
-            Questions about how this works for you?
-          </h2>
-          <p className="text-text-muted text-[1.05rem] leading-relaxed">
-            Our clients get Claude&apos;s most powerful models. This is a
-            lightweight preview &mdash; imagine what the full version does.
-          </p>
+          {hasMessages ? (
+            <div className="liquid-glass px-4 py-2 !rounded-xl">
+              <div className="flex items-center justify-between">
+                <button
+                  onClick={() => {
+                    setMessages([]);
+                    saveMessages([]);
+                  }}
+                  className="font-styrene text-[11px] text-red-500/70 hover:text-red-500 transition-colors"
+                >
+                  Reset Chat
+                </button>
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+                  </span>
+                  <span className="font-styrene text-[12px] text-text-muted">
+                    Chatting with <span className="text-accent">Settle AI</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <>
+              <h2
+                className="text-[clamp(1.6rem,3vw,2.4rem)] font-medium leading-[1.12] mb-3"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                Questions about how this works for you?
+              </h2>
+              <p className="text-text-muted text-[1.05rem] leading-relaxed">
+                Our clients get Claude&apos;s most powerful models. This is a
+                lightweight preview &mdash; imagine what the full version does.
+              </p>
+            </>
+          )}
         </div>
 
         {/* Messages — expands smoothly when chatting */}
@@ -211,7 +273,10 @@ export function AskClaude() {
         </div>
 
         {/* Input */}
-        <div className="relative bg-white/60 border border-border-light rounded-xl p-3 focus-within:border-text/30 transition-colors">
+        <div
+          ref={inputWrapRef}
+          className="relative bg-white/60 border border-border-light rounded-xl p-3 focus-within:border-text/30 transition-colors"
+        >
           <textarea
             ref={textareaRef}
             value={input}
