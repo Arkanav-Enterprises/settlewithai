@@ -86,7 +86,7 @@ export default function ProcessScroll() {
           </h2>
           <div className="space-y-12">
             {PHASES.map((p) => (
-              <div key={p.num} className="fade-up">
+              <div key={p.num}>
                 <span className="text-accent/50 text-sm block mb-2">
                   {p.num}
                 </span>
