@@ -68,7 +68,21 @@ export default function ProcessScroll() {
     const phaseCount = PHASES.length;
     const phaseDuration = 1 / phaseCount;
 
-    /* No opacity animation — all phases always fully visible */
+    /* Counter-rotate each phase's content so text stays horizontal */
+    phases.forEach((el, i) => {
+      const phaseAngle = i * SLICE_ANGLE;
+      /* Content needs to counter-rotate by totalRotation to stay upright.
+         Each phase starts at its line angle, and the circle rotates by -totalRotation,
+         so the visual rotation of content = phaseAngle + (-totalRotation * progress).
+         To keep text at 0°, counter-rotate by: totalRotation * progress - phaseAngle.
+         But phaseAngle is baked into the line's CSS transform, so we only need
+         to counter the circle's rotation: */
+      tl.to(el, {
+        rotation: totalRotation,
+        ease: "none",
+        duration: 1,
+      }, 0);
+    });
 
     return () => {
       tl.kill();
@@ -180,7 +194,7 @@ export default function ProcessScroll() {
       </div>
 
       {/* Spacer for scroll room */}
-      <div className="relative z-10 h-[180vh] md:h-[100vh]" />
+      <div className="relative z-10 h-[150vh] md:h-[100vh]" />
     </section>
   );
 }
