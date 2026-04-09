@@ -13,9 +13,9 @@ export function Nav({ variant = "minimal" }: NavProps) {
           href={variant === "full" ? "#" : "/"}
           className="flex items-center gap-2.5"
         >
-          {variant === "full" && <SettleMark className="h-7 w-auto" />}
+          <SettleMark className={variant === "full" ? "h-7 w-auto" : "h-7 w-auto sm:hidden"} />
           <span
-            className="text-[1.15rem] font-semibold tracking-[-0.03em] text-text"
+            className="hidden sm:inline text-[1.15rem] font-semibold tracking-[-0.03em] text-text"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             SETTLE
