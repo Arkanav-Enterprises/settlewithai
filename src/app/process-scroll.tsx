@@ -75,7 +75,8 @@ export default function ProcessScroll() {
     };
   }, []);
 
-  const circleSize = "min(100vw, 1000px)";
+  /* Bigger circle = more arc length between phases = better spacing */
+  const circleSize = "min(180vw, 1600px)";
 
   return (
     <section
@@ -85,14 +86,14 @@ export default function ProcessScroll() {
       {/* "OUR PROCESS" label */}
       <div className="absolute left-6 lg:left-10 top-1/2 -translate-y-1/2 z-10">
         <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
-          Our Process
+          Our <span className="text-accent">Process</span>
         </p>
       </div>
 
       {/* Rotating circle */}
       <div
         ref={circleRef}
-        className="absolute pointer-events-none left-[-85vw] md:left-[-65vw] lg:left-[-580px]"
+        className="absolute pointer-events-none left-[-150vw] md:left-[-120vw] lg:left-[-1100px]"
         style={{
           width: circleSize,
           height: circleSize,
@@ -169,7 +170,7 @@ export default function ProcessScroll() {
                 >
                   {phase.title}
                 </h3>
-                <p className="text-[13px] leading-[1.6] max-w-[260px] text-text-muted">
+                <p className="text-[13px] leading-[1.6] max-w-[260px] md:max-w-[360px] text-text-muted">
                   {phase.desc}
                 </p>
               </div>
@@ -179,7 +180,7 @@ export default function ProcessScroll() {
       </div>
 
       {/* Spacer for scroll room */}
-      <div className="relative z-10 h-[160vh] md:h-[140vh]" />
+      <div className="relative z-10 h-[180vh] md:h-[100vh]" />
     </section>
   );
 }
