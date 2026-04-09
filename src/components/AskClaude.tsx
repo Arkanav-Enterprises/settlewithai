@@ -98,13 +98,7 @@ export function AskClaude() {
     }
   }, []);
 
-  /* Auto-resize textarea to content */
-  useEffect(() => {
-    const el = textareaRef.current;
-    if (!el) return;
-    el.style.height = "auto";
-    el.style.height = Math.min(el.scrollHeight, 160) + "px";
-  }, [input]);
+  /* No auto-resize — textarea has a fixed height */
 
   async function send(text: string) {
     const trimmed = text.trim();
@@ -218,7 +212,7 @@ export function AskClaude() {
         <div
           ref={containerRef}
           className={`relative mb-4 transition-[height] duration-500 ease-out ${
-            hasMessages ? "h-[50vh] md:h-[420px]" : "h-0"
+            hasMessages ? "h-[360px]" : "h-0"
           }`}
         >
           <div
@@ -275,7 +269,11 @@ export function AskClaude() {
         {/* Input */}
         <div
           ref={inputWrapRef}
-          className="relative bg-white/60 border border-border-light rounded-xl p-3 focus-within:border-text/30 transition-colors"
+          className={`relative bg-white/60 rounded-2xl px-4 py-3.5 transition-all duration-300 ${
+            !hasMessages
+              ? "max-w-[640px] mx-auto shadow-[0_0.25rem_1.25rem_rgba(0,0,0,0.035),0_0_0_0.5px_rgba(0,0,0,0.06)] hover:shadow-[0_0.25rem_1.25rem_rgba(0,0,0,0.035),0_0_0_0.5px_rgba(0,0,0,0.12)] focus-within:shadow-[0_0.25rem_1.25rem_rgba(0,0,0,0.075),0_0_0_0.5px_rgba(0,0,0,0.12)] border border-transparent glow-border"
+              : "border border-border-light focus-within:border-text/30"
+          }`}
         >
           <textarea
             ref={textareaRef}
@@ -288,47 +286,48 @@ export function AskClaude() {
               }
             }}
             placeholder="Ask anything about our services..."
-            rows={1}
-            className="w-full bg-transparent text-text text-[15px] leading-relaxed resize-none outline-none placeholder:text-text-faint placeholder:font-styrene pr-12"
+            rows={hasMessages ? 1 : 4}
+            className={`w-full bg-transparent text-text text-[15px] leading-relaxed resize-none outline-none placeholder:text-text-faint placeholder:font-styrene pr-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${!hasMessages ? "h-[120px]" : ""}`}
           />
-          <button
-            onClick={() => send(input)}
-            disabled={!input.trim() || streaming}
-            className="absolute right-3 bottom-3 w-8 h-8 flex items-center justify-center rounded-lg bg-text text-bg disabled:opacity-30 hover:bg-[#30302e] transition-colors"
-            aria-label="Send message"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              className="rotate-[-90deg]"
+          {/* Bottom row: pills (horizontal scroll) + send button */}
+          <div className="flex items-center gap-2 mt-2">
+            {!hasMessages && (
+              <div className="flex-1 overflow-x-auto no-scrollbar flex gap-2 min-w-0">
+                {SUGGESTIONS.map((q) => (
+                  <button
+                    key={q}
+                    onClick={() => send(q)}
+                    className="font-styrene text-[12px] text-text-muted px-3 py-1.5 rounded-full border border-border-light hover:border-text/30 hover:text-text transition-colors duration-200 whitespace-nowrap shrink-0"
+                  >
+                    {q}
+                  </button>
+                ))}
+              </div>
+            )}
+            <button
+              onClick={() => send(input)}
+              disabled={!input.trim() || streaming}
+              className="shrink-0 w-8 h-8 flex items-center justify-center rounded-lg bg-text text-bg disabled:opacity-30 hover:bg-[#30302e] transition-colors ml-auto"
+              aria-label="Send message"
             >
-              <path
-                d="M8 3L8 13M8 3L4 7M8 3L12 7"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
-
-        {/* Suggestion pills */}
-        {!hasMessages && (
-          <div className="flex flex-wrap gap-2 mt-4 justify-center">
-            {SUGGESTIONS.map((q) => (
-              <button
-                key={q}
-                onClick={() => send(q)}
-                className="text-[13px] text-text-muted px-4 py-2 rounded-full border border-border-light hover:border-text/30 hover:text-text transition-colors duration-200"
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                className="rotate-[-90deg]"
               >
-                {q}
-              </button>
-            ))}
+                <path
+                  d="M8 3L8 13M8 3L4 7M8 3L12 7"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
           </div>
-        )}
+        </div>
       </div>
     </section>
   );
