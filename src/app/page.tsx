@@ -1326,6 +1326,7 @@ export default function Home() {
             >
               {[
                 {
+                  // Clock — "The audit": time spent inside the business
                   icon: (
                     <svg
                       width="24"
@@ -1341,11 +1342,32 @@ export default function Home() {
                       <path d="M12 6v6l4 2" />
                     </svg>
                   ),
-                  title: "AI Readiness Assessment",
-                  category: "AI Readiness",
-                  desc: "We audit every department\u2019s workflows, discover use cases, and build a tier-based rollout map with blocker analysis.",
+                  title: "The audit",
+                  category: "The audit",
+                  desc: "We spend a week inside your business. Every department, every repeat task. You get back a ranked list of what AI should do first, what it should never touch, and what it\u2019ll cost you to get there.",
                 },
                 {
+                  // Wrench/key — "Teaching the AI": rules + customisation
+                  icon: (
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                    </svg>
+                  ),
+                  title: "Teaching the AI your business",
+                  category: "Teaching the AI",
+                  desc: "Generic AI gives generic answers. We write the rules that make it answer your questions the way your best employee would \u2014 using your SOPs, your templates, your compliance constraints. If your offer process has 40 steps, the AI learns all 40.",
+                },
+                {
+                  // Dashboard — "Rolling it out": one page, every project
                   icon: (
                     <svg
                       width="24"
@@ -1362,30 +1384,12 @@ export default function Home() {
                       <path d="M9 21V9" />
                     </svg>
                   ),
-                  title: "Deployment Dashboard",
-                  category: "Deployment Dashboard",
-                  desc: "Interactive rollout visualisation with project-level tracking, skill mapping, and a kanban board for execution.",
+                  title: "Rolling it out",
+                  category: "Rolling it out",
+                  desc: "We don\u2019t hand you a tool and leave. We sit with each team, watch them try it, fix what doesn\u2019t fit, and track every project on one page \u2014 what\u2019s live, what\u2019s stuck, what\u2019s working. No AI theatre.",
                 },
                 {
-                  icon: (
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-                    </svg>
-                  ),
-                  title: "Instruction Engineering",
-                  category: "Instruction Engineering",
-                  desc: "Production-grade Claude instructions with knowledge file specs, review gates, safety rules, and output standards.",
-                },
-                {
+                  // People — "Training your team": adoption
                   icon: (
                     <svg
                       width="24"
@@ -1403,9 +1407,9 @@ export default function Home() {
                       <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                     </svg>
                   ),
-                  title: "Setup & Training",
-                  category: "Setup & Training",
-                  desc: "Project creation, knowledge file preparation, team onboarding, and ongoing iteration support.",
+                  title: "Training your team",
+                  category: "Training your team",
+                  desc: "Most AI projects fail because the people who were supposed to use the tool never got comfortable with it. We stay on-site for the first month, train every user one-on-one if we have to, and come back monthly for as long as it matters.",
                 },
               ].map((s, i) => (
                 <div

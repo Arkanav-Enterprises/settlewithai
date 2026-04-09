@@ -5,45 +5,77 @@ import * as d3 from "d3";
 
 /* ─── Data ──────────────────────────────────────────────── */
 
-/* Tooltip descriptions for every child node */
+/* Tooltip descriptions for every child node.
+   Written for SMB owners who don't speak AI — plain verbs, no jargon. */
 const nodeDescriptions: Record<string, string> = {
-  // AI Readiness
-  "Workflow Audit": "Map every repeatable process across departments — what eats time, what\u2019s error-prone.",
-  "Use Cases": "Discover and prioritise the highest-impact AI opportunities for your team.",
-  "Rollout Map": "A phased deployment plan: quick wins first, deeper integrations over time.",
-  "Blocker Analysis": "Identify skill gaps, data issues, and organisational resistance before they stall your rollout.",
-  // Deployment Dashboard
-  "Visualisation": "See your entire AI rollout in one interactive view — departments, timelines, dependencies.",
-  "Tracking": "Monitor project-level progress with real-time status updates.",
-  "Skill Mapping": "Match team capabilities to use cases and flag training needs.",
-  "Kanban": "Execution board for managing deployment tasks across teams.",
-  // Instruction Engineering
-  "Claude AI Instructions": "Production-grade prompts with structured workflows, not generic templates.",
-  "Knowledge Files": "Per-project reference documents that give Claude AI your business context.",
-  "Safety Rules": "Review gates and guardrails that prevent errors before they reach your team.",
-  "Output Standards": "Formatting rules so every output matches your internal conventions.",
-  // Setup & Training
-  "Configuration": "Project creation, tool connections, and environment setup.",
-  "Knowledge Prep": "Organise and structure the documents Claude AI needs to do its job.",
-  "Onboarding": "Hands-on training so your team uses Claude AI confidently from day one.",
-  "Iteration": "Ongoing refinement — we monitor, adjust, and expand as your needs evolve.",
+  // The audit
+  "Watch every team":
+    "Spend a day with each department. Watch how work actually gets done, not how your org chart says it does.",
+  "Find what to automate":
+    "Rank every repetitive task by time saved and difficulty. Quick wins first.",
+  "Phase the launch":
+    "Map out the first 30 / 60 / 90 days. What goes live when, and who\u2019s ready for it.",
+  "Flag what to avoid":
+    "Call out the tasks AI shouldn\u2019t touch \u2014 compliance issues, missing data, culture pushback \u2014 before they stall the project.",
+  // Teaching the AI
+  "Write the rules":
+    "Turn your SOPs and tribal knowledge into instructions the AI follows every time \u2014 the way your best employee would.",
+  "Feed it your SOPs":
+    "Give the AI access to your templates, contracts, specs, and past work, so its answers are grounded in how you do things.",
+  "Set the hard limits":
+    "The stuff AI should never touch \u2014 customer data, pricing overrides, anything regulated \u2014 made explicit upfront.",
+  "Match your templates":
+    "Every output matches your internal format. No stray asterisks, no weird headings, no generic consultant voice.",
+  // Rolling it out
+  "One dashboard":
+    "Every project, every team, every blocker \u2014 on one screen. No more \u201chow\u2019s the AI thing going\u201d meetings.",
+  "What launched":
+    "At a glance: which tools are in production, which department is using what, who got it live.",
+  "Who needs help":
+    "See who\u2019s been onboarded, who\u2019s still hesitant, and where to run a refresher.",
+  "What stalled":
+    "Surface the projects that are drifting \u2014 missing data, unclear owner, lost momentum \u2014 before they die quietly.",
+  // Training your team
+  "Set up the tools":
+    "We install it, connect it to your systems, and make sure it works before your team touches it.",
+  "Write it down":
+    "Short, plain-language guides and cheat sheets so nobody has to remember what to type.",
+  "Train every user":
+    "We sit with people one-on-one if we have to. The bar is: everyone\u2019s comfortable, not just the early adopters.",
+  "Check back monthly":
+    "We come back every month to see what\u2019s working, what isn\u2019t, and tune it as your business changes.",
 };
 
 /* Keep the old type for compatibility but we won't use images/urls */
 const tooltipItems: Record<string, { heading: string; body: string; image: string; url: string }> = {};
 
 const categories: Record<string, { items: string[] }> = {
-  "AI Readiness": {
-    items: ["Workflow Audit", "Use Cases", "Rollout Map", "Blocker Analysis"],
+  "The audit": {
+    items: [
+      "Watch every team",
+      "Find what to automate",
+      "Phase the launch",
+      "Flag what to avoid",
+    ],
   },
-  "Deployment Dashboard": {
-    items: ["Visualisation", "Tracking", "Skill Mapping", "Kanban"],
+  "Teaching the AI": {
+    items: [
+      "Write the rules",
+      "Feed it your SOPs",
+      "Set the hard limits",
+      "Match your templates",
+    ],
   },
-  "Instruction Engineering": {
-    items: ["Claude AI Instructions", "Knowledge Files", "Safety Rules", "Output Standards"],
+  "Rolling it out": {
+    items: ["One dashboard", "What launched", "Who needs help", "What stalled"],
   },
-  "Setup & Training": {
-    items: ["Configuration", "Knowledge Prep", "Onboarding", "Iteration"],
+  "Training your team": {
+    items: [
+      "Set up the tools",
+      "Write it down",
+      "Train every user",
+      "Check back monthly",
+    ],
   },
 };
 
