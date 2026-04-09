@@ -1475,7 +1475,7 @@ export default function Home() {
       </section>
 
       {/* ── CTA ──────────────────────────────────────── */}
-      <section id="contact" ref={ctaRef} className="bg-[#1a1a19]">
+      <section id="contact" ref={ctaRef} className="bg-accent">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-28 md:py-40">
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
             {/* Left: text + form */}
