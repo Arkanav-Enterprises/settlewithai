@@ -21,46 +21,46 @@ export function AskClaude() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [streaming, setStreaming] = useState(false);
+  const [userScrolledUp, setUserScrolledUp] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const thumbRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const isNearBottom = useRef(true);
 
-  /* Scroll the messages container (not the page) to the bottom */
+  /* Check if scroll is near the bottom (within 80px) */
+  const checkNearBottom = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return true;
+    return el.scrollHeight - el.scrollTop - el.clientHeight < 80;
+  }, []);
+
+  /* Auto-scroll only if user hasn't scrolled up */
+  const maybeScrollToBottom = useCallback(() => {
+    if (isNearBottom.current) {
+      const el = scrollRef.current;
+      if (el) el.scrollTop = el.scrollHeight;
+    }
+  }, []);
+
+  useEffect(() => {
+    maybeScrollToBottom();
+  }, [messages, maybeScrollToBottom]);
+
+  /* Track user scroll to detect manual scroll-up */
+  const handleScroll = useCallback(() => {
+    const near = checkNearBottom();
+    isNearBottom.current = near;
+    setUserScrolledUp(!near);
+  }, [checkNearBottom]);
+
   const scrollToBottom = useCallback(() => {
     const el = scrollRef.current;
-    if (el) el.scrollTop = el.scrollHeight;
-  }, []);
-
-  /* Position the custom scrollbar thumb */
-  const updateThumb = useCallback(() => {
-    const el = scrollRef.current;
-    const thumb = thumbRef.current;
-    if (!el || !thumb) return;
-    const { scrollTop, scrollHeight, clientHeight } = el;
-    if (scrollHeight <= clientHeight) {
-      thumb.style.opacity = "0";
-      return;
+    if (el) {
+      el.scrollTop = el.scrollHeight;
+      isNearBottom.current = true;
+      setUserScrolledUp(false);
     }
-    const thumbH = Math.max(24, (clientHeight / scrollHeight) * clientHeight);
-    const maxTop = clientHeight - thumbH;
-    const top = (scrollTop / (scrollHeight - clientHeight)) * maxTop;
-    thumb.style.opacity = "1";
-    thumb.style.height = `${thumbH}px`;
-    thumb.style.transform = `translateY(${top}px)`;
   }, []);
-
-  useEffect(() => {
-    scrollToBottom();
-    updateThumb();
-  }, [messages, scrollToBottom, updateThumb]);
-
-  /* Update thumb on scroll */
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    el.addEventListener("scroll", updateThumb, { passive: true });
-    return () => el.removeEventListener("scroll", updateThumb);
-  }, [updateThumb]);
 
   /* Auto-resize textarea to content */
   useEffect(() => {
@@ -79,9 +79,16 @@ export function AskClaude() {
     setMessages(history);
     setInput("");
     setStreaming(true);
+    /* Re-engage auto-scroll on new send */
+    isNearBottom.current = true;
+    setUserScrolledUp(false);
 
-    /* Optimistically add an empty assistant message we'll stream into */
     setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
+
+    /* Smooth-scroll the chat container into view after expansion */
+    setTimeout(() => {
+      containerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 100);
 
     try {
       const res = await fetch("/api/chat", {
@@ -131,7 +138,7 @@ export function AskClaude() {
     >
       <div className="max-w-[960px] mx-auto">
         {/* Header */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-6">
           <h2
             className="text-[clamp(1.6rem,3vw,2.4rem)] font-medium leading-[1.12] mb-3"
             style={{ fontFamily: "var(--font-heading)" }}
@@ -144,41 +151,63 @@ export function AskClaude() {
           </p>
         </div>
 
-        {/* Messages — scrolls internally, page stays pinned */}
-        {hasMessages && (
-          <div className="relative mb-6">
-            <div
-              ref={scrollRef}
-              className="max-h-[480px] overflow-y-auto space-y-5 scroll-smooth overscroll-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            >
-              {messages.map((msg, i) => (
-                <div
-                  key={i}
-                  className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
-                >
-                  {msg.role === "user" ? (
-                    <div className="font-styrene max-w-[80%] px-5 py-3 rounded-2xl rounded-br-md bg-text text-bg text-[15px] leading-relaxed">
-                      {msg.content}
+        {/* Messages — expands smoothly when chatting */}
+        <div
+          ref={containerRef}
+          className={`relative mb-4 transition-[height] duration-500 ease-out ${
+            hasMessages ? "h-[50vh] md:h-[420px]" : "h-0"
+          }`}
+        >
+          <div
+            ref={scrollRef}
+            onScroll={handleScroll}
+            className={`absolute inset-0 space-y-5 pr-1 ${hasMessages ? "overflow-y-auto overscroll-contain" : "overflow-hidden"}`}
+            style={{
+              scrollbarWidth: "thin",
+              scrollbarColor: "rgba(217,119,87,0.4) transparent",
+            }}
+          >
+            {messages.map((msg, i) => (
+              <div
+                key={i}
+                className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+              >
+                {msg.role === "user" ? (
+                  <div className="font-styrene max-w-[80%] px-5 py-3 rounded-2xl rounded-br-md bg-text text-bg text-[15px] leading-relaxed">
+                    {msg.content}
+                  </div>
+                ) : (
+                  <div className="font-styrene max-w-[90%] text-[15px] leading-[1.7] text-text">
+                    <div className="[&>p]:mb-3 [&>p:last-child]:mb-0 [&>ul]:mb-3 [&>ul]:ml-4 [&>ul]:list-disc [&>ol]:mb-3 [&>ol]:ml-4 [&>ol]:list-decimal [&_strong]:font-medium">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {msg.content || "\u2026"}
+                      </ReactMarkdown>
                     </div>
-                  ) : (
-                    <div className="font-styrene max-w-[90%] text-[15px] leading-[1.7] text-text">
-                      <div className="[&>p]:mb-3 [&>p:last-child]:mb-0 [&>ul]:mb-3 [&>ul]:ml-4 [&>ul]:list-disc [&>ol]:mb-3 [&>ol]:ml-4 [&>ol]:list-decimal [&_strong]:font-medium">
-                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                          {msg.content || "…"}
-                        </ReactMarkdown>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-            {/* Custom scrollbar — orange pill on the right edge */}
-            <div
-              ref={thumbRef}
-              className="absolute right-0 top-0 w-1.5 rounded-full bg-accent opacity-0 transition-opacity duration-200 pointer-events-none"
-            />
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
-        )}
+
+          {/* Scroll-to-bottom button — appears when user scrolls up */}
+          {userScrolledUp && (
+            <button
+              onClick={scrollToBottom}
+              className="absolute bottom-2 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center shadow-md hover:bg-accent/90 transition-colors z-10"
+              aria-label="Scroll to bottom"
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M7 3v8m0 0l3-3m-3 3L4 8"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          )}
+        </div>
 
         {/* Input */}
         <div className="relative bg-white/60 border border-border-light rounded-xl p-3 focus-within:border-text/30 transition-colors">
@@ -220,7 +249,7 @@ export function AskClaude() {
           </button>
         </div>
 
-        {/* Suggestion pills — visible when no conversation yet */}
+        {/* Suggestion pills */}
         {!hasMessages && (
           <div className="flex flex-wrap gap-2 mt-4 justify-center">
             {SUGGESTIONS.map((q) => (
