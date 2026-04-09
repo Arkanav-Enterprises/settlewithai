@@ -24,7 +24,7 @@
   --color-accent-border: var(--accent-border);
   --color-border: var(--border);
   --color-border-light: var(--border-light);
-  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-sentient), Georgia, "Times New Roman", serif;
 }
 

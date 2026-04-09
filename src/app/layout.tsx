@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Geist } from "next/font/google";
+import { Manrope } from "next/font/google";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-const geist = Geist({
+const manrope = Manrope({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   display: "swap",
-  variable: "--font-geist",
+  variable: "--font-manrope",
 });
 
 const sentient = localFont({
@@ -259,7 +259,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`h-full antialiased ${geist.variable} ${sentient.variable}`}>
+    <html lang="en" className={`h-full antialiased ${manrope.variable} ${sentient.variable}`}>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />

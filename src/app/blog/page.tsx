@@ -18,6 +18,15 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "the-client-brain",
+    title:
+      "The Client Brain: An LLM Wiki System Inspired by Andrej Karpathy",
+    description:
+      "When you're running 18 Claude projects for one client, facts can't live in twelve places. We built a wiki that gives every project one source of truth — and tells us when something drifts.",
+    date: "2026-04-09",
+    tag: "Engineering",
+  },
+  {
     slug: "the-handover-plan",
     title:
       "The Handover Plan: Anatomy of an AI Rollout Working Session",
@@ -138,7 +147,26 @@ const posts = [
 export default function BlogIndex() {
   return (
     <main className="min-h-screen">
-      <div className="max-w-[860px] mx-auto px-6 lg:px-10 pt-24 md:pt-36 pb-24 md:pb-36">
+      {/* Nav */}
+      <nav className="fixed top-0 w-full z-50 backdrop-blur-xl bg-[#e8e6dc]/80">
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 h-[4.25rem] flex items-center justify-between">
+          <a
+            href="/"
+            className="text-[1.15rem] font-semibold tracking-[-0.03em] text-text"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
+            SETTLE
+          </a>
+          <a
+            href="/#contact"
+            className="text-[14px] font-medium bg-text text-bg px-5 py-2.5 rounded-full hover:bg-[#30302e] transition-colors duration-200"
+          >
+            Get Started
+          </a>
+        </div>
+      </nav>
+
+      <div className="max-w-[860px] mx-auto px-6 lg:px-10 pt-32 md:pt-40 pb-24 md:pb-36">
         <h1
           className="text-[clamp(2.2rem,4.5vw,3.5rem)] font-medium leading-[1.08] mb-20"
           style={{ fontFamily: "var(--font-heading)" }}

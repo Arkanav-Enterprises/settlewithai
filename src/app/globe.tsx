@@ -201,7 +201,7 @@ export default function Globe({ className = "" }: { className?: string }) {
               ctx.stroke();
 
               /* Label background */
-              ctx.font = "600 10px Geist, Inter, system-ui, sans-serif";
+              ctx.font = "600 10px Manrope, Inter, system-ui, sans-serif";
               const label = hi.name.toUpperCase();
               const tw = ctx.measureText(label).width;
               const lx = px - tw / 2;

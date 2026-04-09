@@ -793,7 +793,7 @@ export default function Mindmap({ className = "", highlightCategory }: { classNa
           .text(d.name)
           .attr("font-size", "11px")
           .attr("font-weight", "400")
-          .attr("font-family", "Geist, Inter, system-ui, sans-serif")
+          .attr("font-family", "Manrope, Inter, system-ui, sans-serif")
           .attr("text-anchor", "middle")
           .attr("x", d.x!)
           .attr("y", d.y! + 3)

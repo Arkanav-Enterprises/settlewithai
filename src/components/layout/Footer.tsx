@@ -26,15 +26,12 @@ const INDUSTRY_LINKS = [
 
 const BLOG_LINKS = [
   { label: "Orient Case Study", href: "/blog/orient-case-study" },
+  { label: "The Handover Plan", href: "/blog/the-handover-plan" },
+  { label: "The Client Brain", href: "/blog/the-client-brain" },
   { label: "Orient AI Product Expert", href: "/blog/orient-product-experience" },
   { label: "Deploying Claude AI for Teams", href: "/blog/claude-team-deployment-beyond-diy" },
-  { label: "MCP Explained for Business", href: "/blog/mcp-explained-for-business" },
+  { label: "Structuring Claude for Business", href: "/blog/structuring-claude-for-business" },
   { label: "Integrating AI Into Your Company", href: "/blog/integrating-ai-into-your-company" },
-  { label: "AI-Powered Outreach with Cowork", href: "/blog/ai-powered-outreach-with-cowork" },
-  { label: "Built with Claude Code", href: "/blog/built-with-claude-code" },
-  { label: "Claude AI's Agent Mode", href: "/blog/claude-agent-mode-business-automation" },
-  { label: "Structuring Claude AI for Business", href: "/blog/structuring-claude-for-business" },
-  { label: "Why Claude AI Over Custom AI", href: "/blog/why-claude-over-custom-ai" },
 ];
 
 const TOOL_LINKS = [
@@ -261,7 +258,7 @@ function BoatWithClaude() {
   );
 }
 
-function FooterColumn({ title, links }: { title: string; links: { label: string; href: string }[] }) {
+function FooterColumn({ title, links, seeMoreHref }: { title: string; links: { label: string; href: string }[]; seeMoreHref?: string }) {
   return (
     <div>
       <h3
@@ -281,6 +278,16 @@ function FooterColumn({ title, links }: { title: string; links: { label: string;
             </a>
           </li>
         ))}
+        {seeMoreHref && (
+          <li className="pt-1">
+            <a
+              href={seeMoreHref}
+              className="text-[0.875rem] text-accent hover:text-text transition-colors duration-200 font-medium"
+            >
+              See More &rarr;
+            </a>
+          </li>
+        )}
       </ul>
     </div>
   );
@@ -297,7 +304,7 @@ export function Footer() {
           <FooterColumn title="Compare" links={COMPARE_LINKS} />
           <FooterColumn title="Industries" links={INDUSTRY_LINKS.slice(0, 5)} />
           <FooterColumn title="More Industries" links={INDUSTRY_LINKS.slice(5)} />
-          <FooterColumn title="Blog" links={BLOG_LINKS} />
+          <FooterColumn title="Blog" links={BLOG_LINKS} seeMoreHref="/blog" />
         </div>
       </div>
 
