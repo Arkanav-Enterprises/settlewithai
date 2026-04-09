@@ -1372,7 +1372,7 @@ export default function Home() {
                 }`}
               >
                 <div
-                  className="max-w-md px-9 py-10 md:px-12 md:py-12"
+                  className="max-w-md md:max-w-xl px-9 py-10 md:px-12 md:py-12"
                   style={{
                     /* Rounded frosted-glass card that dissipates into the
                        background: translucent radial fill, backdrop-filter
