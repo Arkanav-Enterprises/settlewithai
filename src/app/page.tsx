@@ -1326,90 +1326,24 @@ export default function Home() {
             >
               {[
                 {
-                  // Clock — "The audit": time spent inside the business
-                  icon: (
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M12 6v6l4 2" />
-                    </svg>
-                  ),
                   title: "The audit",
                   category: "The audit",
-                  desc: "We spend a week inside your business. Every department, every repeat task. You get back a ranked list of what AI should do first, what it should never touch, and what it\u2019ll cost you to get there.",
+                  desc: "A week inside your business.",
                 },
                 {
-                  // Wrench/key — "Teaching the AI": rules + customisation
-                  icon: (
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-                    </svg>
-                  ),
                   title: "Teaching the AI your business",
                   category: "Teaching the AI",
-                  desc: "Generic AI gives generic answers. We write the rules that make it answer your questions the way your best employee would \u2014 using your SOPs, your templates, your compliance constraints. If your offer process has 40 steps, the AI learns all 40.",
+                  desc: "Answers the way your best employee would.",
                 },
                 {
-                  // Dashboard — "Rolling it out": one page, every project
-                  icon: (
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <rect x="3" y="3" width="18" height="18" rx="2" />
-                      <path d="M3 9h18" />
-                      <path d="M9 21V9" />
-                    </svg>
-                  ),
                   title: "Rolling it out",
                   category: "Rolling it out",
-                  desc: "We don\u2019t hand you a tool and leave. We sit with each team, watch them try it, fix what doesn\u2019t fit, and track every project on one page \u2014 what\u2019s live, what\u2019s stuck, what\u2019s working. No AI theatre.",
+                  desc: "We stay until every team uses it.",
                 },
                 {
-                  // People — "Training your team": adoption
-                  icon: (
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                      <circle cx="9" cy="7" r="4" />
-                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                    </svg>
-                  ),
                   title: "Training your team",
                   category: "Training your team",
-                  desc: "Most AI projects fail because the people who were supposed to use the tool never got comfortable with it. We stay on-site for the first month, train every user one-on-one if we have to, and come back monthly for as long as it matters.",
+                  desc: "On-site for a month, one-on-one.",
                 },
               ].map((s, i) => (
                 <div
@@ -1417,16 +1351,15 @@ export default function Home() {
                   onMouseEnter={() => setHoveredService(s.category)}
                   onMouseLeave={() => setHoveredService(null)}
                 >
-                  {i > 0 && <div className="h-px bg-border-light my-6" />}
+                  {i > 0 && <div className="h-px bg-border-light my-5" />}
                   <div className="fade-up cursor-default">
-                    <div className="text-accent mb-3">{s.icon}</div>
                     <h3
-                      className="text-[1rem] font-medium mb-2"
+                      className="text-[1rem] font-medium mb-1.5"
                       style={{ fontFamily: "var(--font-heading)" }}
                     >
                       {s.title}
                     </h3>
-                    <p className="text-text-muted text-[13px] leading-[1.65]">
+                    <p className="text-text-muted text-[13px] leading-[1.5] whitespace-nowrap overflow-hidden text-ellipsis">
                       {s.desc}
                     </p>
                   </div>
@@ -1485,73 +1418,54 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Customer Quotes ─────────────────────────── */}
+      {/* ── Customer Quotes ───────────────────────────
+         Deliberately de-emphasized: small subtitle-scale heading,
+         3 trimmed quotes in plain columns (no featured treatment,
+         no bordered grid), halved vertical padding. The point is
+         to nod at broader adoption without hijacking the page. */}
       <section ref={quotesRef} className="bg-[#ddd9cc]">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
-          <p className="fade-up text-xs uppercase tracking-[0.15em] text-text-faint mb-4">
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-14 md:py-20">
+          <p className="fade-up text-[10.5px] uppercase tracking-[0.15em] text-text-faint mb-2.5">
             Voices from South Asia
           </p>
           <h2
-            className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-16 max-w-3xl text-text"
+            className="fade-up text-[clamp(1rem,1.4vw,1.2rem)] font-medium leading-[1.35] mb-10 max-w-xl text-text-muted"
             style={{ animationDelay: "80ms" }}
           >
-            What business leaders are saying about AI adoption.
+            What business leaders are saying about AI.
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-px bg-border-light rounded-2xl overflow-hidden">
+          <div className="grid md:grid-cols-3 gap-10 md:gap-12 max-w-5xl">
             {[
               {
-                q: "My worry isn\u2019t intentional harm but unexamined assumptions being scaled through automation.",
-                attr: "Entrepreneur, India",
-                span: "md:row-span-2",
-                featured: true,
+                q: "I had the app in 2 days. It would have taken 2 months before.",
+                attr: "Small business owner, India",
               },
               {
-                q: "I\u2019m a father, small business owner in a small town in India \u2014 not rich, not Ivy League. I tried building an app in a programming language I\u2019d never touched\u2026 in 2 days with an AI tool, I had the app. It would have taken at least 2 months before.",
+                q: "Since I can think faster than I could build, my range of ideas has grown.",
                 attr: "Entrepreneur, India",
               },
               {
-                q: "It\u2019s not AI giving me ideas \u2014 it\u2019s me discovering ideas myself, as AI writes the code. Since I could think faster than I could build, my range of ideas has grown.",
+                q: "I don\u2019t see any limit anymore.",
                 attr: "Entrepreneur, India",
-              },
-              {
-                q: "A laptop crash wiped three months of work \u2014 my website, gone. I rebuilt it in four languages within five weeks\u2026 then built a financial data tool for a charity in four days. I don\u2019t see any limit anymore.",
-                attr: "Entrepreneur, India",
-              },
-              {
-                q: "I was finding ways to earn, and accidentally AI gave me the idea of a new business\u2026 so I can marry the love of my life, retire my family, and help people in Balochistan and Sindh with food, schools, and hospitals.",
-                attr: "Entrepreneur, Pakistan",
               },
             ].map((quote, i) => (
               <div
                 key={i}
-                className={`fade-up bg-bg p-8 md:p-10 flex flex-col justify-between ${
-                  quote.span ?? ""
-                }`}
+                className="fade-up"
                 style={{ animationDelay: `${i * 80}ms` }}
               >
-                <blockquote
-                  className={`leading-[1.7] mb-8 ${
-                    quote.featured
-                      ? "text-[clamp(1.1rem,1.8vw,1.35rem)] text-text"
-                      : "text-[clamp(0.95rem,1.2vw,1.05rem)] text-text-muted"
-                  }`}
-                  style={{
-                    fontFamily: quote.featured
-                      ? "Sentient, Georgia, serif"
-                      : "inherit",
-                  }}
-                >
+                <blockquote className="text-[13.5px] leading-[1.7] text-text-muted mb-3">
                   &ldquo;{quote.q}&rdquo;
                 </blockquote>
-                <div className="text-xs text-text-faint uppercase tracking-[0.08em]">
+                <div className="text-[10.5px] text-text-faint uppercase tracking-[0.08em]">
                   {quote.attr}
                 </div>
               </div>
             ))}
           </div>
-          <p className="text-xs text-text-faint mt-6 max-w-2xl">
-            Quotes sampled from Anthropic&rsquo;s{" "}
+          <p className="text-[10.5px] text-text-faint mt-10 max-w-2xl">
+            From Anthropic&rsquo;s{" "}
             <a
               href="https://www.anthropic.com/features/81k-interviews#quotes"
               target="_blank"
@@ -1560,7 +1474,7 @@ export default function Home() {
             >
               81,000 Conversations About AI
             </a>
-            , filtered by South Asia. Edited for clarity.
+            , edited for clarity.
           </p>
         </div>
       </section>
