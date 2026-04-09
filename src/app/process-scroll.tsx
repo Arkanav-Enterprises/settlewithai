@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -30,36 +30,49 @@ const PHASES = [
 ];
 
 const TOTAL_SLICES = 16;
-const SLICE_ANGLE = 360 / TOTAL_SLICES;
-/* Each phase occupies 2 slices (22.5° x 2 = 45°) */
-const PHASE_ANGLE = SLICE_ANGLE * 2;
-const ROTATION_RANGE = PHASE_ANGLE * (PHASES.length - 1);
+const SLICE_ANGLE = 360 / TOTAL_SLICES; // 22.5°
 
 export default function ProcessScroll() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<HTMLDivElement>(null);
-  const [rotation, setRotation] = useState(0);
+  const phaseRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const dotRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const section = sectionRef.current;
     const circle = circleRef.current;
     if (!section || !circle) return;
 
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
+    const phases = phaseRefs.current.filter(Boolean) as HTMLDivElement[];
+    const dots = dotRefs.current.filter(Boolean) as HTMLDivElement[];
+    const totalRotation = SLICE_ANGLE * (PHASES.length - 1); // 67.5°
+
+    /* Build a GSAP timeline scrubbed by scroll — no React state */
+    const tl = gsap.timeline({
+      scrollTrigger: {
         trigger: section,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1.2,
-        onUpdate: (self) => {
-          const r = self.progress * ROTATION_RANGE;
-          setRotation(r);
-          circle.style.transform = `translateY(-50%) rotate(${-r}deg)`;
-        },
-      });
+        start: "top 70%",
+        end: "bottom 30%",
+        scrub: 1,
+      },
     });
 
-    return () => ctx.revert();
+    /* Rotate the circle */
+    tl.to(circle, {
+      rotation: -totalRotation,
+      ease: "none",
+      duration: 1,
+    }, 0);
+
+    /* Animate each phase: fade in → hold → fade out */
+    const phaseCount = PHASES.length;
+    const phaseDuration = 1 / phaseCount;
+
+    /* No opacity animation — all phases always fully visible */
+
+    return () => {
+      tl.kill();
+    };
   }, []);
 
   const circleSize = "min(100vw, 1000px)";
@@ -76,7 +89,7 @@ export default function ProcessScroll() {
         </p>
       </div>
 
-      {/* Rotating circle with content attached */}
+      {/* Rotating circle */}
       <div
         ref={circleRef}
         className="absolute pointer-events-none left-[-85vw] md:left-[-65vw] lg:left-[-580px]"
@@ -107,95 +120,56 @@ export default function ProcessScroll() {
           />
         ))}
 
-        {/* Phase content — attached to the circle, rotates with it */}
+        {/* Phase content on radial lines */}
         {PHASES.map((phase, i) => {
-          const angle = i * PHASE_ANGLE;
-          const rad = (angle * Math.PI) / 180;
-          const r = 50; // percentage from center to circumference
-          /* Position the dot on the circumference */
-          const dotX = 50 + r * Math.cos(rad);
-          const dotY = 50 + r * Math.sin(rad);
-
-          /* Counter-rotate the content so text stays readable.
-             The circle rotates by -rotation, so content needs +rotation
-             to stay upright. */
-          const counterRotation = rotation;
-
-          /* Binary active state — the phase closest to current rotation is fully active */
-          const phaseCenter = i * PHASE_ANGLE;
-          const dist = Math.abs(rotation - phaseCenter);
-          const isClosest = dist <= PHASE_ANGLE / 2;
-          const activeness = isClosest ? 1 : Math.max(0, 0.15 - dist / (PHASE_ANGLE * 8));
+          const angle = i * SLICE_ANGLE;
 
           return (
             <div
               key={phase.num}
-              className="absolute"
+              className="absolute top-1/2 left-1/2 origin-left"
               style={{
-                left: `${dotX}%`,
-                top: `${dotY}%`,
+                width: "120%",
+                transform: `rotate(${angle}deg)`,
               }}
             >
-              {/* Glowing dot */}
-              <div className="absolute -translate-x-1/2 -translate-y-1/2">
-                <div
-                  className="rounded-full transition-all duration-300"
-                  style={{
-                    width: `${8 + activeness * 12}px`,
-                    height: `${8 + activeness * 12}px`,
-                    background: "#d97757",
-                    opacity: 0.15 + activeness * 0.45,
-                    filter: `blur(${3 + activeness * 5}px)`,
-                  }}
-                />
-                <div
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
-                  style={{
-                    width: `${4 + activeness * 4}px`,
-                    height: `${4 + activeness * 4}px`,
-                    background: "#d97757",
-                    opacity: 0.3 + activeness * 0.5,
-                  }}
-                />
-              </div>
+              {/* Dot on circumference */}
+              <div
+                ref={(el) => { dotRefs.current[i] = el; }}
+                className="absolute rounded-full"
+                style={{
+                  left: "41.6%",
+                  top: "-5px",
+                  width: "10px",
+                  height: "10px",
+                  background: "#d97757",
+                  filter: "blur(3px)",
+                  opacity: 0.2,
+                }}
+              />
 
               {/* Content — counter-rotated to stay readable */}
               <div
-                className="absolute left-6 pointer-events-auto"
+                ref={(el) => { phaseRefs.current[i] = el; }}
+                className="absolute pointer-events-auto"
                 style={{
-                  transform: `rotate(${counterRotation}deg)`,
-                  transformOrigin: "-24px 0",
-                  width: "min(50vw, 480px)",
-                  opacity: 0.15 + activeness * 0.85,
-                  transition: "opacity 0.3s ease-out",
+                  left: "43%",
+                  top: "-10px",
+                  transformOrigin: "0 10px",
+                  width: "min(45vw, 420px)",
+                  opacity: 1,
                 }}
               >
-                {/* Number */}
-                <span
-                  className="text-[15px] font-medium block mb-3 transition-colors duration-300"
-                  style={{ color: activeness > 0.3 ? "#141413" : "rgba(20,20,19,0.25)" }}
-                >
+                <span className="text-[14px] block mb-2 text-text-muted">
                   {phase.num}
                 </span>
-                {/* Title */}
                 <h3
-                  className="text-[clamp(1.4rem,3.5vw,2.8rem)] font-medium leading-[1.1] mb-3 transition-colors duration-300"
-                  style={{
-                    fontFamily: "var(--font-heading)",
-                    color: activeness > 0.5 ? "#141413" : "rgba(20,20,19,0.15)",
-                  }}
+                  className="text-[clamp(1.4rem,3.5vw,2.8rem)] font-semibold leading-[1.08] mb-3 text-text"
+                  style={{ fontFamily: "var(--font-heading)" }}
                 >
                   {phase.title}
                 </h3>
-                {/* Description */}
-                <p
-                  className="text-[14px] leading-[1.65] max-w-[280px] transition-colors duration-300"
-                  style={{
-                    color: activeness > 0.5
-                      ? "rgba(20,20,19,0.5)"
-                      : "rgba(20,20,19,0.1)",
-                  }}
-                >
+                <p className="text-[13px] leading-[1.6] max-w-[260px] text-text-muted">
                   {phase.desc}
                 </p>
               </div>
@@ -205,7 +179,7 @@ export default function ProcessScroll() {
       </div>
 
       {/* Spacer for scroll room */}
-      <div className="relative z-10 h-[220vh] md:h-[180vh]" />
+      <div className="relative z-10 h-[160vh] md:h-[140vh]" />
     </section>
   );
 }
