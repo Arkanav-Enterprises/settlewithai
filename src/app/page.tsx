@@ -876,8 +876,8 @@ export default function Home() {
     <main className="min-h-screen">
       <BlogTOC
         headings={[
-          { id: "problem", text: "The problem" },
           { id: "case-study", text: "Case study" },
+          { id: "problem", text: "The problem" },
           { id: "process", text: "How we work" },
           { id: "services", text: "Services" },
           { id: "founder", text: "Who builds this" },
