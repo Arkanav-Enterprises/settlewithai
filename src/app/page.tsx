@@ -855,6 +855,20 @@ export default function Home() {
   const [pinnedService, setPinnedService] = useState<string | null>(null);
   const activeServiceCategory = hoveredService ?? pinnedService;
 
+  /* Quotes carousel — horizontal scroll-snap container with manual
+     nav buttons. Auto-advance is deliberately omitted: auto-moving
+     testimonials are distracting mid-read, and scroll-snap + nav
+     buttons already signal "there's more" without taking agency
+     away from the reader. */
+  const quotesScrollRef = useRef<HTMLDivElement>(null);
+  const scrollQuotes = (dir: 1 | -1) => {
+    const el = quotesScrollRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>("[data-quote-card]");
+    const step = (card?.offsetWidth ?? 320) + 24; /* card width + gap-6 */
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
+  };
+
   // Discovery Call button state/observer removed while the CTA is hidden.
   // See the commented-out floating button below.
 
@@ -1103,12 +1117,12 @@ export default function Home() {
           <div className="h-px bg-border-light" />
         </div>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-20 md:py-28">
-          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-10">
+          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-10 text-center">
             What we deliver.
           </h2>
 
           {/* Pill rail */}
-          <div className="fade-up flex flex-wrap gap-2.5 mb-10 md:mb-12">
+          <div className="fade-up flex flex-wrap justify-center gap-2.5 mb-10 md:mb-12">
             {[
               {
                 title: "The audit",
@@ -1353,7 +1367,7 @@ export default function Home() {
             ].map((p) => (
               <div
                 key={p.num}
-                className={`fade-up relative py-8 md:py-6 pl-8 md:pl-0 ${
+                className={`fade-up parallax-card relative py-8 md:py-6 pl-8 md:pl-0 ${
                   p.align === "right" ? "md:flex md:justify-end" : ""
                 }`}
               >
@@ -1451,23 +1465,76 @@ export default function Home() {
       </section>
 
       {/* ── Customer Quotes ───────────────────────────
-         Deliberately de-emphasized: small subtitle-scale heading,
-         3 trimmed quotes in plain columns (no featured treatment,
-         no bordered grid), halved vertical padding. The point is
-         to nod at broader adoption without hijacking the page. */}
+         Horizontal scroll-snap carousel. The quote text sizing is
+         kept small per the design brief — the carousel is the
+         mechanism, not a reason to re-inflate the section. Cards
+         are viewport-responsive (85vw capped at 340px) so on mobile
+         one card fills the viewport and on desktop ~3 cards sit
+         alongside each other. Edge fade via mask-image lets cards
+         dissolve instead of clipping hard at the section gutter. */}
       <section ref={quotesRef} className="bg-[#ddd9cc]">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-14 md:py-20">
-          <p className="fade-up text-[10.5px] uppercase tracking-[0.15em] text-text-faint mb-2.5">
-            Voices from South Asia
-          </p>
-          <h2
-            className="fade-up text-[clamp(1rem,1.4vw,1.2rem)] font-medium leading-[1.35] mb-10 max-w-xl text-text-muted"
-            style={{ animationDelay: "80ms" }}
-          >
-            What business leaders are saying about AI.
-          </h2>
+          <div className="fade-up flex items-end justify-between gap-6 mb-8 md:mb-10">
+            <div>
+              <p className="text-[10.5px] uppercase tracking-[0.15em] text-text-faint mb-2.5">
+                Voices from South Asia
+              </p>
+              <h2 className="text-[clamp(1rem,1.4vw,1.2rem)] font-medium leading-[1.35] max-w-xl text-text-muted">
+                What business leaders are saying about AI.
+              </h2>
+            </div>
+            {/* Nav buttons — hidden on xs where swipe is more natural */}
+            <div className="hidden sm:flex items-center gap-2 shrink-0">
+              <button
+                type="button"
+                aria-label="Previous quote"
+                onClick={() => scrollQuotes(-1)}
+                className="w-9 h-9 rounded-full border border-[rgba(20,20,19,0.18)] bg-bg hover:bg-[rgba(20,20,19,0.04)] hover:border-[rgba(20,20,19,0.3)] transition-colors flex items-center justify-center text-text cursor-pointer"
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M9 2L4 7l5 5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+              <button
+                type="button"
+                aria-label="Next quote"
+                onClick={() => scrollQuotes(1)}
+                className="w-9 h-9 rounded-full border border-[rgba(20,20,19,0.18)] bg-bg hover:bg-[rgba(20,20,19,0.04)] hover:border-[rgba(20,20,19,0.3)] transition-colors flex items-center justify-center text-text cursor-pointer"
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M5 2l5 5-5 5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
 
-          <div className="grid md:grid-cols-3 gap-10 md:gap-12 max-w-5xl">
+          {/* The scroll container extends past the section's content
+             gutter with negative margin + matching positive padding,
+             so the first and last cards can fade into the viewport
+             edges via mask-image instead of butting hard against the
+             container wall. */}
+          <div
+            ref={quotesScrollRef}
+            className="fade-up no-scrollbar flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth -mx-6 lg:-mx-10 px-6 lg:px-10 pb-2"
+            style={{
+              maskImage:
+                "linear-gradient(90deg, transparent 0, #000 3.5%, #000 96.5%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(90deg, transparent 0, #000 3.5%, #000 96.5%, transparent 100%)",
+            }}
+          >
             {[
               {
                 q: "I had the app in 2 days. It would have taken 2 months before.",
@@ -1481,13 +1548,25 @@ export default function Home() {
                 q: "I don\u2019t see any limit anymore.",
                 attr: "Entrepreneur, India",
               },
+              {
+                q: "My worry isn\u2019t intentional harm but unexamined assumptions being scaled through automation.",
+                attr: "Entrepreneur, India",
+              },
+              {
+                q: "A laptop crash wiped three months of work. I rebuilt my website in four languages within five weeks.",
+                attr: "Entrepreneur, India",
+              },
+              {
+                q: "Accidentally, AI gave me the idea of a new business \u2014 enough to retire my family and help people in Balochistan and Sindh.",
+                attr: "Entrepreneur, Pakistan",
+              },
             ].map((quote, i) => (
               <div
                 key={i}
-                className="fade-up"
-                style={{ animationDelay: `${i * 80}ms` }}
+                data-quote-card
+                className="snap-start shrink-0 w-[min(85vw,340px)] flex flex-col justify-between py-1"
               >
-                <blockquote className="text-[13.5px] leading-[1.7] text-text-muted mb-3">
+                <blockquote className="text-[13.5px] leading-[1.7] text-text-muted mb-4">
                   &ldquo;{quote.q}&rdquo;
                 </blockquote>
                 <div className="text-[10.5px] text-text-faint uppercase tracking-[0.08em]">
@@ -1496,7 +1575,8 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <p className="text-[10.5px] text-text-faint mt-10 max-w-2xl">
+
+          <p className="text-[10.5px] text-text-faint mt-8 max-w-2xl">
             From Anthropic&rsquo;s{" "}
             <a
               href="https://www.anthropic.com/features/81k-interviews#quotes"

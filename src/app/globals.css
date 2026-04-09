@@ -462,3 +462,41 @@ details[open] summary .faq-icon-v {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
+
+/* ─── Process cards: scroll-linked parallax ──────────
+   Uses the modern view-timeline so each card's transform is
+   driven by its position within the viewport — no JS, no scroll
+   listener, no framer-motion. The keyframes translate the card
+   from +Y (below resting) to −Y (above resting) across its full
+   view range. Alternating `-a` / `-b` variants give adjacent
+   cards slightly different magnitudes so the 4-card sequence
+   reads as layered depth instead of a single block shifting. */
+@keyframes parallax-card-a {
+  from { transform: translateY(55px); }
+  to   { transform: translateY(-55px); }
+}
+@keyframes parallax-card-b {
+  from { transform: translateY(95px); }
+  to   { transform: translateY(-95px); }
+}
+@media (min-width: 768px) {
+  .parallax-card {
+    animation-timeline: view(block);
+    animation-range: entry 0% exit 100%;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+    will-change: transform;
+  }
+  .parallax-card:nth-child(odd)  { animation-name: parallax-card-a; }
+  .parallax-card:nth-child(even) { animation-name: parallax-card-b; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .parallax-card { animation: none !important; }
+}
+
+/* ─── Hide scrollbar (used by horizontal carousels) ── */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
