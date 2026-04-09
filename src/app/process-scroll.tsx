@@ -51,11 +51,13 @@ export default function ProcessScroll() {
     const trigger = ScrollTrigger.create({
       trigger: section,
       start: "top top",
-      end: `+=${window.innerHeight * 4}`,
+      end: `+=${window.innerHeight * 5}`,
       pin: true,
       scrub: 0.8,
+      anticipatePin: 1,
       onUpdate: (self) => {
-        const progress = self.progress;
+        /* Reserve the last 20% of scroll as dwell time on phase 04 */
+        const progress = Math.min(self.progress / 0.8, 1);
         const idx = Math.min(
           PHASES.length - 1,
           Math.floor(progress * PHASES.length)
@@ -71,13 +73,13 @@ export default function ProcessScroll() {
   /* Mobile: simple vertical stack */
   if (isMobile) {
     return (
-      <section className="bg-[#1a1a19] relative overflow-hidden">
+      <section className="bg-[#ddd9cc] relative overflow-hidden">
         <div className="relative max-w-[1280px] mx-auto px-6 py-16">
-          <p className="text-[11px] uppercase tracking-[0.15em] text-[rgba(255,255,255,0.3)] mb-4">
+          <p className="text-[11px] uppercase tracking-[0.15em] text-text-faint mb-4">
             Our Process
           </p>
           <h2
-            className="text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-14 text-white"
+            className="text-[clamp(1.5rem,3vw,2.4rem)] tracking-[-0.02em] font-medium leading-[1.12] mb-14 text-text"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             From zero to settled in four phases.
@@ -89,12 +91,12 @@ export default function ProcessScroll() {
                   {p.num}
                 </span>
                 <h3
-                  className="text-white text-[clamp(1.5rem,3vw,2.2rem)] font-medium mb-4"
+                  className="text-text text-[clamp(1.5rem,3vw,2.2rem)] font-medium mb-4"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
                   {p.title}
                 </h3>
-                <p className="text-[rgba(255,255,255,0.5)] text-sm leading-[1.7] max-w-sm">
+                <p className="text-text-muted text-sm leading-[1.7] max-w-sm">
                   {p.desc}
                 </p>
               </div>
@@ -108,11 +110,11 @@ export default function ProcessScroll() {
   return (
     <div
       ref={sectionRef}
-      className="bg-[#1a1a19] relative overflow-hidden h-screen"
+      className="bg-[#ddd9cc] relative overflow-hidden h-screen"
     >
       {/* "PROCESS" label */}
       <div className="absolute left-10 top-1/2 -translate-y-1/2 z-10">
-        <p className="text-[11px] uppercase tracking-[0.15em] text-[rgba(255,255,255,0.3)]">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
           Our Process
         </p>
       </div>
@@ -134,7 +136,7 @@ export default function ProcessScroll() {
         <div
           className="absolute inset-0 rounded-full"
           style={{
-            border: "1px solid rgba(255,255,255,0.08)",
+            border: "1.5px solid rgba(20,20,19,0.12)",
           }}
         />
 
@@ -144,9 +146,9 @@ export default function ProcessScroll() {
             key={i}
             className="absolute top-1/2 left-1/2 origin-left"
             style={{
-              width: "50%",
+              width: "200%",
               height: "1px",
-              background: "rgba(255,255,255,0.06)",
+              background: "rgba(20,20,19,0.1)",
               transform: `rotate(${i * SLICE_ANGLE}deg)`,
             }}
           />
@@ -216,16 +218,16 @@ export default function ProcessScroll() {
                     : "translateY(60px)",
               }}
             >
-              <span className="text-[rgba(255,255,255,0.3)] text-sm block mb-3">
+              <span className="text-text-faint text-sm block mb-3">
                 {p.num}
               </span>
               <h3
-                className="text-white text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-5"
+                className="text-text text-[clamp(1.5rem,3vw,2.4rem)] tracking-[-0.02em] font-medium leading-[1.12] mb-5"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
                 {p.title}
               </h3>
-              <p className="text-[rgba(255,255,255,0.45)] text-[15px] leading-[1.7] max-w-md">
+              <p className="text-text-muted text-[15px] leading-[1.7] max-w-md">
                 {p.desc}
               </p>
             </div>

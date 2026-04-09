@@ -985,13 +985,13 @@ export default function Home() {
 
       {/* ── Problem ──────────────────────────────────── */}
       <section id="problem" ref={problemRef}>
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-12 md:py-16 relative">
-          <div className="flex items-start justify-between mb-10">
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24 relative">
+          <div className="flex items-start justify-between mb-8">
             <div className="max-w-[70%] sm:max-w-2xl">
-              <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-5">
+              <h2 className="fade-up text-[clamp(1.5rem,3vw,2.4rem)] font-medium leading-[1.12] tracking-[-0.02em] mb-4">
                 Most AI adoption stalls at the demo.
               </h2>
-              <p className="fade-up text-text-muted text-[17px] leading-relaxed">
+              <p className="fade-up text-text-muted text-[16px] leading-relaxed">
                 The gap isn&apos;t tools &mdash; it&apos;s deployment.
                 Here&apos;s how we close it.
               </p>
@@ -1003,7 +1003,7 @@ export default function Home() {
               width={1000}
               height={1000}
               loading="lazy"
-              className="w-[100px] md:w-[160px] lg:w-[220px] shrink-0 ml-4 md:ml-8 lg:ml-12 -mt-4"
+              className="w-[70px] md:w-[120px] lg:w-[160px] shrink-0 ml-4 md:ml-8 lg:ml-12 -mt-4"
             />
           </div>
 
@@ -1045,8 +1045,8 @@ export default function Home() {
 
       {/* ── Why Claude ───────────────────────────────── */}
       <section ref={whyClaudeRef}>
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 pt-6 md:pt-10 pb-16 md:pb-24">
-          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-10 text-center">
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24">
+          <h2 className="fade-up text-[clamp(1.5rem,3vw,2.4rem)] tracking-[-0.02em] font-medium leading-[1.12] mb-10 text-center">
             Built for production, not demos.
           </h2>
 
@@ -1089,8 +1089,8 @@ export default function Home() {
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
           <div className="h-px bg-border-light" />
         </div>
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-20 md:py-28">
-          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-10 text-center">
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24">
+          <h2 className="fade-up text-[clamp(1.5rem,3vw,2.4rem)] tracking-[-0.02em] font-medium leading-[1.12] mb-10 text-center">
             What we deliver.
           </h2>
 
@@ -1180,7 +1180,7 @@ export default function Home() {
         </div>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24">
           <div className="flex items-start justify-between mb-10">
-            <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] max-w-2xl">
+            <h2 className="fade-up text-[clamp(1.5rem,3vw,2.4rem)] tracking-[-0.02em] font-medium leading-[1.12] max-w-2xl">
               Who we work with.
             </h2>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -1224,14 +1224,14 @@ export default function Home() {
          one card fills the viewport and on desktop ~3 cards sit
          alongside each other. Edge fade via mask-image lets cards
          dissolve instead of clipping hard at the section gutter. */}
-      <section ref={quotesRef} className="bg-[#1a1a19]">
+      <section ref={quotesRef} className="bg-[#ddd9cc]">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-14 md:py-20">
           <div className="fade-up flex items-end justify-between gap-6 mb-8 md:mb-10">
             <div>
-              <p className="text-[10.5px] uppercase tracking-[0.15em] text-[rgba(255,255,255,0.25)] mb-2.5">
+              <p className="text-[10.5px] uppercase tracking-[0.15em] text-text-faint mb-2.5">
                 Voices from South Asia
               </p>
-              <h2 className="text-[clamp(1rem,1.4vw,1.2rem)] font-medium leading-[1.35] max-w-xl text-[rgba(255,255,255,0.5)]">
+              <h2 className="text-[clamp(1rem,1.4vw,1.2rem)] font-medium leading-[1.35] max-w-xl text-text-muted">
                 What business leaders are saying about AI.
               </h2>
             </div>
@@ -1241,7 +1241,7 @@ export default function Home() {
                 type="button"
                 aria-label="Previous quote"
                 onClick={() => scrollQuotes(-1)}
-                className="w-9 h-9 rounded-full border border-[rgba(255,255,255,0.15)] bg-transparent hover:bg-[rgba(255,255,255,0.05)] hover:border-[rgba(255,255,255,0.25)] transition-colors flex items-center justify-center text-white cursor-pointer"
+                className="w-9 h-9 rounded-full border border-[rgba(20,20,19,0.18)] bg-bg hover:bg-[rgba(20,20,19,0.04)] hover:border-[rgba(20,20,19,0.3)] transition-colors flex items-center justify-center text-text cursor-pointer"
               >
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path
@@ -1257,7 +1257,7 @@ export default function Home() {
                 type="button"
                 aria-label="Next quote"
                 onClick={() => scrollQuotes(1)}
-                className="w-9 h-9 rounded-full border border-[rgba(255,255,255,0.15)] bg-transparent hover:bg-[rgba(255,255,255,0.05)] hover:border-[rgba(255,255,255,0.25)] transition-colors flex items-center justify-center text-white cursor-pointer"
+                className="w-9 h-9 rounded-full border border-[rgba(20,20,19,0.18)] bg-bg hover:bg-[rgba(20,20,19,0.04)] hover:border-[rgba(20,20,19,0.3)] transition-colors flex items-center justify-center text-text cursor-pointer"
               >
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path
@@ -1312,23 +1312,23 @@ export default function Home() {
                 data-quote-card
                 className="snap-start shrink-0 w-[min(85vw,340px)] md:w-[320px] flex flex-col justify-between py-1"
               >
-                <blockquote className="text-[13.5px] leading-[1.7] text-[rgba(255,255,255,0.5)] mb-4">
+                <blockquote className="text-[13.5px] leading-[1.7] text-text-muted mb-4">
                   &ldquo;{quote.q}&rdquo;
                 </blockquote>
-                <div className="text-[10.5px] text-[rgba(255,255,255,0.25)] uppercase tracking-[0.08em]">
+                <div className="text-[10.5px] text-text-faint uppercase tracking-[0.08em]">
                   {quote.attr}
                 </div>
               </div>
             ))}
           </div>
 
-          <p className="text-[10.5px] text-[rgba(255,255,255,0.2)] mt-8 max-w-2xl">
+          <p className="text-[10.5px] text-text-faint mt-8 max-w-2xl">
             From Anthropic&rsquo;s{" "}
             <a
               href="https://www.anthropic.com/features/81k-interviews#quotes"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline hover:text-[rgba(255,255,255,0.4)] transition-colors"
+              className="underline hover:text-text-muted transition-colors"
             >
               81,000 Conversations About AI
             </a>
@@ -1344,7 +1344,7 @@ export default function Home() {
         </div>
         <div className="max-w-[860px] mx-auto px-6 lg:px-10 py-24 md:py-36">
           <div className="fade-up mb-14">
-            <h2 className="text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-3">
+            <h2 className="text-[clamp(1.5rem,3vw,2.4rem)] tracking-[-0.02em] font-medium leading-[1.12] mb-3">
               Frequently asked questions.
             </h2>
             <a
@@ -1422,7 +1422,7 @@ export default function Home() {
             <span className="fade-up block text-[10px] font-medium uppercase tracking-[0.18em] text-text-faint mb-5">
               Who builds this
             </span>
-            <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-14 max-w-2xl">
+            <h2 className="fade-up text-[clamp(1.5rem,3vw,2.4rem)] tracking-[-0.02em] font-medium leading-[1.12] mb-14 max-w-2xl">
               One operator. Every project.
             </h2>
 

@@ -186,7 +186,7 @@ function WordOcean({ onFrame }: { onFrame: (t: number, h: number, waveTop: numbe
         else if (y < fadeStart) alpha = 0.08;
         else alpha = 0.08 + 0.62 * ((y - fadeStart) / (fadeEnd - fadeStart));
 
-        ctx.fillStyle = `rgba(20, 20, 19, ${alpha})`;
+        ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.4})`;
         ctx.fillText(word.text, word.x, y);
       }
 
@@ -262,7 +262,7 @@ function FooterColumn({ title, links, seeMoreHref }: { title: string; links: { l
   return (
     <div>
       <h3
-        className="text-[0.8rem] font-semibold uppercase tracking-[0.08em] text-text mb-4"
+        className="text-[0.8rem] font-semibold uppercase tracking-[0.08em] text-white mb-4"
         style={{ fontFamily: "var(--font-heading)" }}
       >
         {title}
@@ -272,7 +272,7 @@ function FooterColumn({ title, links, seeMoreHref }: { title: string; links: { l
           <li key={link.href}>
             <a
               href={link.href}
-              className="text-[0.875rem] text-text-muted hover:text-accent transition-colors duration-200"
+              className="text-[0.875rem] text-[rgba(255,255,255,0.45)] hover:text-accent transition-colors duration-200"
             >
               {link.label}
             </a>
@@ -282,7 +282,7 @@ function FooterColumn({ title, links, seeMoreHref }: { title: string; links: { l
           <li className="pt-1">
             <a
               href={seeMoreHref}
-              className="text-[0.875rem] text-accent hover:text-text transition-colors duration-200 font-medium"
+              className="text-[0.875rem] text-accent hover:text-white transition-colors duration-200 font-medium"
             >
               See More &rarr;
             </a>
@@ -295,9 +295,27 @@ function FooterColumn({ title, links, seeMoreHref }: { title: string; links: { l
 
 export function Footer() {
   return (
-    <footer className="border-t border-border-light">
+    <footer className="relative overflow-hidden border-t border-border-light bg-[#1a1a19]">
+      {/* Aurora gradient background */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div
+          className="absolute w-[800px] h-[600px] rounded-full opacity-[0.12] blur-[120px] animate-aurora-1"
+          style={{ background: "radial-gradient(circle, #d97757 0%, transparent 70%)", top: "-20%", left: "-10%" }}
+        />
+        <div
+          className="absolute w-[600px] h-[500px] rounded-full opacity-[0.08] blur-[100px] animate-aurora-2"
+          style={{ background: "radial-gradient(circle, #d97757 0%, transparent 70%)", top: "30%", right: "-5%" }}
+        />
+        <div
+          className="absolute w-[500px] h-[400px] rounded-full opacity-[0.06] blur-[80px] animate-aurora-3"
+          style={{ background: "radial-gradient(circle, #c0c0c0 0%, transparent 70%)", bottom: "-10%", left: "30%" }}
+        />
+        {/* Blur overlay to smooth the movement */}
+        <div className="absolute inset-0 backdrop-blur-[2px]" />
+      </div>
+
       {/* Link columns */}
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-12 lg:py-16">
+      <div className="relative max-w-[1280px] mx-auto px-6 lg:px-10 py-12 lg:py-16">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-6">
           <FooterColumn title="Company" links={COMPANY_LINKS} />
           <FooterColumn title="Free Tools" links={TOOL_LINKS} />
@@ -309,15 +327,15 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-border-light">
+      <div className="relative border-t border-[rgba(255,255,255,0.06)]">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 min-h-16 py-4 sm:py-0 sm:h-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
           <span
-            className="text-[0.95rem] font-medium tracking-[-0.03em] text-text"
+            className="text-[0.95rem] font-medium tracking-[-0.03em] text-white"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             SETTLE
           </span>
-          <span className="text-text-faint text-sm">
+          <span className="text-[rgba(255,255,255,0.3)] text-sm">
             AI, thoughtfully deployed. Built on Claude AI by Anthropic.
           </span>
         </div>

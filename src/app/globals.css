@@ -130,6 +130,26 @@ h1, h2, h3 {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(20, 20, 19, 0.12); border-radius: 3px; }
 
+/* ─── Footer aurora gradients ─────────────────── */
+@keyframes aurora-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(5%, 8%) scale(1.1); }
+  66% { transform: translate(-3%, -5%) scale(0.95); }
+}
+@keyframes aurora-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-6%, -4%) scale(1.05); }
+  66% { transform: translate(4%, 6%) scale(1.1); }
+}
+@keyframes aurora-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(3%, -6%) scale(1.08); }
+  66% { transform: translate(-5%, 3%) scale(0.92); }
+}
+.animate-aurora-1 { animation: aurora-1 12s ease-in-out infinite; }
+.animate-aurora-2 { animation: aurora-2 15s ease-in-out infinite; }
+.animate-aurora-3 { animation: aurora-3 18s ease-in-out infinite; }
+
 /* ─── Process scroll phase transition ─────────── */
 @keyframes phase-in {
   from { opacity: 0; transform: translateY(16px); }
