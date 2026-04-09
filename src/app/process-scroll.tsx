@@ -52,10 +52,7 @@ export default function ProcessScroll() {
         end: "bottom top",
         scrub: 1.2,
         onUpdate: (self) => {
-          /* Offset so phase 01 is fully active when section is ~25% scrolled in
-             (i.e. actually visible), not at progress=0 when it's off-screen */
-          const adjusted = Math.max(0, (self.progress - 0.15) / 0.7);
-          const r = adjusted * ROTATION_RANGE;
+          const r = self.progress * ROTATION_RANGE;
           setRotation(r);
           circle.style.transform = `translateY(-50%) rotate(${-r}deg)`;
         },
