@@ -51,7 +51,7 @@ export function Nav({ variant = "minimal" }: NavProps) {
               href="https://customers.settlewithai.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[14px] font-medium bg-white text-black px-5 py-2.5 rounded-full hover:bg-gray-100 transition-colors duration-200"
+              className="text-[14px] font-medium text-text-muted hover:text-text transition-colors duration-200"
             >
               Client Portal
             </a>
