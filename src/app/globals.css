@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Styrene A";
+  src: url("/fonts/StyreneA-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Styrene A";
+  src: url("/fonts/StyreneA-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Styrene A";
+  src: url("/fonts/StyreneA-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-display: swap;
+}
+
 :root {
   --bg: #e8e6dc;
   --bg-dark: #141413;
@@ -26,6 +45,7 @@
   --color-border-light: var(--border-light);
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-sentient), Georgia, "Times New Roman", serif;
+  --font-styrene: "Styrene A", ui-sans-serif, system-ui, sans-serif;
 }
 
 html {

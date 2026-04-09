@@ -6,6 +6,7 @@ import { getCalApi } from "@calcom/embed-react";
 import { Footer } from "@/components/layout/Footer";
 import { Nav } from "@/components/layout/Nav";
 import { BlogTOC } from "@/components/blog/BlogTOC";
+import { AskClaude } from "@/components/AskClaude";
 
 const Globe = dynamic(() => import("./globe"), { ssr: false });
 const Mindmap = dynamic(() => import("./mindmap"), { ssr: false });
@@ -867,7 +868,14 @@ export default function Home() {
     if (!el) return;
     const card = el.querySelector<HTMLElement>("[data-quote-card]");
     const step = (card?.offsetWidth ?? 320) + 24; /* card width + gap-6 */
-    el.scrollBy({ left: dir * step, behavior: "smooth" });
+
+    if (dir === 1 && el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) {
+      el.scrollTo({ left: 0, behavior: "smooth" });
+    } else if (dir === -1 && el.scrollLeft <= 4) {
+      el.scrollTo({ left: el.scrollWidth, behavior: "smooth" });
+    } else {
+      el.scrollBy({ left: dir * step, behavior: "smooth" });
+    }
   };
 
   // Discovery Call button state/observer removed while the CTA is hidden.
@@ -900,6 +908,7 @@ export default function Home() {
       <BlogTOC
         headings={[
           { id: "case-study", text: "Case study" },
+          { id: "ask", text: "Ask Claude" },
           { id: "problem", text: "The problem" },
           { id: "services", text: "Services" },
           { id: "process", text: "How we work" },
@@ -966,10 +975,13 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Ask Claude ─────────────────────────────────── */}
+      <AskClaude />
+
       {/* ── Problem ──────────────────────────────────── */}
       <section id="problem" ref={problemRef}>
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36 relative">
-          <div className="flex items-start justify-between mb-16">
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-12 md:py-16 relative">
+          <div className="flex items-start justify-between mb-10">
             <div className="max-w-[70%] sm:max-w-2xl">
               <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-5">
                 Most AI adoption stalls at the demo.
@@ -1029,37 +1041,27 @@ export default function Home() {
       {/* ── Why Claude ───────────────────────────────── */}
       <section ref={whyClaudeRef}>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 pt-6 md:pt-10 pb-16 md:pb-24">
-          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-5 text-center">
+          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-10 text-center">
             Built for production, not demos.
           </h2>
-          <p
-            className="fade-up text-text-muted text-[17px] leading-relaxed mb-12 text-center max-w-3xl mx-auto"
-            style={{ animationDelay: "60ms" }}
-          >
-            Most AI models are great in a sandbox and unpredictable in
-            production. Claude is the opposite. It treats your instructions as a
-            contract, not a suggestion &mdash; so the offer template stays
-            branded, the chat agent stays in scope, and your rollout
-            doesn&rsquo;t quietly drift over time.
-          </p>
 
           <div className="grid md:grid-cols-3 gap-px bg-border-light rounded-2xl overflow-hidden stagger mb-16">
             {[
               {
                 title: "Same output. Every time.",
-                body: "When your offer document needs to land identically on attempt #1 and attempt #1,000 — that\u2019s Claude.",
+                body: "Attempt #1 and attempt #1,000 land identically.",
               },
               {
                 title: "Stays in scope.",
-                body: "Customer-facing chat that won\u2019t go off-script, brand voice that won\u2019t drift, guardrails that actually hold.",
+                body: "Guardrails hold. Brand voice doesn\u2019t drift.",
               },
               {
                 title: "Works inside your stack.",
-                body: "Cowork, Claude Projects, Skills, MCP — Claude ships with the deployment surfaces other models are still building.",
+                body: "SAP, HubSpot, Salesforce, Google Drive \u2014 via MCP.",
               },
             ].map((c) => (
               <div key={c.title} className="fade-up bg-bg p-7 md:p-8">
-                <h3 className="text-text font-medium text-[16px] mb-3">
+                <h3 className="text-text font-medium text-[16px] mb-2">
                   {c.title}
                 </h3>
                 <p className="text-text-muted text-[14.5px] leading-[1.7]">
@@ -1493,13 +1495,7 @@ export default function Home() {
              container wall. */}
           <div
             ref={quotesScrollRef}
-            className="fade-up no-scrollbar flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth -mx-6 lg:-mx-10 px-6 lg:px-10 pb-2"
-            style={{
-              maskImage:
-                "linear-gradient(90deg, transparent 0, #000 3.5%, #000 96.5%, transparent 100%)",
-              WebkitMaskImage:
-                "linear-gradient(90deg, transparent 0, #000 3.5%, #000 96.5%, transparent 100%)",
-            }}
+            className="fade-up no-scrollbar flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2"
           >
             {[
               {
@@ -1563,9 +1559,17 @@ export default function Home() {
           <div className="h-px bg-border-light" />
         </div>
         <div className="max-w-[860px] mx-auto px-6 lg:px-10 py-24 md:py-36">
-          <h2 className="fade-up text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-14">
-            Frequently asked questions.
-          </h2>
+          <div className="fade-up mb-14">
+            <h2 className="text-[clamp(1.8rem,3.5vw,3rem)] font-medium leading-[1.12] mb-3">
+              Frequently asked questions.
+            </h2>
+            <a
+              href="#ask"
+              className="text-[14px] text-accent hover:text-accent/80 transition-colors"
+            >
+              Want to ask AI instead? ↑
+            </a>
+          </div>
 
           <div className="divide-y divide-border-light">
             {[
