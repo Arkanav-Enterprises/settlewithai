@@ -19,6 +19,15 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "the-ai-gap",
+    title:
+      "The AI You Dismissed Isn't the AI That's Here Now",
+    description:
+      "Most people tried ChatGPT once and formed an opinion. Meanwhile, frontier models like Claude are restructuring entire business workflows. The gap between perception and reality is growing fast.",
+    date: "2026-04-10",
+    tag: "Perspective",
+  },
+  {
     slug: "ai-chat-on-your-website",
     title:
       "We Added a Custom AI Chat to Our Website in One Afternoon",
