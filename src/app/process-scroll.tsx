@@ -43,35 +43,41 @@ export default function ProcessScroll() {
     const circle = circleRef.current;
     if (!section || !circle) return;
 
-    const phases = phaseRefs.current.filter(Boolean) as HTMLDivElement[];
-    const dots = dotRefs.current.filter(Boolean) as HTMLDivElement[];
     const totalRotation = SLICE_ANGLE * (PHASES.length - 1); // 67.5°
 
-    /* Build a GSAP timeline scrubbed by scroll — no React state */
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top 70%",
-        end: "bottom 30%",
-        scrub: 1,
-      },
+    const mm = gsap.matchMedia();
+
+    /* Desktop: pin the section so all 4 phases have full viewport dwell time */
+    mm.add("(min-width: 768px)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "+=300%",
+          pin: true,
+          scrub: 1,
+        },
+      });
+      tl.to(circle, { rotation: -totalRotation, ease: "none", duration: 1 }, 0);
+      return () => tl.kill();
     });
 
-    /* Rotate the circle */
-    tl.to(circle, {
-      rotation: -totalRotation,
-      ease: "none",
-      duration: 1,
-    }, 0);
-
-    /* Animate each phase: fade in → hold → fade out */
-    const phaseCount = PHASES.length;
-    const phaseDuration = 1 / phaseCount;
-
-    /* No opacity animation — all phases always fully visible */
+    /* Mobile: scroll-scrubbed without pin (existing behaviour) */
+    mm.add("(max-width: 767px)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 70%",
+          end: "bottom 30%",
+          scrub: 1,
+        },
+      });
+      tl.to(circle, { rotation: -totalRotation, ease: "none", duration: 1 }, 0);
+      return () => tl.kill();
+    });
 
     return () => {
-      tl.kill();
+      mm.revert();
     };
   }, []);
 
@@ -190,8 +196,8 @@ export default function ProcessScroll() {
         className="absolute right-0 top-0 w-[700px] lg:w-[800px] h-auto opacity-[0.04] md:opacity-[0.06] pointer-events-none select-none hidden md:block"
       />
 
-      {/* Spacer for scroll room */}
-      <div className="relative z-10 h-[130vh] md:h-[100vh]" />
+      {/* Spacer for scroll room — desktop height set here; pin handles scroll travel */}
+      <div className="relative z-10 h-[130vh] md:h-screen" />
     </section>
   );
 }

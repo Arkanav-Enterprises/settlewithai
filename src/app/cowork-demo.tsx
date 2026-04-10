@@ -54,37 +54,245 @@ function Tooltip({ text, side }: { text: string; side: "left" | "right" }) {
   );
 }
 
-/* ─── Chat View ─── */
+const STACK_ICON = (
+  <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="rgba(20,20,19,0.4)" strokeWidth="1.5" className="shrink-0 mt-px">
+    <path d="M2 7l8-4 8 4-8 4-8-4z" /><path d="M2 12l8 4 8-4" /><path d="M2 17l8 4 8-4" />
+  </svg>
+);
+
+const CHECK_ICON = (
+  <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="rgba(20,20,19,0.4)" strokeWidth="1.5" className="shrink-0">
+    <circle cx="10" cy="10" r="8" /><path d="M6.5 10.5l2.5 2.5 4.5-5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const PROJECT_FILES = [
+  "SAMPLE OFFER OFFSET 3.docx",
+  "SAMPLE OFFER OFFSET 4.docx",
+  "WEB_OFFSET_Price_List.xlsx",
+  "Orient logo.png",
+];
+
+const DOC_STEPS = [
+  "Applying Orient brand & logo",
+  "Embedding machine images",
+  "Formatting pricing table",
+];
+
+const RESPONSE_TEXT =
+  "Found the offset price list and 2 sample offer templates. Building the offer document for ABC Packaging now — 4-colour web offset, 889mm web width.";
+
+/* ─── Chat View — light mode, Orient doc generation sequence ─── */
 function ChatView() {
+  const [displayText, setDisplayText] = useState("");
+  const [showDocGen, setShowDocGen] = useState(false);
+  const [docGenStep, setDocGenStep] = useState(0);
+  const [showDoc, setShowDoc] = useState(false);
+
+  useEffect(() => {
+    const timeoutIds: ReturnType<typeof setTimeout>[] = [];
+    let intervalId: ReturnType<typeof setInterval>;
+
+    const schedule = (fn: () => void, ms: number) => {
+      const id = setTimeout(fn, ms);
+      timeoutIds.push(id);
+    };
+
+    schedule(() => {
+      let i = 0;
+      intervalId = setInterval(() => {
+        i++;
+        setDisplayText(RESPONSE_TEXT.slice(0, i));
+        if (i >= RESPONSE_TEXT.length) {
+          clearInterval(intervalId);
+          schedule(() => setShowDocGen(true), 400);
+          schedule(() => setDocGenStep(1), 700);
+          schedule(() => setDocGenStep(2), 1150);
+          schedule(() => setDocGenStep(3), 1600);
+          schedule(() => { setDocGenStep(DOC_STEPS.length + 1); setShowDoc(true); }, 2200);
+        }
+      }, 16);
+    }, 1450);
+
+    return () => {
+      timeoutIds.forEach(clearTimeout);
+      clearInterval(intervalId);
+    };
+  }, []);
+
   return (
-    <div className="absolute inset-0 top-28 px-6 md:px-10 overflow-hidden">
-      <div className="max-w-lg mx-auto space-y-5 pt-4">
-        <div className="flex justify-end" style={{ opacity: 0, animation: "400ms ease-out 500ms forwards panelSlideUp" }}>
-          <div className="rounded-[20px] px-5 py-3.5 text-[14px] leading-[1.5]" style={{ backgroundColor: "rgba(20,20,19,0.07)", color: "#141413" }}>
-            Generate an offer for the ABC Packaging order &mdash; 50,000 units, 4-colour offset.
+    <div
+      className="absolute inset-0 overflow-y-auto"
+      style={{
+        top: "8rem",
+        scrollbarWidth: "thin",
+        scrollbarColor: "rgba(217,119,87,0.3) transparent",
+      }}
+    >
+      <div className="max-w-[560px] mx-auto px-8 pt-2 pb-8 space-y-5">
+
+        {/* User message */}
+        <div className="flex justify-end" style={{ opacity: 0, animation: "400ms ease-out 300ms forwards panelSlideUp" }}>
+          <div
+            className="rounded-2xl rounded-br-md px-5 py-3.5 text-[14px] leading-relaxed max-w-[85%]"
+            style={{ backgroundColor: "#141413", color: "white" }}
+          >
+            Hello, I&rsquo;d like to generate an offer for a web offset machine please.
           </div>
         </div>
-        <div style={{ opacity: 0, animation: "400ms ease-out 800ms forwards panelSlideUp" }}>
-          <div className="flex items-start gap-3">
-            {CLAUDE_SPARK}
-            <p className="text-[14px] leading-[1.65]" style={{ color: "rgba(20,20,19,0.5)" }}>
-              I&apos;ll pull the specs from the RFQ, cross-reference with your BOM pricing rules, and draft the offer. One moment &mdash; checking material costs and current lead times.
-            </p>
+
+        {/* Tool use: project file search */}
+        <div style={{ opacity: 0, animation: "400ms ease-out 650ms forwards panelSlideUp" }}>
+          <div className="flex items-start gap-2 mb-2.5" style={{ color: "rgba(20,20,19,0.45)" }}>
+            {STACK_ICON}
+            <span className="text-[13px]">Searched project for &ldquo;web offset machine price list configurations&rdquo;</span>
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="rgba(20,20,19,0.35)" className="shrink-0 mt-0.5 ml-auto">
+              <path d="M14.128 7.165a.502.502 0 0 1 .744.67l-4.5 5-.078.07a.5.5 0 0 1-.666-.07l-4.5-5-.06-.082a.501.501 0 0 1 .729-.656l.075.068L10 11.752z" />
+            </svg>
+          </div>
+          <div
+            className="rounded-xl overflow-hidden ml-5"
+            style={{ border: "1px solid rgba(20,20,19,0.09)", backgroundColor: "rgba(20,20,19,0.02)" }}
+          >
+            {PROJECT_FILES.map((file, i) => (
+              <div
+                key={file}
+                className="flex items-center justify-between px-4 py-2.5"
+                style={{
+                  borderTop: i > 0 ? "1px solid rgba(20,20,19,0.06)" : "none",
+                  opacity: 0,
+                  animation: `250ms ease-out ${800 + i * 100}ms forwards panelSlideUp`,
+                }}
+              >
+                <span className="text-[12px] truncate pr-4" style={{ color: "rgba(20,20,19,0.6)", fontFamily: "var(--font-mono, monospace)" }}>{file}</span>
+                <span
+                  className="text-[10px] font-medium px-1.5 py-0.5 rounded shrink-0"
+                  style={{ backgroundColor: "rgba(20,20,19,0.06)", color: "rgba(20,20,19,0.4)", letterSpacing: "0.04em" }}
+                >
+                  TEXT
+                </span>
+              </div>
+            ))}
           </div>
         </div>
-        <div className="flex justify-end" style={{ opacity: 0, animation: "400ms ease-out 1100ms forwards panelSlideUp" }}>
-          <div className="rounded-[20px] px-5 py-3.5 text-[14px] leading-[1.5]" style={{ backgroundColor: "rgba(20,20,19,0.07)", color: "#141413" }}>
-            Do we have capacity for this run next month?
-          </div>
+
+        {/* Done */}
+        <div
+          className="flex items-center gap-2 ml-5"
+          style={{ opacity: 0, animation: "300ms ease-out 1250ms forwards panelSlideUp", color: "rgba(20,20,19,0.45)" }}
+        >
+          {CHECK_ICON}
+          <span className="text-[13px]">Done</span>
         </div>
-        <div style={{ opacity: 0, animation: "400ms ease-out 1400ms forwards panelSlideUp" }}>
-          <div className="flex items-start gap-3">
-            {CLAUDE_SPARK}
-            <p className="text-[14px] leading-[1.65]" style={{ color: "rgba(20,20,19,0.5)" }}>
-              Line 2 has 68% utilization next month. You can fit a 50K run in the second week &mdash; I&apos;ll block the slot and add it to the offer.
-            </p>
+
+        {/* Claude response — streams character by character */}
+        {displayText && (
+          <p className="text-[14px] leading-[1.75]" style={{ color: "rgba(20,20,19,0.72)" }}>
+            {displayText}
+            {displayText.length < RESPONSE_TEXT.length && (
+              <span
+                className="inline-block w-[2px] h-[1em] ml-[1px] align-middle rounded-sm"
+                style={{ backgroundColor: "rgba(20,20,19,0.4)", animation: "700ms step-end infinite cursorBlink" }}
+              />
+            )}
+          </p>
+        )}
+
+        {/* Document generation tool use */}
+        {showDocGen && (
+          <div style={{ opacity: 0, animation: "350ms ease-out forwards panelSlideUp" }}>
+            <div className="flex items-start gap-2 mb-2.5" style={{ color: "rgba(20,20,19,0.45)" }}>
+              {/* Pencil / write icon */}
+              <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="rgba(20,20,19,0.4)" strokeWidth="1.5" className="shrink-0 mt-px">
+                <path d="M13.586 3.586a2 2 0 1 1 2.828 2.828l-9 9A2 2 0 0 1 6 16H4v-2a2 2 0 0 1 .586-1.414l9-9z" strokeLinejoin="round" />
+              </svg>
+              <span className="text-[13px]">Generating offer document</span>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="rgba(20,20,19,0.35)" className="shrink-0 mt-0.5 ml-auto">
+                <path d="M14.128 7.165a.502.502 0 0 1 .744.67l-4.5 5-.078.07a.5.5 0 0 1-.666-.07l-4.5-5-.06-.082a.501.501 0 0 1 .729-.656l.075.068L10 11.752z" />
+              </svg>
+            </div>
+            <div
+              className="rounded-xl overflow-hidden ml-5"
+              style={{ border: "1px solid rgba(20,20,19,0.09)", backgroundColor: "rgba(20,20,19,0.02)" }}
+            >
+              {DOC_STEPS.map((step, i) => {
+                const done = docGenStep > i + 1;
+                const active = docGenStep === i + 1;
+                const pending = docGenStep < i + 1;
+                return (
+                  <div
+                    key={step}
+                    className="flex items-center gap-3 px-4 py-2.5"
+                    style={{ borderTop: i > 0 ? "1px solid rgba(20,20,19,0.06)" : "none" }}
+                  >
+                    {done ? (
+                      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="#d97757" strokeWidth="1.8" className="shrink-0">
+                        <circle cx="10" cy="10" r="8" /><path d="M6.5 10.5l2.5 2.5 4.5-5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    ) : active ? (
+                      /* spinning ring */
+                      <svg className="shrink-0 progress-spin" width="14" height="14" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10" stroke="rgba(20,20,19,0.1)" strokeWidth="2.5" />
+                        <circle cx="12" cy="12" r="10" stroke="#3B82F6" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="20 43" />
+                      </svg>
+                    ) : (
+                      <div className="w-3.5 h-3.5 rounded-full shrink-0" style={{ backgroundColor: "rgba(20,20,19,0.08)" }} />
+                    )}
+                    <span
+                      className="text-[12px]"
+                      style={{
+                        color: done ? "rgba(20,20,19,0.3)" : active ? "rgba(20,20,19,0.7)" : "rgba(20,20,19,0.3)",
+                        textDecoration: done ? "line-through" : "none",
+                        fontWeight: active ? 500 : 400,
+                      }}
+                    >
+                      {step}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
+
+        {/* Final document card */}
+        {showDoc && (
+          <div
+            className="rounded-xl overflow-hidden"
+            style={{
+              border: "1px solid rgba(20,20,19,0.09)",
+              borderLeft: "3px solid #de2127",
+              backgroundColor: "rgba(20,20,19,0.015)",
+              opacity: 0,
+              animation: "400ms ease-out forwards panelSlideUp",
+            }}
+          >
+            <div className="flex items-center gap-3 px-4 py-3.5">
+              {/* Word doc icon */}
+              <div
+                className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 text-white text-[13px] font-bold"
+                style={{ backgroundColor: "#2B579A" }}
+              >
+                W
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-[13px] font-medium truncate" style={{ color: "rgba(20,20,19,0.8)" }}>
+                  Orient_Offer_Web_Offset_PH_2026_Q_042.docx
+                </p>
+                <p className="text-[11px] mt-0.5" style={{ color: "rgba(20,20,19,0.35)" }}>
+                  Cover · Specs · Pricing · T&amp;C · Contact &mdash; 8 pages
+                </p>
+              </div>
+              <span
+                className="text-[10px] font-medium px-2 py-1 rounded shrink-0"
+                style={{ backgroundColor: "rgba(20,20,19,0.06)", color: "rgba(20,20,19,0.4)", letterSpacing: "0.05em" }}
+              >
+                .docx
+              </span>
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );
@@ -257,7 +465,7 @@ function CoworkView() {
 
 /* ─── Main ─── */
 export default function CoworkDemo({ className = "" }: { className?: string }) {
-  const [activeTab, setActiveTab] = useState<"chat" | "cowork">("cowork");
+  const [activeTab, setActiveTab] = useState<"chat" | "cowork">("chat");
 
   return (
     <div className={`flex justify-center items-center w-full ${className}`}>
