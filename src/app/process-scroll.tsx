@@ -107,9 +107,6 @@ export default function ProcessScroll() {
     };
   }, []);
 
-  /* Bigger circle = more arc length between phases = better spacing */
-  const circleSize = "min(180vw, 1600px)";
-
   return (
     <section ref={sectionRef} className="bg-[#ddd9cc] relative overflow-hidden">
       {/* "OUR PROCESS" label */}
@@ -119,13 +116,12 @@ export default function ProcessScroll() {
         </p>
       </div>
 
-      {/* Rotating circle */}
+      {/* Rotating circle. Mobile uses a larger radius so the arc between
+         phases (r × 22.5° ≈ 55vw at 280vw) clears the phase text blocks. */}
       <div
         ref={circleRef}
-        className="absolute pointer-events-none left-[-150vw] md:left-[-120vw] lg:left-[-1100px]"
+        className="absolute pointer-events-none left-[-262vw] md:left-[-120vw] lg:left-[-1100px] w-[min(280vw,1600px)] h-[min(280vw,1600px)] md:w-[min(180vw,1600px)] md:h-[min(180vw,1600px)]"
         style={{
-          width: circleSize,
-          height: circleSize,
           top: "50%",
           transform: "translateY(-50%)",
         }}

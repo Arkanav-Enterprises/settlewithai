@@ -465,7 +465,7 @@ function CoworkView() {
 
 /* ─── Main ─── */
 export default function CoworkDemo({ className = "" }: { className?: string }) {
-  const [activeTab, setActiveTab] = useState<"chat" | "cowork">("chat");
+  const [activeTab, setActiveTab] = useState<"chat" | "cowork">("cowork");
 
   return (
     <div className={`flex justify-center items-center w-full ${className}`}>
