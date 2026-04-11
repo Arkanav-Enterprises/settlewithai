@@ -87,7 +87,7 @@ function ClaudeTooltip() {
 
   return (
     <span
-      className="inline items-baseline text-accent relative underline decoration-accent/40 underline-offset-4 cursor-pointer"
+      className="inline items-baseline text-accent relative cursor-default"
       onMouseEnter={show}
       onMouseLeave={hide}
     >
@@ -97,7 +97,7 @@ function ClaudeTooltip() {
         className="inline-block w-[0.85em] h-[0.85em] mr-1 align-baseline animate-breathe"
         aria-hidden="true"
       />
-      Claude AI
+      Claude (or any AI you use!)
       {open && (
         <a
           href="https://claude.ai"
@@ -133,6 +133,58 @@ function ClaudeTooltip() {
             </svg>
           </span>
         </a>
+      )}
+    </span>
+  );
+}
+
+/* ─── Service tooltip ───────────────────────────────────
+   Hover-shown explainer for the off-menu services listed in
+   the "Also available" row under the mindmap. Shares the
+   200ms close delay pattern with ClaudeTooltip so cursor
+   travel into the popover keeps it open. The popover itself
+   is a non-link because these are internal services, not
+   external references. */
+
+function ServiceTooltip({
+  label,
+  title,
+  body,
+}: {
+  label: string;
+  title: string;
+  body: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const timeout = useRef<ReturnType<typeof setTimeout>>(null);
+
+  const show = () => {
+    if (timeout.current) clearTimeout(timeout.current);
+    setOpen(true);
+  };
+  const hide = () => {
+    timeout.current = setTimeout(() => setOpen(false), 200);
+  };
+
+  return (
+    <span
+      className="relative inline-block text-text font-medium underline decoration-dotted decoration-[rgba(20,20,19,0.35)] underline-offset-[3px] cursor-help"
+      onMouseEnter={show}
+      onMouseLeave={hide}
+      onFocus={show}
+      onBlur={hide}
+      tabIndex={0}
+    >
+      {label}
+      {open && (
+        <span
+          className="service-tooltip"
+          onMouseEnter={show}
+          onMouseLeave={hide}
+        >
+          <span className="service-tooltip-title">{title}</span>
+          <span className="service-tooltip-body">{body}</span>
+        </span>
       )}
     </span>
   );
@@ -845,6 +897,7 @@ export default function Home() {
   const founderRef = useFadeIn();
   const ctaRef = useFadeIn();
   const whyClaudeRef = useFadeIn();
+  const claudeRecommendRef = useFadeIn();
 
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -1043,6 +1096,110 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Why Claude recommendation + use cases link ──────
+         Left card: three compressed reasons, a muted flexibility
+         line, and the CTA. Right card: a visual Claude card with
+         accent-tinted background that links out to Anthropic's
+         enterprise use cases page. The separate rounded cards
+         signal "different kinds of things" — our reasoning vs
+         Anthropic's proof — where a shared-border grid would
+         flatten them into sibling panels. */}
+      <section ref={claudeRecommendRef}>
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24">
+          <h2 className="fade-up text-[clamp(1.5rem,3vw,2.4rem)] tracking-[-0.02em] font-medium leading-[1.12] mb-10 md:mb-12 text-center">
+            Why we default to Claude.
+          </h2>
+
+          <div className="grid md:grid-cols-[1.05fr_1fr] gap-4 md:gap-6 max-w-[1040px] mx-auto stagger">
+            {/* LEFT — three compressed reasons + flexibility line + CTA */}
+            <div className="fade-up bg-bg border border-border-light rounded-2xl p-7 md:p-10">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-accent mb-7">
+                Why Claude wins in production
+              </p>
+              <div className="space-y-5">
+                {[
+                  { num: "01", text: "Instruction fidelity." },
+                  { num: "02", text: "Refuses before it fabricates." },
+                  { num: "03", text: "Best-in-class at tool use." },
+                ].map((r) => (
+                  <div key={r.num} className="flex items-baseline gap-4">
+                    <span className="text-accent/50 text-[13px] font-medium shrink-0 tabular-nums">
+                      {r.num}
+                    </span>
+                    <h3 className="text-text font-medium text-[17px] md:text-[18px] leading-[1.3]">
+                      {r.text}
+                    </h3>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-8 text-text-muted text-[13.5px] leading-[1.6]">
+                Not the only model we deploy. We pick what fits.
+              </p>
+              <div className="mt-6">
+                <a
+                  href="#contact"
+                  className="group inline-flex items-center text-[14px] font-medium bg-text text-bg px-5 py-2.5 rounded-lg hover:bg-[#30302e] transition-colors duration-200"
+                >
+                  Talk to us about your stack
+                  <Arrow />
+                </a>
+              </div>
+            </div>
+
+            {/* RIGHT — Claude visual card linking to Anthropic's
+               enterprise use cases page */}
+            <a
+              href="https://claude.com/resources/use-cases"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="fade-up group relative bg-[rgba(217,119,87,0.06)] hover:bg-[rgba(217,119,87,0.09)] border border-[rgba(217,119,87,0.2)] hover:border-[rgba(217,119,87,0.4)] rounded-2xl p-7 md:p-10 flex flex-col justify-between min-h-[260px] md:min-h-[320px] transition-all duration-300"
+            >
+              <div className="flex items-start justify-between">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/claude-color.svg"
+                  alt="Claude"
+                  width={56}
+                  height={56}
+                  className="w-12 h-12 md:w-14 md:h-14 animate-breathe"
+                />
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  className="text-text-muted group-hover:text-accent transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M4 10L10 4M10 4H5M10 4V9"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-accent mb-3">
+                  From Anthropic
+                </p>
+                <h3
+                  className="text-[clamp(1.3rem,2.2vw,1.75rem)] font-medium leading-[1.2] tracking-[-0.02em] mb-3 text-text"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  See Claude in production.
+                </h3>
+                <p className="text-text-muted text-[14px] leading-[1.6]">
+                  Real enterprise deployments across research, finance,
+                  legal, and engineering.
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* ── Why Claude ───────────────────────────────── */}
       <section ref={whyClaudeRef}>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24">
@@ -1085,7 +1242,7 @@ export default function Home() {
          sticky pin; hover still previews any branch without losing the
          pinned baseline. Same data drives both the pill label row and
          the mindmap's highlight state via the shared category key. */}
-      <section id="services" ref={servicesRef}>
+      <section id="services" ref={servicesRef} className="relative z-10">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
           <div className="h-px bg-border-light" />
         </div>
@@ -1164,6 +1321,37 @@ export default function Home() {
               className="w-full h-full"
               highlightCategory={activeServiceCategory}
             />
+          </div>
+
+          {/* Also available — off-menu offerings for clients who
+             don't need a full deployment. Sits below the mindmap as
+             a secondary menu so the primary deployment pills/mindmap
+             story stays intact. */}
+          <div className="fade-up mt-14 md:mt-20 pt-10 border-t border-border-light text-center">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-text-faint mb-4">
+              Also available
+            </p>
+            <p className="text-text-muted text-[15px] md:text-[16px] leading-[1.7] max-w-[640px] mx-auto">
+              Not every engagement needs a full deployment. We also run{" "}
+              <ServiceTooltip
+                label="consulting"
+                title="Consulting"
+                body="Workflow mapping and strategy. We spend a week inside your business and hand you a prioritized AI rollout plan to execute in-house."
+              />
+              ,{" "}
+              <ServiceTooltip
+                label="custom builds"
+                title="Custom builds"
+                body="Bespoke AI applications for workflows that don't fit an off-the-shelf deployment. Built alongside your in-house team."
+              />
+              , and{" "}
+              <ServiceTooltip
+                label="fine-tunes on your own data"
+                title="Fine-tuning"
+                body="Training a model on your proprietary data so it speaks and decides like your team. Ideal for niche domains and proprietary voice."
+              />
+              .
+            </p>
           </div>
         </div>
       </section>

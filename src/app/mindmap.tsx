@@ -135,7 +135,10 @@ const FC = {
 const MOBILE_BP = 800;
 const ANIM_DUR = 450;
 const MOBILE_MAX_CATS = 4;
-const MOBILE_MAX_NODES = 3;
+/* Items per category on mobile. Parents always render; only the top-N
+   items by source order survive so the wheel stays readable on narrow
+   viewports. Each category's items array is already in priority order. */
+const MOBILE_MAX_ITEMS_PER_CAT = 2;
 
 /* ─── Component ─────────────────────────────────────────── */
 
@@ -246,9 +249,15 @@ export default function Mindmap({ className = "", highlightCategory }: { classNa
         };
         all.push(catNode);
 
-        categories[name].items.forEach((itemName, ii) => {
-          const itemAngle =
-            (ii / categories[name].items.length) * Math.PI * 2;
+        /* On mobile, keep only the first N items per category so the
+           wheel doesn't cram 16 labels around the logo. Divide the
+           angle by the sliced length (not the original) so the
+           surviving items spread evenly around the category node. */
+        const itemsForCat = isMobile
+          ? categories[name].items.slice(0, MOBILE_MAX_ITEMS_PER_CAT)
+          : categories[name].items;
+        itemsForCat.forEach((itemName, ii) => {
+          const itemAngle = (ii / itemsForCat.length) * Math.PI * 2;
           const bIR = isMobile ? 1.8 : 2.8;
           const itemR =
             circleWidth * bIR + Math.random() * (circleWidth * 0.05);
