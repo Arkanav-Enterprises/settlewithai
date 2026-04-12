@@ -12,6 +12,7 @@ const Globe = dynamic(() => import("./globe"), { ssr: false });
 const Mindmap = dynamic(() => import("./mindmap"), { ssr: false });
 const CoworkDemo = dynamic(() => import("./cowork-demo"), { ssr: false });
 const ProcessScroll = dynamic(() => import("./process-scroll"), { ssr: false });
+const AgentDiagram = dynamic(() => import("./agent-diagram"), { ssr: false });
 
 /* ─── Scroll-triggered fade-in ──────────────────────────── */
 
@@ -995,12 +996,15 @@ export default function Home() {
             India&apos;s first. You don&apos;t need more employees.
             You need agents.
           </h2>
-          <p className="fade-up text-text-muted text-[16px] md:text-[17px] leading-[1.7] max-w-[640px] mx-auto mb-8">
+          <p className="fade-up text-text-muted text-[16px] md:text-[17px] leading-[1.7] max-w-[640px] mx-auto mb-12 md:mb-16">
             Every workflow we deploy becomes an AI agent. Your offer
             generator. Your MIS reporter. Your support desk. Your
             procurement analyst. Each one trained on your data, your
             rules, your voice.
           </p>
+
+          <AgentDiagram className="mb-12 md:mb-16" />
+
           <p className="fade-up text-text text-[16px] md:text-[17px] leading-[1.7] max-w-[640px] mx-auto font-medium">
             Each agent costs a fraction of the employee doing the same
             work. One engagement with Settle. Every agent your business
