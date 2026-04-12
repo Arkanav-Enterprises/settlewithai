@@ -235,7 +235,7 @@ export default function ProcessScroll() {
       </div>
 
       {/* Spacer for scroll room — desktop height set here; pin handles scroll travel */}
-      <div className="relative z-10 h-[130vh] md:h-screen" />
+      <div className="relative z-10 h-[180vh] md:h-screen" />
     </section>
   );
 }
