@@ -92,24 +92,24 @@ interface MindmapNode extends d3.SimulationNodeDatum {
 /* ─── Force config ──────────────────────────────────────── */
 
 const FC = {
-  charge: { categoryStrength: 0.3, itemStrength: -0.25 },
+  charge: { categoryStrength: 0.3, itemStrength: -0.35 },
   collision: {
-    categoryRadius: 2,
-    itemRadius: 1.5,
-    mobileItemRadius: 2.2,
-    strength: 0.05,
-    mobileStrength: 0.15,
+    categoryRadius: 2.5,
+    itemRadius: 2.2,
+    mobileItemRadius: 2.5,
+    strength: 0.12,
+    mobileStrength: 0.2,
   },
   center: { strength: 0.25 },
   radial: { radius: 0.9, mobileRadius: 0.25, strength: 0.001 },
   categoryStabilize: { damping: 0.75, resizeDamping: 0.75 },
-  categoryRepulsion: { minDistance: 7.5, force: 0.01, resizeForce: 0.01 },
-  itemRepulsion: { minDistance: 1.5, force: 0.1, resizeForce: 0.85 },
+  categoryRepulsion: { minDistance: 9, force: 0.015, resizeForce: 0.015 },
+  itemRepulsion: { minDistance: 2.8, force: 0.2, resizeForce: 0.9 },
   crossCategoryRepulsion: {
-    minDistance: 2.8,
-    force: 0.25,
-    resizeMinDistance: 2.8,
-    resizeForce: 0.25,
+    minDistance: 3.5,
+    force: 0.35,
+    resizeMinDistance: 3.5,
+    resizeForce: 0.35,
   },
   itemToCategoryDistance: {
     minDistance: 0.5,

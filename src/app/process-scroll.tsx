@@ -120,9 +120,8 @@ export default function ProcessScroll() {
          phases (r × 22.5° ≈ 55vw at 280vw) clears the phase text blocks. */}
       <div
         ref={circleRef}
-        className="absolute pointer-events-none left-[-262vw] md:left-[-120vw] lg:left-[-1100px] w-[min(280vw,1600px)] h-[min(280vw,1600px)] md:w-[min(180vw,1600px)] md:h-[min(180vw,1600px)]"
+        className="absolute pointer-events-none left-[-262vw] md:left-[-120vw] lg:left-[-1100px] w-[280vw] h-[280vw] md:w-[min(180vw,1600px)] md:h-[min(180vw,1600px)] top-[65%] md:top-[50%]"
         style={{
-          top: "50%",
           transform: "translateY(-50%)",
         }}
       >
@@ -194,12 +193,12 @@ export default function ProcessScroll() {
                   {phase.num}
                 </span>
                 <h3
-                  className="text-[clamp(1.4rem,3.5vw,2.8rem)] font-semibold leading-[1.08] mb-3 text-text"
+                  className="text-[clamp(1.4rem,3.5vw,2.8rem)] font-normal leading-[1.08] mb-3 text-text"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
                   {phase.title}
                 </h3>
-                <p className="text-[15px] md:text-[16px] leading-[1.6] max-w-[300px] md:max-w-[440px] md:text-black text-text-muted font-medium">
+                <p className="text-[15px] md:text-[16px] leading-[1.6] max-w-[300px] md:max-w-[440px] md:text-black text-text-muted font-normal">
                   {phase.desc}
                 </p>
               </div>
@@ -235,7 +234,7 @@ export default function ProcessScroll() {
       </div>
 
       {/* Spacer for scroll room — desktop height set here; pin handles scroll travel */}
-      <div className="relative z-10 h-[180vh] md:h-screen" />
+      <div className="relative z-10 h-[130vh] md:h-screen" />
     </section>
   );
 }
