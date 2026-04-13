@@ -28,6 +28,7 @@ const BLOG_LINKS = [
   { label: "Orient Case Study", href: "/blog/orient-case-study" },
   { label: "The Handover Plan", href: "/blog/the-handover-plan" },
   { label: "The Client Brain", href: "/blog/the-client-brain" },
+  { label: "AI Powered Printing Press", href: "/blog/claude-printing-press" },
   { label: "Orient AI Product Expert", href: "/blog/orient-product-experience" },
   { label: "Deploying Claude AI for Teams", href: "/blog/claude-team-deployment-beyond-diy" },
   { label: "Structuring Claude for Business", href: "/blog/structuring-claude-for-business" },

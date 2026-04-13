@@ -19,6 +19,15 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "claude-printing-press",
+    title:
+      "We're Teaching Claude to Run a Printing Press",
+    description:
+      "One of the first production deployments of AI controlling physical industrial machinery. Not a chatbot. Not a copilot. An agent that starts, stops, and tunes a digital printing press through natural language.",
+    date: "2026-04-13",
+    tag: "Case Study",
+  },
+  {
     slug: "the-ai-gap",
     title:
       "The AI You Dismissed Isn't the AI That's Here Now",
