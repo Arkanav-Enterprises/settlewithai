@@ -4,7 +4,7 @@ import { BlogTOC } from "@/components/blog/BlogTOC";
 import { Nav } from "@/components/layout/Nav";
 
 export const metadata: Metadata = {
-  title: "We're Teaching Claude to Run a Printing Press",
+  title: "We're Teaching AI to Run a Printing Press",
   description:
     "Settle AI is building one of the first production deployments of Claude controlling physical industrial machinery. Not a chatbot. Not a copilot. An AI agent that starts, stops, and tunes a digital printing press through natural language.",
   keywords: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "article",
-    title: "We're Teaching Claude to Run a Printing Press",
+    title: "We're Teaching AI to Run a Printing Press",
     description:
       "One of the first production deployments of Claude controlling physical industrial machinery. Here's how we built it — and why it's safe.",
     url: "https://settlewithai.com/blog/claude-printing-press",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "We're Teaching Claude to Run a Printing Press",
+    title: "We're Teaching AI to Run a Printing Press",
     description:
       "One of the first production deployments of Claude controlling physical industrial machinery.",
   },
@@ -44,7 +44,7 @@ export default function Article() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: "We're Teaching Claude to Run a Printing Press",
+    headline: "We're Teaching AI to Run a Printing Press",
     description:
       "Settle AI is building one of the first production deployments of Claude controlling physical industrial machinery — not a chatbot, not a copilot, but an AI agent that starts, stops, and tunes a digital printing press through natural language.",
     datePublished: "2026-04-13T00:00:00Z",
@@ -103,7 +103,7 @@ export default function Article() {
               {
                 "@type": "ListItem",
                 position: 3,
-                name: "We're Teaching Claude to Run a Printing Press",
+                name: "We're Teaching AI to Run a Printing Press",
                 item: "https://settlewithai.com/blog/claude-printing-press",
               },
             ],
@@ -147,7 +147,7 @@ export default function Article() {
               letterSpacing: "-0.03em",
             }}
           >
-            We&apos;re Teaching Claude to Run a Printing Press
+            We&apos;re Teaching AI to Run a Printing Press
           </h1>
           <p className="text-white/70 text-[18px] leading-relaxed max-w-[600px]">
             One of the first production deployments of AI controlling physical

@@ -21,7 +21,7 @@ const posts = [
   {
     slug: "claude-printing-press",
     title:
-      "We're Teaching Claude to Run a Printing Press",
+      "We're Teaching AI to Run a Printing Press",
     description:
       "One of the first production deployments of AI controlling physical industrial machinery. Not a chatbot. Not a copilot. An agent that starts, stops, and tunes a digital printing press through natural language.",
     date: "2026-04-13",
