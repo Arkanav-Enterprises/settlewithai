@@ -4,6 +4,7 @@ import { getAllSlugs } from "@/lib/content";
 const SITE_URL = "https://settlewithai.com";
 
 const BLOG_SLUGS = [
+  "settle-marketplace-launch",
   "orient-case-study",
   "claude-team-deployment-beyond-diy",
   "built-with-claude-code",

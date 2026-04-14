@@ -1010,6 +1010,32 @@ export default function Home() {
             work. One engagement with Settle. Every agent your business
             requires.
           </p>
+
+          {/* Engagement vs. marketplace CTA pair.
+             Primary: full engagement (every agent, custom-built).
+             Secondary: pre-built individual agents on the marketplace
+             for buyers who want a single agent without an engagement. */}
+          <div className="fade-up mt-10 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <a
+              href="#contact"
+              className="group inline-flex items-center text-[14px] font-medium bg-text text-bg px-5 py-2.5 rounded-lg hover:bg-[#30302e] transition-colors duration-200"
+            >
+              Start an engagement
+              <Arrow />
+            </a>
+            <a
+              href="https://marketplace.settlewithai.com"
+              target="_blank"
+              rel="noopener"
+              className="group inline-flex items-center text-[14px] font-medium text-text border border-border hover:border-text px-5 py-2.5 rounded-lg transition-colors duration-200"
+            >
+              Or buy individual agents
+              <Arrow />
+            </a>
+          </div>
+          <p className="fade-up mt-5 text-text-faint text-[13.5px] leading-[1.6] max-w-[560px] mx-auto">
+            An engagement gives you every agent your business needs, custom-built around how you actually run. Want one agent today, or a consult to figure out what you need? The marketplace and a quick call are both there.
+          </p>
         </div>
       </section>
 
@@ -1199,7 +1225,7 @@ export default function Home() {
                 body: "SAP, HubSpot, Salesforce, Google Drive \u2014 via MCP.",
               },
             ].map((c) => (
-              <div key={c.title} className="fade-up bg-bg p-7 md:p-8">
+              <div key={c.title} className="fade-up bg-bg p-7 md:p-8 text-center">
                 <h3 className="text-text font-medium text-[16px] mb-2">
                   {c.title}
                 </h3>

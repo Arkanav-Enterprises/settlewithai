@@ -19,6 +19,15 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: "settle-marketplace-launch",
+    title:
+      "Settle Marketplace: The Agents We Built for Clients, Now for Sale",
+    description:
+      "Six production-tested AI agents from real enterprise deployments. Pre-paid credits, no subscriptions, ninety seconds from email verification to a running agent.",
+    date: "2026-04-14",
+    tag: "Product",
+  },
+  {
     slug: "claude-printing-press",
     title:
       "We're Teaching AI to Run a Printing Press",

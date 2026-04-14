@@ -46,6 +46,7 @@ const TOOL_LINKS = [
 
 const COMPANY_LINKS = [
   { label: "Home", href: "/" },
+  { label: "Marketplace", href: "https://marketplace.settlewithai.com" },
   { label: "Blog", href: "/blog" },
   { label: "Get Started", href: "/#contact" },
   { label: "Login", href: "https://customers.settlewithai.com/" },

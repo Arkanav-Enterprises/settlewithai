@@ -42,6 +42,14 @@ export function Nav({ variant = "minimal" }: NavProps) {
           )}
           <div className="flex items-center gap-5">
             <a
+              href="https://marketplace.settlewithai.com"
+              target="_blank"
+              rel="noopener"
+              className="text-[15px] text-text-muted hover:text-text transition-colors duration-200 hidden sm:block"
+            >
+              Marketplace
+            </a>
+            <a
               href={variant === "full" ? "#contact" : "/#contact"}
               className="text-[14px] font-medium bg-text text-bg px-5 py-2.5 rounded-lg hover:bg-[#30302e] transition-colors duration-200"
             >
