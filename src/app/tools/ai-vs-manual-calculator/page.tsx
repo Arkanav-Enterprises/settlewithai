@@ -4,6 +4,7 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { ToolProse } from "@/components/tools/ToolProse";
 
 const SITE_URL = "https://settlewithai.com";
 
@@ -120,7 +121,64 @@ export default function AiVsManualCalculatorPage() {
           </p>
         </header>
 
+        <ToolProse title="Where the 85% number comes from">
+          <p>
+            When Orient Printing&rsquo;s document generation went from four
+            hours to thirty minutes, the internal reaction was skepticism.
+            An 85% time reduction sounds like a pitch deck number — too
+            clean, too convenient, the kind of thing that shows up in
+            marketing and disappears when a skeptic asks for the raw
+            timings. The number held up because the workflow itself was
+            structured in exactly the way that produces that reduction.
+          </p>
+          <p>
+            Templated output, a clear knowledge base to reference,
+            consistent input format, and a review gate where the human
+            corrects rather than re-creates. When those four conditions
+            hold, time reduction lands between 75% and 90% almost every
+            time. When one of them is missing, it lands between 30% and
+            50% — still meaningful, but a different category of savings.
+            The delta between the two buckets is why this calculator
+            distinguishes structured from unstructured tasks.
+          </p>
+          <p>
+            The preset tasks in this tool are modeled on real deployments.
+            If your task isn&rsquo;t in the list, use the custom option and
+            enter honest baseline times — not aspirational ones, not
+            defensive ones. The annual number depends entirely on inputs
+            matching reality.
+          </p>
+        </ToolProse>
+
         <Calculator />
+
+        <ToolProse title="Why the annual number is the one that matters">
+          <p>
+            Per-task savings tend to feel small. Fifteen minutes here, an
+            hour there. Most people intuitively dismiss them as below the
+            threshold of organizational change. The annual view flips that
+            dismissal on its head.
+          </p>
+          <p>
+            A workflow that saves forty-five minutes per execution, run
+            twenty times per week, saves about thirty-five working days
+            per year. Double that for a team of two people running the same
+            workflow. Multiply across three deployed projects and
+            you&rsquo;re in FTE-equivalent territory — not because AI
+            replaces headcount (it usually doesn&rsquo;t), but because the
+            team can take on work they couldn&rsquo;t before. Hiring plans,
+            capacity models, and growth forecasts all shift when the
+            annual number lands in the right range.
+          </p>
+          <p>
+            The second-order effect is more interesting than the headline
+            number: teams that reclaim meaningful hours use them on work
+            that used to get deferred indefinitely — better proposals,
+            deeper analysis, faster response to customers. The ROI of AI
+            deployment shows up partly in time saved and partly in work
+            that wasn&rsquo;t getting done at all.
+          </p>
+        </ToolProse>
 
         <section className="mt-20">
           <h2 className="text-xl font-semibold tracking-[-0.02em] text-text mb-6 font-heading">

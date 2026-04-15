@@ -1,20 +1,8 @@
 import type { MetadataRoute } from "next";
 import { getAllSlugs } from "@/lib/content";
+import { BLOG_POSTS } from "@/content/blog-posts";
 
 const SITE_URL = "https://settlewithai.com";
-
-const BLOG_SLUGS = [
-  "settle-marketplace-launch",
-  "orient-case-study",
-  "claude-team-deployment-beyond-diy",
-  "built-with-claude-code",
-  "mcp-explained-for-business",
-  "integrating-ai-into-your-company",
-  "ai-powered-outreach-with-cowork",
-  "claude-agent-mode-business-automation",
-  "structuring-claude-for-business",
-  "why-claude-over-custom-ai",
-];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const comparisonSlugs = getAllSlugs("comparisons");
@@ -83,11 +71,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const blogPages: MetadataRoute.Sitemap = BLOG_SLUGS.map((slug) => ({
-    url: `${SITE_URL}/blog/${slug}`,
+  const blogPages: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
+    url: `${SITE_URL}/blog/${post.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
-    priority: slug === "orient-case-study" ? 0.9 : 0.6,
+    priority: post.priority ?? 0.6,
   }));
 
   const comparisonPages: MetadataRoute.Sitemap = comparisonSlugs.map(

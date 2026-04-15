@@ -4,6 +4,7 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { ToolProse } from "@/components/tools/ToolProse";
 
 const SITE_URL = "https://settlewithai.com";
 
@@ -118,7 +119,61 @@ export default function AiRoiCalculatorPage() {
           </p>
         </header>
 
+        <ToolProse title="How AI ROI actually compounds">
+          <p>
+            AI savings look unimpressive at the single-task level. Forty-five
+            minutes saved on a quote. Twenty minutes on a report. A few hours a
+            week on onboarding emails. These are the numbers people quote to
+            dismiss AI deployment as not worth the investment — and they&rsquo;re
+            wrong, because they&rsquo;re measuring the wrong unit.
+          </p>
+          <p>
+            What actually matters is the same task, performed by the same team,
+            compounded over a year. A quoting workflow that runs twenty times a
+            week, saving forty-five minutes each time, is the equivalent of
+            thirty-five full working days per year — for one workflow, in one
+            department. Stack that across five or six deployed projects, and
+            you&rsquo;re measuring in FTE equivalents rather than hours.
+          </p>
+          <p>
+            The calculator below handles the math, but the inputs matter more
+            than the arithmetic. Be honest about how many employees will
+            actually use AI daily (usually less than you think), how structured
+            those tasks are (more structured = higher reduction), and what your
+            fully loaded cost per hour really is (usually 1.3-1.5x base pay
+            after benefits and overhead).
+          </p>
+        </ToolProse>
+
         <RoiCalculator />
+
+        <ToolProse title="Reading your estimate">
+          <p>
+            The output is a floor, not a ceiling — assuming the deployment
+            quality is strong. Orient Printing&rsquo;s actual numbers beat our
+            early ROI estimates because structured Claude AI projects, with
+            properly engineered instructions and knowledge files, outperform
+            generic prompt-based AI usage by a large margin. The difference
+            between 40% and 85% time reduction almost always comes down to
+            instruction quality and knowledge curation, not the AI model.
+          </p>
+          <p>
+            The two inputs that produce the most variance in your estimate are
+            (1) the percentage of your team that will actually adopt the AI
+            daily and (2) the AI time reduction rate. Adoption is an
+            organizational problem, not a technical one, and it&rsquo;s the
+            single biggest reason ROI estimates miss. Reduction rate is a
+            workflow property — templated, repeatable, rule-based work lands
+            toward the top of the range; analytical or relational work lands
+            toward the bottom.
+          </p>
+          <p>
+            Treat the annual number as a planning input, not a promise. If the
+            estimate justifies a deployment, the discovery session does the
+            second-order work of validating which workflows are actually in
+            each bucket.
+          </p>
+        </ToolProse>
 
         <section className="mt-20">
           <h2 className="text-xl font-semibold tracking-[-0.02em] text-text mb-6 font-heading">

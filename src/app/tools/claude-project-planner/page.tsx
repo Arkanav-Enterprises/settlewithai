@@ -4,6 +4,7 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { ToolProse } from "@/components/tools/ToolProse";
 
 const SITE_URL = "https://settlewithai.com";
 
@@ -122,7 +123,76 @@ export default function ClaudeProjectPlannerPage() {
           </p>
         </header>
 
+        <ToolProse title="Why one-off prompting fails for business workflows">
+          <p>
+            Most teams start their AI journey with open-ended chat — type a
+            question, get an answer, copy the output somewhere, move on. It
+            works fine for ad-hoc curiosity, but it collapses the moment a
+            workflow repeats. The second time you need to generate the same
+            kind of output, you&rsquo;re re-explaining the context, re-pasting
+            the same templates, re-correcting the same errors. Every session
+            is from scratch.
+          </p>
+          <p>
+            A Claude AI Project changes the pattern. It&rsquo;s a persistent
+            workspace with instructions, knowledge files, and safety rules
+            that stay in place across every conversation. Once engineered,
+            the project produces consistent output regardless of who on your
+            team triggers it, because the context is in the project — not
+            in the person using it. That consistency is the unlock. It&rsquo;s
+            also what distinguishes &ldquo;using AI&rdquo; from
+            &ldquo;deploying AI.&rdquo;
+          </p>
+          <p>
+            This planner walks you through designing one. You&rsquo;ll
+            describe a specific workflow, define what Claude needs to know
+            to execute it reliably, and set the boundaries for what it
+            should and shouldn&rsquo;t do. The output is a blueprint — a
+            starting spec for a real project you can build in your
+            Anthropic workspace.
+          </p>
+        </ToolProse>
+
         <Planner />
+
+        <ToolProse title="From blueprint to deployed project">
+          <p>
+            Building the project in Claude is the easy part. Getting it to
+            reliably produce the output your team trusts takes four steps
+            that most first-time builders underweight.
+          </p>
+          <p>
+            <strong>1. Curate knowledge files aggressively.</strong> The
+            single biggest lever on output quality is what you put in the
+            knowledge base. More isn&rsquo;t better. Specific, curated,
+            authoritative reference material beats large dumps of vaguely
+            relevant documentation every time. If a file contradicts
+            another file in your knowledge base, Claude will occasionally
+            pick the wrong one.
+          </p>
+          <p>
+            <strong>2. Write instructions for the junior case, not the
+            obvious case.</strong> Your instructions should specify what to
+            do when the input is ambiguous or incomplete, not just what to
+            do when everything is ideal. That&rsquo;s where projects fail in
+            production, and it&rsquo;s where generic prompts also fail.
+          </p>
+          <p>
+            <strong>3. Build review gates into the workflow.</strong> The
+            human reviewing the output needs to know what to check, not
+            just read the full output. Flag fields, confidence scores, or
+            source citations all work — the point is that review time
+            becomes bounded and focused.
+          </p>
+          <p>
+            <strong>4. Iterate on real output, not imagined output.</strong>
+            Ship the project to one user, watch them use it on real work
+            for two weeks, then fix the gaps you find. Three or four
+            iterations usually land you at the quality bar where the
+            project stops being &ldquo;helpful&rdquo; and becomes
+            &ldquo;trusted.&rdquo;
+          </p>
+        </ToolProse>
 
         <section className="mt-20">
           <h2 className="text-xl font-semibold tracking-[-0.02em] text-text mb-6 font-heading">

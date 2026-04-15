@@ -4,6 +4,7 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { ToolProse } from "@/components/tools/ToolProse";
 
 const SITE_URL = "https://settlewithai.com";
 
@@ -117,7 +118,63 @@ export default function UseCaseFinderPage() {
           </p>
         </header>
 
+        <ToolProse title="The use-case problem most companies run into">
+          <p>
+            The hardest part of AI adoption isn&rsquo;t deploying — it&rsquo;s
+            knowing where to deploy. Every leadership team we talk to knows AI
+            can help somewhere in their business. Very few can name the top
+            three workflows, in priority order, with honest time estimates.
+            That gap is why many AI initiatives never get past the pilot
+            stage: the team is so busy debating what to try first that nothing
+            ships.
+          </p>
+          <p>
+            This tool takes a department-first approach to solving that.
+            Workflows don&rsquo;t exist in isolation — they live inside the
+            context of a sales team, a finance team, an operations team. By
+            starting with your industry and your department structure, the
+            tool can identify use cases that are both relevant to your
+            business model and tied to a specific owner who would actually
+            deploy them.
+          </p>
+          <p>
+            You&rsquo;ll see multiple use cases per department with rough time
+            savings estimates. The goal isn&rsquo;t to deploy all of them. The
+            goal is to have a concrete shortlist to sequence, because the
+            biggest accelerator in AI adoption is moving from &ldquo;maybe
+            somewhere&rdquo; to &ldquo;these three, in this order, starting
+            now.&rdquo;
+          </p>
+        </ToolProse>
+
         <UseCaseFinder />
+
+        <ToolProse title="Picking your first three deployments">
+          <p>
+            Once you have a list of twenty to fifty use cases, the instinct is
+            to pick the biggest time-saver. That&rsquo;s often the wrong move.
+            The first AI project your team deploys sets the precedent — if it
+            ships slowly or fails, it becomes the internal reference point for
+            every subsequent AI conversation. Pick for momentum, not for
+            maximum impact, on the first one.
+          </p>
+          <p>
+            Three criteria work well for sequencing: frequency (how often does
+            this workflow run per week), structure (how templated is the
+            output), and ownership (is there a single person who can champion
+            the project and give feedback). High scores on all three produce a
+            Quick Win — deployable in days, visible to the whole team, and
+            likely to build appetite for the next project. Save the highest-
+            impact-but-slower-to-deploy workflows for project two or three,
+            when the methodology is already trusted internally.
+          </p>
+          <p>
+            If the list is thirty use cases deep and you can&rsquo;t decide
+            between them, that&rsquo;s usually the moment to run a discovery
+            session. Most companies don&rsquo;t need more ideas — they need a
+            deployment sequence and an owner for each project.
+          </p>
+        </ToolProse>
 
         <section className="mt-20">
           <h2 className="text-xl font-semibold tracking-[-0.02em] text-text mb-6 font-heading">

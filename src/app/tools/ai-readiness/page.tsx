@@ -4,6 +4,7 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { ToolProse } from "@/components/tools/ToolProse";
 
 const SITE_URL = "https://settlewithai.com";
 
@@ -119,7 +120,61 @@ export default function AiReadinessPage() {
           </p>
         </header>
 
+        <ToolProse title="Why readiness matters before you deploy">
+          <p>
+            Most AI deployments don&rsquo;t fail because the technology was
+            wrong. They fail because the business wasn&rsquo;t ready for it. A
+            company with fragmented documentation, inconsistent processes, and
+            siloed data can buy any AI tool on the market and still end up with
+            nothing deployed twelve months later. The AI isn&rsquo;t the
+            bottleneck — the foundations are.
+          </p>
+          <p>
+            This assessment evaluates eight dimensions that, together, predict
+            whether structured AI deployment will stick: company size and
+            workflow volume, current AI usage, documentation maturity, process
+            standardization, leadership buy-in, data accessibility, and team
+            capacity. Each one is a lever. A strong score on any single
+            dimension can compensate for a weaker score on another. A low score
+            across several dimensions usually means the next six months are
+            better spent on standardization than on AI tooling.
+          </p>
+          <p>
+            Take the two minutes. There are no &ldquo;right&rdquo; answers —
+            just honest ones. You&rsquo;ll get a specific, actionable breakdown
+            instead of a generic &ldquo;you&rsquo;re ready&rdquo; verdict.
+          </p>
+        </ToolProse>
+
         <AiReadinessGrader />
+
+        <ToolProse title="What your score actually means">
+          <p>
+            <strong>Ready to Deploy (25-32):</strong> your organization has the
+            structure, workflow volume, and buy-in to start deploying Claude AI
+            projects immediately. The right move is to pick your two or three
+            highest-value workflows and deploy real projects within four to six
+            weeks. Don&rsquo;t spend another quarter in strategy mode — you&rsquo;ve
+            already earned the right to ship.
+          </p>
+          <p>
+            <strong>High Potential (17-24):</strong> you have strong foundations
+            in most dimensions, but one or two specific gaps need closing
+            before a full rollout. The common pattern is strong leadership
+            buy-in but weak documentation, or strong documentation but
+            inconsistent processes. Fix the weakest dimension first, then
+            deploy. Trying to go full-speed before that patch usually burns
+            trust on the first failed project and sets you back six months.
+          </p>
+          <p>
+            <strong>Building Foundations (8-16):</strong> don&rsquo;t deploy
+            yet. Your team would spend more time fighting basic inconsistency
+            than realizing AI value. Standardize your highest-frequency
+            workflows, centralize scattered reference documents, and run small
+            pilots with individual contributors before you touch anything at
+            team scale. Come back to this assessment in ninety days.
+          </p>
+        </ToolProse>
 
         <section className="mt-20">
           <h2 className="text-xl font-semibold tracking-[-0.02em] text-text mb-6 font-heading">

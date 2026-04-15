@@ -4,6 +4,7 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { ToolProse } from "@/components/tools/ToolProse";
 
 const SITE_URL = "https://settlewithai.com";
 
@@ -122,7 +123,66 @@ export default function WorkflowAutomationQuizPage() {
           </p>
         </header>
 
+        <ToolProse title="Not every workflow should be automated">
+          <p>
+            The most underrated skill in AI deployment is knowing what
+            <em> not </em>to automate. Some workflows look like obvious
+            candidates — they&rsquo;re repetitive, take a lot of time, and
+            happen often — but they rely on tacit human judgment that&rsquo;s
+            hard to specify in instructions. Others look unpromising but turn
+            out to be ideal because they&rsquo;re structured, rule-governed,
+            and easy to review.
+          </p>
+          <p>
+            The four patterns that usually get incorrectly flagged for
+            automation: workflows that require physical presence, workflows
+            where errors cost more than the human review would, workflows that
+            happen rarely (less than once a week), and workflows where the
+            real bottleneck is a decision, not a task. Each of these looks
+            automatable on paper and produces AI initiatives that either
+            stall or generate work rather than remove it.
+          </p>
+          <p>
+            The five dimensions this quiz scores — frequency, duration,
+            structure, output type, and team involvement — are designed
+            together to separate real automation candidates from
+            look-alikes. A workflow that runs often but has unstructured
+            output will score lower than a workflow that runs less often with
+            highly structured output, and that&rsquo;s usually the correct
+            call.
+          </p>
+        </ToolProse>
+
         <WorkflowAutomationQuiz />
+
+        <ToolProse title="How to read your scores">
+          <p>
+            <strong>15-20:</strong> strong automation candidate. The workflow
+            is structured enough that a Claude AI project with proper
+            instructions will produce reliable output, and it runs often
+            enough to justify the engineering work. Examples from past
+            engagements: proposal generation, compliance checklists, status
+            report drafts, onboarding email sequences, weekly performance
+            summaries.
+          </p>
+          <p>
+            <strong>10-14:</strong> deployable, but needs more design
+            up-front. These workflows usually have one or two dimensions that
+            pull down the score — output is semi-structured, or team
+            involvement is high. They still work, but they require more
+            instruction engineering and a clearer human-in-the-loop pattern
+            to avoid surfacing garbage outputs. Expect a slightly longer
+            build phase.
+          </p>
+          <p>
+            <strong>Below 10:</strong> skip this workflow for now. Trying to
+            automate it produces more friction than value, and the time
+            spent would be better invested in a higher-scoring candidate.
+            Revisit it once three or four other projects are running
+            cleanly — by then, you&rsquo;ll have internal pattern library
+            that may unlock it.
+          </p>
+        </ToolProse>
 
         <section className="mt-20">
           <h2 className="text-xl font-semibold tracking-[-0.02em] text-text mb-6 font-heading">
