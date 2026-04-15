@@ -5,6 +5,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 const COMPARE_LINKS = [
   { label: "Settle vs DIY", href: "/compare/diy" },
   { label: "Settle vs Big Consulting", href: "/compare/big-consulting" },
+  { label: "Settle vs ERP Vendor AI", href: "/compare/erp-vendors" },
   { label: "Settle vs Freelancers", href: "/compare/freelance-consultants" },
   { label: "Settle vs ChatGPT", href: "/compare/chatgpt-generic-ai" },
   { label: "Settle vs Offshore Dev", href: "/compare/offshore-development" },

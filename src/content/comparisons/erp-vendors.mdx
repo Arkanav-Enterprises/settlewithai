@@ -1,1 +1,217 @@
-Invalid API key · Fix external API key
+---
+title: "Settle vs ERP Vendor AI: Keep Your ERP, Deploy AI That Actually Adapts to Your Workflows"
+description: "SAP Joule, Oracle OCI AI, Dynamics 365 Copilot, NetSuite, Workday. Every major ERP vendor is selling AI as an upsell tied to their roadmap. Settle deploys Claude AI across your full stack — without locking you into any single vendor's AI decisions."
+slug: "erp-vendors"
+competitor: "ERP Vendor AI Modules"
+date: "2026-04-15"
+keywords:
+  - sap joule alternative
+  - oracle ai alternative
+  - dynamics 365 copilot alternative
+  - netsuite ai alternative
+  - workday ai alternative
+  - erp ai deployment
+  - claude ai with erp
+  - mcp erp integration
+  - ai vendor lock-in
+  - erp agnostic ai
+faq:
+  - question: "How is Settle different from the AI module my ERP vendor is selling me?"
+    answer: "Your ERP vendor's AI is a feature of their product — pitched to keep you inside their ecosystem, priced as an add-on, and limited to the data inside their system. Settle deploys Claude AI as an independent layer that connects to your ERP (via MCP), your CRM, your documents, and anything else your team actually uses. You keep the ERP investment, add real AI, and avoid a second multi-year vendor lock-in."
+  - question: "Does Settle replace our ERP?"
+    answer: "No. We do not replace ERPs and we do not compete with them. If you run SAP, Oracle, NetSuite, Dynamics, Workday, Infor, Epicor, Odoo, or any other system, Settle deploys Claude AI alongside it. The goal is to make your existing ERP more useful, not to rip it out."
+  - question: "What's MCP and why does it matter for ERP integration?"
+    answer: "MCP (Model Context Protocol) is an open standard Anthropic released that lets Claude AI read from and write to your existing systems through secure connectors. This matters because it means Claude can work with your ERP data without your ERP vendor building an AI feature for you and without Settle needing a proprietary integration. If your ERP has an API or database, Claude can use it."
+  - question: "Isn't the ERP vendor's AI already integrated with my data?"
+    answer: "On paper, yes. In practice, it's integrated with the data the vendor has decided to expose through their AI surface. Most ERP AI modules are narrow — summarize this invoice, draft this email, suggest this account code. The moment you want something cross-functional — AI that reads ERP plus CRM plus your shared drive — you're back to writing custom logic, and the vendor AI can't help."
+  - question: "What does ERP vendor AI typically cost?"
+    answer: "It varies, but the pattern is consistent: AI modules are priced as per-user add-ons on top of existing license fees. SAP Joule, Microsoft Copilot for Dynamics 365, Oracle OCI AI services, and Salesforce Einstein Copilot all price AI as an upsell. For a mid-market company, this can add 20-40% to annual license cost before you've deployed anything meaningful."
+  - question: "Can Settle work with multiple ERPs if we have them?"
+    answer: "Yes. Many mid-market companies run two or three overlapping systems — an ERP for operations, a CRM for sales, separate finance or HR tools. An ERP-vendor AI lives inside one system. Settle deploys Claude AI across all of them, which is often where the highest-value use cases live."
+  - question: "What if our ERP vendor eventually builds better AI?"
+    answer: "They probably will — and it will still be constrained to their product. The Claude AI projects we deploy live in your Anthropic account and talk to whatever systems you have. If your ERP vendor ships a great AI feature later, use it. You're not locked in either direction."
+---
+
+> **Quick verdict:** Your ERP vendor is not wrong to sell you AI. They are wrong to imply their AI will cover what your team actually needs. ERP-vendor AI is narrow, tied to one product, and priced as an upsell. Settle deploys Claude AI as an independent layer that connects to your ERP and everything else — without a new multi-year contract, a new platform migration, or the assumption that your ERP's AI roadmap matches your business.
+
+## At a glance
+
+| Dimension | ERP Vendor AI (SAP, Oracle, Dynamics, etc.) | Settle |
+|---|---|---|
+| **Scope** | Limited to what happens inside the ERP | Connects to ERP plus CRM, docs, email, and custom systems via MCP |
+| **Pricing model** | Per-user add-on, typically 20-40% on top of license | Structured deployment engagement, no recurring AI license markup |
+| **Implementation** | Through vendor partner network (more consultants) | Direct engagement with Settle |
+| **Vendor lock-in** | Deepens — AI tied to your ERP contract | Independent — Claude AI projects live in your Anthropic account |
+| **Time to deploy** | Quarters to years, gated by vendor release cycle | First projects in 2-3 weeks |
+| **Customization depth** | Bounded by what the vendor chose to expose | Every instruction, knowledge file, and safety rule is yours to edit |
+| **Cross-system workflows** | Weak — AI lives inside one product | Strong — Claude AI reads and writes across the stack |
+| **AI model choice** | Whatever the vendor picked | Claude AI (Anthropic), chosen deliberately for business reasoning |
+
+Both approaches have a legitimate place. The question is whether you want AI as a feature of your ERP, or AI as a capability that works across your whole operation.
+
+---
+
+## The ERP vendor AI pitch
+
+Every major ERP vendor has landed on the same play: bundle AI into the existing product, charge for it as a module, and frame it as the fastest path to AI value because "it already has your data."
+
+SAP launched Joule. Oracle has OCI AI services and the AI agents baked into NetSuite and Fusion. Microsoft is pushing Copilot for Dynamics 365 hard. Workday has its own agents. Infor, Epicor, Sage, Odoo, and the rest are lining up similar stories. The marketing almost writes itself: "your ERP already knows your business — why not let it run the AI too?"
+
+It's a compelling narrative if you don't look closely. When you do, three patterns show up across every vendor.
+
+### Pattern 1: The AI is narrower than the demo suggests
+
+ERP vendor AI demos are excellent. The pitch deck shows a dashboard that summarizes last quarter, drafts a report, answers a natural-language query, and spots an anomaly. What the demo usually doesn't show is that each of those features is a discrete module, separately priced, with its own rollout timeline, and its own limits.
+
+The actual scope tends to be: summarize objects inside this product, draft text templates the vendor has defined, answer questions against a pre-indexed slice of your data. Useful, but bounded. The moment you want "read a contract from our shared drive, compare it to the terms in our ERP, and flag anything off" — you're outside the vendor's product surface, and their AI can't help.
+
+### Pattern 2: The pricing is an upsell, not a feature
+
+AI modules are consistently priced on top of existing license fees, usually per user. Do the math for a 200-person company with half the team using AI regularly: the monthly add-on lands somewhere between a meaningful line item and a serious capex conversation. And that's before the partner implementation fees, which brings us to the third pattern.
+
+### Pattern 3: Implementation still flows through partners
+
+Most ERP vendors don't deploy their own AI directly to mid-market customers. Instead, the work goes through their certified partner network — the same SIs and consulting firms that handled your original ERP implementation. That means a second implementation, a second statement of work, a second change-management cycle, and a second partner learning your workflows from scratch.
+
+If your ERP deployment two years ago was smooth, this might be fine. If it was painful, the second round is likely to be painful in the same ways.
+
+---
+
+## Where ERP vendor AI works well
+
+We don't think every company should skip ERP-vendor AI. There are real cases where it's the right call.
+
+- **You live inside the ERP.** If 90% of your team's day happens in one system, and you just want that system to be smarter — narrower AI that stays inside that product can be a good fit.
+- **You have no other systems of record.** Smaller or very vertically integrated companies sometimes genuinely have one source of truth, and the multi-system argument doesn't apply.
+- **You already have a deep partner relationship.** If your ERP partner has delivered well historically, layering their AI work on top of an existing trusted relationship reduces risk.
+- **You need it tied to a specific ERP workflow.** Some of the AI features are well-scoped to things like invoice coding, expense approval, or financial close narratives — and if that specific workflow is your biggest pain, a native feature may solve it cleanly.
+
+If three or more of these describe you, talk to your ERP vendor. You'll probably be fine.
+
+---
+
+## Where it breaks down
+
+For most mid-market companies we talk to, the ERP-vendor path runs into the same wall: the highest-value AI use cases don't live inside a single system.
+
+A good example: a manufacturer we worked with had quoting that touched five things — product specs in their ERP, historical pricing in a separate database, competitor intel in a shared drive, customer correspondence in email, and an engineering reference library in PDFs nobody had touched in a decade. The ERP vendor's AI module could do the first part. It could not touch the other four. So the use case that mattered most — an AI-assisted quote — was structurally out of reach.
+
+That pattern repeats. The valuable workflows are almost always cross-functional, and cross-functional workflows don't map cleanly onto any one vendor's product surface.
+
+There are also two quieter problems that matter over time.
+
+**Vendor roadmap risk.** Your ERP vendor's AI improves on their schedule, with their choices of models, safety posture, and capabilities. If Claude AI ships a major leap next quarter, you won't see it in your ERP module unless the vendor decides to adopt it. You inherit whatever the vendor picks.
+
+**Lock-in compounds.** Adding AI to your ERP deepens an existing vendor relationship. If three years from now you want to migrate to a different ERP, you're now migrating the core system plus the AI layer you built on top of it.
+
+---
+
+## Settle's approach
+
+Settle deploys Claude AI as an independent layer across your full stack. Your ERP stays. Your other systems stay. Claude sits alongside them and connects via MCP (Model Context Protocol) — the open standard Anthropic released for letting AI read from and write to your real systems.
+
+### Phase 1: Workflow discovery
+
+We map the actual work your team does — not the work the ERP assumes they do. This usually produces a list of twenty to fifty use cases, and the highest-value ones almost always cross systems. At Orient Printing and Packaging, we mapped 49 use cases across seven departments.
+
+### Phase 2: Prioritization
+
+We select the projects worth deploying first. The criteria are simple: measurable time savings, clear ownership, acceptable risk. At Orient, we shipped 11 projects in the first wave.
+
+### Phase 3: Instruction engineering
+
+This is the work the vendor AI modules skip. Every project gets explicit instructions, a curated knowledge pack, safety rules, review gates, and output specifications. The ERP module you're offered has these too — but they're fixed by the vendor, and you can't change them. With Settle, you own every word.
+
+### Phase 4: Deploy and Settle
+
+We train the team, establish feedback loops, and stay engaged while adoption takes hold. The projects live in your Anthropic account. You own them.
+
+The result at Orient: document generation that took about four hours now takes thirty minutes — an 85% reduction. That project read from their ERP, their document templates, and their compliance reference library. No single vendor AI could have done it, because no single vendor owned all three sources.
+
+---
+
+## Why MCP changes the ERP conversation
+
+For a long time, the argument for ERP-vendor AI was "it already has your data." MCP weakens that argument significantly.
+
+MCP is an open protocol that lets Claude AI connect to your systems through lightweight, secure connectors. If your ERP has an API — and every serious ERP does — Claude can read from it. Same for your CRM, your shared drive, your ticketing system, your document management platform, your email. The AI isn't trapped inside one product because the protocol is vendor-neutral.
+
+This is a practical shift, not just a theoretical one. The "data gravity" argument your ERP vendor is making — that you should adopt their AI because that's where your data lives — was more compelling before MCP existed. Now your data can stay exactly where it is, and an independent AI layer can work across all of it.
+
+We talk about MCP in more depth in [MCP Explained for Business](/blog/mcp-explained-for-business), if you want the deeper version.
+
+---
+
+## Cost comparison
+
+The financial picture depends heavily on your specific vendor and contract, but the shape is consistent.
+
+### ERP vendor AI pricing
+
+| Component | Typical cost shape |
+|---|---|
+| AI module license | Per-user monthly fee, often 20-40% on top of existing license |
+| Partner implementation | $50,000-250,000 for a multi-department rollout |
+| Ongoing support | Folded into partner retainer or vendor support tier |
+| Module upgrades | Usually included in license, but tied to vendor release cycle |
+| **Annual run-rate** | **Typically a recurring six-figure line item for 200+ user companies** |
+
+The big caveat: these numbers vary wildly. Some vendors bundle AI into premium tiers. Some partners discount aggressively. The point isn't the specific dollars — it's that AI becomes a recurring license category, not a one-time capability build.
+
+### Settle pricing
+
+We charge a structured engagement fee for deployment. There's no recurring AI license markup from us because Claude AI is priced directly by Anthropic on API usage, which is generally a fraction of per-user ERP-AI module costs for most workflows. Your ongoing cost is Claude API usage plus whatever maintenance or iteration you want from us.
+
+For most mid-market companies, the structural difference is: ERP vendor AI is a permanent recurring cost; Settle is a focused deployment engagement plus usage-based API costs you control directly.
+
+---
+
+## When ERP vendor AI makes sense
+
+- You're already deeply committed to one ERP and most of your business actually runs inside it.
+- You have one or two very specific, in-system workflows you want AI for, and a native module covers them cleanly.
+- Your partner relationship is strong and you want continuity.
+- You don't anticipate cross-system AI use cases in the next 18 months.
+
+## When Settle is the better fit
+
+- Your highest-value AI use cases cross two or more systems (almost always the case for 50-500 person companies).
+- You want to keep the ERP investment but add AI without a second vendor lock-in.
+- You want Claude AI specifically — for its reasoning depth on long, complex workflows.
+- You want the AI layer to be yours: projects, instructions, knowledge files, all editable, all portable.
+- You want deployment measured in weeks, not the vendor's release schedule.
+- You'd rather spend API usage dollars than a new per-user recurring license category.
+
+Orient is the archetype here. They kept their existing systems. We deployed Claude AI alongside — reading their templates, their ERP records, their compliance docs, their customer correspondence. No ERP vendor AI could have spanned that. And if they switch ERPs in five years, the Claude projects come with them.
+
+---
+
+## Frequently asked questions
+
+### How is Settle different from SAP Joule, Oracle AI, or Dynamics 365 Copilot?
+
+Those are AI features inside specific products. They're useful for workflows that happen inside those products. Settle deploys Claude AI as an independent layer that works across your ERP, your CRM, your documents, and anything else with an API or database. The value tends to be highest on cross-system work — and that's where vendor-specific AI modules are structurally weakest.
+
+### Will we need to replace our ERP to work with Settle?
+
+No. Settle doesn't replace ERPs or compete with them. Every engagement we do assumes your existing systems stay in place. We deploy Claude AI projects that read from your ERP (and your other systems) through MCP and standard APIs. The ERP stays exactly as it is.
+
+### What's MCP and why should I care about it for ERP integration?
+
+MCP (Model Context Protocol) is an open standard from Anthropic that lets Claude AI connect to external systems through secure, lightweight connectors. For ERP users, the practical effect is that Claude can read from and write to your ERP without the ERP vendor having to build an AI feature for you. If the ERP has an API, Claude can use it. This is the technical reason you no longer need to buy AI from the vendor that owns your data.
+
+### Doesn't our ERP vendor's AI have an advantage because it already has our data?
+
+That argument was much stronger before MCP existed. Now your data can stay exactly where it is, and Claude AI can work across it without migration. The ERP vendor's AI still has some advantage on tightly-coupled in-product features, but it loses the advantage on any workflow that spans more than one system — which is where most real business work happens.
+
+### How does Settle's cost compare to an ERP AI module subscription?
+
+ERP AI modules are almost always priced as recurring per-user add-ons, often 20-40% on top of existing license fees. Settle is a structured deployment engagement plus Claude API usage priced directly by Anthropic. For most mid-market companies, the structural difference is significant: ongoing AI costs become usage-based and controllable, rather than a new permanent license category.
+
+### Can Settle work if we have SAP and Salesforce and a shared drive, not just one ERP?
+
+Yes — and that's exactly the case where Settle is most useful. Multi-system environments are where ERP-vendor AI breaks down and where an independent Claude AI deployment shines. The projects we build regularly read from three or four different systems in a single workflow.
+
+### What happens if our ERP vendor launches a great AI feature later?
+
+Use it. Your Claude AI projects aren't threatened by your ERP vendor shipping better AI, because the two aren't competing — they're doing different jobs. If a native module solves a narrow in-product workflow cleanly, enable it. The cross-system, high-leverage work stays with Claude.
