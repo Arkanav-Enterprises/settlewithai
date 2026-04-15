@@ -461,7 +461,7 @@ details[open] summary .faq-icon-v {
 .claude-tooltip {
   position: absolute;
   left: 0;
-  top: calc(100% + 10px);
+  bottom: calc(100% + 10px);
   z-index: 50;
   width: 240px;
   background-color: #1a1a19;
@@ -478,6 +478,12 @@ details[open] summary .faq-icon-v {
 }
 .claude-tooltip:hover {
   background-color: #252524;
+}
+.claude-tooltip-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 2px;
 }
 .claude-tooltip h3 {
   font-size: 13px;
@@ -503,7 +509,7 @@ details[open] summary .faq-icon-v {
   margin-top: 2px;
 }
 @keyframes tooltipIn {
-  from { opacity: 0; transform: scale(0.95) translateY(-4px); }
+  from { opacity: 0; transform: scale(0.95) translateY(4px); }
   to { opacity: 1; transform: scale(1) translateY(0); }
 }
 

@@ -109,18 +109,18 @@ function ClaudeTooltip() {
           onMouseLeave={hide}
           onClick={(e) => e.stopPropagation()}
         >
-          <img
-            src="/claude-color.svg"
-            alt="Claude"
-            className="w-8 h-8 rounded-md"
-          />
-          <div>
+          <div className="claude-tooltip-header">
+            <img
+              src="/claude-color.svg"
+              alt="Claude"
+              className="w-8 h-8 rounded-md"
+            />
             <h3>Claude AI</h3>
-            <p>
-              Anthropic&apos;s AI assistant &mdash; built to be helpful,
-              harmless, and honest. The model we deploy for every client.
-            </p>
           </div>
+          <p>
+            Anthropic&apos;s AI assistant &mdash; built to be helpful,
+            harmless, and honest. The model we deploy for every client.
+          </p>
           <span className="claude-tooltip-link">
             claude.ai
             <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
@@ -187,7 +187,7 @@ function HeroSubtitle() {
   }, []);
 
   return (
-    <p className="text-text text-[clamp(1rem,1.5vw,1.2rem)] leading-[1.7]">
+    <div className="text-text text-[clamp(1rem,1.5vw,1.2rem)] leading-[1.7]">
       {[...HERO_PREFIX].map((c, idx) => (
         <span
           key={`p${idx}`}
@@ -212,7 +212,7 @@ function HeroSubtitle() {
           {c}
         </span>
       ))}
-    </p>
+    </div>
   );
 }
 
