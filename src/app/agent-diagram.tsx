@@ -8,9 +8,9 @@ const AGENTS = [
   { name: "Offer Generator", icon: "doc" },
   { name: "MIS Reporter", icon: "chart" },
   { name: "Support Desk", icon: "chat" },
-  { name: "Procurement Analyst", icon: "search" },
-  { name: "Compliance Checker", icon: "shield" },
-  { name: "Onboarding Agent", icon: "user" },
+  { name: "Recruitment Hunter", icon: "search" },
+  { name: "Service Report Writer", icon: "clipboard" },
+  { name: "BOM Generator", icon: "cube" },
 ] as const;
 
 type IconKey = (typeof AGENTS)[number]["icon"];
@@ -91,10 +91,10 @@ function AgentIcon({ icon, className = "" }: { icon: IconKey; className?: string
       return <svg viewBox="0 0 24 24" className={c} {...p}><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>;
     case "search":
       return <svg viewBox="0 0 24 24" className={c} {...p}><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg>;
-    case "shield":
-      return <svg viewBox="0 0 24 24" className={c} {...p}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M9 12l2 2 4-4" /></svg>;
-    case "user":
-      return <svg viewBox="0 0 24 24" className={c} {...p}><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>;
+    case "clipboard":
+      return <svg viewBox="0 0 24 24" className={c} {...p}><rect x="6" y="4" width="12" height="17" rx="2" /><path d="M9 4V3a1 1 0 011-1h4a1 1 0 011 1v1M9 13l2 2 4-4" /></svg>;
+    case "cube":
+      return <svg viewBox="0 0 24 24" className={c} {...p}><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z" /><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5" /></svg>;
   }
 }
 

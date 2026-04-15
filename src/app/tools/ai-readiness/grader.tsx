@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 interface Option {
@@ -359,13 +360,13 @@ export function AiReadinessGrader() {
             <p className="text-white/70 text-[0.9375rem] mb-6 max-w-md mx-auto">
               {result.cta}
             </p>
-            <a
+            <Link
               href="/#contact"
               className="inline-flex items-center gap-2 bg-white text-accent font-medium text-[0.95rem] px-6 py-3 rounded-full hover:bg-white/90 transition-colors"
             >
               Book a Discovery Call
               <span aria-hidden="true">&rarr;</span>
-            </a>
+            </Link>
           </div>
 
           {/* Restart */}

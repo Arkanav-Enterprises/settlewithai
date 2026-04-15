@@ -986,15 +986,14 @@ export default function Home() {
         <div className="h-px bg-border-light" />
       </div>
 
-      {/* ── GAAS — India's first Agents-as-a-Service positioning ── */}
+      {/* ── GAAS — Agents-as-a-Service positioning ── */}
       <section ref={gaasRef}>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24 text-center">
           <p className="fade-up text-[11px] font-semibold uppercase tracking-[0.15em] text-accent mb-5">
             Agents as a Service
           </p>
           <h2 className="fade-up text-[clamp(1.5rem,3vw,2.4rem)] tracking-[-0.02em] font-medium leading-[1.12] mb-6 max-w-[720px] mx-auto">
-            India&apos;s first. You don&apos;t need more employees.
-            You need agents.
+            You don&apos;t need more employees. You need agents.
           </h2>
           <p className="fade-up text-text-muted text-[16px] md:text-[17px] leading-[1.7] max-w-[640px] mx-auto mb-12 md:mb-16">
             Every workflow we deploy becomes an AI agent. Your offer
