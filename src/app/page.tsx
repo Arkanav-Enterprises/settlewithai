@@ -913,7 +913,6 @@ export default function Home() {
         headings={[
           { id: "case-study", text: "Case study" },
           { id: "ask", text: "Ask Claude" },
-          { id: "problem", text: "The problem" },
           { id: "services", text: "Services" },
           { id: "process", text: "How we work" },
           { id: "founder", text: "Who builds this" },
