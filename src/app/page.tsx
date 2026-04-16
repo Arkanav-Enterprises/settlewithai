@@ -489,32 +489,37 @@ function OrientCaseStudyCard() {
                   any prospect can ask anything.
                 </h3>
 
-                {/* Browser frame screenshot */}
-                <div className="rounded-xl overflow-hidden border border-[rgba(20,20,19,0.1)] bg-bg shadow-[0_4px_24px_rgba(0,0,0,0.06)] mb-3">
+                {/* Browser frame screenshot — the card is clickable since
+                   the Orient site is now live at tphorient.com. */}
+                <a
+                  href="https://www.tphorient.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block rounded-xl overflow-hidden border border-[rgba(20,20,19,0.1)] bg-bg shadow-[0_4px_24px_rgba(0,0,0,0.06)] mb-3 transition-shadow hover:shadow-[0_6px_32px_rgba(0,0,0,0.1)]"
+                >
                   <div className="flex items-center gap-1.5 px-4 py-2.5 bg-[rgba(20,20,19,0.04)] border-b border-[rgba(20,20,19,0.08)]">
                     <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
                     <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
                     <span className="w-2.5 h-2.5 rounded-full bg-[rgba(20,20,19,0.18)]" />
                     <div className="flex-1 text-center text-[11px] text-text-faint font-mono px-2 truncate">
-                      orient-landing-opal.vercel.app
+                      www.tphorient.com
                     </div>
                     <div className="w-12 shrink-0" />
                   </div>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/orient/orient-landing-hero.png"
-                    alt="Orient landing page concept"
+                    alt="Orient landing page at tphorient.com"
                     loading="lazy"
                     className="w-full block"
                   />
-                </div>
+                </a>
                 <div className="flex items-start justify-between gap-4 mb-12 text-[12px]">
                   <div className="text-text-muted leading-snug">
-                    Concept site · Next.js · Interactive globe · Embedded AI
-                    chat
+                    Next.js · Interactive globe · Embedded AI chat
                   </div>
                   <div className="text-accent font-semibold uppercase tracking-[0.08em] text-[10px] shrink-0 mt-0.5">
-                    Launching soon
+                    Live at tphorient.com
                   </div>
                 </div>
 
