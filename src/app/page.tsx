@@ -74,95 +74,33 @@ function Arrow() {
 
 /* ─── Claude tooltip ───────────────────────────────────── */
 
-function ClaudeTooltip() {
-  const [open, setOpen] = useState(false);
-  const timeout = useRef<ReturnType<typeof setTimeout>>(null);
-
-  const show = () => {
-    if (timeout.current) clearTimeout(timeout.current);
-    setOpen(true);
-  };
-  const hide = () => {
-    timeout.current = setTimeout(() => setOpen(false), 200);
-  };
-
-  return (
-    <span
-      className="inline items-baseline text-accent relative cursor-default"
-      onMouseEnter={show}
-      onMouseLeave={hide}
-    >
-      <img
-        src="/claude-color.svg"
-        alt=""
-        className="inline-block w-[0.85em] h-[0.85em] mr-1 align-baseline animate-breathe"
-        aria-hidden="true"
-      />
-      Claude (or any AI you use!)
-      {open && (
-        <a
-          href="https://claude.ai"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="claude-tooltip"
-          onMouseEnter={show}
-          onMouseLeave={hide}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="claude-tooltip-header">
-            <img
-              src="/claude-color.svg"
-              alt="Claude"
-              className="w-8 h-8 rounded-md"
-            />
-            <h3>Claude AI</h3>
-          </div>
-          <p>
-            Anthropic&apos;s AI assistant &mdash; built to be helpful,
-            harmless, and honest. The model we deploy for every client.
-          </p>
-          <span className="claude-tooltip-link">
-            claude.ai
-            <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
-              <path
-                d="M1 7h11m0 0L8 3m4 4L8 11"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </span>
-        </a>
-      )}
-    </span>
-  );
-}
 
 /* ─── Hero subtitle typewriter ──────────────────────────
    Types out the hero subtitle on first load. Every character
    is rendered upfront at opacity:0 so the liquid-glass card
-   has its final size from frame one — no layout shift. The
-   <ClaudeTooltip /> in the middle is treated as a single
-   typing tick (with a slightly longer pause) so it pops in
-   between the prefix and suffix without breaking interactivity. */
+   has its final size from frame one — no layout shift. */
 
-const HERO_PREFIX = "We settle ";
-const HERO_SUFFIX =
-  " into your team\u2019s actual workflows \u2014 structured rollouts, production-grade instructions, and real results. No AI expertise required on your end.";
-const HERO_TOTAL = HERO_PREFIX.length + 1 + HERO_SUFFIX.length;
+const HERO_TEXT =
+  "We settle AI into your team\u2019s actual workflows \u2014 structured rollouts, production-grade instructions, and real results. No AI expertise required on your end.";
 
 function HeroSubtitle() {
-  const [i, setI] = useState(0);
-
-  useEffect(() => {
-    const reduced =
+  /* Lazy initializer avoids the setState-in-effect lint. If the user
+     prefers reduced motion, start fully revealed and skip the animation. */
+  const [i, setI] = useState<number>(() => {
+    if (
       typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
-      setI(HERO_TOTAL);
-      return;
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return HERO_TEXT.length;
     }
+    return 0;
+  });
+
+  /* Intentional mount-only effect. `i` is read once as a reduced-motion
+     guard (initial state already at HERO_TEXT.length) — re-running on
+     every increment would restart the typewriter in a loop. */
+  useEffect(() => {
+    if (i >= HERO_TEXT.length) return;
 
     let cancelled = false;
     let n = 0;
@@ -172,10 +110,8 @@ function HeroSubtitle() {
       if (cancelled) return;
       n += 1;
       setI(n);
-      if (n >= HERO_TOTAL) return;
-      // longer pause when the tooltip pops in (the "atom" tick)
-      const isTooltipTick = n === HERO_PREFIX.length;
-      timer = setTimeout(tick, isTooltipTick ? 140 : 22);
+      if (n >= HERO_TEXT.length) return;
+      timer = setTimeout(tick, 22);
     };
 
     const start = setTimeout(tick, 280);
@@ -184,30 +120,16 @@ function HeroSubtitle() {
       clearTimeout(start);
       clearTimeout(timer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="text-text text-[clamp(1rem,1.5vw,1.2rem)] leading-[1.7]">
-      {[...HERO_PREFIX].map((c, idx) => (
+      {[...HERO_TEXT].map((c, idx) => (
         <span
-          key={`p${idx}`}
+          key={idx}
           style={{ opacity: idx < i ? 1 : 0 }}
           aria-hidden={idx < i ? undefined : true}
-        >
-          {c}
-        </span>
-      ))}
-      <span
-        style={{ opacity: i > HERO_PREFIX.length ? 1 : 0 }}
-        aria-hidden={i > HERO_PREFIX.length ? undefined : true}
-      >
-        <ClaudeTooltip />
-      </span>
-      {[...HERO_SUFFIX].map((c, idx) => (
-        <span
-          key={`s${idx}`}
-          style={{ opacity: idx + HERO_PREFIX.length + 1 < i ? 1 : 0 }}
-          aria-hidden={idx + HERO_PREFIX.length + 1 < i ? undefined : true}
         >
           {c}
         </span>
