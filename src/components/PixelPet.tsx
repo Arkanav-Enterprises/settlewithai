@@ -2,131 +2,65 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
-/* ─── Palette ──────────────────────────────────────── */
-const O = "#D97757"; // body
-const E = "#141413"; // eyes
-type Pixel = string | null;
-const _: Pixel = null;
+/* ─── Sprite assets ──────────────────────────────────
+   Native-resolution PNGs traced directly from Aurelien's
+   source video. We render them as <img> with
+   image-rendering: pixelated so every source pixel maps
+   1:1 to SCALE screen pixels at any size. */
 
-/* ─── Sprite grids ─────────────────────────────────────
-   Canvas 13×10. Body is a rounded block (cols 3-9, rows 0-4).
-   Four legs are vertical sticks at cols 3, 5, 7, 9.
-   Two arms are 3-pixel diagonals that oscillate between a
-   45° pose (FRAME_A) and a 30° pose (FRAME_B). The leg
-   cycle alternates which pair is fully extended vs short.
-
-   Eyes ride on IDLE/WINK/BLINK variants that share the same
-   arm+leg frame so the eye-change doesn't disturb stride. */
-
-/* ── FRAME A: arms at 45°, legs 1+3 long, legs 2+4 short ── */
-const FRAME_A_IDLE: Pixel[][] = [
-  [_, _, _, O, O, O, O, O, O, O, _, _, _],
-  [_, _, _, O, E, O, O, O, E, O, _, _, _],
-  [_, _, O, O, O, O, O, O, O, O, O, _, _],
-  [_, _, O, O, O, O, O, O, O, O, O, _, _],
-  [_, _, _, O, O, O, O, O, O, O, _, _, _],
-  [_, _, _, O, _, O, _, O, _, O, _, _, _],
-  [_, _, O, O, _, O, _, O, _, O, O, _, _], // arm segment 1 (col 2, col 10), legs
-  [_, O, _, O, _, _, _, _, _, O, _, O, _], // arm segment 2, long legs
-  [O, _, _, _, _, _, _, _, _, _, _, _, O], // arm tips
-  [_, _, _, _, _, _, _, _, _, _, _, _, _],
-];
-
-const FRAME_A_WINK: Pixel[][] = [
-  [_, _, _, O, O, O, O, O, O, O, _, _, _],
-  [_, _, _, O, O, O, O, O, E, O, _, _, _], // left eye closed
-  [_, _, O, O, O, O, O, O, O, O, O, _, _],
-  [_, _, O, O, O, O, O, O, O, O, O, _, _],
-  [_, _, _, O, O, O, O, O, O, O, _, _, _],
-  [_, _, _, O, _, O, _, O, _, O, _, _, _],
-  [_, _, O, O, _, O, _, O, _, O, O, _, _],
-  [_, O, _, O, _, _, _, _, _, O, _, O, _],
-  [O, _, _, _, _, _, _, _, _, _, _, _, O],
-  [_, _, _, _, _, _, _, _, _, _, _, _, _],
-];
-
-const FRAME_A_BLINK: Pixel[][] = [
-  [_, _, _, O, O, O, O, O, O, O, _, _, _],
-  [_, _, _, O, O, O, O, O, O, O, _, _, _], // both eyes closed
-  [_, _, O, O, O, O, O, O, O, O, O, _, _],
-  [_, _, O, O, O, O, O, O, O, O, O, _, _],
-  [_, _, _, O, O, O, O, O, O, O, _, _, _],
-  [_, _, _, O, _, O, _, O, _, O, _, _, _],
-  [_, _, O, O, _, O, _, O, _, O, O, _, _],
-  [_, O, _, O, _, _, _, _, _, O, _, O, _],
-  [O, _, _, _, _, _, _, _, _, _, _, _, O],
-  [_, _, _, _, _, _, _, _, _, _, _, _, _],
-];
-
-/* ── FRAME B: arms at 30° (more horizontal), legs 1+3 short, 2+4 long ── */
-const FRAME_B_IDLE: Pixel[][] = [
-  [_, _, _, O, O, O, O, O, O, O, _, _, _],
-  [_, _, _, O, E, O, O, O, E, O, _, _, _],
-  [_, _, O, O, O, O, O, O, O, O, O, _, _],
-  [_, _, O, O, O, O, O, O, O, O, O, _, _],
-  [_, _, _, O, O, O, O, O, O, O, _, _, _],
-  [_, _, _, O, _, O, _, O, _, O, _, _, _],
-  [_, _, O, _, _, O, _, O, _, _, O, _, _], // arms shift + different leg pair long
-  [_, O, _, _, O, O, _, O, O, _, _, O, _],
-  [O, _, _, _, _, _, _, _, _, _, _, _, O],
-  [_, _, _, _, _, _, _, _, _, _, _, _, _],
-];
-
-const FRAME_B_WINK: Pixel[][] = [
-  [_, _, _, O, O, O, O, O, O, O, _, _, _],
-  [_, _, _, O, O, O, O, O, E, O, _, _, _],
-  [_, _, O, O, O, O, O, O, O, O, O, _, _],
-  [_, _, O, O, O, O, O, O, O, O, O, _, _],
-  [_, _, _, O, O, O, O, O, O, O, _, _, _],
-  [_, _, _, O, _, O, _, O, _, O, _, _, _],
-  [_, _, O, _, _, O, _, O, _, _, O, _, _],
-  [_, O, _, _, O, O, _, O, O, _, _, O, _],
-  [O, _, _, _, _, _, _, _, _, _, _, _, O],
-  [_, _, _, _, _, _, _, _, _, _, _, _, _],
-];
-
-const FRAME_B_BLINK: Pixel[][] = [
-  [_, _, _, O, O, O, O, O, O, O, _, _, _],
-  [_, _, _, O, O, O, O, O, O, O, _, _, _],
-  [_, _, O, O, O, O, O, O, O, O, O, _, _],
-  [_, _, O, O, O, O, O, O, O, O, O, _, _],
-  [_, _, _, O, O, O, O, O, O, O, _, _, _],
-  [_, _, _, O, _, O, _, O, _, O, _, _, _],
-  [_, _, O, _, _, O, _, O, _, _, O, _, _],
-  [_, O, _, _, O, O, _, O, O, _, _, O, _],
-  [O, _, _, _, _, _, _, _, _, _, _, _, O],
-  [_, _, _, _, _, _, _, _, _, _, _, _, _],
-];
-
-const FRAMES = {
-  a_idle: FRAME_A_IDLE,
-  a_wink: FRAME_A_WINK,
-  a_blink: FRAME_A_BLINK,
-  b_idle: FRAME_B_IDLE,
-  b_wink: FRAME_B_WINK,
-  b_blink: FRAME_B_BLINK,
+const SPRITES = {
+  forward: "/pixel-pet/forward.png", // 11×7: head-on, two eyes open
+  wink: "/pixel-pet/wink.png",       // 11×7: left eye closed
+  blink: "/pixel-pet/blink.png",     // 11×7: both eyes closed
+  profile: "/pixel-pet/profile.png", // 18×7: profile with gray staircase tail
 } as const;
 
-type FrameKey = keyof typeof FRAMES;
+type SpriteKey = keyof typeof SPRITES;
 
-const SPRITE_W = FRAME_A_IDLE[0].length;
-const SPRITE_H = FRAME_A_IDLE.length;
+/* Each sprite has a native size. Keeping these in sync with the PNGs
+   lets us compute screen dimensions and hit-box without loading the
+   image to inspect. */
+const SPRITE_META: Record<SpriteKey, { w: number; h: number }> = {
+  forward: { w: 11, h: 7 },
+  wink: { w: 11, h: 7 },
+  blink: { w: 11, h: 7 },
+  profile: { w: 18, h: 7 },
+};
 
 interface PixelPetProps {
   scale?: number;
+  walkSpeed?: number;
   frameMs?: number;
+  idleMs?: number;
+  minWalkPx?: number;
   offsetY?: number;
   className?: string;
 }
 
+type Behaviour =
+  | { kind: "wink"; msLeft: number; direction: 1 | -1 }
+  | { kind: "idle"; msLeft: number; direction: 1 | -1 }
+  | { kind: "walk"; direction: 1 | -1; distanceLeft: number };
+
 export function PixelPet({
   scale = 4,
-  frameMs = 280,
+  walkSpeed = 24,
+  frameMs = 220,
+  idleMs = 1500,
+  minWalkPx = 50,
   offsetY = 2,
   className = "",
 }: PixelPetProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
-  const [frame, setFrame] = useState<FrameKey>("a_idle");
+  const [sprite, setSprite] = useState<SpriteKey>("wink");
+  const [x, setX] = useState(14);
+  const [direction, setDirection] = useState<1 | -1>(1);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const behaviourRef = useRef<Behaviour>({
+    kind: "wink",
+    msLeft: 600,
+    direction: 1,
+  });
 
   const reduced = useSyncExternalStore(
     (callback) => {
@@ -138,23 +72,118 @@ export function PixelPet({
     () => false,
   );
 
-  /* Typing loop: alternate arm/leg frames A ↔ B at frameMs cadence.
-     Eye state (idle/wink/blink) is a separate overlay — ~8% chance
-     per tick of a wink or blink on either arm frame. */
+  /* Measure parent width for bounce bounds. */
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el?.parentElement) return;
+    const parent = el.parentElement;
+    const ro = new ResizeObserver(() => {
+      setContainerWidth(parent.clientWidth);
+    });
+    ro.observe(parent);
+    return () => ro.disconnect();
+  }, []);
+
+  /* Sprite frame cycler. Picks the visible PNG based on behaviour. */
   useEffect(() => {
     if (reduced) return;
-    let armToggle: "a" | "b" = "a";
+    let walkToggle = 0;
     const id = setInterval(() => {
-      armToggle = armToggle === "a" ? "b" : "a";
-      const roll = Math.random();
-      const eye: "idle" | "wink" | "blink" =
-        roll < 0.06 ? "blink" : roll < 0.12 ? "wink" : "idle";
-      setFrame(`${armToggle}_${eye}` as FrameKey);
+      const b = behaviourRef.current;
+      if (b.kind === "wink") {
+        setSprite("wink");
+      } else if (b.kind === "idle") {
+        /* Idle: mostly forward, occasional quick blinks/winks. */
+        const roll = Math.random();
+        if (roll < 0.08) setSprite("blink");
+        else if (roll < 0.16) setSprite("wink");
+        else setSprite("forward");
+      } else {
+        /* Walk: alternate sprite to suggest stride rhythm. We use
+           profile for both halves but the position changes each tick
+           so the eye reads motion. */
+        walkToggle = (walkToggle + 1) % 2;
+        setSprite("profile");
+      }
     }, frameMs);
     return () => clearInterval(id);
   }, [reduced, frameMs]);
 
-  const sprite = FRAMES[frame];
+  /* rAF loop: position + behaviour transitions. */
+  useEffect(() => {
+    if (reduced || containerWidth === 0) return;
+    const meta = SPRITE_META.profile;
+    const spritePx = meta.w * scale;
+    const maxX = Math.max(0, containerWidth - spritePx);
+
+    let last = performance.now();
+    let rafId = 0;
+
+    const tick = (now: number) => {
+      const dtMs = now - last;
+      last = now;
+      const b = behaviourRef.current;
+
+      if (b.kind === "walk") {
+        setX((prev) => {
+          const step = walkSpeed * b.direction * (dtMs / 1000);
+          let next = prev + step;
+          let hitEdge = false;
+          if (next >= maxX) { next = maxX; hitEdge = true; }
+          else if (next <= 0) { next = 0; hitEdge = true; }
+
+          const walked = Math.abs(step);
+          const distanceLeft = b.distanceLeft - walked;
+          if (hitEdge || distanceLeft <= 0) {
+            const flip = hitEdge || Math.random() < 0.5;
+            const nextDir: 1 | -1 = flip ? ((-b.direction) as 1 | -1) : b.direction;
+            behaviourRef.current = {
+              kind: "idle",
+              msLeft: idleMs * (0.7 + Math.random() * 0.8),
+              direction: nextDir,
+            };
+            setDirection(nextDir);
+          } else {
+            behaviourRef.current = { ...b, distanceLeft };
+          }
+          return next;
+        });
+      } else if (b.kind === "wink") {
+        const msLeft = b.msLeft - dtMs;
+        if (msLeft <= 0) {
+          behaviourRef.current = {
+            kind: "idle",
+            msLeft: idleMs * 0.8,
+            direction: b.direction,
+          };
+        } else {
+          behaviourRef.current = { ...b, msLeft };
+        }
+      } else {
+        const msLeft = b.msLeft - dtMs;
+        if (msLeft <= 0) {
+          const distance = minWalkPx + Math.random() * 220;
+          behaviourRef.current = {
+            kind: "walk",
+            direction: b.direction,
+            distanceLeft: distance,
+          };
+        } else {
+          behaviourRef.current = { ...b, msLeft };
+        }
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, [reduced, containerWidth, walkSpeed, idleMs, minWalkPx, scale]);
+
+  const meta = SPRITE_META[sprite];
+  const spriteW = meta.w * scale;
+  const spriteH = meta.h * scale;
+  /* All sprites render into the PROFILE width box so the visual
+     anchor doesn't jump when the sprite swaps mid-animation. */
+  const boxW = SPRITE_META.profile.w * scale;
 
   return (
     <div
@@ -162,34 +191,27 @@ export function PixelPet({
       className={`pointer-events-none absolute ${className}`}
       style={{
         bottom: `calc(100% + ${offsetY}px)`,
-        left: 14,
-        width: SPRITE_W * scale,
-        height: SPRITE_H * scale,
+        left: `${x}px`,
+        width: boxW,
+        height: spriteH,
+        transform: direction === -1 ? "scaleX(-1)" : undefined,
+        transformOrigin: "center",
       }}
       aria-hidden
     >
-      <svg
-        viewBox={`0 0 ${SPRITE_W} ${SPRITE_H}`}
-        width={SPRITE_W * scale}
-        height={SPRITE_H * scale}
-        shapeRendering="crispEdges"
-        style={{ display: "block" }}
-      >
-        {sprite.map((row, y) =>
-          row.map((color, px) =>
-            color ? (
-              <rect
-                key={`${y}-${px}`}
-                x={px}
-                y={y}
-                width={1}
-                height={1}
-                fill={color}
-              />
-            ) : null,
-          ),
-        )}
-      </svg>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={SPRITES[sprite]}
+        alt=""
+        width={spriteW}
+        height={spriteH}
+        style={{
+          display: "block",
+          width: spriteW,
+          height: spriteH,
+          imageRendering: "pixelated",
+        }}
+      />
     </div>
   );
 }
