@@ -23,7 +23,7 @@ interface PixelPetProps {
 
 export function PixelPet({
   scale = 4,
-  offsetY = 2,
+  offsetY = -8,
   className = "",
 }: PixelPetProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
