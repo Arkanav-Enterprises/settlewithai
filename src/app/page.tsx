@@ -80,8 +80,26 @@ function Arrow() {
    is rendered upfront at opacity:0 so the liquid-glass card
    has its final size from frame one — no layout shift. */
 
-const HERO_TEXT =
-  "We settle AI into your team\u2019s actual workflows \u2014 structured rollouts, production-grade instructions, and real results. No AI expertise required on your end.";
+/* Three styled segments: default, semibold emphasis, and a
+   subdued tail that supports the main line. Each character
+   inherits its segment's className; the typewriter counter
+   walks through all segments as if the string were flat. */
+const HERO_SEGMENTS = [
+  {
+    text: "We settle AI into your team\u2019s actual workflows \u2014 structured rollouts, production-grade instructions, ",
+    className: "",
+  },
+  {
+    text: "and end-to-end automation.",
+    className: "font-semibold",
+  },
+  {
+    text: " No AI expertise required on your end.",
+    className: "text-text-muted",
+  },
+];
+
+const HERO_LEN = HERO_SEGMENTS.reduce((n, s) => n + s.text.length, 0);
 
 function HeroSubtitle() {
   /* Lazy initializer avoids the setState-in-effect lint. If the user
@@ -91,16 +109,16 @@ function HeroSubtitle() {
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
     ) {
-      return HERO_TEXT.length;
+      return HERO_LEN;
     }
     return 0;
   });
 
   /* Intentional mount-only effect. `i` is read once as a reduced-motion
-     guard (initial state already at HERO_TEXT.length) — re-running on
-     every increment would restart the typewriter in a loop. */
+     guard (initial state already at HERO_LEN) — re-running on every
+     increment would restart the typewriter in a loop. */
   useEffect(() => {
-    if (i >= HERO_TEXT.length) return;
+    if (i >= HERO_LEN) return;
 
     let cancelled = false;
     let n = 0;
@@ -110,7 +128,7 @@ function HeroSubtitle() {
       if (cancelled) return;
       n += 1;
       setI(n);
-      if (n >= HERO_TEXT.length) return;
+      if (n >= HERO_LEN) return;
       timer = setTimeout(tick, 22);
     };
 
@@ -123,15 +141,24 @@ function HeroSubtitle() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  let charIdx = 0;
   return (
     <div className="text-text text-[clamp(1rem,1.5vw,1.2rem)] leading-[1.7]">
-      {[...HERO_TEXT].map((c, idx) => (
-        <span
-          key={idx}
-          style={{ opacity: idx < i ? 1 : 0 }}
-          aria-hidden={idx < i ? undefined : true}
-        >
-          {c}
+      {HERO_SEGMENTS.map((segment, si) => (
+        <span key={si} className={segment.className}>
+          {[...segment.text].map((c) => {
+            const myIdx = charIdx++;
+            const visible = myIdx < i;
+            return (
+              <span
+                key={myIdx}
+                style={{ opacity: visible ? 1 : 0 }}
+                aria-hidden={visible ? undefined : true}
+              >
+                {c}
+              </span>
+            );
+          })}
         </span>
       ))}
     </div>
