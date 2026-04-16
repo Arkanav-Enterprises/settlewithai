@@ -25,66 +25,57 @@ const _: Pixel = null;
    2 WALK_A      — stride A, left/inner legs lifted
    3 WALK_B      — stride B, right/outer legs lifted */
 
-/* Canvas 22×10. Head has a notch cut from the upper-right so the
-   silhouette reads "head tilted down toward the laptop." Both
-   eyes are 1×2 vertical blocks kept INSIDE the head outline; the
-   right eye sits one row lower than the left for the looking-down
-   cue. Legs are 1×2 blocks at cols 2-3, 5-6, 8-9 (three leg pairs).
-   Staircase tail extends 5 steps down-right. */
+/* Canvas 18×8 — the earlier, cleaner silhouette. Three poses:
+   FORWARD (head-on, two eyes open), WINK (left eye closed slit,
+   right eye open), PROFILE_A/PROFILE_B (walking, gray staircase
+   trail rises up-right from the back). WINK+blink is the only
+   addition vs the originally-shipped sprite. */
 
-const IDLE: Pixel[][] = [
-  [_, _, _, O, O, O, O, O, O, _, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, O, O, O, O, O, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, E, O, O, O, O, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, E, O, O, O, E, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, O, O, O, O, E, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, O, O, O, O, O, _, _, G, G, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, O, O, O, O, O, _, _, _, _, G, G, _, _, _, _, _, _],
-  [_, _, O, O, _, O, O, _, O, O, _, _, _, _, _, _, G, G, _, _, _, _],
-  [_, _, O, O, _, O, O, _, O, O, _, _, _, _, _, _, _, _, G, G, _, _],
-  [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, G, G],
+const FORWARD: Pixel[][] = [
+  [_, _, _, O, O, O, O, O, O, O, _, _, _, _, _, _, _, _],
+  [_, _, _, O, E, O, O, O, E, O, _, _, _, _, _, _, _, _],
+  [_, O, O, O, O, O, O, O, O, O, O, O, _, _, _, _, _, _],
+  [_, O, O, O, O, O, O, O, O, O, O, O, _, _, _, _, _, _],
+  [_, _, _, O, O, O, O, O, O, O, _, _, _, _, _, _, _, _],
+  [_, _, _, O, O, O, O, O, O, O, _, _, _, _, _, _, _, _],
+  [_, _, _, O, _, O, _, O, _, O, _, _, _, _, _, _, _, _],
+  [_, _, _, O, _, O, _, O, _, O, _, _, _, _, _, _, _, _],
 ];
 
-const WINK: Pixel[][] = [
-  [_, _, _, O, O, O, O, O, O, _, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, O, O, O, O, O, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, O, O, O, O, O, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, E, E, O, O, E, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, O, O, O, O, E, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, O, O, O, O, O, _, _, G, G, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, O, O, O, O, O, _, _, _, _, G, G, _, _, _, _, _, _],
-  [_, _, O, O, _, O, O, _, O, O, _, _, _, _, _, _, G, G, _, _, _, _],
-  [_, _, O, O, _, O, O, _, O, O, _, _, _, _, _, _, _, _, G, G, _, _],
-  [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, G, G],
+const FORWARD_WINK: Pixel[][] = [
+  [_, _, _, O, O, O, O, O, O, O, _, _, _, _, _, _, _, _],
+  [_, _, _, O, O, O, O, O, E, O, _, _, _, _, _, _, _, _],
+  [_, O, O, O, E, E, O, O, O, O, O, O, _, _, _, _, _, _],
+  [_, O, O, O, O, O, O, O, O, O, O, O, _, _, _, _, _, _],
+  [_, _, _, O, O, O, O, O, O, O, _, _, _, _, _, _, _, _],
+  [_, _, _, O, O, O, O, O, O, O, _, _, _, _, _, _, _, _],
+  [_, _, _, O, _, O, _, O, _, O, _, _, _, _, _, _, _, _],
+  [_, _, _, O, _, O, _, O, _, O, _, _, _, _, _, _, _, _],
 ];
 
-const WALK_A: Pixel[][] = [
-  [_, _, _, O, O, O, O, O, O, _, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, O, O, O, O, O, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, E, O, O, O, O, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, E, O, O, O, E, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, O, O, O, O, E, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, O, O, O, O, O, _, _, G, G, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, O, O, O, O, O, _, _, _, _, G, G, _, _, _, _, _, _],
-  [_, _, _, _, _, O, O, _, O, O, _, _, _, _, _, _, G, G, _, _, _, _],
-  [_, _, O, O, _, _, _, _, _, O, _, _, _, _, _, _, _, _, G, G, _, _],
-  [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, G, G],
+const PROFILE_A: Pixel[][] = [
+  [_, _, _, O, O, O, O, O, O, _, _, _, _, _, _, _, G, G],
+  [_, _, _, O, O, O, O, O, O, O, O, _, _, _, _, G, G, _],
+  [_, _, _, O, E, O, O, O, E, O, O, _, _, _, G, G, _, _],
+  [_, _, _, O, O, O, O, O, O, O, O, O, _, G, G, _, _, _],
+  [_, _, _, O, O, O, O, O, O, O, O, O, G, G, _, _, _, _],
+  [_, _, _, O, O, O, O, O, O, O, O, O, _, _, _, _, _, _],
+  [_, _, _, O, _, O, _, O, _, O, O, _, _, _, _, _, _, _],
+  [_, _, _, O, _, O, _, _, _, O, _, _, _, _, _, _, _, _],
 ];
 
-const WALK_B: Pixel[][] = [
-  [_, _, _, O, O, O, O, O, O, _, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, O, O, O, O, O, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, E, O, O, O, O, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, E, O, O, O, E, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, O, O, O, O, E, _, _, _, _, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, O, O, O, O, O, _, _, G, G, _, _, _, _, _, _, _, _],
-  [_, _, O, O, O, O, O, O, O, O, _, _, _, _, G, G, _, _, _, _, _, _],
-  [_, _, O, O, _, O, O, _, _, _, _, _, _, _, _, _, G, G, _, _, _, _],
-  [_, _, O, _, _, _, _, _, O, O, _, _, _, _, _, _, _, _, G, G, _, _],
-  [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, G, G],
+const PROFILE_B: Pixel[][] = [
+  [_, _, _, O, O, O, O, O, O, _, _, _, _, _, _, _, G, G],
+  [_, _, _, O, O, O, O, O, O, O, O, _, _, _, _, G, G, _],
+  [_, _, _, O, E, O, O, O, E, O, O, _, _, _, G, G, _, _],
+  [_, _, _, O, O, O, O, O, O, O, O, O, _, G, G, _, _, _],
+  [_, _, _, O, O, O, O, O, O, O, O, O, G, G, _, _, _, _],
+  [_, _, _, _, O, _, O, _, O, O, O, O, _, _, _, _, _, _],
+  [_, _, _, O, O, O, _, O, _, O, O, _, _, _, _, _, _, _],
+  [_, _, _, _, _, _, _, _, _, O, _, _, _, _, _, _, _, _],
 ];
 
-const FRAMES: Pixel[][][] = [IDLE, WINK, WALK_A, WALK_B];
+const FRAMES: Pixel[][][] = [FORWARD, FORWARD_WINK, PROFILE_A, PROFILE_B];
 const F_IDLE = 0;
 const F_WINK = 1;
 const F_WALK_A = 2;
@@ -119,7 +110,7 @@ export function PixelPet({
   frameMs = 220,
   idleMs = 1600,
   minWalkPx = 50,
-  offsetY = -4,
+  offsetY = 2,
   className = "",
 }: PixelPetProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
