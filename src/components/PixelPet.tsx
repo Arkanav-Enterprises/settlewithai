@@ -9,11 +9,9 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
    1:1 to SCALE screen pixels at any size. */
 
 const SPRITES = {
-  forward: "/pixel-pet/forward.png", // upright, all legs planted
+  forward: "/pixel-pet/forward.png", // idle, all legs planted
   wink: "/pixel-pet/wink.png",       // left eye closed
   blink: "/pixel-pet/blink.png",     // both eyes closed
-  type_a: "/pixel-pet/type_a.png",   // leaned forward, left arm tapping
-  type_b: "/pixel-pet/type_b.png",   // leaned forward, right arm tapping
   profile: "/pixel-pet/profile.png", // walk stride A
   walkb: "/pixel-pet/walkb.png",     // walk stride B
 } as const;
@@ -26,8 +24,6 @@ const SPRITE_META: Record<SpriteKey, { w: number; h: number }> = {
   forward: { w: 20, h: 8 },
   wink: { w: 20, h: 8 },
   blink: { w: 20, h: 8 },
-  type_a: { w: 20, h: 8 },
-  type_b: { w: 20, h: 8 },
   profile: { w: 20, h: 8 },
   walkb: { w: 20, h: 8 },
 };
@@ -51,8 +47,8 @@ export function PixelPet({
   scale = 4,
   walkSpeed = 24,
   frameMs = 220,
-  idleMs = 3500,
-  minWalkPx = 40,
+  idleMs = 1500,
+  minWalkPx = 50,
   offsetY = 2,
   className = "",
 }: PixelPetProps) {
@@ -89,30 +85,23 @@ export function PixelPet({
     return () => ro.disconnect();
   }, []);
 
-  /* Sprite frame cycler. During idle the pet leans forward and
-     types — alternates type_a/type_b so the inner legs tap like
-     fingers on the input bar below. Walking alternates the two
-     stride frames. Wink on mount and occasional blinks punctuate. */
+  /* Sprite frame cycler. Picks the visible PNG based on behaviour. */
   useEffect(() => {
     if (reduced) return;
-    let typeToggle = 0;
     let walkToggle = 0;
     const id = setInterval(() => {
       const b = behaviourRef.current;
       if (b.kind === "wink") {
         setSprite("wink");
       } else if (b.kind === "idle") {
+        /* Idle: mostly forward, occasional quick blinks/winks. */
         const roll = Math.random();
-        if (roll < 0.06) {
-          setSprite("blink");
-        } else if (roll < 0.12) {
-          setSprite("wink");
-        } else {
-          /* Typing loop: body leaned forward, inner legs alternating. */
-          typeToggle = (typeToggle + 1) % 2;
-          setSprite(typeToggle === 0 ? "type_a" : "type_b");
-        }
+        if (roll < 0.08) setSprite("blink");
+        else if (roll < 0.16) setSprite("wink");
+        else setSprite("forward");
       } else {
+        /* Walk: alternate between profile (stride A) and walkb (stride B)
+           so legs shuffle; tail stays constant. */
         walkToggle = (walkToggle + 1) % 2;
         setSprite(walkToggle === 0 ? "profile" : "walkb");
       }
