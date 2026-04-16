@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { PixelPet } from "./PixelPet";
 
 interface Message {
   role: "user" | "assistant";
@@ -275,6 +276,9 @@ export function AskClaude() {
               : "border border-border-light focus-within:border-text/30"
           }`}
         >
+          {/* Pixel pet walks along the top edge of the input — decorative,
+             only in empty state so it doesn't distract during chat. */}
+          {!hasMessages && <PixelPet scale={3} />}
           <textarea
             ref={textareaRef}
             value={input}
