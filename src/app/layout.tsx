@@ -186,75 +186,10 @@ export default function RootLayout({
           ],
         },
       },
-      {
-        "@type": "FAQPage",
-        mainEntity: [
-          {
-            "@type": "Question",
-            name: "What is Claude AI, and why does Settle use it exclusively?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Claude AI is Anthropic\u2019s AI assistant, purpose-built for long, complex reasoning and safe enterprise use. Settle chose to work exclusively with Claude AI because, after testing every major model in production business workflows, it consistently outperforms on the tasks that matter most: multi-step document generation, precise instruction following, and reliable output across hundreds of runs. At Orient Printing, for example, Claude AI handles everything from generating 8-page sales proposals with accurate pricing to troubleshooting industrial printing press issues from technical manuals. One model, deeply understood, produces better results than spreading across three or four.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "Is AI realistic for manufacturers and traditional businesses?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Absolutely. Settle\u2019s first client is a 79-year-old printing and packaging manufacturer with 20,000+ units installed across 50 countries. Settle mapped 49 use cases across their 7 departments and deployed 11 in the first engagement, covering offer generation, RFQ drafting, BOM creation, service troubleshooting, and vendor analysis. Traditional businesses often have the most to gain from AI because their workflows are repeatable, documentation-heavy, and largely unchanged for years. The offer generator alone cut document creation time from 4 hours to 30 minutes.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "How is Settle different from hiring a big consulting firm?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Large consulting firms charge enterprise rates, take months to deliver a strategy deck, and then hand you a PDF that your team has to figure out how to implement. Settle does the opposite. Working Claude AI projects ship in the first two to three weeks. Your team is using AI from week one, not waiting for a 200-page assessment. Settle is built specifically for companies with 50 to 500 employees \u2014 too complex for a DIY tutorial but too lean to justify a Big Four engagement. Every project comes with production-grade instructions, safety rules, and review gates. Not a strategy deck. Working tools.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "What does a typical Claude AI deployment engagement look like?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Four phases. First, Discovery: auditing every department\u2019s workflows to identify where AI will have the highest impact. Second, Architecture: building a prioritised rollout plan that groups use cases by workflow cluster, not department. Third, Instruction Engineering: writing production-grade Claude AI project instructions with safety rules, edge case handling, review gates, and knowledge file specifications. Fourth, Deploy and Settle: projects go live, the team gets trained, and Settle iterates based on real usage. Quick wins typically ship in the first 2\u20133 weeks. Deeper integrations with ERP or CRM follow in subsequent phases.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "How long until we see results from AI deployment?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Most teams see their first working Claude AI project within 2 to 3 weeks. These are typically high-volume, low-complexity tasks like email drafting, document generation, or knowledge base Q&A. The full rollout depends on scope and how many departments are involved. Orient Printing deployed 11 projects across 7 departments over about 6 months, but they were measuring time savings from month one. The key is starting with a quick win that proves the value, then expanding. Once one department sees results, the others start asking when they\u2019re next.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "What systems can Claude AI connect to?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Claude AI connects to business systems through MCP (Model Context Protocol), an open standard built by Anthropic specifically for enterprise integration. If your system has an API or structured data export, Settle can build a connector for it. Connectors have been built for ERPs like SAP, CRMs like HubSpot and Salesforce, document stores like SharePoint and Google Drive, email systems, and custom internal databases. Each connector is a lightweight server that translates data between Claude AI and your system. Most take a few days to build and test.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "Do employees need technical skills to use Claude AI?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Not at all. Settle engineers the instructions so your team interacts with Claude AI in plain language, exactly the way they\u2019d talk to a knowledgeable colleague. They don\u2019t write prompts, configure settings, or understand anything about AI. They use structured Claude AI projects built and tested specifically for their workflows. A sales engineer types in a customer name and product requirements, and gets back a formatted offer document. A procurement manager describes what they need, and gets a complete RFQ. The complexity is in the instructions, not in what your team has to do.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "Is company data safe with Claude AI?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Yes. Claude AI is built by Anthropic, which leads the industry in AI safety research. Data sent to Claude AI via the API is not used for model training by default. Anthropic holds SOC 2 Type II certification and offers HIPAA-eligible plans for healthcare data. Beyond Anthropic\u2019s security, every project Settle deploys includes explicit safety rules, review gates, and output boundaries written into the instructions. Claude AI won\u2019t share data between departments unless configured to. It won\u2019t fabricate information. It won\u2019t take actions without human approval at defined checkpoints.",
-            },
-          },
-        ],
-      },
+      /* FAQPage lives on the homepage only. Keeping it here caused GSC
+         to flag "Duplicate field 'FAQPage'" on /ai-consulting-for/* and
+         /compare/* pages (which get their own FAQ schema from
+         ArticleLayout). See src/app/page.tsx for the homepage FAQ. */
     ],
   };
 
