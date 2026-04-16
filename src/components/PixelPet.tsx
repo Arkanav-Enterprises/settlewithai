@@ -31,15 +31,31 @@ const _: Pixel = null;
    trail rises up-right from the back). WINK+blink is the only
    addition vs the originally-shipped sprite. */
 
-const FORWARD: Pixel[][] = [
+/* Two FORWARD variants cycle during idle so the inner "arms"
+   alternate up/down — reads as the pet typing on the input bar.
+   Outer legs (cols 3 and 9) stay planted as the support feet;
+   inner legs (cols 5 and 7) are the typing fingers. */
+
+const FORWARD_TYPE_A: Pixel[][] = [
   [_, _, _, O, O, O, O, O, O, O, _, _, _, _, _, _, _, _],
   [_, _, _, O, E, O, O, O, E, O, _, _, _, _, _, _, _, _],
   [_, O, O, O, O, O, O, O, O, O, O, O, _, _, _, _, _, _],
   [_, O, O, O, O, O, O, O, O, O, O, O, _, _, _, _, _, _],
   [_, _, _, O, O, O, O, O, O, O, _, _, _, _, _, _, _, _],
   [_, _, _, O, O, O, O, O, O, O, _, _, _, _, _, _, _, _],
-  [_, _, _, O, _, O, _, O, _, O, _, _, _, _, _, _, _, _],
-  [_, _, _, O, _, O, _, O, _, O, _, _, _, _, _, _, _, _],
+  [_, _, _, O, _, _, _, O, _, O, _, _, _, _, _, _, _, _],
+  [_, _, _, O, _, _, _, O, _, O, _, _, _, _, _, _, _, _],
+];
+
+const FORWARD_TYPE_B: Pixel[][] = [
+  [_, _, _, O, O, O, O, O, O, O, _, _, _, _, _, _, _, _],
+  [_, _, _, O, E, O, O, O, E, O, _, _, _, _, _, _, _, _],
+  [_, O, O, O, O, O, O, O, O, O, O, O, _, _, _, _, _, _],
+  [_, O, O, O, O, O, O, O, O, O, O, O, _, _, _, _, _, _],
+  [_, _, _, O, O, O, O, O, O, O, _, _, _, _, _, _, _, _],
+  [_, _, _, O, O, O, O, O, O, O, _, _, _, _, _, _, _, _],
+  [_, _, _, O, _, O, _, _, _, O, _, _, _, _, _, _, _, _],
+  [_, _, _, O, _, O, _, _, _, O, _, _, _, _, _, _, _, _],
 ];
 
 const FORWARD_WINK: Pixel[][] = [
@@ -49,8 +65,8 @@ const FORWARD_WINK: Pixel[][] = [
   [_, O, O, O, O, O, O, O, O, O, O, O, _, _, _, _, _, _],
   [_, _, _, O, O, O, O, O, O, O, _, _, _, _, _, _, _, _],
   [_, _, _, O, O, O, O, O, O, O, _, _, _, _, _, _, _, _],
-  [_, _, _, O, _, O, _, O, _, O, _, _, _, _, _, _, _, _],
-  [_, _, _, O, _, O, _, O, _, O, _, _, _, _, _, _, _, _],
+  [_, _, _, O, _, _, _, O, _, O, _, _, _, _, _, _, _, _],
+  [_, _, _, O, _, _, _, O, _, O, _, _, _, _, _, _, _, _],
 ];
 
 const PROFILE_A: Pixel[][] = [
@@ -75,11 +91,21 @@ const PROFILE_B: Pixel[][] = [
   [_, _, _, _, _, _, _, _, _, O, _, _, _, _, _, _, _, _],
 ];
 
-const FRAMES: Pixel[][][] = [FORWARD, FORWARD_WINK, PROFILE_A, PROFILE_B];
-const F_IDLE = 0;
-const F_WINK = 1;
-const F_WALK_A = 2;
-const F_WALK_B = 3;
+/* Frame indices into FRAMES[]. Keep numeric constants to avoid
+   enum overhead; order must match the FRAMES array below. */
+const F_TYPE_A = 0;
+const F_TYPE_B = 1;
+const F_WINK = 2;
+const F_WALK_A = 3;
+const F_WALK_B = 4;
+
+const FRAMES: Pixel[][][] = [
+  FORWARD_TYPE_A,
+  FORWARD_TYPE_B,
+  FORWARD_WINK,
+  PROFILE_A,
+  PROFILE_B,
+];
 
 const SPRITE_W = FRAMES[0][0].length;
 const SPRITE_H = FRAMES[0].length;
@@ -147,19 +173,26 @@ export function PixelPet({
     return () => ro.disconnect();
   }, []);
 
-  /* Sprite-frame cycler. Chooses the visible frame based on the
-     current behaviour phase — wink holds F_WINK, idle uses F_IDLE
-     (with occasional wink blinks), walk alternates F_WALK_A/B. */
+  /* Sprite-frame cycler. During idle the two FORWARD variants
+     alternate so the inner arms look like they're typing;
+     occasional WINK frames punctuate the typing with a blink.
+     During walk, the two PROFILE variants alternate for stride.
+     Initial wink holds F_WINK until the state machine advances. */
   useEffect(() => {
     if (reduced) return;
     let strideToggle = F_WALK_A;
+    let typeToggle = F_TYPE_A;
     const id = setInterval(() => {
       const b = behaviourRef.current;
       if (b.kind === "wink") {
         setFrame(F_WINK);
       } else if (b.kind === "idle") {
-        /* Random quick blinks during idle, otherwise face forward */
-        setFrame(Math.random() < 0.15 ? F_WINK : F_IDLE);
+        if (Math.random() < 0.12) {
+          setFrame(F_WINK);
+        } else {
+          typeToggle = typeToggle === F_TYPE_A ? F_TYPE_B : F_TYPE_A;
+          setFrame(typeToggle);
+        }
       } else {
         strideToggle = strideToggle === F_WALK_A ? F_WALK_B : F_WALK_A;
         setFrame(strideToggle);
