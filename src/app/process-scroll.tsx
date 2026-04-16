@@ -120,7 +120,7 @@ export default function ProcessScroll() {
          phases (r × 22.5° ≈ 55vw at 280vw) clears the phase text blocks. */}
       <div
         ref={circleRef}
-        className="absolute pointer-events-none left-[-262vw] md:left-[-120vw] lg:left-[-1100px] w-[280vw] h-[280vw] md:w-[min(180vw,1600px)] md:h-[min(180vw,1600px)] top-[65%] md:top-[50%]"
+        className="absolute pointer-events-none left-[-262vw] md:left-[-120vw] lg:left-[-1100px] w-[280vw] h-[280vw] md:w-[min(180vw,1600px)] md:h-[min(180vw,1600px)] top-[50%]"
         style={{
           transform: "translateY(-50%)",
         }}
