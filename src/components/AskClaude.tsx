@@ -278,7 +278,7 @@ export function AskClaude() {
         >
           {/* Pixel pet walks along the top edge of the input — decorative,
              only in empty state so it doesn't distract during chat. */}
-          {!hasMessages && <PixelPet scale={3} />}
+          {!hasMessages && <PixelPet scale={4} />}
           <textarea
             ref={textareaRef}
             value={input}
