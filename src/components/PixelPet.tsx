@@ -54,9 +54,10 @@ export function PixelPet({
 
   const spriteW = NATIVE_W * scale;
   const spriteH = NATIVE_H * scale;
-  /* Anchor just to the left of center, same visual position the
-     source video uses relative to its input bar. */
-  const left = Math.max(12, Math.floor((containerWidth - spriteW) / 2));
+  /* Anchor near the right edge of the input bar with a small gap,
+     mirroring the source video's pet position. */
+  const RIGHT_MARGIN = 16;
+  const left = Math.max(12, containerWidth - spriteW - RIGHT_MARGIN);
 
   return (
     <div
