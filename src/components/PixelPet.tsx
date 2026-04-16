@@ -9,22 +9,23 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
    1:1 to SCALE screen pixels at any size. */
 
 const SPRITES = {
-  forward: "/pixel-pet/forward.png", // 11×7: head-on, two eyes open
-  wink: "/pixel-pet/wink.png",       // 11×7: left eye closed
-  blink: "/pixel-pet/blink.png",     // 11×7: both eyes closed
-  profile: "/pixel-pet/profile.png", // 18×7: profile with gray staircase tail
+  forward: "/pixel-pet/forward.png", // idle, all legs planted
+  wink: "/pixel-pet/wink.png",       // left eye closed
+  blink: "/pixel-pet/blink.png",     // both eyes closed
+  profile: "/pixel-pet/profile.png", // walk stride A
+  walkb: "/pixel-pet/walkb.png",     // walk stride B
 } as const;
 
 type SpriteKey = keyof typeof SPRITES;
 
-/* Each sprite has a native size. Keeping these in sync with the PNGs
-   lets us compute screen dimensions and hit-box without loading the
-   image to inspect. */
+/* All sprites share the same 20×8 canvas so anchor stays stable
+   as frames swap mid-animation. */
 const SPRITE_META: Record<SpriteKey, { w: number; h: number }> = {
-  forward: { w: 11, h: 7 },
-  wink: { w: 11, h: 7 },
-  blink: { w: 11, h: 7 },
-  profile: { w: 18, h: 7 },
+  forward: { w: 20, h: 8 },
+  wink: { w: 20, h: 8 },
+  blink: { w: 20, h: 8 },
+  profile: { w: 20, h: 8 },
+  walkb: { w: 20, h: 8 },
 };
 
 interface PixelPetProps {
@@ -99,11 +100,10 @@ export function PixelPet({
         else if (roll < 0.16) setSprite("wink");
         else setSprite("forward");
       } else {
-        /* Walk: alternate sprite to suggest stride rhythm. We use
-           profile for both halves but the position changes each tick
-           so the eye reads motion. */
+        /* Walk: alternate between profile (stride A) and walkb (stride B)
+           so legs shuffle; tail stays constant. */
         walkToggle = (walkToggle + 1) % 2;
-        setSprite("profile");
+        setSprite(walkToggle === 0 ? "profile" : "walkb");
       }
     }, frameMs);
     return () => clearInterval(id);
