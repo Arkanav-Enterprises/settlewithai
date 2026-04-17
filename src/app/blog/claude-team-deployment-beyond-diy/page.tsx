@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "Claude AI setup guide",
     "enterprise AI implementation",
     "AI workflow automation",
-    "Claude AI deployment studio",
+    "full-stack AI agency",
   ],
   alternates: {
     canonical:

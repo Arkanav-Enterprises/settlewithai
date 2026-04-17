@@ -131,4 +131,4 @@ The difference is architecture.
 
 ---
 
-*[Pranav Ambwani](https://settlewithai.com) is the founder of Settle, a Claude AI deployment studio that helps mid-market companies and manufacturers go from AI experiments to production workflows. Read more at [settlewithai.com](https://settlewithai.com).*
+*[Pranav Ambwani](https://settlewithai.com) is the founder of Settle, a full-stack AI agency that helps mid-market companies and manufacturers go from AI experiments to production workflows. Read more at [settlewithai.com](https://settlewithai.com).*

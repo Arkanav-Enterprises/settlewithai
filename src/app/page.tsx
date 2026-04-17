@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Nav } from "@/components/layout/Nav";
 import { BlogTOC } from "@/components/blog/BlogTOC";
 import { AskClaude } from "@/components/AskClaude";
+import { ParticleSettleMark } from "@/components/ParticleSettleMark";
 
 const Globe = dynamic(() => import("./globe"), { ssr: false });
 const Mindmap = dynamic(() => import("./mindmap"), { ssr: false });
@@ -689,145 +690,6 @@ function OrientCaseStudyCard() {
 
 /* ─── Animated logo mark (CTA illustration) ───────────── */
 
-function AnimatedSettleMark() {
-  const ref = useRef<SVGSVGElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.3 },
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  // Path lengths measured from the SVG geometry
-  const mainLen = 820;
-  const flick1Len = 30;
-  const flick2Len = 30;
-
-  return (
-    <svg
-      ref={ref}
-      viewBox="0 0 199 298"
-      fill="none"
-      className="w-full h-full"
-      style={
-        visible
-          ? { animation: "float-gentle 4s ease-in-out 3.5s infinite" }
-          : undefined
-      }
-    >
-      {/* Main calligraphic stroke */}
-      <path
-        d="M146.118 42.7126C134.632 77.172 157.605 100.145 180.578 65.6855C203.551 31.2261 192.064 -3.23338 157.605 8.2531C123.145 19.7396 79.1857 107.5 88.6857 157.577C98.1857 207.655 146.536 175.199 143.686 198C141.183 218.02 122.766 234.672 103.186 252.601C78.9328 274.809 48.99 295.263 29.4417 293.252C-6.69105 289.535 -2.97404 253.403 32.1474 231.455C67.2688 209.507 78.7483 239.9 54.095 266.576"
-        stroke="white"
-        strokeWidth="8.04054"
-        strokeLinecap="round"
-        strokeDasharray={mainLen}
-        strokeDashoffset={visible ? undefined : mainLen}
-        style={
-          visible
-            ? {
-                animation: `draw-on 2s cubic-bezier(0.16, 1, 0.3, 1) forwards`,
-                strokeDashoffset: mainLen,
-              }
-            : { strokeDashoffset: mainLen }
-        }
-      />
-      {/* Top flick */}
-      <path
-        d="M163.02 26.5102C169.912 15.0237 179.101 19.6183 174.507 33.4021"
-        stroke="white"
-        strokeWidth="5.74324"
-        strokeLinecap="round"
-        strokeDasharray={flick1Len}
-        style={
-          visible
-            ? {
-                animation: `draw-on 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.6s forwards`,
-                strokeDashoffset: flick1Len,
-              }
-            : { strokeDashoffset: flick1Len }
-        }
-      />
-      {/* Bottom flick */}
-      <path
-        d="M38.0201 243.892C44.9119 255.378 54.1011 250.784 49.5065 237"
-        stroke="white"
-        strokeWidth="5.74324"
-        strokeLinecap="round"
-        strokeDasharray={flick2Len}
-        style={
-          visible
-            ? {
-                animation: `draw-on 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards`,
-                strokeDashoffset: flick2Len,
-              }
-            : { strokeDashoffset: flick2Len }
-        }
-      />
-      {/* Accent dots — pop in after strokes */}
-      <circle
-        cx="106.507"
-        cy="248.486"
-        r="11.4865"
-        fill="white"
-        opacity="0"
-        style={
-          visible
-            ? {
-                animation:
-                  "dot-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.2s forwards",
-                transformOrigin: "106.507px 248.486px",
-              }
-            : undefined
-        }
-      />
-      <circle
-        cx="187.507"
-        cy="11.4865"
-        r="11.4865"
-        fill="white"
-        opacity="0"
-        style={
-          visible
-            ? {
-                animation:
-                  "dot-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.5s forwards",
-                transformOrigin: "187.507px 11.4865px",
-              }
-            : undefined
-        }
-      />
-      <circle
-        cx="94.5065"
-        cy="98.4865"
-        r="11.4865"
-        fill="white"
-        opacity="0"
-        style={
-          visible
-            ? {
-                animation:
-                  "dot-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.8s forwards",
-                transformOrigin: "94.5065px 98.4865px",
-              }
-            : undefined
-        }
-      />
-    </svg>
-  );
-}
-
 /* ─── Logo mark ─────────────────────────────────────────── */
 
 function SettleMark({
@@ -897,22 +759,6 @@ export default function Home() {
      testimonials are distracting mid-read, and scroll-snap + nav
      buttons already signal "there's more" without taking agency
      away from the reader. */
-  const quotesScrollRef = useRef<HTMLDivElement>(null);
-  const scrollQuotes = (dir: 1 | -1) => {
-    const el = quotesScrollRef.current;
-    if (!el) return;
-    const card = el.querySelector<HTMLElement>("[data-quote-card]");
-    const step = (card?.offsetWidth ?? 320) + 24; /* card width + gap-6 */
-
-    if (dir === 1 && el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) {
-      el.scrollTo({ left: 0, behavior: "smooth" });
-    } else if (dir === -1 && el.scrollLeft <= 4) {
-      el.scrollTo({ left: el.scrollWidth, behavior: "smooth" });
-    } else {
-      el.scrollBy({ left: dir * step, behavior: "smooth" });
-    }
-  };
-
   // Discovery Call button state/observer removed while the CTA is hidden.
   // See the commented-out floating button below.
 
@@ -970,11 +816,19 @@ export default function Home() {
         {/* Hero text — no glass card, type sits directly on the bg */}
         <div className="relative z-10 max-w-[1280px] mx-auto w-full px-6 pt-28">
           <div className="mx-auto max-w-[640px] text-center">
+            {/* Definitional eyebrow: first extractable passage for LLM
+               citation ("What is Settle?"). Also matched by the
+               SpeakableSpecification cssSelector in layout.tsx. */}
+            <p className="hero-eyebrow text-[11px] md:text-[12px] font-medium uppercase tracking-[0.18em] text-accent/90 mb-6">
+              Full-stack AI agency · Manufacturers &amp; mid-market teams
+            </p>
             <h1 className="text-[clamp(2.4rem,4.8vw,4.2rem)] font-medium leading-[1.08] mb-8">
               Your business, made{" "}
               <span className="text-accent whitespace-nowrap">AI-native</span>.
             </h1>
-            <HeroSubtitle />
+            <div className="hero-subtitle">
+              <HeroSubtitle />
+            </div>
             <div className="mt-8 flex justify-center">
               <a
                 href="#contact"
@@ -1366,7 +1220,27 @@ export default function Home() {
       </section>
 
       {/* ── Process (scroll-pinned) ──────────────────── */}
-      <div id="process" ref={processRef}>
+      {/* Server-rendered heading so non-JS crawlers (CCBot, Common Crawl)
+         index "The Settle Method" as a named entity. ProcessScroll below
+         is client-only (ssr: false) for GSAP, so its eyebrow alone would
+         be invisible to AI training corpora. */}
+      <div id="process" ref={processRef} className="bg-[#ddd9cc]">
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 pt-16 md:pt-24 pb-0">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-text-muted mb-4">
+            Our methodology
+          </p>
+          <h2
+            className="text-[clamp(1.8rem,3.6vw,3rem)] font-medium leading-[1.08] tracking-[-0.02em] text-text max-w-[820px] mb-5"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
+            The Settle Method.
+          </h2>
+          <p className="text-[16px] md:text-[17px] leading-[1.65] text-text-muted max-w-[640px]">
+            A four-phase approach for deploying Claude AI into mid-market
+            businesses — Discovery, Architecture, Instruction Engineering, and
+            Deploy &amp; Settle. Every engagement runs the same playbook.
+          </p>
+        </div>
         <ProcessScroll />
       </div>
 
@@ -1413,113 +1287,138 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Customer Quotes ───────────────────────────
-         Horizontal scroll-snap carousel. The quote text sizing is
-         kept small per the design brief — the carousel is the
-         mechanism, not a reason to re-inflate the section. Cards
-         are viewport-responsive (85vw capped at 340px) so on mobile
-         one card fills the viewport and on desktop ~3 cards sit
-         alongside each other. Edge fade via mask-image lets cards
-         dissolve instead of clipping hard at the section gutter. */}
-      <section ref={quotesRef} className="bg-[#ddd9cc]">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-14 md:py-20">
-          <div className="fade-up flex items-end justify-between gap-6 mb-8 md:mb-10">
-            <div>
-              <p className="text-[10.5px] uppercase tracking-[0.15em] text-text-faint mb-2.5">
-                Voices from South Asia
-              </p>
-              <h2 className="text-[clamp(1rem,1.4vw,1.2rem)] font-medium leading-[1.35] max-w-xl text-text-muted">
-                What business leaders are saying about AI.
-              </h2>
-            </div>
-            {/* Nav buttons — hidden on xs where swipe is more natural */}
-            <div className="hidden sm:flex items-center gap-2 shrink-0">
-              <button
-                type="button"
-                aria-label="Previous quote"
-                onClick={() => scrollQuotes(-1)}
-                className="w-9 h-9 rounded-full border border-[rgba(20,20,19,0.18)] bg-bg hover:bg-[rgba(20,20,19,0.04)] hover:border-[rgba(20,20,19,0.3)] transition-colors flex items-center justify-center text-text cursor-pointer"
-              >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path
-                    d="M9 2L4 7l5 5"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-              <button
-                type="button"
-                aria-label="Next quote"
-                onClick={() => scrollQuotes(1)}
-                className="w-9 h-9 rounded-full border border-[rgba(20,20,19,0.18)] bg-bg hover:bg-[rgba(20,20,19,0.04)] hover:border-[rgba(20,20,19,0.3)] transition-colors flex items-center justify-center text-text cursor-pointer"
-              >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path
-                    d="M5 2l5 5-5 5"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            </div>
+      {/* ── Customer Quotes — Editorial Mosaic ─────────
+         Asymmetric 12-col bento grid. The hero pull quote (col-span-7,
+         row-span-2) gets magazine-style treatment: oversized serif
+         italic + decorative ❝ watermark in accent terracotta. Two
+         stacked cards sit to its right, including one inverted
+         accent-filled card that breaks the monotone beige. A 3-card
+         bottom row includes a near-black "featured" card for a
+         third color-tone step. Subtle hover-lift on every card. */}
+      <section ref={quotesRef} className="bg-[#ddd9cc] relative overflow-hidden">
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-12 md:py-20 relative">
+          {/* Section header */}
+          <div className="fade-up mb-6 md:mb-10 max-w-2xl">
+            <p className="text-[10.5px] uppercase tracking-[0.18em] text-accent mb-2.5 flex items-center gap-2.5">
+              <span className="inline-block w-6 h-px bg-accent/60" />
+              Voices from South Asia
+            </p>
+            <h2 className="text-[clamp(1.25rem,3vw,2.5rem)] font-medium leading-[1.1] tracking-[-0.02em] text-text">
+              What business leaders are{" "}
+              <em className="not-italic text-accent font-heading italic">
+                actually
+              </em>{" "}
+              saying about AI.
+            </h2>
           </div>
 
-          {/* The scroll container extends past the section's content
-             gutter with negative margin + matching positive padding,
-             so the first and last cards can fade into the viewport
-             edges via mask-image instead of butting hard against the
-             container wall. */}
-          <div
-            ref={quotesScrollRef}
-            className="fade-up no-scrollbar flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2"
-          >
-            {[
-              {
-                q: "I had the app in 2 days. It would have taken 2 months before.",
-                attr: "Small business owner, India",
-              },
-              {
-                q: "Since I can think faster than I could build, my range of ideas has grown.",
-                attr: "Entrepreneur, India",
-              },
-              {
-                q: "I don\u2019t see any limit anymore.",
-                attr: "Entrepreneur, India",
-              },
-              {
-                q: "My worry isn\u2019t intentional harm but unexamined assumptions being scaled through automation.",
-                attr: "Entrepreneur, India",
-              },
-              {
-                q: "A laptop crash wiped three months of work. I rebuilt my website in four languages within five weeks.",
-                attr: "Entrepreneur, India",
-              },
-              {
-                q: "Accidentally, AI gave me the idea of a new business \u2014 enough to retire my family and help people in Balochistan and Sindh.",
-                attr: "Entrepreneur, Pakistan",
-              },
-            ].map((quote, i) => (
-              <div
-                key={i}
-                data-quote-card
-                className="snap-start shrink-0 w-[min(85vw,340px)] md:w-[320px] flex flex-col justify-between py-1"
+          {/* Editorial mosaic grid — 2 cols on mobile (bento), 12 on md */}
+          <div className="grid grid-cols-2 md:grid-cols-12 gap-3 md:gap-5">
+            {/* HERO pull quote — full width mobile, 7×2 on md */}
+            <article className="fade-up group relative col-span-2 md:col-span-7 md:row-span-2 bg-bg rounded-xl md:rounded-2xl p-5 md:p-10 overflow-hidden border border-black/[0.05] flex flex-col justify-between hover:-translate-y-0.5 transition-transform duration-500">
+              <span
+                aria-hidden
+                className="absolute -top-6 md:-top-12 -left-2 md:-left-5 text-[7rem] md:text-[16rem] leading-none font-heading text-accent/25 select-none pointer-events-none"
               >
-                <blockquote className="text-[13.5px] leading-[1.7] text-text-muted mb-4">
-                  &ldquo;{quote.q}&rdquo;
-                </blockquote>
-                <div className="text-[10.5px] text-text-faint uppercase tracking-[0.08em]">
-                  {quote.attr}
-                </div>
+                &ldquo;
+              </span>
+              <blockquote className="relative font-heading italic text-[clamp(1.05rem,2.4vw,2rem)] leading-[1.2] tracking-[-0.01em] text-text mt-5 md:mt-12">
+                I had the app in 2 days. It would have taken 2 months
+                before.
+              </blockquote>
+              <div className="relative flex items-center gap-2.5 mt-4 md:mt-8">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                <span className="text-[10px] md:text-[11px] uppercase tracking-[0.15em] font-medium text-text/70">
+                  Small business owner · India
+                </span>
               </div>
-            ))}
+            </article>
+
+            {/* Top-right card — clean cream */}
+            <article className="fade-up col-span-2 md:col-span-5 bg-bg rounded-xl md:rounded-2xl p-4 md:p-6 border border-black/[0.05] flex flex-col justify-between hover:-translate-y-0.5 transition-transform duration-500">
+              <blockquote className="text-[13.5px] md:text-[16px] leading-[1.5] text-text/85 font-medium">
+                &ldquo;Since I can think faster than I could build, my
+                range of ideas has grown.&rdquo;
+              </blockquote>
+              <div className="flex items-center gap-2.5 mt-3 md:mt-4">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                <span className="text-[10px] md:text-[10.5px] uppercase tracking-[0.15em] text-text-muted">
+                  Entrepreneur · India
+                </span>
+              </div>
+            </article>
+
+            {/* Middle-right card — INVERTED terracotta */}
+            <article className="fade-up relative col-span-2 md:col-span-5 bg-accent text-white rounded-xl md:rounded-2xl p-4 md:p-6 overflow-hidden flex flex-col justify-between hover:-translate-y-0.5 transition-transform duration-500">
+              <span
+                aria-hidden
+                className="absolute -top-4 right-1 md:right-2 text-[5rem] md:text-[7rem] leading-none font-heading text-white/20 select-none pointer-events-none"
+              >
+                &ldquo;
+              </span>
+              <blockquote className="relative font-heading italic text-[clamp(1.1rem,1.9vw,1.6rem)] leading-[1.2] text-white">
+                I don&rsquo;t see any limit anymore.
+              </blockquote>
+              <div className="relative flex items-center gap-2.5 mt-3 md:mt-4">
+                <span className="w-1.5 h-1.5 rounded-full bg-white/80" />
+                <span className="text-[10px] md:text-[10.5px] uppercase tracking-[0.15em] text-white/80">
+                  Entrepreneur · India
+                </span>
+              </div>
+            </article>
+
+            {/* Bottom row — 3 cards. On mobile: 2 cols, the dark one spans full. */}
+            <article className="fade-up col-span-1 md:col-span-4 bg-bg rounded-xl md:rounded-2xl p-4 md:p-6 border border-black/[0.05] flex flex-col justify-between hover:-translate-y-0.5 transition-transform duration-500">
+              <blockquote className="text-[12.5px] md:text-[14px] leading-[1.55] text-text/80">
+                &ldquo;My worry isn&rsquo;t intentional harm but
+                unexamined assumptions being scaled through
+                automation.&rdquo;
+              </blockquote>
+              <div className="flex items-center gap-2.5 mt-3 md:mt-4">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                <span className="text-[9.5px] md:text-[10.5px] uppercase tracking-[0.15em] text-text-muted">
+                  Entrepreneur · India
+                </span>
+              </div>
+            </article>
+
+            <article className="fade-up col-span-1 md:col-span-4 bg-bg rounded-xl md:rounded-2xl p-4 md:p-6 border border-black/[0.05] flex flex-col justify-between hover:-translate-y-0.5 transition-transform duration-500">
+              <blockquote className="text-[12.5px] md:text-[14px] leading-[1.55] text-text/80">
+                &ldquo;A laptop crash wiped three months of work. I
+                rebuilt my website in four languages within five
+                weeks.&rdquo;
+              </blockquote>
+              <div className="flex items-center gap-2.5 mt-3 md:mt-4">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                <span className="text-[9.5px] md:text-[10.5px] uppercase tracking-[0.15em] text-text-muted">
+                  Entrepreneur · India
+                </span>
+              </div>
+            </article>
+
+            {/* Featured near-black card — spans full on mobile, 4 on md */}
+            <article className="fade-up relative col-span-2 md:col-span-4 bg-bg-dark text-bg rounded-xl md:rounded-2xl p-4 md:p-6 overflow-hidden flex flex-col justify-between hover:-translate-y-0.5 transition-transform duration-500">
+              <span
+                aria-hidden
+                className="absolute -top-4 right-2 text-[4.5rem] md:text-[6rem] leading-none font-heading text-accent/30 select-none pointer-events-none"
+              >
+                &ldquo;
+              </span>
+              <blockquote className="relative text-[12.5px] md:text-[14px] leading-[1.55] text-bg/90">
+                Accidentally, AI gave me the idea of a new business
+                &mdash; enough to retire my family and help people in
+                Balochistan and Sindh.
+              </blockquote>
+              <div className="relative flex items-center gap-2.5 mt-3 md:mt-4">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                <span className="text-[9.5px] md:text-[10.5px] uppercase tracking-[0.15em] text-bg/60">
+                  Entrepreneur · Pakistan
+                </span>
+              </div>
+            </article>
           </div>
 
-          <p className="text-[10.5px] text-text-faint mt-8 max-w-2xl">
+          <p className="text-[10.5px] md:text-[11px] text-text-faint mt-7 md:mt-12 max-w-2xl">
             From Anthropic&rsquo;s{" "}
             <a
               href="https://www.anthropic.com/features/81k-interviews#quotes"
@@ -1675,6 +1574,12 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
             {/* Left: text + form */}
             <div className="text-center md:text-left">
+              {/* Mobile-only particle mark, above the title */}
+              <div className="md:hidden flex justify-center mb-4">
+                <div className="w-[120px] h-[180px] opacity-[0.32]">
+                  <ParticleSettleMark />
+                </div>
+              </div>
               <h2 className="fade-up text-[clamp(1.8rem,4vw,3.5rem)] font-medium leading-[1.1] mb-5 text-white">
                 Ready to settle in with AI?
               </h2>
@@ -1730,10 +1635,10 @@ export default function Home() {
                 </>
               )}
             </div>
-            {/* Right: animated illustration */}
+            {/* Right: animated illustration — particles morph S → illustration → bot → S */}
             <div className="hidden md:flex justify-center items-center">
-              <div className="w-[320px] h-[480px] lg:w-[380px] lg:h-[570px] opacity-[0.15]">
-                <AnimatedSettleMark />
+              <div className="w-[320px] h-[480px] lg:w-[380px] lg:h-[570px] opacity-[0.32]">
+                <ParticleSettleMark />
               </div>
             </div>
           </div>

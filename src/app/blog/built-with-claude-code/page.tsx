@@ -144,7 +144,7 @@ export default function Article() {
         <div className="prose-settle">
           <h2>Why build a site with a CLI tool?</h2>
           <p>
-            I run a Claude AI deployment studio. I spend my days helping
+            I run a full-stack AI agency. I spend my days helping
             manufacturers and mid-market companies integrate Claude AI into
             their operations. So when I needed a website for Settle, the
             question wasn&apos;t really whether to use Claude AI. It was how

@@ -112,7 +112,7 @@ export default function ProcessScroll() {
       {/* "OUR PROCESS" label */}
       <div className="absolute left-6 lg:left-10 top-1/2 -translate-y-1/2 z-10">
         <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
-          Our <span className="text-accent">Process</span>
+          The Settle <span className="text-accent">Method</span>
         </p>
       </div>
 

@@ -50,7 +50,7 @@ mkdir -p "$OUTPUT_DIR"
 
 COMPARISON_PROMPT="Write a comparison page for settlewithai.com: 'Settle vs $SLUG'.
 
-Settle is an AI deployment studio that deploys Claude (Anthropic's AI) into businesses. First client Orient Printing: 85% faster doc generation, 49 use cases mapped, 11 projects deployed, 4hrs to 30min task time.
+Settle is a full-stack AI agency that deploys Claude (Anthropic's AI) into businesses. First client Orient Printing: 85% faster doc generation, 49 use cases mapped, 11 projects deployed, 4hrs to 30min task time.
 
 Write an MDX file with YAML frontmatter (title, description, slug, competitor, date, keywords, faq array) followed by ~2,800 words of content.
 

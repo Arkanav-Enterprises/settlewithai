@@ -26,6 +26,23 @@ User-agent: Bytespider
 Disallow: /
 
 User-agent: CCBot
-Disallow: /
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Diffbot
+Allow: /
 
 Sitemap: https://settlewithai.com/sitemap.xml
+Sitemap: https://settlewithai.com/llms.txt
+Sitemap: https://settlewithai.com/llms-full.txt

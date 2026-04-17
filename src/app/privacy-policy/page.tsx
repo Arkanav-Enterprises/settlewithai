@@ -31,7 +31,7 @@ export default function PrivacyPolicy() {
           <h2 style={{ fontFamily: "var(--font-heading)" }}>Who we are</h2>
           <p>
             Settle (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) operates settlewithai.com.
-            We are an AI deployment studio that helps businesses deploy Claude AI (by Anthropic) across
+            We are a full-stack AI agency that helps businesses deploy Claude AI (by Anthropic) across
             their workflows. You can contact us at{" "}
             <a href="mailto:hi@settlewithai.com" className="text-accent hover:underline">
               hi@settlewithai.com

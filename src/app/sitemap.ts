@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllSlugs } from "@/lib/content";
 import { BLOG_POSTS } from "@/content/blog-posts";
+import { AGENTS } from "@/content/agents";
 
 const SITE_URL = "https://settlewithai.com";
 
@@ -94,8 +95,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const agentsIndex: MetadataRoute.Sitemap = [
+    {
+      url: `${SITE_URL}/agents`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    },
+  ];
+
+  const agentPages: MetadataRoute.Sitemap = AGENTS.map((agent) => ({
+    url: `${SITE_URL}/agents/${agent.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.75,
+  }));
+
   return [
     ...staticPages,
+    ...agentsIndex,
+    ...agentPages,
     ...blogPages,
     ...comparisonPages,
     ...industryPages,

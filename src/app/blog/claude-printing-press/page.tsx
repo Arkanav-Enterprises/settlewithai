@@ -348,7 +348,7 @@ export default function Article() {
                 Pranav Ambwani
               </a>
               <p className="text-sm text-text-muted mt-1 leading-relaxed">
-                Founder of Settle, an AI deployment studio for manufacturers. Works on-site with factory teams to build production-grade Claude systems. USC Electrical Engineering. Based between Los Angeles and New Delhi.
+                Founder of Settle, a full-stack AI agency for manufacturers and mid-market teams. Works on-site with factory teams to build production-grade Claude systems. USC Electrical Engineering. Based between Los Angeles and New Delhi.
               </p>
             </div>
           </div>

@@ -1,19 +1,19 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 /* ─── Data ─── */
 
 const AGENTS = [
-  { name: "Offer Generator", icon: "doc" },
-  { name: "MIS Reporter", icon: "chart" },
-  { name: "Support Desk", icon: "chat" },
-  { name: "Recruitment Hunter", icon: "search" },
-  { name: "Service Report Writer", icon: "clipboard" },
-  { name: "BOM Generator", icon: "cube" },
+  { name: "Offer Generator", viz: "doc" },
+  { name: "MIS Reporter", viz: "chart" },
+  { name: "Support Desk", viz: "chat" },
+  { name: "Recruitment Hunter", viz: "search" },
+  { name: "Service Report Writer", viz: "clipboard" },
+  { name: "BOM Generator", viz: "cube" },
 ] as const;
 
-type IconKey = (typeof AGENTS)[number]["icon"];
+type VizKey = (typeof AGENTS)[number]["viz"];
 
 /* ─── Layouts ─── */
 
@@ -24,31 +24,34 @@ interface Layout {
   positions: { x: number; y: number }[];
 }
 
+// Positions are intentionally slightly asymmetric (y offsets vary by ~10px
+// between left and right columns) so the layout reads as a living system,
+// not a PowerPoint diagram.
 const DESKTOP: Layout = {
   vb: { w: 860, h: 480 },
-  hub: { x: 430, y: 240, r: 50 },
-  card: { w: 170, h: 68 },
+  hub: { x: 430, y: 240, r: 52 },
+  card: { w: 178, h: 72 },
   positions: [
-    { x: 25, y: 25 },
-    { x: 5, y: 200 },
-    { x: 35, y: 375 },
-    { x: 665, y: 25 },
-    { x: 685, y: 200 },
-    { x: 655, y: 375 },
+    { x: 28, y: 22 },
+    { x: 4, y: 208 },
+    { x: 48, y: 388 },
+    { x: 654, y: 32 },
+    { x: 690, y: 198 },
+    { x: 640, y: 378 },
   ],
 };
 
 const MOBILE: Layout = {
   vb: { w: 320, h: 740 },
-  hub: { x: 160, y: 370, r: 38 },
-  card: { w: 210, h: 46 },
+  hub: { x: 160, y: 370, r: 40 },
+  card: { w: 210, h: 50 },
   positions: [
-    { x: 10, y: 15 },
-    { x: 100, y: 85 },
-    { x: 25, y: 155 },
-    { x: 100, y: 550 },
-    { x: 10, y: 620 },
-    { x: 85, y: 690 },
+    { x: 10, y: 12 },
+    { x: 100, y: 82 },
+    { x: 25, y: 152 },
+    { x: 100, y: 552 },
+    { x: 10, y: 622 },
+    { x: 85, y: 692 },
   ],
 };
 
@@ -77,24 +80,150 @@ function buildPaths(L: Layout) {
 const DESKTOP_PATHS = buildPaths(DESKTOP);
 const MOBILE_PATHS = buildPaths(MOBILE);
 
-/* ─── Icons ─── */
+/* ─── Live micro-vizes ───────────────────────────
+   Each agent card shows a tiny animated SVG specific
+   to its job. All animation via SMIL so instances
+   don't share CSS class state when multiple diagrams
+   render. 24×24 viewBox, uses currentColor for fill. */
 
-function AgentIcon({ icon, className = "" }: { icon: IconKey; className?: string }) {
-  const c = `w-5 h-5 ${className}`;
-  const p = { fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
-  switch (icon) {
+function AgentViz({ type }: { type: VizKey }) {
+  const stroke = { stroke: "currentColor", fill: "none", strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+
+  switch (type) {
+    // Streaming text generation — lines draw in left-to-right, staggered
     case "doc":
-      return <svg viewBox="0 0 24 24" className={c} {...p}><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" /></svg>;
+      return (
+        <svg viewBox="0 0 24 24" className="w-full h-full">
+          <rect x="4.5" y="4" width="15" height="16" rx="1.8" {...stroke} strokeWidth="1.2" opacity="0.35" />
+          {[
+            { y: 8.5, len: 9, delay: 0 },
+            { y: 12, len: 11.5, delay: 0.35 },
+            { y: 15.5, len: 7.5, delay: 0.7 },
+          ].map((bar, idx) => (
+            <line
+              key={idx}
+              x1="7" y1={bar.y}
+              x2={7 + bar.len} y2={bar.y}
+              {...stroke}
+              strokeWidth="1.4"
+              strokeDasharray={bar.len}
+              strokeDashoffset={bar.len}
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                values={`${bar.len};0;0;${bar.len}`}
+                keyTimes="0;0.35;0.85;1"
+                dur="3s"
+                begin={`${bar.delay}s`}
+                repeatCount="indefinite"
+              />
+            </line>
+          ))}
+        </svg>
+      );
+
+    // Bar chart — bars grow from baseline, staggered
     case "chart":
-      return <svg viewBox="0 0 24 24" className={c} {...p}><path d="M18 20V10M12 20V4M6 20v-6" /></svg>;
+      return (
+        <svg viewBox="0 0 24 24" className="w-full h-full">
+          <line x1="4" y1="20" x2="20" y2="20" {...stroke} strokeWidth="1.2" opacity="0.3" />
+          {[
+            { x: 5.5, h: 6, delay: 0 },
+            { x: 10.5, h: 11, delay: 0.3 },
+            { x: 15.5, h: 8, delay: 0.6 },
+          ].map((bar, idx) => (
+            <rect
+              key={idx}
+              x={bar.x}
+              width="3"
+              y={20 - bar.h}
+              height={bar.h}
+              rx="0.6"
+              fill="currentColor"
+              opacity="0.55"
+            >
+              <animate attributeName="height" values={`0;${bar.h};${bar.h};0`} keyTimes="0;0.3;0.85;1" dur="3.2s" begin={`${bar.delay}s`} repeatCount="indefinite" />
+              <animate attributeName="y" values={`20;${20 - bar.h};${20 - bar.h};20`} keyTimes="0;0.3;0.85;1" dur="3.2s" begin={`${bar.delay}s`} repeatCount="indefinite" />
+            </rect>
+          ))}
+        </svg>
+      );
+
+    // Typing indicator — 3 dots bouncing in speech bubble
     case "chat":
-      return <svg viewBox="0 0 24 24" className={c} {...p}><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>;
+      return (
+        <svg viewBox="0 0 24 24" className="w-full h-full">
+          <path d="M3 10a5 5 0 015-5h8a5 5 0 015 5v2a5 5 0 01-5 5h-4.5L8 20.5V17H8a5 5 0 01-5-5z" {...stroke} strokeWidth="1.2" opacity="0.35" />
+          {[8, 12, 16].map((cx, idx) => (
+            <circle key={cx} cx={cx} cy="11" r="1.1" fill="currentColor">
+              <animate attributeName="cy" values="11;9;11;11" keyTimes="0;0.25;0.5;1" dur="1.4s" begin={`${idx * 0.18}s`} repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.35;1;0.35;0.35" keyTimes="0;0.25;0.5;1" dur="1.4s" begin={`${idx * 0.18}s`} repeatCount="indefinite" />
+            </circle>
+          ))}
+        </svg>
+      );
+
+    // Radar sweep — rotating sweep line over nested circles
     case "search":
-      return <svg viewBox="0 0 24 24" className={c} {...p}><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg>;
+      return (
+        <svg viewBox="0 0 24 24" className="w-full h-full">
+          <circle cx="12" cy="12" r="8" {...stroke} strokeWidth="1.2" opacity="0.3" />
+          <circle cx="12" cy="12" r="5" {...stroke} strokeWidth="1" opacity="0.22" />
+          <circle cx="12" cy="12" r="2" {...stroke} strokeWidth="1" opacity="0.5" />
+          <g>
+            <line x1="12" y1="12" x2="20" y2="12" {...stroke} strokeWidth="1.5" opacity="0.8" />
+            <animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="3.6s" repeatCount="indefinite" />
+          </g>
+          {/* Ping dot that briefly appears where the sweep finds something */}
+          <circle cx="17" cy="8" r="1.2" fill="currentColor">
+            <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.4;0.5;0.6;1" dur="3.6s" repeatCount="indefinite" />
+          </circle>
+        </svg>
+      );
+
+    // Checklist — 3 checks appear in sequence, then reset
     case "clipboard":
-      return <svg viewBox="0 0 24 24" className={c} {...p}><rect x="6" y="4" width="12" height="17" rx="2" /><path d="M9 4V3a1 1 0 011-1h4a1 1 0 011 1v1M9 13l2 2 4-4" /></svg>;
+      return (
+        <svg viewBox="0 0 24 24" className="w-full h-full">
+          <rect x="5" y="4" width="14" height="17" rx="1.8" {...stroke} strokeWidth="1.2" opacity="0.35" />
+          <rect x="9" y="2.5" width="6" height="3" rx="0.6" fill="currentColor" opacity="0.45" />
+          {[8.5, 13, 17.5].map((cy, idx) => {
+            const d = `M7.5 ${cy}l1.6 1.6L12 ${cy - 1.6}`;
+            const lineLen = 5.6;
+            return (
+              <g key={idx}>
+                <line x1="14" y1={cy + 0.3} x2="17.5" y2={cy + 0.3} {...stroke} strokeWidth="1.2" opacity="0.28" />
+                <path d={d} {...stroke} strokeWidth="1.5" strokeDasharray={lineLen} strokeDashoffset={lineLen}>
+                  <animate attributeName="stroke-dashoffset" values={`${lineLen};0;0;${lineLen}`} keyTimes="0;0.3;0.9;1" dur="3.5s" begin={`${idx * 0.35}s`} repeatCount="indefinite" />
+                </path>
+              </g>
+            );
+          })}
+        </svg>
+      );
+
+    // BOM — 3 stacked blocks build up, one at a time
     case "cube":
-      return <svg viewBox="0 0 24 24" className={c} {...p}><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z" /><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5" /></svg>;
+      return (
+        <svg viewBox="0 0 24 24" className="w-full h-full">
+          {[
+            { y: 15.5, delay: 0 },
+            { y: 10.5, delay: 0.4 },
+            { y: 5.5, delay: 0.8 },
+          ].map((b, idx) => (
+            <g key={idx}>
+              <rect x="7" y={b.y} width="10" height="3.5" rx="0.6" fill="currentColor" opacity="0.55">
+                <animate attributeName="opacity" values="0;0.55;0.55;0" keyTimes="0;0.25;0.9;1" dur="3.2s" begin={`${b.delay}s`} repeatCount="indefinite" />
+                <animate attributeName="width" values="0;10;10;10" keyTimes="0;0.25;0.9;1" dur="3.2s" begin={`${b.delay}s`} repeatCount="indefinite" />
+              </rect>
+              {/* Subtle tick between stacks */}
+              {idx < 2 && (
+                <line x1="12" y1={b.y - 0.8} x2="12" y2={b.y - 1.8} {...stroke} strokeWidth="1" opacity="0.3" />
+              )}
+            </g>
+          ))}
+        </svg>
+      );
   }
 }
 
@@ -105,7 +234,7 @@ const SETTLE_D =
 
 /* ─── Shared diagram renderer ─── */
 
-function Diagram({ L, paths, visible }: { L: Layout; paths: string[]; visible: boolean }) {
+function Diagram({ L, paths, visible, uid }: { L: Layout; paths: string[]; visible: boolean; uid: string }) {
   const { vb, hub, card, positions } = L;
   const isVertical = vb.h > vb.w;
   const markScale = hub.r / 165;
@@ -115,14 +244,14 @@ function Diagram({ L, paths, visible }: { L: Layout; paths: string[]; visible: b
       className="relative mx-auto w-full"
       style={{ maxWidth: vb.w, aspectRatio: `${vb.w}/${vb.h}` }}
     >
-      {/* Scoped keyframes for float + flow animations */}
       <style>{`
         @keyframes agentFloat {
           0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-6px); }
+          50% { transform: translateY(-5px); }
         }
-        @keyframes agentFlow {
-          to { stroke-dashoffset: -34; }
+        @keyframes agentStatusPulse {
+          0%, 100% { opacity: 0.35; transform: scale(0.9); }
+          50% { opacity: 1; transform: scale(1.1); }
         }
       `}</style>
 
@@ -131,13 +260,46 @@ function Diagram({ L, paths, visible }: { L: Layout; paths: string[]; visible: b
         className="absolute inset-0 w-full h-full pointer-events-none"
         fill="none"
       >
-        {/* Base connecting curves — rendered FIRST so hub paints on top */}
+        <defs>
+          {/* Radial glow backdrop behind hub — gives depth, like a subtle sun */}
+          <radialGradient id={`hubGlow-${uid}`} cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#d97757" stopOpacity="0.22" />
+            <stop offset="45%" stopColor="#d97757" stopOpacity="0.08" />
+            <stop offset="100%" stopColor="#d97757" stopOpacity="0" />
+          </radialGradient>
+
+          {/* Hub inner gradient — soft highlight top-left, suggesting volume */}
+          <radialGradient id={`hubFill-${uid}`} cx="35%" cy="30%" r="75%">
+            <stop offset="0%" stopColor="#e89877" />
+            <stop offset="60%" stopColor="#d97757" />
+            <stop offset="100%" stopColor="#c56642" />
+          </radialGradient>
+
+          {/* Invisible path refs for traveling particles */}
+          {paths.map((d, i) => (
+            <path key={`def-${i}`} id={`${uid}-path-${i}`} d={d} />
+          ))}
+        </defs>
+
+        {/* Hub glow backdrop */}
+        <circle
+          cx={hub.x}
+          cy={hub.y}
+          r={hub.r * 3}
+          fill={`url(#hubGlow-${uid})`}
+          style={{
+            opacity: visible ? 1 : 0,
+            transition: "opacity 900ms ease 200ms",
+          }}
+        />
+
+        {/* Base connecting curves — drawn on entrance, then stay subtle */}
         {paths.map((d, i) => (
           <path
             key={i}
             d={d}
-            stroke="rgba(20,20,19,0.1)"
-            strokeWidth="1.5"
+            stroke="rgba(20,20,19,0.11)"
+            strokeWidth="1.25"
             strokeDasharray="600"
             style={{
               strokeDashoffset: visible ? 0 : 600,
@@ -146,55 +308,81 @@ function Diagram({ L, paths, visible }: { L: Layout; paths: string[]; visible: b
           />
         ))}
 
-        {/* Flowing orange current overlay — same paths, short dashes that animate */}
-        {paths.map((d, i) => (
-          <path
-            key={`flow-${i}`}
-            d={d}
-            stroke="rgba(217,119,87,0.35)"
-            strokeWidth="2"
-            strokeLinecap="round"
-            fill="none"
-            strokeDasharray="6 28"
-            style={{
-              opacity: visible ? 1 : 0,
-              transition: `opacity 400ms ease ${1400 + i * 100}ms`,
-              animation: visible
-                ? `agentFlow ${2.2 + i * 0.15}s linear ${1.5 + i * 0.1}s infinite`
-                : "none",
-            }}
-          />
-        ))}
+        {/* Traveling data packets — two per path, staggered, with faint trail */}
+        {visible &&
+          paths.map((_, i) => {
+            const dur = 2.6 + i * 0.18;
+            const begin = 1.2 + i * 0.3;
+            return (
+              <g key={`packet-${i}`}>
+                {/* Trail — bigger, softer, slightly behind */}
+                <circle r="4.5" fill="#d97757" opacity="0.12">
+                  <animateMotion dur={`${dur}s`} begin={`${begin - 0.08}s`} repeatCount="indefinite" rotate="auto">
+                    <mpath href={`#${uid}-path-${i}`} />
+                  </animateMotion>
+                </circle>
+                {/* Core packet */}
+                <circle r="2.2" fill="#d97757" opacity="0.95">
+                  <animateMotion dur={`${dur}s`} begin={`${begin}s`} repeatCount="indefinite" rotate="auto">
+                    <mpath href={`#${uid}-path-${i}`} />
+                  </animateMotion>
+                </circle>
+                {/* Second packet delayed — creates constant flow */}
+                <circle r="1.8" fill="#d97757" opacity="0.6">
+                  <animateMotion dur={`${dur}s`} begin={`${begin + dur / 2}s`} repeatCount="indefinite" rotate="auto">
+                    <mpath href={`#${uid}-path-${i}`} />
+                  </animateMotion>
+                </circle>
+              </g>
+            );
+          })}
 
-        {/* Hub glow ring */}
+        {/* Sonar pulse rings — expanding outward from hub */}
+        {visible && (
+          <>
+            <circle cx={hub.x} cy={hub.y} r={hub.r} fill="none" stroke="#d97757" strokeWidth="1.4">
+              <animate attributeName="r" values={`${hub.r};${hub.r + 42}`} dur="3.2s" repeatCount="indefinite" />
+              <animate attributeName="stroke-opacity" values="0.45;0" dur="3.2s" repeatCount="indefinite" />
+              <animate attributeName="stroke-width" values="1.6;0.4" dur="3.2s" repeatCount="indefinite" />
+            </circle>
+            <circle cx={hub.x} cy={hub.y} r={hub.r} fill="none" stroke="#d97757" strokeWidth="1.4">
+              <animate attributeName="r" values={`${hub.r};${hub.r + 42}`} dur="3.2s" begin="1.6s" repeatCount="indefinite" />
+              <animate attributeName="stroke-opacity" values="0.45;0" dur="3.2s" begin="1.6s" repeatCount="indefinite" />
+              <animate attributeName="stroke-width" values="1.6;0.4" dur="3.2s" begin="1.6s" repeatCount="indefinite" />
+            </circle>
+          </>
+        )}
+
+        {/* Hub outer ring — fixed */}
         <circle
           cx={hub.x}
           cy={hub.y}
-          r={hub.r + 7}
+          r={hub.r + 6}
           fill="none"
-          stroke="rgba(217,119,87,0.15)"
-          strokeWidth="3.5"
-          style={{ opacity: visible ? 1 : 0, transition: "opacity 600ms ease" }}
+          stroke="rgba(217,119,87,0.28)"
+          strokeWidth="1.5"
+          style={{ opacity: visible ? 1 : 0, transition: "opacity 600ms ease 300ms" }}
         />
 
-        {/* Hub filled circle */}
+        {/* Hub filled circle with gradient */}
         <circle
           cx={hub.x}
           cy={hub.y}
           r={hub.r}
-          fill="#d97757"
+          fill={`url(#hubFill-${uid})`}
           style={{
             opacity: visible ? 1 : 0,
             transform: visible ? "scale(1)" : "scale(0.7)",
             transformOrigin: `${hub.x}px ${hub.y}px`,
             transition: "all 600ms cubic-bezier(0.16,1,0.3,1)",
+            filter: "drop-shadow(0 4px 12px rgba(217,119,87,0.35))",
           }}
         />
 
         {/* Settle mark inside hub */}
-        <g style={{ opacity: visible ? 1 : 0, transition: "opacity 400ms ease 300ms" }}>
+        <g style={{ opacity: visible ? 1 : 0, transition: "opacity 400ms ease 500ms" }}>
           <g transform={`translate(${hub.x - 100 * markScale},${hub.y - 150 * markScale}) scale(${markScale})`}>
-            <path d={SETTLE_D} stroke="rgba(255,255,255,0.55)" strokeWidth="8" strokeLinecap="round" fill="none" />
+            <path d={SETTLE_D} stroke="rgba(255,255,255,0.7)" strokeWidth="8" strokeLinecap="round" fill="none" />
           </g>
         </g>
       </svg>
@@ -203,60 +391,98 @@ function Diagram({ L, paths, visible }: { L: Layout; paths: string[]; visible: b
       <div
         className="absolute left-1/2 -translate-x-1/2 text-center"
         style={{
-          top: `${((hub.y + hub.r + 12) / vb.h) * 100}%`,
+          top: `${((hub.y + hub.r + 14) / vb.h) * 100}%`,
           opacity: visible ? 1 : 0,
-          transition: "opacity 400ms ease 400ms",
+          transition: "opacity 400ms ease 600ms",
         }}
       >
         <span
-          className="text-[12px] md:text-[13px] font-medium text-text-muted"
-          style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.01em" }}
+          className="text-[11.5px] md:text-[12.5px] uppercase tracking-[0.14em] font-medium text-text-muted"
         >
           Your AI layer
         </span>
       </div>
 
-      {/* Agent cards — float gently after entrance */}
+      {/* Agent cards */}
       {AGENTS.map((agent, i) => {
         const pos = positions[i];
-        const fromStart = isVertical ? i < 3 : i < 3;
-        const floatDur = 3.4 + i * 0.35;
-        const floatDelay = 1.8 + i * 0.12;
+        const floatDur = 3.6 + i * 0.32;
+        const floatDelay = 1.9 + i * 0.11;
+        const pulseDelay = i * 0.5;
         return (
           <div
             key={agent.name}
-            className="absolute flex items-center gap-2.5 rounded-xl border border-border-light"
+            className="absolute rounded-xl overflow-hidden"
             style={{
               left: `${(pos.x / vb.w) * 100}%`,
               top: `${(pos.y / vb.h) * 100}%`,
               width: `${(card.w / vb.w) * 100}%`,
-              padding: isVertical ? "8px 10px" : "12px 14px",
-              backgroundColor: "rgba(255,255,255,0.85)",
-              backdropFilter: "blur(8px)",
-              WebkitBackdropFilter: "blur(8px)",
-              boxShadow: "0 2px 12px rgba(0,0,0,0.04)",
               opacity: visible ? 1 : 0,
-              transition: `opacity 600ms cubic-bezier(0.16,1,0.3,1) ${650 + i * 120}ms`,
+              transition: `opacity 600ms cubic-bezier(0.16,1,0.3,1) ${700 + i * 120}ms`,
               animation: visible
                 ? `agentFloat ${floatDur}s ease-in-out ${floatDelay}s infinite`
                 : "none",
             }}
           >
+            {/* Card surface with subtle gradient + accent left edge */}
             <div
-              className="rounded-full flex items-center justify-center bg-[rgba(20,20,19,0.05)] text-text-muted shrink-0"
-              style={{ width: isVertical ? 28 : 36, height: isVertical ? 28 : 36 }}
-            >
-              <AgentIcon icon={agent.icon} className={isVertical ? "!w-3.5 !h-3.5" : ""} />
-            </div>
-            <span
-              className="font-medium text-text leading-tight"
+              className="relative flex items-center gap-2.5 border border-black/[0.06]"
               style={{
-                fontSize: isVertical ? 11 : 12.5,
-                fontFamily: "var(--font-heading)",
+                padding: isVertical ? "9px 11px 9px 13px" : "12px 14px 12px 16px",
+                background:
+                  "linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.8))",
+                backdropFilter: "blur(10px)",
+                WebkitBackdropFilter: "blur(10px)",
+                boxShadow:
+                  "0 1px 2px rgba(20,20,19,0.04), 0 8px 24px -8px rgba(20,20,19,0.08)",
+                borderRadius: "inherit",
               }}
             >
-              {agent.name}
-            </span>
+              {/* Left accent stripe — subtle brand cue */}
+              <span
+                aria-hidden
+                className="absolute left-0 top-2 bottom-2 w-[2px] rounded-full bg-accent/35"
+              />
+
+              {/* Micro-viz */}
+              <div
+                className="shrink-0 rounded-lg flex items-center justify-center text-accent"
+                style={{
+                  width: isVertical ? 30 : 38,
+                  height: isVertical ? 30 : 38,
+                  background:
+                    "radial-gradient(circle at 30% 30%, rgba(217,119,87,0.14), rgba(217,119,87,0.04))",
+                  border: "1px solid rgba(217,119,87,0.14)",
+                }}
+              >
+                <div style={{ width: isVertical ? 18 : 22, height: isVertical ? 18 : 22 }}>
+                  <AgentViz type={agent.viz} />
+                </div>
+              </div>
+
+              {/* Label */}
+              <span
+                className="font-medium text-text leading-tight flex-1 min-w-0"
+                style={{
+                  fontSize: isVertical ? 11.5 : 13,
+                  fontFamily: "var(--font-heading)",
+                  letterSpacing: "-0.005em",
+                }}
+              >
+                {agent.name}
+              </span>
+
+              {/* Active status pulse — top right */}
+              <span
+                aria-hidden
+                className="shrink-0 w-1.5 h-1.5 rounded-full bg-accent"
+                style={{
+                  animation: visible
+                    ? `agentStatusPulse 2.4s ease-in-out ${pulseDelay}s infinite`
+                    : "none",
+                }}
+              />
+            </div>
           </div>
         );
       })}
@@ -270,6 +496,7 @@ export default function AgentDiagram({ className = "" }: { className?: string })
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [mobile, setMobile] = useState(false);
+  const uid = useId().replace(/:/g, "");
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
@@ -300,7 +527,7 @@ export default function AgentDiagram({ className = "" }: { className?: string })
 
   return (
     <div ref={ref} className={className}>
-      <Diagram L={L} paths={P} visible={visible} />
+      <Diagram L={L} paths={P} visible={visible} uid={uid} />
     </div>
   );
 }
