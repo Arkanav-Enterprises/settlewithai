@@ -950,17 +950,17 @@ export default function Home() {
               <div className="hero-subtitle mb-7">
                 <HeroSubtitle />
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col items-start gap-3 min-[370px]:flex-row min-[370px]:items-center min-[370px]:gap-4">
                 <a
                   href="#contact"
-                  className="group inline-flex items-center text-[14px] font-medium bg-text text-bg px-5 py-2.5 rounded-lg hover:bg-[#30302e] transition-colors duration-200"
+                  className="group inline-flex items-center whitespace-nowrap text-[14px] font-medium bg-text text-bg px-5 py-2.5 rounded-lg hover:bg-[#30302e] transition-colors duration-200"
                 >
                   Start a conversation
                   <Arrow />
                 </a>
                 <a
                   href="#case-study"
-                  className="text-[11px] font-mono uppercase tracking-[0.2em] text-text/55 hover:text-text transition-colors"
+                  className="text-[11px] font-mono uppercase tracking-[0.2em] text-text/55 hover:text-text transition-colors whitespace-nowrap"
                 >
                   Case · 01 ↓
                 </a>
