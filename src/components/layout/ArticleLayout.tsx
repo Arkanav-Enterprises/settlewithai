@@ -2,6 +2,7 @@ import { Nav } from "./Nav";
 import { Footer } from "./Footer";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { BlogTOC } from "@/components/blog/BlogTOC";
 
 interface FaqItem {
   question: string;
@@ -57,6 +58,7 @@ export function ArticleLayout({
       {faqSchema && <JsonLd data={faqSchema} />}
 
       <Nav />
+      <BlogTOC />
 
       <article className="max-w-[720px] mx-auto px-6 lg:px-10 pt-32 pb-24 md:pt-40 md:pb-36">
         {/* Breadcrumbs */}
