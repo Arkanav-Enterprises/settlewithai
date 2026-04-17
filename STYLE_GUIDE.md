@@ -11,7 +11,7 @@ Stack assumption: **Tailwind CSS v4** (with the new `@theme inline` directive) +
 Three rules that govern every visual choice on the marketing site:
 
 1. **Warm, not cold.** The palette is warm paper (`#e8e6dc`) and warm ink (`#141413`), never pure white or pure black. This is the single biggest thing that makes the brand feel "settled" rather than clinical.
-2. **Serif headlines, sans body.** A 500-weight serif (Sentient) for every display element. A geometric sans (Geist) for everything else. Never mix within a single heading.
+2. **Serif headlines, sans body.** A 500-weight serif (Fraunces) for every display element. A humanist sans (Manrope) for everything else. Never mix within a single heading.
 3. **One accent, used sparingly.** Orange `#d97757` is the only accent color. It appears on links, one word in most H1s, small decorative marks (the bullet in front of list items, the left rail on a blockquote), and active states. If a screen has five orange things on it, four of them are wrong.
 
 Keep these principles in the dashboard even if specific components change.
@@ -79,43 +79,34 @@ Two families only:
 
 | Family                 | Usage                                           | Weights |
 | ---------------------- | ----------------------------------------------- | ------- |
-| **Sentient** (serif)   | All H1–H3, display numerals, large stat values  | 400, 500, 700 |
-| **Geist** (sans-serif) | Body, UI, labels, buttons, tables, form inputs  | 400, 500, 600 |
+| **Fraunces** (serif)   | All H1–H3, display numerals, large stat values  | variable (400, 500, 700 used) |
+| **Manrope** (sans-serif) | Body, UI, labels, buttons, tables, form inputs  | 400, 500, 600 |
 
-In the marketing site these are loaded via `next/font`:
+In the marketing site these are loaded via `next/font/google`:
 
 ```tsx
 // layout.tsx
-import { Geist } from "next/font/google";
-import localFont from "next/font/local";
+import { Manrope, Fraunces } from "next/font/google";
 
-const geist = Geist({ subsets: ["latin"], weight: ["400","500","600"], display: "swap", variable: "--font-geist" });
-const sentient = localFont({
-  src: [
-    { path: "../fonts/sentient-400.woff2", weight: "400", style: "normal" },
-    { path: "../fonts/sentient-500.woff2", weight: "500", style: "normal" },
-    { path: "../fonts/sentient-700.woff2", weight: "700", style: "normal" },
-  ],
-  display: "swap",
-  variable: "--font-sentient",
-});
+const manrope = Manrope({ subsets: ["latin"], weight: ["400","500","600"], display: "swap", variable: "--font-manrope" });
+const fraunces = Fraunces({ subsets: ["latin"], display: "swap", variable: "--font-fraunces" });
 ```
 
 Then in `globals.css`:
 
 ```css
 @theme inline {
-  --font-sans:    var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-sentient), Georgia, "Times New Roman", serif;
+  --font-sans:    var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-fraunces), Georgia, "Times New Roman", serif;
 }
 
 body { font-family: var(--font-sans); }
 h1, h2, h3 { font-family: var(--font-heading); letter-spacing: -0.03em; }
 ```
 
-> **Important:** All headings get `letter-spacing: -0.03em` globally. This is what makes Sentient feel tight and confident instead of airy. Don't override it.
+> **Important:** All headings get `letter-spacing: -0.03em` globally. This keeps the serif feeling tight and confident instead of airy. Don't override it.
 
-Sentient's .woff2 files live in `src/fonts/` in this repo. Copy them to the dashboard or ship them from a shared CDN.
+Fraunces is a variable font served self-hosted by Next.js (no external CDN call). No local .woff2 files needed.
 
 ### Type scale
 
@@ -128,7 +119,7 @@ The site uses fluid typography via `clamp()` almost everywhere. Use these exact 
 | Section H2           | `text-[clamp(1.8rem,3.5vw,3rem)]` 500 wt        | Line-height 1.12 |
 | Article H2           | `text-[clamp(1.4rem,2.5vw,1.8rem)]` 500 wt      | Used inside `.prose-settle` |
 | Article H3           | `text-[clamp(1.15rem,2vw,1.4rem)]` 500 wt       | |
-| Stat / metric value  | `text-[clamp(1.6rem,3.4vw,2.4rem)]` 500 wt      | Always Sentient, tabular-nums friendly |
+| Stat / metric value  | `text-[clamp(1.6rem,3.4vw,2.4rem)]` 500 wt      | Always Fraunces, tabular-nums friendly |
 | Body (default)       | `17px / 1.7` or Tailwind default                | `color: var(--text)` |
 | Body (prose article) | `17px (1.0625rem) / 1.8`                        | `color: var(--text-muted)` |
 | Body (small/UI)      | `14px / 1.5`                                    | |
@@ -637,8 +628,8 @@ A minimal `globals.css` that ports the entire design system to a fresh dashboard
   --color-accent-border: var(--accent-border);
   --color-border: var(--border);
   --color-border-light: var(--border-light);
-  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-sentient), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-fraunces), Georgia, "Times New Roman", serif;
 }
 
 html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
@@ -678,7 +669,7 @@ h1, h2, h3 { font-family: var(--font-heading); letter-spacing: -0.03em; }
 .path-fuse { animation: fuse-travel 6s linear infinite; }
 ```
 
-Pair that with `next/font` loading Geist + Sentient as shown in section 3, and the dashboard will feel like a Settle product out of the box.
+Pair that with `next/font` loading Manrope + Fraunces as shown in section 3, and the dashboard will feel like a Settle product out of the box.
 
 ---
 

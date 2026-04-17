@@ -25,9 +25,23 @@ const FOCUS = [
   { id: "036", name: "Australia", lon: -133, lat: 25 },
 ];
 
-export default function Globe({ className = "" }: { className?: string }) {
+export default function Globe({
+  className = "",
+  onFocus,
+}: {
+  className?: string;
+  /* Fires once per country change (not every frame). Used by the hero
+     to sync a "now surveying" ticker with whichever country the globe
+     is currently rotating toward. */
+  onFocus?: (country: { name: string; index: number }) => void;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animRef = useRef<number>(0);
+
+  /* Stash callback in a ref so the mount-only effect below doesn't need
+     to re-run (and tear down the rAF loop) when the parent re-renders. */
+  const onFocusRef = useRef(onFocus);
+  onFocusRef.current = onFocus;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -40,6 +54,17 @@ export default function Globe({ className = "" }: { className?: string }) {
     let ch = 0;
     let scrollY = 0;
     const t0 = performance.now();
+
+    /* On mobile the globe sits behind the stacked hero text — the pin/label
+       lands on top of the body copy. Country name is already surfaced in the
+       dispatch rail ("Live · Apr 2026 · {country}"), so we drop the label
+       below 768px rather than repositioning it. */
+    const mobileMQ = window.matchMedia("(max-width: 767px)");
+    let isMobile = mobileMQ.matches;
+    const onMQChange = (e: MediaQueryListEvent) => {
+      isMobile = e.matches;
+    };
+    mobileMQ.addEventListener("change", onMQChange);
 
     /* Reuse projection — just update rotation/scale each frame */
     const projection = geoOrthographic().clipAngle(90);
@@ -90,6 +115,10 @@ export default function Globe({ className = "" }: { className?: string }) {
     const CYCLE = HOLD + MOVE;
     const INTRO = 3;
 
+    /* Tracks the last-emitted highlight so onFocus only fires on change,
+       not every animation frame. -1 sentinel forces emit on first tick. */
+    let lastEmitted = -1;
+
     function tick() {
       if (!ctx || !mounted || cw === 0) return;
 
@@ -127,6 +156,15 @@ export default function Globe({ className = "" }: { className?: string }) {
         highlightIdx = t < 0.5 ? ci : ni;
       }
 
+      /* Emit on change only — tick runs ~60×/s, we want ~1 per country. */
+      if (highlightIdx !== lastEmitted) {
+        lastEmitted = highlightIdx;
+        onFocusRef.current?.({
+          name: FOCUS[highlightIdx].name,
+          index: highlightIdx,
+        });
+      }
+
       /* Update projection in-place */
       projection.scale(radius).translate([cx, cy]).rotate([lon, lat, 0]);
 
@@ -143,20 +181,24 @@ export default function Globe({ className = "" }: { className?: string }) {
       /* ── Graticule ── */
       ctx.beginPath();
       pathGen(graticule);
-      ctx.strokeStyle = "rgba(20,20,19,0.063)";
+      ctx.strokeStyle = "rgba(20,20,19,0.04)";
       ctx.lineWidth = 0.35;
       ctx.stroke();
 
       if (land) {
         const allLand = land as unknown as Parameters<typeof pathGen>[0];
 
-        /* ── Land fill + outlines in two passes ── */
+        /* ── Land fill + outlines in two passes ──
+           Dialled the country-outline stroke down from 0.32 → 0.16 so the
+           globe reads as a subdued background wallpaper rather than
+           competing with the hero text. The highlighted country keeps its
+           warm accent tint, so the "currently surveying" signal still lands. */
         ctx.beginPath();
         pathGen(allLand);
-        ctx.fillStyle = "rgba(20,20,19,0.035)";
+        ctx.fillStyle = "rgba(20,20,19,0.025)";
         ctx.fill();
-        ctx.strokeStyle = "rgba(20,20,19,0.32)";
-        ctx.lineWidth = 0.55;
+        ctx.strokeStyle = "rgba(20,20,19,0.16)";
+        ctx.lineWidth = 0.5;
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
         ctx.stroke();
@@ -169,18 +211,18 @@ export default function Globe({ className = "" }: { className?: string }) {
         if (feat) {
           ctx.beginPath();
           pathGen(feat);
-          ctx.fillStyle = "rgba(217, 119, 87, 0.15)";
+          ctx.fillStyle = "rgba(217, 119, 87, 0.14)";
           ctx.fill();
-          /* Re-stroke with the same dark border the other countries use,
-             since the fill covers the underlying land-pass outline. */
-          ctx.strokeStyle = "rgba(20,20,19,0.32)";
-          ctx.lineWidth = 0.55;
+          /* Re-stroke with a slightly warmer, still-subtle border — enough
+             to define the highlighted country without pulling focus. */
+          ctx.strokeStyle = "rgba(217,119,87,0.35)";
+          ctx.lineWidth = 0.6;
           ctx.lineCap = "round";
           ctx.lineJoin = "round";
           ctx.stroke();
 
-          /* ── Pin + Label ── */
-          const center = projection([-(hi.lon), -(hi.lat)]);
+          /* ── Pin + Label (desktop only) ── */
+          const center = !isMobile ? projection([-(hi.lon), -(hi.lat)]) : null;
           if (center) {
             const [px, py] = center;
             const dist = Math.sqrt((px - cx) ** 2 + (py - cy) ** 2);
@@ -221,17 +263,18 @@ export default function Globe({ className = "" }: { className?: string }) {
         }
       }
 
-      /* ── Inner rim ── */
+      /* ── Inner rim — softened from 0.55 → 0.28 so the globe edge
+         reads as a subtle frame rather than a hard stroke. */
       ctx.beginPath();
       ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
-      ctx.strokeStyle = "rgba(20,20,19,0.55)";
+      ctx.strokeStyle = "rgba(20,20,19,0.28)";
       ctx.lineWidth = 0.6;
       ctx.stroke();
 
       /* ── Outer rim ── */
       ctx.beginPath();
       ctx.arc(cx, cy, radius + 6, 0, 2 * Math.PI);
-      ctx.strokeStyle = "rgba(20,20,19,0.35)";
+      ctx.strokeStyle = "rgba(20,20,19,0.18)";
       ctx.lineWidth = 0.4;
       ctx.stroke();
 
@@ -241,6 +284,7 @@ export default function Globe({ className = "" }: { className?: string }) {
     return () => {
       mounted = false;
       window.removeEventListener("resize", resize);
+      mobileMQ.removeEventListener("change", onMQChange);
       cancelAnimationFrame(animRef.current);
     };
   }, []);

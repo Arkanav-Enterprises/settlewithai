@@ -751,7 +751,7 @@ export default function Mindmap({ className = "", highlightCategory }: { classNa
         .text((d) => d.name)
         .attr("font-size", "13px")
         .attr("font-weight", "600")
-        .attr("font-family", "Sentient, Georgia, serif")
+        .attr("font-family", "Fraunces, Georgia, serif")
         .attr("text-anchor", "middle")
         .attr("x", (d) => d.x!)
         .attr("y", (d) => d.y! + 5)

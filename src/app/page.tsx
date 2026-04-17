@@ -750,6 +750,37 @@ function SettleMark({
   );
 }
 
+/* ─── Feature-card spotlight tracking ───────────────────
+   Pairs with the `.feature-card::before` radial gradient in globals.css.
+   Writes --mx/--my directly on the element so the spotlight follows the
+   cursor without a React re-render — one DOM style write per mousemove
+   vs. a full reconcile tree if we stashed coords in state. */
+function handleFeatureCardMove(e: React.MouseEvent<HTMLDivElement>) {
+  const el = e.currentTarget;
+  const r = el.getBoundingClientRect();
+  el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+  el.style.setProperty("--my", `${e.clientY - r.top}px`);
+}
+
+/* ─── Corner bracket (dispatch cover) ───────────────────
+   4 of these frame the hero like a newspaper masthead. Each
+   bracket is just two perpendicular 1px borders on a tiny box;
+   the position prop picks which two sides to paint. */
+function CornerBracket({ position }: { position: "tl" | "tr" | "bl" | "br" }) {
+  const map = {
+    tl: "top-4 left-4 md:top-6 md:left-6 border-t border-l",
+    tr: "top-4 right-4 md:top-6 md:right-6 border-t border-r",
+    bl: "bottom-4 left-4 md:bottom-6 md:left-6 border-b border-l",
+    br: "bottom-4 right-4 md:bottom-6 md:right-6 border-b border-r",
+  };
+  return (
+    <div
+      aria-hidden
+      className={`absolute w-5 h-5 md:w-7 md:h-7 pointer-events-none border-text/35 z-20 ${map[position]}`}
+    />
+  );
+}
+
 /* ─── Page ──────────────────────────────────────────────── */
 
 export default function Home() {
@@ -760,6 +791,7 @@ export default function Home() {
   const quotesRef = useFadeIn();
   const audienceRef = useFadeIn();
   const faqRef = useFadeIn();
+  const exploreRef = useFadeIn();
   const founderRef = useFadeIn();
   const ctaRef = useFadeIn();
   const whyClaudeRef = useFadeIn();
@@ -768,6 +800,11 @@ export default function Home() {
 
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+
+  /* Hero: "now surveying" ticker synced to the globe's country cycle.
+     The Globe component emits onFocus once per country change (not per
+     animation frame), so this re-renders ~1×/6s — cheap. */
+  const [globeCountry, setGlobeCountry] = useState("India");
   /* Services highlight state. `hoveredService` is the transient preview
      that fires on pointer enter/leave. `pinnedService` is the sticky
      selection set by clicking a pill — it persists until the same pill
@@ -777,6 +814,11 @@ export default function Home() {
   const [hoveredService, setHoveredService] = useState<string | null>(null);
   const [pinnedService, setPinnedService] = useState<string | null>(null);
   const activeServiceCategory = hoveredService ?? pinnedService;
+
+  /* FAQ category filter. "All" is the default; clicking a category pill
+     narrows the index to just those entries. Kept as local state here
+     (not URL state) because FAQs aren't typically deep-linked by category. */
+  const [faqCategory, setFaqCategory] = useState<string>("All");
 
   /* Quotes carousel — horizontal scroll-snap container with manual
      nav buttons. Auto-advance is deliberately omitted: auto-moving
@@ -828,66 +870,121 @@ export default function Home() {
         ]}
       />
       {/* ── Nav ──────────────────────────────────────── */}
-      <Nav variant="full" />
+      <Nav variant="full" revealOnScroll />
 
-      {/* ── Hero + Globe ───────────────────────────────
-         Flex-column in flow: text card on top, globe below taking
-         whatever space is left. Globe is anchored to the TOP of its
-         container so its north pole sits directly under the card,
-         and the card's negative bottom margin lets it visually rest
-         on the pole. Same layout at every breakpoint by design. */}
-      <section className="relative min-h-screen overflow-hidden flex flex-col">
-        {/* Hero text — no glass card, type sits directly on the bg */}
-        <div className="relative z-10 max-w-[1280px] mx-auto w-full px-6 pt-28">
-          <div className="mx-auto max-w-[640px] text-center">
-            {/* Definitional eyebrow: first extractable passage for LLM
-               citation ("What is Settle?"). Also matched by the
-               SpeakableSpecification cssSelector in layout.tsx. */}
-            <p className="hero-eyebrow text-[11px] md:text-[12px] font-medium uppercase tracking-[0.18em] text-accent/90 mb-6">
-              Settle AI · Full-stack AI agency for mid-market teams
-            </p>
-            <h1 className="text-[clamp(2.4rem,4.8vw,4.2rem)] font-medium leading-[1.08] mb-8">
-              Your business, made{" "}
-              <span className="text-accent whitespace-nowrap">AI-native</span>.
+      {/* ── Hero: Dispatch Cover (editorial masthead) ──
+         Editorial split: big stacked-serif title on the LEFT, narrow
+         lede/CTA on the RIGHT, and the globe floats centered-top between
+         them so its north pole rises up through the gutter. A mono
+         dispatch rail and four corner brackets frame the composition
+         like a Field Notes cover. The globe is untouched — just
+         repositioned from "fills below text" to "emerges behind text". */}
+      <section className="relative min-h-[780px] md:min-h-screen overflow-hidden">
+        {/* Corner brackets — echo the GAAS ops-canvas framing */}
+        <CornerBracket position="tl" />
+        <CornerBracket position="tr" />
+        <CornerBracket position="bl" />
+        <CornerBracket position="br" />
+
+        {/* Globe — same positioning as before, just now layered behind.
+           z-0 so the two text columns (z-10) sit on top; its top edge
+           pokes up behind the dispatch rail and into the gutter between
+           the left title and right lede columns. */}
+        <div className="absolute inset-0 flex justify-center items-start pointer-events-none z-0">
+          <div className="w-[min(150vw,1100px)] aspect-square shrink-0 mt-[calc(2px-min(150vw,1100px)*0.02)]">
+            <Globe className="w-full h-full" onFocus={(c) => setGlobeCountry(c.name)} />
+          </div>
+        </div>
+
+        {/* Top mono dispatch rail — full width, framed by brackets */}
+        <div className="relative z-20 pt-8 md:pt-10 px-8 md:px-14">
+          <div className="max-w-[1440px] mx-auto flex items-center justify-between text-[10px] md:text-[11px] font-mono uppercase tracking-[0.22em] text-text/55">
+            <span>Dispatch · 01</span>
+            <span className="hidden md:inline tracking-[0.26em]">
+              Settle — Full-stack AI layer
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <span className="relative inline-flex w-[6px] h-[6px]">
+                <span className="absolute inset-0 rounded-full bg-accent animate-ping opacity-70" />
+                <span className="relative inline-block w-full h-full rounded-full bg-accent" />
+              </span>
+              Live · Apr 2026 · {globeCountry}
+            </span>
+          </div>
+          {/* Hairline under rail, joins the corner brackets visually */}
+          <div className="max-w-[1440px] mx-auto mt-3 h-px bg-text/12" />
+        </div>
+
+        {/* ── Editorial split: title column ‖ globe gutter ‖ lede column ──
+           Grid instead of absolute — lets the browser handle reflow at
+           every breakpoint while keeping the two columns anchored to
+           the left and right edges of the section. */}
+        <div className="relative z-10 px-8 md:px-14 pt-12 md:pt-16">
+          <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-y-8 md:gap-x-12">
+            {/* LEFT: poster-type stacked title on desktop, natural-flow
+               on mobile (spans collapse to inline so the heading wraps at
+               word boundaries like the body copy below, matching its line
+               width instead of stacking one word per line). */}
+            <h1 className="font-heading font-medium leading-[1.02] md:leading-[0.92] tracking-[-0.035em] text-text text-[clamp(2.4rem,9vw,6.4rem)]">
+              <span className="md:block">Your </span>
+              <span className="md:block">business, </span>
+              <span className="md:block">made </span>
+              <span className="md:block text-accent">AI-native.</span>
             </h1>
-            <div className="hero-subtitle">
-              <HeroSubtitle />
-            </div>
-            <div className="mt-8 flex justify-center">
-              <a
-                href="#contact"
-                className="group inline-flex items-center text-[14px] font-medium bg-text text-bg px-5 py-2.5 rounded-lg hover:bg-[#30302e] transition-colors duration-200"
-              >
-                Start a conversation
-                <Arrow />
-              </a>
+
+            {/* RIGHT: narrow lede column — eyebrow, subtitle, CTA */}
+            <div className="md:pl-4 md:pt-6 md:max-w-[360px] md:ml-auto">
+              {/* Mono label stripe — mirrors the "Lede" column-head of a
+                 broadsheet page. Tight vertical rhythm. */}
+              <div className="flex items-center gap-3 mb-4">
+                <span className="block h-px w-8 bg-accent" />
+                <span className="text-[10px] font-mono uppercase tracking-[0.26em] text-text/60">
+                  The Lede
+                </span>
+              </div>
+              <p className="hero-eyebrow text-[11px] md:text-[12px] font-medium uppercase tracking-[0.18em] text-accent/90 mb-5">
+                Settle AI · Full-stack AI agency for mid-market teams
+              </p>
+              <div className="hero-subtitle mb-7">
+                <HeroSubtitle />
+              </div>
+              <div className="flex items-center gap-4">
+                <a
+                  href="#contact"
+                  className="group inline-flex items-center text-[14px] font-medium bg-text text-bg px-5 py-2.5 rounded-lg hover:bg-[#30302e] transition-colors duration-200"
+                >
+                  Start a conversation
+                  <Arrow />
+                </a>
+                <a
+                  href="#case-study"
+                  className="text-[11px] font-mono uppercase tracking-[0.2em] text-text/55 hover:text-text transition-colors"
+                >
+                  Case · 01 ↓
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Globe fills the remaining viewport height. The square canvas
-           is anchored to the top so its north pole starts right below
-           the text card; the rest of the sphere falls off-screen and
-           gets clipped by the section's overflow-hidden. */}
-        <div className="relative flex-1 flex justify-center items-start">
-          {/* The sphere sits at a ~2% inset from the canvas top (sphere
-             radius = ch * 0.48, centered in the square canvas). Pull the
-             wrapper up by (2% of canvas width − 2px) so the north pole
-             lands exactly 2px below the text edge at every viewport. */}
-          <div className="w-[min(150vw,1100px)] aspect-square shrink-0 mt-[calc(2px-min(150vw,1100px)*0.02)]">
-            <Globe className="w-full h-full" />
-          </div>
+        {/* Bottom mono dateline — completes the masthead frame */}
+        <div className="absolute bottom-8 md:bottom-10 left-8 md:left-14 right-8 md:right-14 z-20 hidden sm:flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.24em] text-text/45">
+          <span>Folio · Delhi ↔ New York ↔ London</span>
+          <span className="hidden md:inline">Issue 01 / Vol. I</span>
+          <span>End of page</span>
         </div>
       </section>
 
       {/* ── Case Study: Orient ──────────────────────────
-         Pulled up with a negative top margin so the card overlaps
-         the lower curve of the hero globe. `relative z-10` keeps it
-         stacked above the hero section that precedes it. */}
+         Sits below the Dispatch Cover hero. Earlier versions pulled this
+         card up with a huge negative margin to overlap the globe's lower
+         curve — with the editorial split layout, the hero now occupies
+         the full viewport with the title stack, so the card flows
+         naturally beneath instead. */}
       <section
         id="case-study"
         ref={caseRef}
-        className="relative z-10 -mt-[60vh] md:-mt-[100vh]"
+        className="relative z-10"
       >
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 pb-16 md:pb-20">
           <OrientCaseStudyCard />
@@ -901,11 +998,35 @@ export default function Home() {
         <div className="h-px bg-border-light" />
       </div>
 
-      {/* ── GAAS — Agents-as-a-Service positioning ── */}
+      {/* ── GAAS — Agents-as-a-Service positioning ──
+         Visual thesis: this section is the live-infrastructure
+         inflection on the page. Eyebrow carries an ops-style
+         pulsing dot + mono tag; the diagram below ships the
+         full operations-canvas treatment. Copy is unchanged. */}
       <section ref={gaasRef}>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24 text-center">
-          <p className="fade-up text-[11px] font-semibold uppercase tracking-[0.15em] text-accent mb-5">
-            Agents as a Service
+          <p className="fade-up inline-flex items-center gap-2.5 mb-5">
+            <span
+              aria-hidden
+              className="relative inline-flex w-[7px] h-[7px]"
+            >
+              <span className="absolute inset-0 rounded-full bg-accent animate-ping opacity-70" />
+              <span className="relative inline-block w-full h-full rounded-full bg-accent" />
+            </span>
+            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+              Agents as a Service
+            </span>
+            <span
+              aria-hidden
+              className="hidden sm:inline-block h-px w-8 bg-accent/30"
+            />
+            <span
+              aria-hidden
+              className="hidden sm:inline-block text-[10px] tracking-[0.16em] text-accent/60 uppercase"
+              style={{ fontFamily: "ui-monospace, 'SF Mono', Menlo, monospace" }}
+            >
+              live
+            </span>
           </p>
           <h2 className="fade-up text-[clamp(1.5rem,3vw,2.4rem)] tracking-[-0.02em] font-medium leading-[1.12] mb-6 max-w-[720px] mx-auto">
             You don&apos;t need more employees. You need agents.
@@ -917,7 +1038,27 @@ export default function Home() {
             rules, your voice.
           </p>
 
+          {/* AgentDiagram is dynamic({ ssr: false }) — its DOM mounts
+             AFTER the parent's useFadeIn runs, so attaching `fade-up`
+             here would leave it orphaned (never observed) and stuck at
+             opacity:0. The component has its own IntersectionObserver
+             that fades the canvas/hub/cards in from within. */}
           <AgentDiagram className="mb-12 md:mb-16" />
+
+          {/* Engineering-style separator — ties the copy below to the canvas above */}
+          <div
+            aria-hidden
+            className="fade-up mx-auto mb-10 md:mb-12 flex items-center justify-center gap-3 max-w-[340px]"
+          >
+            <span className="h-px flex-1 bg-border" />
+            <span
+              className="text-[10px] tracking-[0.2em] uppercase text-text-faint"
+              style={{ fontFamily: "ui-monospace, 'SF Mono', Menlo, monospace" }}
+            >
+              how it compounds
+            </span>
+            <span className="h-px flex-1 bg-border" />
+          </div>
 
           <p className="fade-up text-text text-[16px] md:text-[17px] leading-[1.7] max-w-[640px] mx-auto font-medium">
             Each agent costs a fraction of the employee doing the same
@@ -1013,49 +1154,90 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Why Claude recommendation + use cases link ──────
-         Left card: three compressed reasons, a muted flexibility
-         line, and the CTA. Right card: a visual Claude card with
-         accent-tinted background that links out to Anthropic's
-         enterprise use cases page. The separate rounded cards
-         signal "different kinds of things" — our reasoning vs
-         Anthropic's proof — where a shared-border grid would
-         flatten them into sibling panels. */}
+      {/* ── Why Claude — editorial POV + external field guide ──
+         Two feature-cards sharing spotlight/accent-rule DNA. Left card
+         carries our reasoning as a specimen list (hairline + kicker +
+         Fraunces title per reason); right card is the Anthropic link,
+         accent-tinted, with a framed Claude plate + Fig. caption. */}
       <section ref={claudeRecommendRef}>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24">
-          <h2 className="fade-up text-[clamp(1.5rem,3vw,2.4rem)] tracking-[-0.02em] font-medium leading-[1.12] mb-10 md:mb-12 text-center">
-            Why we default to Claude.
-          </h2>
-
-          <div className="grid md:grid-cols-[1.05fr_1fr] gap-4 md:gap-6 max-w-[1040px] mx-auto stagger">
-            {/* LEFT — three compressed reasons + flexibility line + CTA */}
-            <div className="fade-up bg-bg border border-border-light rounded-2xl p-7 md:p-10">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-accent mb-7">
-                Why Claude wins in production
+          {/* Editorial header — tiny eyebrow, Fraunces-italic accent on "Claude",
+             and a hairline diamond ornament for the magazine-opener feel. */}
+          <div className="fade-up text-center mb-12 md:mb-16">
+            <div className="inline-flex items-center gap-3 mb-5">
+              <div className="w-8 h-px bg-[rgba(20,20,19,0.2)]" />
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
+                The model of record
               </p>
-              <div className="space-y-5">
+              <div className="w-8 h-px bg-[rgba(20,20,19,0.2)]" />
+            </div>
+            <h2 className="text-[clamp(1.7rem,3.4vw,2.6rem)] tracking-[-0.02em] font-medium leading-[1.1]">
+              Why we default to{" "}
+              <span
+                className="italic"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                Claude.
+              </span>
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-[1.1fr_1fr] gap-5 md:gap-6 max-w-[1060px] mx-auto stagger">
+            {/* LEFT — "Three reasons" specimen list */}
+            <div
+              className="fade-up feature-card feature-card--lg group"
+              onMouseMove={handleFeatureCardMove}
+            >
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-6 h-px bg-accent" />
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
+                  Our POV &middot; Three reasons
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-7">
                 {[
-                  { num: "01", text: "Instruction fidelity." },
-                  { num: "02", text: "Refuses before it fabricates." },
-                  { num: "03", text: "Best-in-class at tool use." },
+                  {
+                    title: "Instruction fidelity.",
+                    body: "Tell it once — the pattern holds across every run. Zero prompt drift.",
+                  },
+                  {
+                    title: "Refuses before it fabricates.",
+                    body: "Says \u201CI don\u2019t know\u201D before it invents citations, numbers, or policy.",
+                  },
+                  {
+                    title: "Best-in-class at tool use.",
+                    body: "MCP, function calling, structured workflows \u2014 production-grade agentic loops.",
+                  },
                 ].map((r) => (
-                  <div key={r.num} className="flex items-baseline gap-4">
-                    <span className="text-accent/50 text-[13px] font-medium shrink-0 tabular-nums">
-                      {r.num}
-                    </span>
-                    <h3 className="text-text font-medium text-[17px] md:text-[18px] leading-[1.3]">
-                      {r.text}
-                    </h3>
+                  <div key={r.title} className="flex gap-4 md:gap-5">
+                    <div className="pt-[14px] w-6 shrink-0">
+                      <div className="w-full h-px bg-[rgba(20,20,19,0.3)]" />
+                    </div>
+                    <div className="flex-1">
+                      <h3
+                        className="text-[1.25rem] md:text-[1.4rem] font-normal leading-[1.2] text-text mb-1.5"
+                        style={{ fontFamily: "var(--font-heading)" }}
+                      >
+                        {r.title}
+                      </h3>
+                      <p className="text-text-muted text-[14px] leading-[1.6]">
+                        {r.body}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
-              <p className="mt-8 text-text-muted text-[13.5px] leading-[1.6]">
-                Not the only model we deploy. We pick what fits.
-              </p>
-              <div className="mt-6">
+
+              {/* Hairline separator before the footer — editorial coda */}
+              <div className="mt-9 pt-6 border-t border-[rgba(20,20,19,0.1)]">
+                <p className="text-text-muted text-[13px] leading-[1.6] mb-5 italic"
+                   style={{ fontFamily: "var(--font-heading)" }}>
+                  Not the only model we deploy. We pick what fits.
+                </p>
                 <a
                   href="#contact"
-                  className="group inline-flex items-center text-[14px] font-medium bg-text text-bg px-5 py-2.5 rounded-lg hover:bg-[#30302e] transition-colors duration-200"
+                  className="relative z-10 inline-flex items-center text-[14px] font-medium bg-text text-bg px-5 py-2.5 rounded-lg hover:bg-[#30302e] transition-colors duration-200"
                 >
                   Talk to us about your stack
                   <Arrow />
@@ -1063,29 +1245,37 @@ export default function Home() {
               </div>
             </div>
 
-            {/* RIGHT — Claude visual card linking to Anthropic's
-               enterprise use cases page */}
+            {/* RIGHT — Anthropic field guide (accent-tinted feature-card) */}
             <a
               href="https://claude.com/resources/use-cases"
               target="_blank"
               rel="noopener noreferrer"
-              className="fade-up group relative bg-[rgba(217,119,87,0.06)] hover:bg-[rgba(217,119,87,0.09)] border border-[rgba(217,119,87,0.2)] hover:border-[rgba(217,119,87,0.4)] rounded-2xl p-7 md:p-10 flex flex-col justify-between min-h-[260px] md:min-h-[320px] transition-all duration-300"
+              onMouseMove={handleFeatureCardMove}
+              className="fade-up feature-card feature-card--lg feature-card--accent group min-h-[360px] md:min-h-[460px]"
             >
-              <div className="flex items-start justify-between">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/claude-color.svg"
-                  alt="Claude"
-                  width={56}
-                  height={56}
-                  className="w-12 h-12 md:w-14 md:h-14 animate-breathe"
-                />
+              {/* Header — framed Claude plate + Fig. caption + outbound arrow */}
+              <div className="flex items-start justify-between mb-auto">
+                <div className="relative">
+                  <div className="w-16 h-16 md:w-[72px] md:h-[72px] rounded-xl border border-[rgba(217,119,87,0.25)] bg-[rgba(255,255,255,0.35)] flex items-center justify-center">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/claude-color.svg"
+                      alt="Claude"
+                      width={44}
+                      height={44}
+                      className="w-10 h-10 md:w-11 md:h-11 animate-breathe"
+                    />
+                  </div>
+                  <span className="block mt-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-text-muted">
+                    Plate &middot; Claude
+                  </span>
+                </div>
                 <svg
-                  width="14"
-                  height="14"
+                  width="16"
+                  height="16"
                   viewBox="0 0 14 14"
                   fill="none"
-                  className="text-text-muted group-hover:text-accent transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  className="text-text-muted group-hover:text-accent transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 mt-1"
                   aria-hidden="true"
                 >
                   <path
@@ -1097,19 +1287,27 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-accent mb-3">
-                  From Anthropic
-                </p>
+
+              {/* Footer block — kicker, italic Fraunces title, body, url caption */}
+              <div className="mt-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-6 h-px bg-accent" />
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
+                    Field guide &middot; Anthropic
+                  </p>
+                </div>
                 <h3
-                  className="text-[clamp(1.3rem,2.2vw,1.75rem)] font-medium leading-[1.2] tracking-[-0.02em] mb-3 text-text"
+                  className="text-[clamp(1.5rem,2.4vw,1.95rem)] font-normal leading-[1.12] tracking-[-0.01em] mb-3 text-text"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
-                  See Claude in production.
+                  Claude <span className="italic">in production.</span>
                 </h3>
-                <p className="text-text-muted text-[14px] leading-[1.6]">
-                  Real enterprise deployments across research, finance,
-                  legal, and engineering.
+                <p className="text-text-muted text-[14.5px] leading-[1.6] mb-5">
+                  Real enterprise deployments across research, finance, legal,
+                  and engineering.
+                </p>
+                <p className="text-[11.5px] font-medium tracking-[0.08em] text-text-muted/80 font-mono">
+                  claude.com/resources/use-cases
                 </p>
               </div>
             </a>
@@ -1155,21 +1353,39 @@ export default function Home() {
       </section>
 
       {/* ── Services — pill rail above full-width mindmap ────
-         Pills are above the mindmap on every device. Click toggles a
-         sticky pin; hover still previews any branch without losing the
-         pinned baseline. Same data drives both the pill label row and
-         the mindmap's highlight state via the shared category key. */}
+         Editorial treatment: hairline-flanked eyebrow on the H2, italic
+         Fraunces accent on "deliver"; pills get a tiny accent dot on the
+         active/hovered state; the mindmap is framed with corner brackets
+         and specimen-label annotations (plate title, legend). */}
       <section id="services" ref={servicesRef} className="relative z-10">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
           <div className="h-px bg-border-light" />
         </div>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24">
-          <h2 className="fade-up text-[clamp(1.5rem,3vw,2.4rem)] tracking-[-0.02em] font-medium leading-[1.12] mb-10 text-center">
-            What we deliver.
-          </h2>
+          {/* Editorial header — eyebrow kicker + Fraunces italic on "deliver" */}
+          <div className="fade-up text-center mb-10 md:mb-12">
+            <div className="inline-flex items-center gap-3 mb-5">
+              <div className="w-8 h-px bg-[rgba(20,20,19,0.2)]" />
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
+                Scope &amp; deliverables
+              </p>
+              <div className="w-8 h-px bg-[rgba(20,20,19,0.2)]" />
+            </div>
+            <h2 className="text-[clamp(1.7rem,3.4vw,2.6rem)] tracking-[-0.02em] font-medium leading-[1.1]">
+              What we{" "}
+              <span
+                className="italic"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                deliver.
+              </span>
+            </h2>
+          </div>
 
-          {/* Pill rail */}
-          <div className="fade-up flex flex-wrap justify-center gap-2.5 mb-10 md:mb-12">
+          {/* Pill rail — each pill: Fraunces title · hairline · descriptor.
+             Active/pinned state grows a tiny accent dot prefix and warms
+             the border so the selected tag reads as "currently isolated". */}
+          <div className="fade-up flex flex-wrap justify-center gap-2.5 mb-10 md:mb-14">
             {[
               {
                 title: "The audit",
@@ -1206,21 +1422,32 @@ export default function Home() {
                   onMouseEnter={() => setHoveredService(s.category)}
                   onMouseLeave={() => setHoveredService(null)}
                   className={[
-                    "inline-flex items-center gap-2.5 rounded-full pl-4 pr-5 py-2.5 border transition-all duration-200 cursor-pointer",
+                    "group inline-flex items-center gap-3 rounded-full pl-4 pr-5 py-2.5 border transition-all duration-300 cursor-pointer",
                     active
-                      ? "bg-[rgba(217,119,87,0.1)] border-[rgba(217,119,87,0.4)]"
-                      : "bg-bg border-[rgba(20,20,19,0.12)] hover:border-[rgba(20,20,19,0.25)] hover:bg-[rgba(20,20,19,0.03)]",
+                      ? "bg-[rgba(217,119,87,0.1)] border-[rgba(217,119,87,0.45)] shadow-[0_4px_18px_-6px_rgba(217,119,87,0.25)]"
+                      : "bg-bg border-[rgba(20,20,19,0.12)] hover:border-[rgba(20,20,19,0.3)] hover:bg-[rgba(20,20,19,0.03)] hover:-translate-y-[1px]",
                   ].join(" ")}
                 >
+                  {/* Accent indicator — hairline on inactive, filled dot on active */}
+                  <span
+                    aria-hidden
+                    className={[
+                      "shrink-0 transition-all duration-300 rounded-full",
+                      active
+                        ? "w-1.5 h-1.5 bg-accent"
+                        : "w-2 h-px bg-[rgba(20,20,19,0.3)] group-hover:bg-[rgba(20,20,19,0.5)]",
+                    ].join(" ")}
+                  />
                   <span
                     className="text-[13px] font-medium text-text"
                     style={{ fontFamily: "var(--font-heading)" }}
                   >
                     {s.title}
                   </span>
-                  <span className="text-text-faint text-[12px] hidden sm:inline">
-                    ·
-                  </span>
+                  <span
+                    aria-hidden
+                    className="w-px h-3 bg-[rgba(20,20,19,0.15)] hidden sm:inline-block"
+                  />
                   <span className="text-text-muted text-[12.5px] hidden sm:inline">
                     {s.desc}
                   </span>
@@ -1229,15 +1456,41 @@ export default function Home() {
             })}
           </div>
 
-          {/* Full-width mindmap.
-             Explicit height is required because the Mindmap reads
-             container.clientHeight on mount/resize — without a fixed
-             height the component would render at 0 and never lay out. */}
-          <div className="fade-up w-full h-[520px] md:h-[640px]">
-            <Mindmap
-              className="w-full h-full"
-              highlightCategory={activeServiceCategory}
-            />
+          {/* Mindmap — framed as an editorial plate.
+             Corner brackets + specimen-label top-left + legend bottom-right.
+             Faint inset border to separate the plate from the page. */}
+          <div className="fade-up relative px-2 md:px-4 py-3 md:py-5">
+            <CornerBracket position="tl" />
+            <CornerBracket position="tr" />
+            <CornerBracket position="bl" />
+            <CornerBracket position="br" />
+
+            {/* Top-left specimen tag */}
+            <div className="absolute top-4 left-12 md:top-7 md:left-16 z-10 flex items-center gap-3 pointer-events-none">
+              <div className="w-5 h-px bg-accent" />
+              <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-accent">
+                Plate &middot; Service constellation
+              </p>
+            </div>
+
+            {/* Bottom-right legend */}
+            <div className="absolute bottom-4 right-12 md:bottom-7 md:right-16 z-10 flex items-center gap-3 pointer-events-none">
+              <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-text-muted">
+                Hover a tag to isolate
+              </p>
+              <div className="w-5 h-px bg-[rgba(20,20,19,0.3)]" />
+            </div>
+
+            {/* Full-width mindmap.
+               Explicit height is required because the Mindmap reads
+               container.clientHeight on mount/resize — without a fixed
+               height the component would render at 0 and never lay out. */}
+            <div className="w-full h-[520px] md:h-[640px]">
+              <Mindmap
+                className="w-full h-full"
+                highlightCategory={activeServiceCategory}
+              />
+            </div>
           </div>
 
         </div>
@@ -1268,43 +1521,100 @@ export default function Home() {
         <ProcessScroll />
       </div>
 
-      {/* ── Who it's for ─────────────────────────────── */}
+      {/* ── Who it's for — editorial "client profiles" page ──
+         Matched to the Why Claude / What we deliver vocabulary: hairline
+         eyebrow, italic Fraunces accent on the H2, and two feature-card
+         specimens each carrying a kicker tag, Fraunces title, body, and
+         a bottom metadata rail (team size · shape · workflow emphasis). */}
       <section ref={audienceRef}>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
           <div className="h-px bg-border-light" />
         </div>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24">
-          <div className="flex items-start justify-between mb-10">
-            <h2 className="fade-up text-[clamp(1.5rem,3vw,2.4rem)] tracking-[-0.02em] font-medium leading-[1.12] max-w-2xl">
-              Who we work with.
+          {/* Editorial header */}
+          <div className="fade-up text-center mb-12 md:mb-14">
+            <div className="inline-flex items-center gap-3 mb-5">
+              <div className="w-8 h-px bg-[rgba(20,20,19,0.2)]" />
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
+                Client profiles
+              </p>
+              <div className="w-8 h-px bg-[rgba(20,20,19,0.2)]" />
+            </div>
+            <h2 className="text-[clamp(1.7rem,3.4vw,2.6rem)] tracking-[-0.02em] font-medium leading-[1.1]">
+              Who we{" "}
+              <span
+                className="italic"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                work with.
+              </span>
             </h2>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/settle-char-3.svg"
-              alt=""
-              width={1000}
-              height={1000}
-              loading="lazy"
-              className="w-[70px] md:w-[100px] lg:w-[140px] shrink-0 ml-4 md:ml-8 lg:ml-12 -mt-4"
-            />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-px bg-border-light rounded-2xl overflow-hidden stagger">
+          <div className="grid md:grid-cols-2 gap-5 md:gap-6 max-w-[1100px] mx-auto stagger">
             {[
               {
-                title: "Manufacturers & Industrial Companies",
-                desc: "Complex operations, multiple departments, high documentation overhead. We map your workflows, deploy Claude across teams, and train your people to use it.",
+                tag: "Manufacturing & industrial",
+                title: "Manufacturers & industrial operators.",
+                desc: "Complex operations, multiple departments, heavy documentation overhead. We map your workflows, deploy Claude across teams, and train your people to use it.",
+                meta: [
+                  "50–500 people",
+                  "Multi-department",
+                  "Ops + R&D + field",
+                ],
               },
               {
-                title: "Growing SMBs",
-                desc: "Lean teams doing more than they should manually. We find the workflows where Claude saves the most time and deploy them first.",
+                tag: "Growing SMBs",
+                title: "Growing SMBs.",
+                desc: "Lean teams doing more than they should manually. We find the workflows where Claude saves the most time — and deploy those first, then layer the rest.",
+                meta: [
+                  "10–100 people",
+                  "Lean operations",
+                  "High-volume repeat work",
+                ],
               },
             ].map((a) => (
-              <div key={a.title} className="fade-up bg-bg p-8 md:p-10">
-                <h3 className="text-lg font-medium mb-3">{a.title}</h3>
-                <p className="text-text-muted text-[15px] leading-[1.7]">
+              <div
+                key={a.title}
+                className="fade-up feature-card feature-card--lg group"
+                onMouseMove={handleFeatureCardMove}
+              >
+                {/* Accent kicker */}
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-6 h-px bg-accent" />
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
+                    Profile &middot; {a.tag}
+                  </p>
+                </div>
+
+                {/* Fraunces serif title */}
+                <h3
+                  className="text-[clamp(1.4rem,2.2vw,1.85rem)] font-normal leading-[1.15] tracking-[-0.01em] text-text mb-4"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  {a.title}
+                </h3>
+
+                <p className="text-text-muted text-[15px] leading-[1.65] mb-7">
                   {a.desc}
                 </p>
+
+                <div className="flex-1" />
+
+                {/* Metadata rail — hairline-separated tag row */}
+                <div className="pt-5 mt-auto border-t border-[rgba(20,20,19,0.1)] flex flex-wrap gap-x-3 gap-y-1.5 text-[12.5px] text-text-muted">
+                  {a.meta.map((m, i) => (
+                    <span key={m} className="inline-flex items-center">
+                      {i > 0 && (
+                        <span
+                          aria-hidden
+                          className="inline-block w-1 h-1 rounded-full bg-[rgba(20,20,19,0.25)] mr-3"
+                        />
+                      )}
+                      {m}
+                    </span>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
@@ -1320,7 +1630,7 @@ export default function Home() {
          bottom row includes a near-black "featured" card for a
          third color-tone step. Subtle hover-lift on every card. */}
       <section ref={quotesRef} className="bg-[#ddd9cc] relative overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-12 md:py-20 relative">
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24 relative">
           {/* Section header */}
           <div className="fade-up mb-6 md:mb-10 max-w-2xl">
             <p className="text-[10.5px] uppercase tracking-[0.18em] text-accent mb-2.5 flex items-center gap-2.5">
@@ -1457,92 +1767,246 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── FAQ ──────────────────────────────────────── */}
+      {/* ── FAQ ──────────────────────────────────────────
+         Archival-catalog treatment. Each entry reads as a museum-style
+         reference record: mono `Q.NN` call number, uppercase category
+         tag, then the question. Opening an entry surfaces a Fraunces
+         italic `A.` specimen marker + an accent hairline rail under the
+         meta column — keeping the catalog metaphor intact through the
+         answer. Filter pills above let 11 entries stay browseable. */}
       <section ref={faqRef}>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
           <div className="h-px bg-border-light" />
         </div>
-        <div className="max-w-[860px] mx-auto px-6 lg:px-10 py-24 md:py-36">
-          <div className="fade-up mb-14">
-            <h2 className="text-[clamp(1.5rem,3vw,2.4rem)] tracking-[-0.02em] font-medium leading-[1.12] mb-3">
-              Frequently asked questions.
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24">
+          <div className="max-w-[1080px] mx-auto">
+          {/* Editorial header — matches the rest of the site's section vocab */}
+          <div className="fade-up text-center mb-12 md:mb-14">
+            <div className="inline-flex items-center gap-3 mb-5">
+              <div className="w-8 h-px bg-[rgba(20,20,19,0.2)]" />
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
+                Reference · FAQ
+              </p>
+              <div className="w-8 h-px bg-[rgba(20,20,19,0.2)]" />
+            </div>
+            <h2 className="text-[clamp(1.7rem,3.4vw,2.6rem)] tracking-[-0.02em] font-medium leading-[1.1]">
+              Frequently asked{" "}
+              <span
+                className="italic"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                questions.
+              </span>
             </h2>
-            <a
-              href="#ask"
-              className="text-[14px] text-accent hover:text-accent/80 transition-colors"
-            >
-              Want to ask AI instead? ↑
-            </a>
+            <p className="mt-5 text-[12px] md:text-[13px] font-mono uppercase tracking-[0.22em] text-text/55">
+              Eleven entries ·{" "}
+              <a
+                href="#ask"
+                className="text-accent hover:text-accent/80 transition-colors normal-case tracking-normal font-sans text-[14px]"
+              >
+                ask AI directly ↑
+              </a>
+            </p>
           </div>
 
-          <div className="divide-y divide-border-light">
+          {/* Filter rail — editorial pills. Active pill gets the accent
+             hairline underline treatment (not a filled pill) so it reads
+             as "chapter marker" rather than "button bar". */}
+          <div className="fade-up mb-10 md:mb-12 flex flex-wrap items-center justify-center gap-x-1 gap-y-2">
+            {[
+              "All",
+              "The firm",
+              "The method",
+              "The stack",
+              "In practice",
+              "Trust",
+            ].map((cat) => {
+              const active = faqCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setFaqCategory(cat)}
+                  className="relative px-3 md:px-4 py-2 text-[11px] md:text-[11.5px] font-semibold uppercase tracking-[0.18em] transition-colors"
+                  style={{
+                    color: active
+                      ? "#d97757"
+                      : "rgba(20,20,19,0.55)",
+                  }}
+                >
+                  {cat}
+                  {/* Active hairline underline — anchored just below the
+                     label, extends the full pill width on active, narrows
+                     to a stub on inactive so the motion reads as a "cursor
+                     ticking along a catalog spine". */}
+                  <span
+                    aria-hidden
+                    className="absolute left-1/2 -translate-x-1/2 bottom-[2px] h-px transition-all duration-300"
+                    style={{
+                      width: active ? "calc(100% - 12px)" : "0px",
+                      background: "#d97757",
+                    }}
+                  />
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Entries — catalog rows with a shared top/bottom hairline frame.
+             Fade-up is on the container (not each entry) because the filter
+             pills above swap child DOM in/out, and `useFadeIn`'s observer
+             only binds once on mount — newly-mounted children would never
+             get `.visible` applied. One wrapper = one fade, zero bugs. */}
+          <div className="fade-up border-t border-[rgba(20,20,19,0.14)]">
             {[
               {
+                cat: "The firm",
                 q: "What is Settle AI?",
                 a: "Settle AI is a full-stack AI agency that deploys Claude AI \u2014 Anthropic\u2019s frontier model \u2014 into the actual workflows of manufacturers, professional services firms, and mid-market companies. Settle handles the full rollout: workflow discovery, instruction engineering, custom agent deployment, integrations, and ongoing optimisation. The company is also known as \u201cSettle with AI\u201d, which is where the domain settlewithai.com comes from. Settle AI is built specifically for 50\u2013500-person companies that are too complex for a DIY AI tutorial but too lean to justify a Big Four consulting engagement.",
               },
               {
+                cat: "The firm",
                 q: "Who founded Settle AI?",
                 a: "Settle AI was founded in 2025 by Pranav Ambwani. Pranav holds a BS in Electrical Engineering from the University of Southern California and spent nine years in product and growth across B2B SaaS and fintech in Los Angeles before returning home to Delhi to start Settle AI. He writes about Claude AI deployment, instruction engineering, and the mechanics of running AI in production on the Settle AI blog and on Medium.",
               },
               {
+                cat: "The firm",
                 q: "Where is Settle AI based, and who does it serve?",
                 a: "Settle AI is remote-first and operates globally. Engagements have been delivered across India, the United States, the United Kingdom, and continental Europe. The agency focuses on mid-market companies \u2014 50 to 500 employees \u2014 across thirteen industries: manufacturing, healthcare, legal, finance, logistics, real estate, professional services, construction, education, retail, SaaS, hospitality, and nonprofit. Settle AI works asynchronously by default with synchronous working sessions at deployment checkpoints.",
               },
               {
+                cat: "The stack",
                 q: "What is Claude AI, and why does Settle AI use it exclusively?",
                 a: "Claude AI is Anthropic\u2019s AI assistant, purpose-built for long, complex reasoning and safe enterprise use. I chose to work exclusively with Claude because, after testing every major model in production business workflows, it consistently outperforms on the tasks that matter most: multi-step document generation, precise instruction following, and reliable output across hundreds of runs. At Orient Printing, for example, Claude handles everything from generating 8-page sales proposals with accurate pricing to troubleshooting industrial printing press issues from technical manuals. One model, deeply understood, produces better results than spreading across three or four.",
               },
               {
+                cat: "In practice",
                 q: "We\u2019re a manufacturer. Is AI realistic for us?",
                 a: "Absolutely. My first client is a 79-year-old printing and packaging manufacturer with 20,000+ units installed across 50 countries. Not exactly a Silicon Valley startup. I mapped 49 use cases across their 7 departments and deployed 11 in the first engagement, covering offer generation, RFQ drafting, BOM creation, service troubleshooting, and vendor analysis. Traditional businesses often have the most to gain from AI because their workflows are repeatable, documentation-heavy, and largely unchanged for years. The offer generator alone cut document creation time from 4 hours to 30 minutes. That\u2019s not incremental. It\u2019s a step change in how the team works.",
               },
               {
+                cat: "The method",
                 q: "How is Settle different from hiring a big consulting firm?",
                 a: "Large consulting firms charge enterprise rates, take months to deliver a strategy deck, and then hand you a PDF that your team has to figure out how to implement. I do the opposite. Working Claude agents ship in the first two to three weeks. Your team is using AI from week one, not waiting for a 200-page assessment to get approved. Settle is built specifically for companies with 50 to 500 employees, the ones too complex for a DIY YouTube tutorial but too lean to justify a Big Four engagement. Every agent I deploy comes with production-grade instructions, safety rules, and review gates. Not a strategy deck. Working tools.",
               },
               {
+                cat: "The method",
                 q: "What does a typical engagement look like?",
                 a: "Four phases. First, Discovery: I spend time with your team to audit every department\u2019s workflows and identify where AI will have the highest impact. Second, Architecture: I build a prioritised rollout plan that groups use cases by workflow cluster, not department, because that\u2019s what produces the best results. Third, Instruction Engineering: I write production-grade Claude agent instructions with safety rules, edge case handling, review gates, and knowledge file specifications. Fourth, Deploy and Settle: agents go live, your team gets trained, and I iterate based on real usage. Quick wins typically ship in the first 2\u20133 weeks. Deeper integrations with your ERP or CRM follow in subsequent phases.",
               },
               {
+                cat: "The method",
                 q: "How long until we see results?",
                 a: "Most teams see their first working Claude agent within 2 to 3 weeks. These are typically high-volume, low-complexity tasks like email drafting, document generation, or knowledge base Q&A. The full rollout depends on your scope and how many departments are involved. Orient Printing deployed 11 agents across 7 departments over about 6 months, but they were measuring time savings from month one. The key is starting with a quick win that proves the value, then expanding from there. I\u2019ve found that once one department sees results, the others start asking when they\u2019re next.",
               },
               {
+                cat: "The stack",
                 q: "What systems can Claude connect to?",
                 a: "Claude connects to your business systems through MCP (Model Context Protocol), an open standard built by Anthropic specifically for this purpose. If your system has an API or structured data export, I can build a connector for it. I\u2019ve built MCP connectors for ERPs like SAP, CRMs like HubSpot and Salesforce, document stores like SharePoint and Google Drive, email systems, and custom internal databases. The connector is a lightweight server that sits between Claude and your system, translating data in both directions. Most connectors take a few days to build and test. Once connected, Claude doesn\u2019t just know about your business in theory. It can read real data, pull actual numbers, and write results back.",
               },
               {
+                cat: "In practice",
                 q: "Do our employees need technical skills?",
                 a: "Not at all. I engineer the instructions so your team interacts with Claude in plain language, exactly the way they\u2019d talk to a knowledgeable colleague. They don\u2019t write prompts, configure settings, or understand anything about AI. They use structured Claude agents that I\u2019ve built and tested specifically for their workflows. A sales engineer types in a customer name and product requirements, and gets back a formatted offer document. A procurement manager describes what they need, and gets a complete RFQ. The complexity is in the instructions I write, not in what your team has to do.",
               },
               {
+                cat: "Trust",
                 q: "Is our company data safe with Claude?",
                 a: "Yes. Claude is built by Anthropic, which leads the industry in AI safety research. Data sent to Claude via the API is not used for model training by default. Anthropic holds SOC 2 Type II certification and offers HIPAA-eligible plans for healthcare data. Beyond Anthropic\u2019s security, every project I deploy includes explicit safety rules, review gates, and output boundaries written into the instructions. Claude won\u2019t share data between departments unless configured to. It won\u2019t fabricate information. It won\u2019t take actions without human approval at checkpoints I define. Your proprietary processes, pricing, and customer data stay private.",
               },
-            ].map((faq, i) => (
-              <details
-                key={i}
-                className="fade-up group"
-                style={{ animationDelay: `${i * 40}ms` }}
-              >
-                <summary className="flex items-center justify-between gap-6 py-6 cursor-pointer select-none">
-                  <span className="text-[clamp(1rem,1.5vw,1.1rem)] font-medium leading-snug">
-                    {faq.q}
-                  </span>
-                  <span className="relative shrink-0 w-5 h-5 text-text-faint">
-                    {/* horizontal line (always visible = minus when open) */}
-                    <span className="absolute top-1/2 left-0 w-full h-px bg-current -translate-y-1/2" />
-                    {/* vertical line (fades out on open = plus → minus) */}
-                    <span className="faq-icon-v absolute top-0 left-1/2 h-full w-px bg-current -translate-x-1/2" />
-                  </span>
-                </summary>
-                <div className="pb-6 pr-11 text-text-muted text-[15px] leading-[1.75]">
-                  {faq.a}
-                </div>
-              </details>
-            ))}
+            ]
+              .map((faq, i) => ({ ...faq, num: i + 1 }))
+              .filter(
+                (faq) => faqCategory === "All" || faq.cat === faqCategory,
+              )
+              .map((faq) => {
+                const nn = String(faq.num).padStart(2, "0");
+                return (
+                  <details
+                    key={faq.num}
+                    className="faq-entry group border-b border-[rgba(20,20,19,0.14)]"
+                  >
+                    <summary className="cursor-pointer select-none list-none py-6 md:py-7 relative">
+                      <div className="flex items-start gap-4 md:gap-8">
+                        {/* Meta rail — desktop only. Q.NN on top, category
+                           tag below. The whole column shifts to accent on
+                           hover/open via group state. */}
+                        <div className="hidden md:flex flex-col items-start shrink-0 w-[140px] pt-[6px]">
+                          <span
+                            className="font-mono tabular-nums text-[11px] tracking-[0.2em] text-text/55 transition-colors duration-200 group-hover:text-accent group-open:text-accent mb-2"
+                          >
+                            Q.{nn}
+                          </span>
+                          <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-text/45 whitespace-nowrap transition-colors duration-200 group-open:text-accent/80">
+                            {faq.cat}
+                          </span>
+                        </div>
+
+                        {/* Question + mobile meta */}
+                        <div className="flex-1 min-w-0">
+                          {/* Mobile-only meta row */}
+                          <div className="flex items-center gap-3 md:hidden mb-2.5">
+                            <span className="font-mono tabular-nums text-[10px] tracking-[0.2em] text-text/55 group-open:text-accent transition-colors">
+                              Q.{nn}
+                            </span>
+                            <span className="w-4 h-px bg-text/20" />
+                            <span className="text-[9px] font-semibold uppercase tracking-[0.22em] text-text/45">
+                              {faq.cat}
+                            </span>
+                          </div>
+                          <h3 className="text-[clamp(1.05rem,1.7vw,1.22rem)] font-medium leading-[1.35] text-text pr-8 md:pr-12 transition-colors duration-200">
+                            {faq.q}
+                          </h3>
+                        </div>
+
+                        {/* +/× icon */}
+                        <span className="relative shrink-0 w-5 h-5 text-text/55 mt-[6px] transition-colors duration-200 group-hover:text-accent group-open:text-accent">
+                          <span className="absolute top-1/2 left-0 w-full h-px bg-current -translate-y-1/2" />
+                          <span className="faq-icon-v absolute top-0 left-1/2 h-full w-px bg-current -translate-x-1/2" />
+                        </span>
+                      </div>
+                    </summary>
+
+                    {/* Answer — aligned under the Question column on desktop.
+                       The left 140px tracks the summary's meta column and
+                       carries the accent hairline rail + Fraunces "A." marker. */}
+                    <div className="flex items-start gap-4 md:gap-8 pb-8 md:pb-10">
+                      <div className="hidden md:block shrink-0 w-[140px] relative self-stretch">
+                        {/* Accent hairline rail — drops from the top of the
+                           answer block down its full height. Sits aligned
+                           with where the Q.NN label started. */}
+                        <div className="absolute left-0 top-0 bottom-0 w-px bg-accent/35" />
+                        {/* "A." specimen marker in Fraunces italic */}
+                        <span
+                          className="absolute left-3 top-0 italic text-accent leading-none"
+                          style={{
+                            fontFamily: "var(--font-heading)",
+                            fontSize: "28px",
+                          }}
+                        >
+                          A.
+                        </span>
+                      </div>
+                      <div className="flex-1 min-w-0 pr-8 md:pr-12">
+                        {/* Mobile "A." marker */}
+                        <span
+                          className="md:hidden inline-block italic text-accent leading-none mb-3"
+                          style={{
+                            fontFamily: "var(--font-heading)",
+                            fontSize: "22px",
+                          }}
+                        >
+                          A.
+                        </span>
+                        <p className="text-text-muted text-[15px] md:text-[15.5px] leading-[1.8]">
+                          {faq.a}
+                        </p>
+                      </div>
+                    </div>
+                  </details>
+                );
+              })}
+          </div>
           </div>
         </div>
       </section>
@@ -1551,11 +2015,11 @@ export default function Home() {
          Three internal-link hubs that give Google (and users) a
          clear crawl path into the topical clusters. Each card links
          to a hub page plus a few high-intent sub-pages. */}
-      <section>
+      <section ref={exploreRef}>
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
           <div className="h-px bg-border-light" />
         </div>
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-20 md:py-28">
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24">
           <div className="fade-up mb-12 max-w-[760px]">
             <span className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-accent mb-5">
               Go deeper
@@ -1572,28 +2036,35 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-5 md:gap-6">
             {/* By industry */}
-            <a
-              href="/ai-consulting"
-              className="fade-up group block rounded-xl p-7 md:p-8 border border-[rgba(20,20,19,0.1)] bg-[rgba(0,0,0,0.02)] hover:bg-[rgba(0,0,0,0.04)] hover:border-[rgba(20,20,19,0.18)] transition-colors duration-200"
+            <div
+              className="fade-up feature-card group"
+              onMouseMove={handleFeatureCardMove}
             >
-              <div className="text-[11px] uppercase tracking-[0.14em] text-text-faint mb-3">
+              <span className="feature-card-index" aria-hidden="true">01</span>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-text-faint mb-4 font-medium">
                 By industry
               </div>
               <h3
-                className="text-[1.15rem] md:text-[1.25rem] font-medium leading-[1.25] text-text mb-3 group-hover:text-accent transition-colors"
+                className="text-[1.3rem] md:text-[1.5rem] font-medium leading-[1.2] text-text mb-3 group-hover:text-accent transition-colors"
                 style={{
                   fontFamily: "var(--font-heading)",
                   letterSpacing: "-0.02em",
                 }}
               >
-                AI consulting for your vertical.
+                <a
+                  href="/ai-consulting"
+                  className="after:absolute after:inset-0 after:content-['']"
+                >
+                  AI consulting for your vertical.
+                </a>
               </h3>
-              <p className="text-text-muted text-[14.5px] leading-[1.7] mb-5">
+              <p className="text-text-muted text-[14.5px] leading-[1.65] mb-6">
                 Manufacturing, healthcare, legal, finance, logistics, real
                 estate, professional services, construction, education,
                 retail, SaaS, hospitality, nonprofit.
               </p>
-              <div className="flex flex-wrap gap-x-3 gap-y-2 text-[13px] text-text-muted">
+              <div className="flex-1" />
+              <div className="relative z-10 pt-4 mt-auto border-t border-[rgba(20,20,19,0.08)] flex flex-wrap gap-x-3 gap-y-1.5 text-[12.5px] text-text-muted">
                 <a
                   href="/ai-consulting-for/manufacturing"
                   className="hover:text-accent transition-colors"
@@ -1615,30 +2086,37 @@ export default function Home() {
                   Logistics
                 </a>
               </div>
-            </a>
+            </div>
 
             {/* Compare */}
-            <a
-              href="/compare"
-              className="fade-up group block rounded-xl p-7 md:p-8 border border-[rgba(20,20,19,0.1)] bg-[rgba(0,0,0,0.02)] hover:bg-[rgba(0,0,0,0.04)] hover:border-[rgba(20,20,19,0.18)] transition-colors duration-200"
+            <div
+              className="fade-up feature-card group"
+              onMouseMove={handleFeatureCardMove}
             >
-              <div className="text-[11px] uppercase tracking-[0.14em] text-text-faint mb-3">
+              <span className="feature-card-index" aria-hidden="true">02</span>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-text-faint mb-4 font-medium">
                 Compare
               </div>
               <h3
-                className="text-[1.15rem] md:text-[1.25rem] font-medium leading-[1.25] text-text mb-3 group-hover:text-accent transition-colors"
+                className="text-[1.3rem] md:text-[1.5rem] font-medium leading-[1.2] text-text mb-3 group-hover:text-accent transition-colors"
                 style={{
                   fontFamily: "var(--font-heading)",
                   letterSpacing: "-0.02em",
                 }}
               >
-                Settle AI vs the alternatives.
+                <a
+                  href="/compare"
+                  className="after:absolute after:inset-0 after:content-['']"
+                >
+                  Settle AI vs the alternatives.
+                </a>
               </h3>
-              <p className="text-text-muted text-[14.5px] leading-[1.7] mb-5">
+              <p className="text-text-muted text-[14.5px] leading-[1.65] mb-6">
                 Honest side-by-sides against Big Four consulting, DIY, ERP
                 vendor AI, freelancers, and generic AI tools.
               </p>
-              <div className="flex flex-wrap gap-x-3 gap-y-2 text-[13px] text-text-muted">
+              <div className="flex-1" />
+              <div className="relative z-10 pt-4 mt-auto border-t border-[rgba(20,20,19,0.08)] flex flex-wrap gap-x-3 gap-y-1.5 text-[12.5px] text-text-muted">
                 <a
                   href="/compare/big-consulting"
                   className="hover:text-accent transition-colors"
@@ -1660,30 +2138,37 @@ export default function Home() {
                   vs ChatGPT
                 </a>
               </div>
-            </a>
+            </div>
 
             {/* Blog */}
-            <a
-              href="/blog"
-              className="fade-up group block rounded-xl p-7 md:p-8 border border-[rgba(20,20,19,0.1)] bg-[rgba(0,0,0,0.02)] hover:bg-[rgba(0,0,0,0.04)] hover:border-[rgba(20,20,19,0.18)] transition-colors duration-200"
+            <div
+              className="fade-up feature-card group"
+              onMouseMove={handleFeatureCardMove}
             >
-              <div className="text-[11px] uppercase tracking-[0.14em] text-text-faint mb-3">
+              <span className="feature-card-index" aria-hidden="true">03</span>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-text-faint mb-4 font-medium">
                 Writing
               </div>
               <h3
-                className="text-[1.15rem] md:text-[1.25rem] font-medium leading-[1.25] text-text mb-3 group-hover:text-accent transition-colors"
+                className="text-[1.3rem] md:text-[1.5rem] font-medium leading-[1.2] text-text mb-3 group-hover:text-accent transition-colors"
                 style={{
                   fontFamily: "var(--font-heading)",
                   letterSpacing: "-0.02em",
                 }}
               >
-                Field notes from Claude AI deployment.
+                <a
+                  href="/blog"
+                  className="after:absolute after:inset-0 after:content-['']"
+                >
+                  Field notes from Claude AI deployment.
+                </a>
               </h3>
-              <p className="text-text-muted text-[14.5px] leading-[1.7] mb-5">
+              <p className="text-text-muted text-[14.5px] leading-[1.65] mb-6">
                 Instruction engineering, Claude Skills, MCP connectors, and
                 the mechanics of running AI in production.
               </p>
-              <div className="flex flex-wrap gap-x-3 gap-y-2 text-[13px] text-text-muted">
+              <div className="flex-1" />
+              <div className="relative z-10 pt-4 mt-auto border-t border-[rgba(20,20,19,0.08)] flex flex-wrap gap-x-3 gap-y-1.5 text-[12.5px] text-text-muted">
                 <a
                   href="/blog/claude-best-invention-2026"
                   className="hover:text-accent transition-colors"
@@ -1698,109 +2183,365 @@ export default function Home() {
                   ERP/CRM connectors
                 </a>
               </div>
-            </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── Founder ──────────────────────────────────── */}
+      {/* ── Founder · Homepage Colophon ─────────────────
+         Treated as the editorial "staff box" — a magazine signs its work
+         under the masthead, this page does the same. The portrait gets
+         the same archival plate treatment we use on the Claude visual
+         and the service mindmap: corner brackets + micro-caption. The
+         bio column mirrors the same hairline-flanked eyebrow / Fraunces
+         italic title vocabulary we've used everywhere else on the page. */}
       <section id="founder" ref={founderRef} className="bg-[#ddd9cc]">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
-          <div className="max-w-[860px] mx-auto">
-            <span className="fade-up block text-[10px] font-medium uppercase tracking-[0.18em] text-text-faint mb-5">
-              Who builds this
-            </span>
-            <h2 className="fade-up text-[clamp(1.5rem,3vw,2.4rem)] tracking-[-0.02em] font-medium leading-[1.12] mb-14 max-w-2xl">
-              One operator. Every agent.
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
+          <div className="h-px bg-border-light" />
+        </div>
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24">
+          {/* Editorial header — matches the section vocabulary used across
+             FAQ, Who we work with, What we deliver, etc. */}
+          <div className="fade-up text-center mb-14 md:mb-16">
+            <div className="inline-flex items-center gap-3 mb-5">
+              <div className="w-8 h-px bg-[rgba(20,20,19,0.2)]" />
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
+                Who builds this
+              </p>
+              <div className="w-8 h-px bg-[rgba(20,20,19,0.2)]" />
+            </div>
+            <h2 className="text-[clamp(1.7rem,3.4vw,2.6rem)] tracking-[-0.02em] font-medium leading-[1.1]">
+              One operator.{" "}
+              <span
+                className="italic"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                Every agent.
+              </span>
             </h2>
+          </div>
 
-            <div className="grid sm:grid-cols-[180px_1fr] gap-8 sm:gap-12 items-start">
-              {/* Photo */}
+          {/* Two-column: portrait plate | editorial bio */}
+          <div className="fade-up grid md:grid-cols-[minmax(180px,210px)_1fr] gap-10 md:gap-16 items-start max-w-[920px] mx-auto">
+            {/* ── Portrait plate ──
+               Specimen-frame treatment: 4 corner brackets just outside
+               the image, mono caption below, dossier tags under that.
+               Hover: subtle grayscale→color shift + faint accent glow
+               behind the plate — humanises the plate without breaking
+               the archival metaphor. */}
+            <div className="group relative mx-auto md:mx-0 w-[170px] md:w-[200px]">
+              {/* Corner brackets */}
+              <span aria-hidden className="absolute -top-2 -left-2 w-4 h-4 border-t border-l border-text/35 pointer-events-none" />
+              <span aria-hidden className="absolute -top-2 -right-2 w-4 h-4 border-t border-r border-text/35 pointer-events-none" />
+              <span aria-hidden className="absolute bottom-[68px] -left-2 w-4 h-4 border-b border-l border-text/35 pointer-events-none" />
+              <span aria-hidden className="absolute bottom-[68px] -right-2 w-4 h-4 border-b border-r border-text/35 pointer-events-none" />
+
+              {/* Soft accent glow on hover — implied "gallery light" */}
+              <div
+                aria-hidden
+                className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{
+                  background:
+                    "radial-gradient(circle at 50% 50%, rgba(217,119,87,0.18) 0%, transparent 70%)",
+                  filter: "blur(20px)",
+                  transform: "scale(1.15)",
+                }}
+              />
+
+              {/* Portrait — square, not circle. Editorial gravitas > avatar. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/pranav-ambwani.jpg"
                 alt="Pranav Ambwani, Founder of Settle"
-                width={360}
-                height={360}
+                width={520}
+                height={520}
                 loading="lazy"
-                className="fade-up w-[140px] sm:w-[180px] h-[140px] sm:h-[180px] rounded-full object-cover border border-border-light"
-                style={{ filter: "grayscale(0.15) contrast(1.02)" }}
+                className="relative z-10 w-full aspect-square object-cover rounded-[2px] border border-[rgba(20,20,19,0.15)] transition-[filter,transform] duration-700 ease-out group-hover:scale-[1.015]"
+                style={{ filter: "grayscale(0.25) contrast(1.03)" }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.filter =
+                    "grayscale(0) contrast(1.03)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.filter =
+                    "grayscale(0.25) contrast(1.03)";
+                }}
               />
 
-              {/* Bio — operational, not resume */}
-              <div className="fade-up">
-                <div
-                  className="text-[clamp(1.4rem,2vw,1.8rem)] font-medium leading-[1.15] mb-1"
-                  style={{
-                    fontFamily: "var(--font-heading)",
-                    letterSpacing: "-0.02em",
-                  }}
-                >
-                  Pranav Ambwani
-                </div>
-                <div className="text-[11px] font-medium uppercase tracking-[0.14em] text-accent mb-6">
+              {/* Micro-caption under plate */}
+              <div className="mt-4 flex items-center gap-3">
+                <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-text/55">
+                  Plate · The Operator
+                </span>
+              </div>
+              <div className="mt-1.5 text-[10px] font-mono uppercase tracking-[0.18em] text-text/40 whitespace-nowrap">
+                File · 01 · Delhi
+              </div>
+            </div>
+
+            {/* ── Editorial bio column ── */}
+            <div className="relative">
+              {/* Top kicker — role as a broadsheet-style label */}
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-6 h-px bg-accent" />
+                <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
                   Founder · Settle AI
+                </span>
+              </div>
+
+              {/* Name — Fraunces italic for masthead treatment */}
+              <h3
+                className="text-[clamp(2rem,3.6vw,2.8rem)] font-normal leading-[1.05] tracking-[-0.02em] text-text mb-5"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                Pranav{" "}
+                <span className="italic">Ambwani.</span>
+              </h3>
+
+              {/* Bio */}
+              <p className="text-text-muted text-[16px] md:text-[17px] leading-[1.7] mb-8 max-w-[560px]">
+                Pranav holds a BS in Electrical Engineering from the
+                University of Southern California and spent nine years in
+                Los Angeles before returning home to Delhi. He founded
+                Settle AI in 2025 to deploy Claude AI across mid-market
+                businesses end-to-end.
+              </p>
+
+              {/* Dossier fact rail — 4 credentials at a glance.
+                 Reads like the byline/dateline strip at the top of a
+                 newspaper column: dense, scan-friendly, high trust. */}
+              <div className="mb-8 pt-5 border-t border-[rgba(20,20,19,0.14)]">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-6">
+                  {[
+                    { k: "Trained", v: "USC · BSEE" },
+                    { k: "Built in", v: "Nine years · LA" },
+                    { k: "Based", v: "Delhi, India" },
+                    { k: "Operating", v: "Since 2025" },
+                  ].map((f) => (
+                    <div key={f.k}>
+                      <div className="text-[9.5px] font-semibold uppercase tracking-[0.22em] text-text/45 mb-1.5">
+                        {f.k}
+                      </div>
+                      <div className="text-[13px] md:text-[13.5px] font-medium text-text leading-tight">
+                        {f.v}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <p className="text-text-muted text-[16px] md:text-[17px] leading-[1.7] mb-4">
-                  Pranav holds a BS in Electrical Engineering from the
-                  University of Southern California and spent nine years in
-                  Los Angeles before returning home to Delhi. He founded
-                  Settle AI in 2025 to deploy Claude AI across mid-market
-                  businesses end-to-end.
-                </p>
-                <div className="flex items-center gap-5 mt-2">
-                  <a
-                    href="/about"
-                    className="inline-block text-accent text-[14px] font-medium hover:underline"
+              </div>
+
+              {/* Signed byline — editorial credit style replaces the
+                 generic "About Settle AI · LinkedIn" link row. Reads as
+                 "this piece signed by" rather than a CTA rail. */}
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+                <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-text/45">
+                  Signed
+                </span>
+                <span className="w-3 h-px bg-text/20" />
+                <a
+                  href="/about"
+                  className="group inline-flex items-center gap-1.5 text-[13px] font-medium text-text hover:text-accent transition-colors"
+                >
+                  About Settle AI
+                  <svg
+                    className="w-[11px] h-[11px] transition-transform duration-200 group-hover:translate-x-0.5"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    aria-hidden="true"
                   >
-                    About Settle AI
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/pranavambwani/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block text-accent text-[14px] font-medium hover:underline"
+                    <path
+                      d="M3 11L11 3M11 3H5M11 3v6"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/pranavambwani/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-1.5 text-[13px] font-medium text-text hover:text-accent transition-colors"
+                >
+                  LinkedIn
+                  <svg
+                    className="w-[11px] h-[11px] transition-transform duration-200 group-hover:translate-x-0.5"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    aria-hidden="true"
                   >
-                    LinkedIn
-                  </a>
-                </div>
+                    <path
+                      d="M3 11L11 3M11 3H5M11 3v6"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href="https://medium.com/@pranavambwani"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-1.5 text-[13px] font-medium text-text hover:text-accent transition-colors"
+                >
+                  Medium
+                  <svg
+                    className="w-[11px] h-[11px] transition-transform duration-200 group-hover:translate-x-0.5"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 11L11 3M11 3H5M11 3v6"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </a>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────── */}
-      <section id="contact" ref={ctaRef} className="bg-accent">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-28 md:py-40">
-          <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-            {/* Left: text + form */}
-            <div className="text-center md:text-left">
-              {/* Mobile-only particle mark, above the title */}
-              <div className="md:hidden flex justify-center mb-4">
-                <div className="w-[120px] h-[180px] opacity-[0.32]">
+      {/* ── CTA · Closing Dispatch ───────────────────
+         Editorial bookend to the Hero's "Dispatch Cover". Same vocab:
+         corner brackets, top mono rail, bottom mono dateline, editorial
+         split layout. The form lives inside an ivory RSVP-style intake
+         card that sits on the accent field — the color tension makes
+         the paper read as expensive. ParticleSettleMark is untouched. */}
+      <section
+        id="contact"
+        ref={ctaRef}
+        className="relative bg-accent overflow-hidden"
+      >
+        {/* Corner brackets — white-tinted to read on the accent field */}
+        <div aria-hidden className="absolute top-4 left-4 md:top-6 md:left-6 w-5 h-5 md:w-7 md:h-7 border-t border-l border-white/35 pointer-events-none z-20" />
+        <div aria-hidden className="absolute top-4 right-4 md:top-6 md:right-6 w-5 h-5 md:w-7 md:h-7 border-t border-r border-white/35 pointer-events-none z-20" />
+        <div aria-hidden className="absolute bottom-4 left-4 md:bottom-6 md:left-6 w-5 h-5 md:w-7 md:h-7 border-b border-l border-white/35 pointer-events-none z-20" />
+        <div aria-hidden className="absolute bottom-4 right-4 md:bottom-6 md:right-6 w-5 h-5 md:w-7 md:h-7 border-b border-r border-white/35 pointer-events-none z-20" />
+
+        {/* Top mono dispatch rail — mirrors the Hero's masthead framing */}
+        <div className="relative z-20 pt-8 md:pt-10 px-8 md:px-14">
+          <div className="max-w-[1440px] mx-auto flex items-center justify-between text-[10px] md:text-[11px] font-mono uppercase tracking-[0.22em] text-white/65">
+            <span>Dispatch · 02 — Close</span>
+            <span className="hidden md:inline tracking-[0.26em]">
+              Correspondence
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <span className="relative inline-flex w-[6px] h-[6px]">
+                <span className="absolute inset-0 rounded-full bg-white animate-ping opacity-60" />
+                <span className="relative inline-block w-full h-full rounded-full bg-white" />
+              </span>
+              Availability · Q3 2026
+            </span>
+          </div>
+          {/* Hairline under rail — completes the masthead frame */}
+          <div className="max-w-[1440px] mx-auto mt-3 h-px bg-white/18" />
+        </div>
+
+        <div className="relative z-10 max-w-[1280px] mx-auto px-8 md:px-14 py-20 md:py-32">
+          <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-12 md:gap-16 items-center">
+            {/* LEFT: editorial title + RSVP intake card.
+               No fade-up here on purpose — the CTA sits at the bottom of
+               the page, readers who reach it are committed, and the extra
+               observation was unreliably firing in this section anyway. */}
+            <div className="text-left">
+              {/* Mobile-only particle mark — above the title so the animated
+                 S reads as a masthead motif on narrow screens. */}
+              <div className="md:hidden flex justify-center mb-6">
+                <div className="w-[120px] h-[180px] opacity-[0.35]">
                   <ParticleSettleMark />
                 </div>
               </div>
-              <h2 className="fade-up text-[clamp(1.8rem,4vw,3.5rem)] font-medium leading-[1.1] mb-5 text-white">
-                Ready to settle in with AI?
+
+              {/* Eyebrow: hairline-flanked label matching the rest of the site */}
+              <div className="inline-flex items-center gap-3 mb-5">
+                <div className="w-8 h-px bg-white/40" />
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/85">
+                  The Close
+                </p>
+              </div>
+
+              <h2
+                className="text-[clamp(2rem,4.2vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] mb-5 text-white"
+              >
+                Ready to settle in with{" "}
+                <span
+                  className="italic"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  AI?
+                </span>
               </h2>
-              <p className="fade-up text-white/70 text-[17px] leading-relaxed mb-12">
+              <p className="text-white/75 text-[16px] md:text-[17px] leading-[1.65] mb-10 max-w-[460px]">
                 We take on a small number of clients each quarter. Tell us
                 about the project and we&apos;ll let you know if it&apos;s a
                 fit.
               </p>
-              {submitted ? (
-                <div className="fade-up visible">
-                  <p className="text-white text-lg font-medium mb-2">
-                    Thanks — we&apos;ll be in touch.
-                  </p>
-                  <p className="text-white/50 text-sm">
-                    Expect a reply within 24 hours.
-                  </p>
+
+              {/* RSVP intake card — cream paper on accent field.
+                 Inner micro-masthead mirrors the section's framing so the
+                 card reads as a nested artifact (document within document). */}
+              <div
+                className="relative rounded-xl bg-bg border border-[rgba(20,20,19,0.1)] p-6 md:p-8 max-w-[520px]"
+                style={{
+                  boxShadow:
+                    "0 30px 60px -30px rgba(20,20,19,0.35), 0 10px 20px -10px rgba(20,20,19,0.15)",
+                }}
+              >
+                {/* Card corner tickmarks — tiny echoes of the section corners */}
+                <span aria-hidden className="absolute top-2 left-2 w-2.5 h-2.5 border-t border-l border-[rgba(20,20,19,0.2)]" />
+                <span aria-hidden className="absolute top-2 right-2 w-2.5 h-2.5 border-t border-r border-[rgba(20,20,19,0.2)]" />
+                <span aria-hidden className="absolute bottom-2 left-2 w-2.5 h-2.5 border-b border-l border-[rgba(20,20,19,0.2)]" />
+                <span aria-hidden className="absolute bottom-2 right-2 w-2.5 h-2.5 border-b border-r border-[rgba(20,20,19,0.2)]" />
+
+                {/* Card masthead */}
+                <div className="flex items-center justify-between mb-5 pb-4 border-b border-[rgba(20,20,19,0.1)]">
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-[10px] tracking-[0.24em] uppercase text-text/55">
+                      Form · 01
+                    </span>
+                    <span className="w-4 h-px bg-text/15" />
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-accent">
+                      Intake
+                    </span>
+                  </div>
+                  <span className="hidden sm:inline font-mono text-[10px] tracking-[0.22em] uppercase text-text/40">
+                    Apr 2026
+                  </span>
                 </div>
-              ) : (
-                <>
+
+                {submitted ? (
+                  <div>
+                    {/* Received state — editorial receipt */}
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="relative inline-flex w-[8px] h-[8px]">
+                        <span className="absolute inset-0 rounded-full bg-accent animate-ping opacity-60" />
+                        <span className="relative inline-block w-full h-full rounded-full bg-accent" />
+                      </span>
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-accent">
+                        Received
+                      </span>
+                    </div>
+                    <p
+                      className="text-text text-[1.4rem] md:text-[1.6rem] leading-[1.15] font-normal mb-3"
+                      style={{ fontFamily: "var(--font-heading)" }}
+                    >
+                      Thanks — we&apos;ll be{" "}
+                      <span className="italic">in touch.</span>
+                    </p>
+                    <p className="text-text-muted text-[13px] leading-relaxed">
+                      Expect a reply within 24 hours. If it&apos;s urgent,
+                      reply to the note we send with any context that
+                      matters.
+                    </p>
+                  </div>
+                ) : (
                   <form
                     onSubmit={async (e) => {
                       e.preventDefault();
@@ -1813,36 +2554,78 @@ export default function Home() {
                         setSubmitted(true);
                       }
                     }}
-                    className="fade-up flex flex-col sm:flex-row gap-3"
                   >
+                    {/* Field · email — editorial underline treatment,
+                       no box. The label sits above as a tiny eyebrow so
+                       the input itself stays clean and ledger-like. */}
+                    <label
+                      htmlFor="cta-email"
+                      className="block text-[10px] font-semibold uppercase tracking-[0.22em] text-text/55 mb-2"
+                    >
+                      Your email
+                    </label>
                     <input
+                      id="cta-email"
                       type="email"
                       name="email"
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="you@company.com"
-                      className="flex-1 bg-white/10 border border-white/20 rounded-lg px-5 py-3.5 text-sm text-white placeholder-white/40 focus:border-white/40 focus:outline-none transition-colors duration-200"
+                      className="w-full bg-transparent border-0 border-b border-[rgba(20,20,19,0.2)] focus:border-accent focus:outline-none text-text placeholder-text/35 text-[16px] py-2 mb-6 transition-colors duration-200"
                     />
+
                     <button
                       type="submit"
-                      className="bg-white text-accent font-medium px-7 py-3.5 rounded-lg hover:bg-white/90 transition-colors duration-200 whitespace-nowrap text-[15px]"
+                      className="group w-full inline-flex items-center justify-center gap-2 bg-text text-bg font-medium text-[15px] px-6 py-3.5 rounded-lg hover:bg-[#30302e] transition-colors duration-200"
                     >
                       Let&apos;s talk
+                      <svg
+                        className="w-[14px] h-[14px] transition-transform duration-200 group-hover:translate-x-0.5"
+                        viewBox="0 0 14 14"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M1 7h12M8 2l5 5-5 5"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
                     </button>
+
+                    {/* Micro-caption — replaces the generic "48 hours" line.
+                       Mentions Pranav by name: the form feels personally
+                       attended rather than routed through a CRM. */}
+                    <p className="mt-4 text-text-muted text-[12px] leading-[1.6] flex items-center gap-2">
+                      <span className="w-2 h-px bg-text/25" />
+                      Reply within 48 hours · usually signed by Pranav
+                    </p>
                   </form>
-                  <p className="fade-up text-white/40 text-sm mt-5">
-                    We respond within 48 hours.
-                  </p>
-                </>
-              )}
+                )}
+              </div>
             </div>
-            {/* Right: animated illustration — particles morph S → illustration → bot → S */}
+
+            {/* RIGHT: particle mark — KEEP untouched.
+               The animation morphs S → illustration → bot → S and is the
+               signature motif of this page. Opacity / sizing unchanged. */}
             <div className="hidden md:flex justify-center items-center">
               <div className="w-[320px] h-[480px] lg:w-[380px] lg:h-[570px] opacity-[0.32]">
                 <ParticleSettleMark />
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Bottom mono dateline — completes the masthead frame */}
+        <div className="relative z-20 pb-8 md:pb-10 px-8 md:px-14">
+          <div className="max-w-[1440px] mx-auto mb-3 h-px bg-white/15" />
+          <div className="max-w-[1440px] mx-auto hidden sm:flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.24em] text-white/55">
+            <span>Folio · Delhi ↔ New York ↔ London</span>
+            <span className="hidden md:inline">Issue 01 / Vol. I</span>
+            <span>End of issue</span>
           </div>
         </div>
       </section>

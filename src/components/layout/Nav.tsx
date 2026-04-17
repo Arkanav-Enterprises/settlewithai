@@ -1,12 +1,35 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 interface NavProps {
   /** "full" shows the SettleMark logo, section links, and both CTAs.
    *  "minimal" (default) shows just the text logo + primary CTA. */
   variant?: "full" | "minimal";
+  /** When true, the nav is hidden at the top of the page and slides
+   *  in once the user scrolls past the hero masthead. Used on the
+   *  homepage so the Hero's dispatch rail can breathe at the very top. */
+  revealOnScroll?: boolean;
 }
 
-export function Nav({ variant = "minimal" }: NavProps) {
+export function Nav({ variant = "minimal", revealOnScroll = false }: NavProps) {
+  const [visible, setVisible] = useState(!revealOnScroll);
+
+  useEffect(() => {
+    if (!revealOnScroll) return;
+    const onScroll = () => setVisible(window.scrollY > 120);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [revealOnScroll]);
+
   return (
-    <nav className="fixed top-0 w-full z-50 backdrop-blur-xl bg-[#e8e6dc]/80">
+    <nav
+      className={`fixed top-0 w-full z-50 backdrop-blur-xl bg-[#e8e6dc]/80 transition-transform duration-300 ease-out ${
+        visible ? "translate-y-0" : "-translate-y-full"
+      }`}
+      aria-hidden={!visible}
+    >
       <div className="max-w-[1280px] mx-auto px-6 lg:px-10 h-[4.25rem] flex items-center justify-between">
         {/* Logo */}
         <a

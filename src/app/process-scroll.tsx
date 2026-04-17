@@ -11,30 +11,21 @@ const PHASES = [
     num: "01",
     title: "Discovery",
     desc: "We map every repeatable workflow across your team. What eats time, what\u2019s error-prone, what\u2019s high-volume.",
-    image: "/cave-art.webp",
-    /* cave-art is already black-on-white, no invert needed */
-    invertColors: false,
   },
   {
     num: "02",
     title: "Architecture",
     desc: "Your entire rollout \u2014 use cases, departments, timelines, gaps, and skills \u2014 in one interactive dashboard.",
-    image: "/Architecture.png",
-    invertColors: true,
   },
   {
     num: "03",
     title: "Instruction Engineering",
     desc: "Production-grade Claude instructions for every use case. Structured workflows with review gates and safety rules.",
-    image: "/Instruction%20Engineering.png",
-    invertColors: true,
   },
   {
     num: "04",
     title: "Deploy & Settle",
     desc: "We deploy, train your team, and iterate. Quick wins ship in weeks. Deeper integrations follow in phases.",
-    image: "/Deploy%20and%20Settle.png",
-    invertColors: true,
   },
 ];
 
@@ -109,11 +100,22 @@ export default function ProcessScroll() {
 
   return (
     <section ref={sectionRef} className="bg-[#ddd9cc] relative overflow-hidden">
-      {/* "OUR PROCESS" label */}
-      <div className="absolute left-6 lg:left-10 top-1/2 -translate-y-1/2 z-10">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-text-muted">
-          The Settle <span className="text-accent">Method</span>
-        </p>
+      {/* Left-edge running label — editorial museum-tag treatment.
+         Hairline vertical rule + method name + live "phase 0X / 04" counter. */}
+      <div className="absolute left-6 lg:left-10 top-1/2 -translate-y-1/2 z-10 flex items-center gap-4">
+        <div className="w-px h-12 bg-[rgba(20,20,19,0.22)]" />
+        <div>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-text-muted mb-2">
+            The Settle <span className="text-accent">Method</span>
+          </p>
+          <p
+            className="text-[10px] font-medium tracking-[0.18em] text-text-muted/70 tabular-nums"
+            aria-live="polite"
+          >
+            {String(activePhase + 1).padStart(2, "0")}
+            <span className="opacity-50"> / 04</span>
+          </p>
+        </div>
       </div>
 
       {/* Rotating circle. Mobile uses a larger radius so the arc between
@@ -158,7 +160,10 @@ export default function ProcessScroll() {
                 transform: `rotate(${angle}deg)`,
               }}
             >
-              {/* Dot on circumference */}
+              {/* Dot on circumference — crisp accent marker for the active
+                 phase (with a soft halo ring), hairline mute for the others.
+                 The halo is built from layered box-shadows rather than blur()
+                 so the mark stays sharp at any scale. */}
               <div
                 ref={(el) => {
                   dotRefs.current[i] = el;
@@ -166,12 +171,19 @@ export default function ProcessScroll() {
                 className="absolute rounded-full"
                 style={{
                   left: "41.6%",
-                  top: "-5px",
-                  width: "10px",
-                  height: "10px",
-                  background: "#d97757",
-                  filter: "blur(3px)",
-                  opacity: 0.2,
+                  top: "-4px",
+                  width: "8px",
+                  height: "8px",
+                  background:
+                    activePhase === i ? "#d97757" : "rgba(20,20,19,0.35)",
+                  transform: activePhase === i ? "scale(1.25)" : "scale(0.7)",
+                  boxShadow:
+                    activePhase === i
+                      ? "0 0 0 4px rgba(217,119,87,0.14), 0 0 0 10px rgba(217,119,87,0.05)"
+                      : "none",
+                  opacity: activePhase === i ? 1 : 0.55,
+                  transition:
+                    "background 500ms ease, transform 500ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 500ms ease, opacity 500ms ease",
                 }}
               />
 
@@ -189,9 +201,31 @@ export default function ProcessScroll() {
                   opacity: 1,
                 }}
               >
-                <span className="text-[14px] block mb-2 text-text-muted">
-                  {phase.num}
-                </span>
+                {/* Editorial kicker — hairline rule + uppercase micro-label.
+                   Replaces the bare "01" text for a magazine-tag feel. */}
+                <div className="flex items-center gap-3 mb-4">
+                  <div
+                    className="h-px transition-all duration-500"
+                    style={{
+                      width: activePhase === i ? "32px" : "18px",
+                      background:
+                        activePhase === i
+                          ? "#d97757"
+                          : "rgba(20,20,19,0.25)",
+                    }}
+                  />
+                  <span
+                    className="text-[11px] font-semibold uppercase tracking-[0.22em] tabular-nums transition-colors duration-500"
+                    style={{
+                      color:
+                        activePhase === i
+                          ? "#d97757"
+                          : "rgba(20,20,19,0.55)",
+                    }}
+                  >
+                    Phase {phase.num}
+                  </span>
+                </div>
                 <h3
                   className="text-[clamp(1.4rem,3.5vw,2.8rem)] font-normal leading-[1.08] mb-3 text-text"
                   style={{ fontFamily: "var(--font-heading)" }}
@@ -207,30 +241,66 @@ export default function ProcessScroll() {
         })}
       </div>
 
-      {/* Phase background images — crossfade as scroll advances. Desktop only.
-         All rendered as faint grey silhouettes via grayscale + multiply blend.
-         White-on-dark PNGs get inverted first so multiply works consistently. */}
-      <div className="absolute right-0 top-0 w-[700px] lg:w-[800px] h-[700px] lg:h-[800px] pointer-events-none select-none hidden md:block">
+      {/* Ghost numeral — editorial replacement for the previous illustration
+         crossfade. Giant italic Fraunces numeral anchored in the right half,
+         crossfading between phases. Echoes the ghost-numeral motif on the
+         Explore cards. Desktop only; hidden on mobile to preserve scroll room. */}
+      <div
+        aria-hidden
+        className="absolute right-0 top-0 bottom-0 w-[min(56vw,760px)] pointer-events-none select-none hidden md:flex items-center justify-center"
+      >
+        {/* Soft warm halo behind the numeral — implied "gallery light" on
+           the active phase without adding noisy imagery. */}
+        <div
+          className="absolute w-[520px] h-[520px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(217,119,87,0.08) 0%, rgba(217,119,87,0.02) 45%, transparent 70%)",
+            filter: "blur(20px)",
+          }}
+        />
         {PHASES.map((phase, i) => (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img
+          <span
             key={phase.num}
-            src={phase.image}
-            alt=""
-            width={1024}
-            height={1024}
-            loading={i === 0 ? "eager" : "lazy"}
-            className="absolute inset-0 w-full h-full object-contain"
+            className="absolute italic font-normal leading-none tabular-nums"
             style={{
-              opacity: activePhase === i ? 0.1 : 0,
-              transition: "opacity 600ms ease",
-              filter: phase.invertColors
-                ? "invert(1) grayscale(1)"
-                : "grayscale(1)",
-              mixBlendMode: "multiply",
+              fontFamily: "var(--font-heading)",
+              fontSize: "clamp(280px, 38vw, 560px)",
+              letterSpacing: "-0.06em",
+              color: "rgba(20,20,19,0.07)",
+              opacity: activePhase === i ? 1 : 0,
+              transform:
+                activePhase === i
+                  ? "translateY(0) scale(1)"
+                  : "translateY(8px) scale(0.985)",
+              transition:
+                "opacity 700ms cubic-bezier(0.16, 1, 0.3, 1), transform 900ms cubic-bezier(0.16, 1, 0.3, 1)",
             }}
-          />
+          >
+            {phase.num}
+          </span>
         ))}
+
+        {/* Editorial specimen caption — tiny uppercase label under the
+           numeral, crossfades with the active phase title. */}
+        <div
+          className="absolute bottom-[18%] flex flex-col items-center gap-2"
+          style={{ minWidth: "260px" }}
+        >
+          <div className="w-10 h-px bg-[rgba(20,20,19,0.2)]" />
+          {PHASES.map((phase, i) => (
+            <span
+              key={phase.num}
+              className="absolute top-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-text-muted whitespace-nowrap"
+              style={{
+                opacity: activePhase === i ? 0.75 : 0,
+                transition: "opacity 600ms ease",
+              }}
+            >
+              Phase {phase.num} &middot; {phase.title}
+            </span>
+          ))}
+        </div>
       </div>
 
       {/* Spacer for scroll room — desktop height set here; pin handles scroll travel */}

@@ -165,7 +165,7 @@ export function AskClaude() {
   return (
     <section
       id="ask"
-      className="relative z-20 max-w-[1280px] mx-auto px-6 lg:px-10 py-20 md:py-28"
+      className="relative z-20 max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24"
     >
       <div className="max-w-[960px] mx-auto">
         {/* Header */}
