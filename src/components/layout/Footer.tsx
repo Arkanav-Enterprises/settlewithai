@@ -23,6 +23,9 @@ const INDUSTRY_LINKS = [
   { label: "Education", href: "/ai-consulting-for/education" },
   { label: "Retail", href: "/ai-consulting-for/retail-ecommerce" },
   { label: "Construction", href: "/ai-consulting-for/construction" },
+  { label: "SaaS", href: "/ai-consulting-for/saas" },
+  { label: "Hospitality", href: "/ai-consulting-for/hospitality" },
+  { label: "Nonprofit", href: "/ai-consulting-for/nonprofit" },
 ];
 
 const BLOG_LINKS = [
@@ -47,6 +50,7 @@ const TOOL_LINKS = [
 
 const COMPANY_LINKS = [
   { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
   { label: "Marketplace", href: "https://marketplace.settlewithai.com" },
   { label: "Blog", href: "/blog" },
   { label: "Get Started", href: "/#contact" },
@@ -305,9 +309,9 @@ export function Footer() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-6">
           <FooterColumn title="Company" links={COMPANY_LINKS} />
           <FooterColumn title="Free Tools" links={TOOL_LINKS} />
-          <FooterColumn title="Compare" links={COMPARE_LINKS} />
+          <FooterColumn title="Compare" links={COMPARE_LINKS} seeMoreHref="/compare" />
           <FooterColumn title="Industries" links={INDUSTRY_LINKS.slice(0, 5)} />
-          <FooterColumn title="More Industries" links={INDUSTRY_LINKS.slice(5)} />
+          <FooterColumn title="More Industries" links={INDUSTRY_LINKS.slice(5)} seeMoreHref="/ai-consulting" />
           <FooterColumn title="Blog" links={BLOG_LINKS} seeMoreHref="/blog" />
         </div>
       </div>

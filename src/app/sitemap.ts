@@ -9,12 +9,13 @@ const SITE_URL = "https://settlewithai.com";
 // Google treats every-URL-modified-today as noise and degrades crawl budget.
 // Static pages use the most recent repositioning date; blog posts use their
 // publish date from the content registry.
-const HOMEPAGE_LAST_UPDATED = "2026-04-14"; // Full-stack repositioning + marketplace launch
+const HOMEPAGE_LAST_UPDATED = "2026-04-17"; // SEO overhaul + hub pages + 3 new industries
 const TOOLS_LAST_UPDATED = "2026-03-01";
 const COMPARISONS_LAST_UPDATED = "2026-03-27";
-const INDUSTRIES_LAST_UPDATED = "2026-03-27";
+const INDUSTRIES_LAST_UPDATED = "2026-04-17"; // SaaS, hospitality, nonprofit added
 const AGENTS_LAST_UPDATED = "2026-04-14";
 const POLICIES_LAST_UPDATED = "2025-11-01";
+const HUBS_LAST_UPDATED = "2026-04-17"; // /about, /ai-consulting, /compare hubs
 
 const toDate = (iso: string) => new Date(`${iso}T00:00:00Z`);
 
@@ -33,6 +34,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: SITE_URL, lastModified: toDate(latestBlogDate) },
+    { url: `${SITE_URL}/about`, lastModified: toDate(HUBS_LAST_UPDATED) },
+    { url: `${SITE_URL}/ai-consulting`, lastModified: toDate(HUBS_LAST_UPDATED) },
+    { url: `${SITE_URL}/compare`, lastModified: toDate(HUBS_LAST_UPDATED) },
     { url: `${SITE_URL}/blog`, lastModified: toDate(latestBlogDate) },
     { url: `${SITE_URL}/privacy-policy`, lastModified: toDate(POLICIES_LAST_UPDATED) },
     { url: `${SITE_URL}/terms-of-service`, lastModified: toDate(POLICIES_LAST_UPDATED) },

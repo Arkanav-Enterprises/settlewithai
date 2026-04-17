@@ -98,8 +98,9 @@ export default function RootLayout({
       {
         "@type": ["Organization", "ProfessionalService"],
         "@id": orgId,
-        name: "Settle",
-        alternateName: "Settle with AI",
+        name: "Settle AI",
+        legalName: "Settle",
+        alternateName: ["Settle AI", "Settle with AI", "Settle"],
         url: siteUrl,
         logo: {
           "@type": "ImageObject",
@@ -112,7 +113,19 @@ export default function RootLayout({
           "Full-stack AI agency that deploys Claude AI (Anthropic) into the actual workflows of manufacturers, professional services firms, and mid-market companies — from workflow discovery and instruction engineering to custom agent builds, integrations, and ongoing optimization.",
         slogan: "Your business, made AI-native.",
         foundingDate: "2025-11",
+        foundingLocation: {
+          "@type": "Place",
+          name: "Global (remote-first)",
+        },
         founder: { "@id": personId },
+        brand: {
+          "@type": "Brand",
+          name: "Settle AI",
+          alternateName: "Settle with AI",
+          url: siteUrl,
+          logo: `${siteUrl}/apple-touch-icon.png`,
+        },
+        knowsLanguage: ["English"],
         contactPoint: {
           "@type": "ContactPoint",
           email: "hi@settlewithai.com",
@@ -131,6 +144,8 @@ export default function RootLayout({
         ],
         sameAs: [
           "https://www.linkedin.com/company/settle-with-ai",
+          "https://www.linkedin.com/in/pranavambwani/",
+          "https://medium.com/@pranavambwani",
         ],
         knowsAbout: [
           "Artificial Intelligence",

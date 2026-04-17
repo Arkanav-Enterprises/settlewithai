@@ -27,7 +27,31 @@ const HOMEPAGE_FAQ_JSONLD = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "What is Claude AI, and why does Settle use it exclusively?",
+      name: "What is Settle AI?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Settle AI is a full-stack AI agency that deploys Claude AI \u2014 Anthropic\u2019s frontier model \u2014 into the actual workflows of manufacturers, professional services firms, and mid-market companies. Settle handles the full rollout: workflow discovery, instruction engineering, custom agent deployment, integrations, and ongoing optimisation. The company is also known as \u201cSettle with AI\u201d, reflected in the primary domain settlewithai.com. Settle AI is built specifically for 50\u2013500-person companies that are too complex for a DIY AI tutorial but too lean to justify a Big Four consulting engagement.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Who founded Settle AI?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Settle AI was founded in 2025 by Pranav Ambwani. Pranav holds a BS in Electrical Engineering from the University of Southern California and spent nine years working in product and growth across B2B SaaS and fintech in Los Angeles before returning to Delhi to start Settle AI. He writes about Claude AI deployment, instruction engineering, and the mechanics of running AI in production on the Settle AI blog and on Medium.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Where is Settle AI based, and who does it serve?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Settle AI is remote-first and operates globally. Engagements have been delivered across India, the United States, the United Kingdom, and continental Europe. The agency focuses on mid-market companies \u2014 50 to 500 employees \u2014 across thirteen industries: manufacturing, healthcare, legal, finance, logistics, real estate, professional services, construction, education, retail, SaaS, hospitality, and nonprofit. Settle AI works asynchronously by default with synchronous working sessions at deployment checkpoints.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is Claude AI, and why does Settle AI use it exclusively?",
       acceptedAnswer: {
         "@type": "Answer",
         text: "Claude AI is Anthropic\u2019s AI assistant, purpose-built for long, complex reasoning and safe enterprise use. Settle chose to work exclusively with Claude AI because, after testing every major model in production business workflows, it consistently outperforms on the tasks that matter most: multi-step document generation, precise instruction following, and reliable output across hundreds of runs. At Orient Printing, for example, Claude AI handles everything from generating 8-page sales proposals with accurate pricing to troubleshooting industrial printing press issues from technical manuals. One model, deeply understood, produces better results than spreading across three or four.",
@@ -820,7 +844,7 @@ export default function Home() {
                citation ("What is Settle?"). Also matched by the
                SpeakableSpecification cssSelector in layout.tsx. */}
             <p className="hero-eyebrow text-[11px] md:text-[12px] font-medium uppercase tracking-[0.18em] text-accent/90 mb-6">
-              Full-stack AI agency · Manufacturers &amp; mid-market teams
+              Settle AI · Full-stack AI agency for mid-market teams
             </p>
             <h1 className="text-[clamp(2.4rem,4.8vw,4.2rem)] font-medium leading-[1.08] mb-8">
               Your business, made{" "}
@@ -1454,8 +1478,20 @@ export default function Home() {
           <div className="divide-y divide-border-light">
             {[
               {
-                q: "What is Claude AI, and why does Settle use it exclusively?",
-                a: "Claude is Anthropic\u2019s AI assistant, purpose-built for long, complex reasoning and safe enterprise use. I chose to work exclusively with Claude because, after testing every major model in production business workflows, it consistently outperforms on the tasks that matter most: multi-step document generation, precise instruction following, and reliable output across hundreds of runs. At Orient Printing, for example, Claude handles everything from generating 8-page sales proposals with accurate pricing to troubleshooting industrial printing press issues from technical manuals. One model, deeply understood, produces better results than spreading across three or four.",
+                q: "What is Settle AI?",
+                a: "Settle AI is a full-stack AI agency that deploys Claude AI \u2014 Anthropic\u2019s frontier model \u2014 into the actual workflows of manufacturers, professional services firms, and mid-market companies. Settle handles the full rollout: workflow discovery, instruction engineering, custom agent deployment, integrations, and ongoing optimisation. The company is also known as \u201cSettle with AI\u201d, which is where the domain settlewithai.com comes from. Settle AI is built specifically for 50\u2013500-person companies that are too complex for a DIY AI tutorial but too lean to justify a Big Four consulting engagement.",
+              },
+              {
+                q: "Who founded Settle AI?",
+                a: "Settle AI was founded in 2025 by Pranav Ambwani. Pranav holds a BS in Electrical Engineering from the University of Southern California and spent nine years in product and growth across B2B SaaS and fintech in Los Angeles before returning home to Delhi to start Settle AI. He writes about Claude AI deployment, instruction engineering, and the mechanics of running AI in production on the Settle AI blog and on Medium.",
+              },
+              {
+                q: "Where is Settle AI based, and who does it serve?",
+                a: "Settle AI is remote-first and operates globally. Engagements have been delivered across India, the United States, the United Kingdom, and continental Europe. The agency focuses on mid-market companies \u2014 50 to 500 employees \u2014 across thirteen industries: manufacturing, healthcare, legal, finance, logistics, real estate, professional services, construction, education, retail, SaaS, hospitality, and nonprofit. Settle AI works asynchronously by default with synchronous working sessions at deployment checkpoints.",
+              },
+              {
+                q: "What is Claude AI, and why does Settle AI use it exclusively?",
+                a: "Claude AI is Anthropic\u2019s AI assistant, purpose-built for long, complex reasoning and safe enterprise use. I chose to work exclusively with Claude because, after testing every major model in production business workflows, it consistently outperforms on the tasks that matter most: multi-step document generation, precise instruction following, and reliable output across hundreds of runs. At Orient Printing, for example, Claude handles everything from generating 8-page sales proposals with accurate pricing to troubleshooting industrial printing press issues from technical manuals. One model, deeply understood, produces better results than spreading across three or four.",
               },
               {
                 q: "We\u2019re a manufacturer. Is AI realistic for us?",
@@ -1511,6 +1547,162 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Explore: Industries · Compare · Blog ──────
+         Three internal-link hubs that give Google (and users) a
+         clear crawl path into the topical clusters. Each card links
+         to a hub page plus a few high-intent sub-pages. */}
+      <section>
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
+          <div className="h-px bg-border-light" />
+        </div>
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-20 md:py-28">
+          <div className="fade-up mb-12 max-w-[760px]">
+            <span className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-accent mb-5">
+              Go deeper
+            </span>
+            <h2 className="text-[clamp(1.5rem,3vw,2.4rem)] tracking-[-0.02em] font-medium leading-[1.12] mb-4">
+              Browse the playbook.
+            </h2>
+            <p className="text-text-muted text-[16px] md:text-[17px] leading-[1.7]">
+              Industry-specific deployment guides, honest comparisons
+              against the alternatives, and long-form writing on Claude AI
+              in production.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5 md:gap-6">
+            {/* By industry */}
+            <a
+              href="/ai-consulting"
+              className="fade-up group block rounded-xl p-7 md:p-8 border border-[rgba(20,20,19,0.1)] bg-[rgba(0,0,0,0.02)] hover:bg-[rgba(0,0,0,0.04)] hover:border-[rgba(20,20,19,0.18)] transition-colors duration-200"
+            >
+              <div className="text-[11px] uppercase tracking-[0.14em] text-text-faint mb-3">
+                By industry
+              </div>
+              <h3
+                className="text-[1.15rem] md:text-[1.25rem] font-medium leading-[1.25] text-text mb-3 group-hover:text-accent transition-colors"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                AI consulting for your vertical.
+              </h3>
+              <p className="text-text-muted text-[14.5px] leading-[1.7] mb-5">
+                Manufacturing, healthcare, legal, finance, logistics, real
+                estate, professional services, construction, education,
+                retail, SaaS, hospitality, nonprofit.
+              </p>
+              <div className="flex flex-wrap gap-x-3 gap-y-2 text-[13px] text-text-muted">
+                <a
+                  href="/ai-consulting-for/manufacturing"
+                  className="hover:text-accent transition-colors"
+                >
+                  Manufacturing
+                </a>
+                <span className="text-text-faint">·</span>
+                <a
+                  href="/ai-consulting-for/professional-services"
+                  className="hover:text-accent transition-colors"
+                >
+                  Professional services
+                </a>
+                <span className="text-text-faint">·</span>
+                <a
+                  href="/ai-consulting-for/logistics-supply-chain"
+                  className="hover:text-accent transition-colors"
+                >
+                  Logistics
+                </a>
+              </div>
+            </a>
+
+            {/* Compare */}
+            <a
+              href="/compare"
+              className="fade-up group block rounded-xl p-7 md:p-8 border border-[rgba(20,20,19,0.1)] bg-[rgba(0,0,0,0.02)] hover:bg-[rgba(0,0,0,0.04)] hover:border-[rgba(20,20,19,0.18)] transition-colors duration-200"
+            >
+              <div className="text-[11px] uppercase tracking-[0.14em] text-text-faint mb-3">
+                Compare
+              </div>
+              <h3
+                className="text-[1.15rem] md:text-[1.25rem] font-medium leading-[1.25] text-text mb-3 group-hover:text-accent transition-colors"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                Settle AI vs the alternatives.
+              </h3>
+              <p className="text-text-muted text-[14.5px] leading-[1.7] mb-5">
+                Honest side-by-sides against Big Four consulting, DIY, ERP
+                vendor AI, freelancers, and generic AI tools.
+              </p>
+              <div className="flex flex-wrap gap-x-3 gap-y-2 text-[13px] text-text-muted">
+                <a
+                  href="/compare/big-consulting"
+                  className="hover:text-accent transition-colors"
+                >
+                  vs Big Four
+                </a>
+                <span className="text-text-faint">·</span>
+                <a
+                  href="/compare/diy"
+                  className="hover:text-accent transition-colors"
+                >
+                  vs DIY
+                </a>
+                <span className="text-text-faint">·</span>
+                <a
+                  href="/compare/chatgpt-generic-ai"
+                  className="hover:text-accent transition-colors"
+                >
+                  vs ChatGPT
+                </a>
+              </div>
+            </a>
+
+            {/* Blog */}
+            <a
+              href="/blog"
+              className="fade-up group block rounded-xl p-7 md:p-8 border border-[rgba(20,20,19,0.1)] bg-[rgba(0,0,0,0.02)] hover:bg-[rgba(0,0,0,0.04)] hover:border-[rgba(20,20,19,0.18)] transition-colors duration-200"
+            >
+              <div className="text-[11px] uppercase tracking-[0.14em] text-text-faint mb-3">
+                Writing
+              </div>
+              <h3
+                className="text-[1.15rem] md:text-[1.25rem] font-medium leading-[1.25] text-text mb-3 group-hover:text-accent transition-colors"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                Field notes from Claude AI deployment.
+              </h3>
+              <p className="text-text-muted text-[14.5px] leading-[1.7] mb-5">
+                Instruction engineering, Claude Skills, MCP connectors, and
+                the mechanics of running AI in production.
+              </p>
+              <div className="flex flex-wrap gap-x-3 gap-y-2 text-[13px] text-text-muted">
+                <a
+                  href="/blog/claude-best-invention-2026"
+                  className="hover:text-accent transition-colors"
+                >
+                  Why Claude
+                </a>
+                <span className="text-text-faint">·</span>
+                <a
+                  href="/blog/erp-crm-claude-connectors-2026"
+                  className="hover:text-accent transition-colors"
+                >
+                  ERP/CRM connectors
+                </a>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* ── Founder ──────────────────────────────────── */}
       <section id="founder" ref={founderRef} className="bg-[#ddd9cc]">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-24 md:py-36">
@@ -1547,21 +1739,31 @@ export default function Home() {
                   Pranav Ambwani
                 </div>
                 <div className="text-[11px] font-medium uppercase tracking-[0.14em] text-accent mb-6">
-                  Founder · Settle
+                  Founder · Settle AI
                 </div>
                 <p className="text-text-muted text-[16px] md:text-[17px] leading-[1.7] mb-4">
                   Pranav holds a BS in Electrical Engineering from the
                   University of Southern California and spent nine years in
-                  Los Angeles before returning home to Delhi.
+                  Los Angeles before returning home to Delhi. He founded
+                  Settle AI in 2025 to deploy Claude AI across mid-market
+                  businesses end-to-end.
                 </p>
-                <a
-                  href="https://www.linkedin.com/in/pranavambwani/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block text-accent text-[14px] font-medium hover:underline mt-2"
-                >
-                  LinkedIn
-                </a>
+                <div className="flex items-center gap-5 mt-2">
+                  <a
+                    href="/about"
+                    className="inline-block text-accent text-[14px] font-medium hover:underline"
+                  >
+                    About Settle AI
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/pranavambwani/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block text-accent text-[14px] font-medium hover:underline"
+                  >
+                    LinkedIn
+                  </a>
+                </div>
               </div>
             </div>
           </div>
