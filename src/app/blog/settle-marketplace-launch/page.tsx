@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { BlogTOC } from "@/components/blog/BlogTOC";
 import { Nav } from "@/components/layout/Nav";
+import { MagazineHeader } from "@/components/blog/MagazineHeader";
+import { MagazineOutro } from "@/components/blog/MagazineOutro";
 
 export const metadata: Metadata = {
   title:
@@ -119,37 +121,17 @@ export default function Article() {
 
       <Nav />
 
-      <article className="max-w-[720px] mx-auto px-6 lg:px-10 pt-32 pb-24 md:pt-40 md:pb-36">
-        <header className="mb-16">
-          <a
-            href="/blog"
-            className="text-accent text-sm font-medium hover:underline"
-          >
-            &larr; Back to Blog
-          </a>
-          <h1
-            className="text-[clamp(2rem,4.5vw,3.2rem)] font-medium leading-[1.12] mt-8 mb-6"
-            style={{
-              fontFamily: "var(--font-heading)",
-              letterSpacing: "-0.03em",
-            }}
-          >
-            Settle Marketplace: The Agents We Built for Clients, Now for Sale
-          </h1>
-          <p className="text-text-muted text-[17px] leading-relaxed">
-            Six production-tested AI agents from real enterprise deployments. Pre-paid credits, no subscriptions, ninety seconds from email verification to a running agent.
-          </p>
-          <div className="flex items-center gap-3 mt-6 text-sm text-text-faint">
-            <a href="/#contact" className="hover:text-accent transition-colors">
-              Pranav Ambwani
-            </a>
-            <span>&middot;</span>
-            <time dateTime="2026-04-14">April 2026</time>
-            <span>&middot;</span>
-            <span>6 min read</span>
-          </div>
-        </header>
+      <MagazineHeader
+        category="Product"
+        issue="No. 01"
+        title="Settle Marketplace: The Agents We Built for Clients, Now for Sale"
+        deck="Six production-tested AI agents from real enterprise deployments. Pre-paid credits, no subscriptions, ninety seconds from email verification to a running agent."
+        author="Pranav Ambwani"
+        date="2026-04-14"
+        readingTime="6 min read"
+      />
 
+      <article className="max-w-[720px] mx-auto px-6 lg:px-10 pb-24 md:pb-36">
         <div className="prose-settle">
           <p>
             A few weeks ago a manufacturer in Pune emailed asking if we could just build them an offer generator. Not a 49-use-case rollout. Not a six-month engagement. One agent. The thing they actually needed.
@@ -328,76 +310,42 @@ export default function Article() {
           </p>
         </div>
 
-        {/* CTA */}
-        <section className="mt-20 lg:-mx-10 lg:px-10 py-14 bg-accent rounded-2xl text-center">
-          <h2
-            className="text-[clamp(1.4rem,3vw,2rem)] font-semibold leading-tight tracking-[-0.02em] text-white mb-3"
-            style={{ fontFamily: "var(--font-heading)" }}
-          >
-            Browse the marketplace
-          </h2>
-          <p className="text-white/80 text-[1rem] mb-6 max-w-md mx-auto">
-            Six production-tested agents, pre-paid credits, no contracts. Ninety seconds from email to running.
-          </p>
-          <a
-            href="https://marketplace.settlewithai.com"
-            target="_blank"
-            rel="noopener"
-            className="inline-flex items-center gap-2 bg-white text-accent font-medium text-[0.95rem] px-6 py-3 rounded-full hover:bg-white/90 transition-colors"
-          >
-            Open Marketplace
-            <span aria-hidden="true">&rarr;</span>
-          </a>
-        </section>
-
-        {/* Further reading */}
-        <section className="mt-16">
-          <h2
-            className="text-xl font-semibold tracking-[-0.02em] text-text mb-6"
-            style={{ fontFamily: "var(--font-heading)" }}
-          >
-            Further reading
-          </h2>
-          <div className="grid sm:grid-cols-2 gap-6">
-            <a href="/blog/orient-case-study" className="group block">
-              <h3 className="text-[1rem] font-medium text-text group-hover:text-accent transition-colors mb-1">
-                The Orient Case Study
-              </h3>
-              <p className="text-sm text-text-muted line-clamp-2">
-                The 79-year-old manufacturer behind five of the agents in the marketplace. 49 use cases mapped, 11 deployed.
-              </p>
-            </a>
-            <a href="/blog/ai-chat-on-your-website" className="group block">
-              <h3 className="text-[1rem] font-medium text-text group-hover:text-accent transition-colors mb-1">
-                We Added a Custom AI Chat to Our Website in One Afternoon
-              </h3>
-              <p className="text-sm text-text-muted line-clamp-2">
-                The architecture behind the Site Assistant, written before it was a product.
-              </p>
-            </a>
-          </div>
-        </section>
-
-        {/* Author bio */}
-        <div className="mt-16 pt-8 border-t border-border-light flex items-start gap-4">
-          <div
-            className="w-12 h-12 rounded-full bg-[#e8e6dc] flex items-center justify-center shrink-0 text-text font-medium text-lg"
-            style={{ fontFamily: "var(--font-heading)" }}
-          >
-            P
-          </div>
-          <div>
-            <a
-              href="/#contact"
-              className="font-medium text-text hover:text-accent transition-colors"
-            >
-              Pranav Ambwani
-            </a>
-            <p className="text-sm text-text-muted mt-1 leading-relaxed">
-              Founder of Settle. Deploys Claude AI into mid-market companies and manufacturers &mdash; structured rollouts, production-grade instructions, real results.
-            </p>
-          </div>
-        </div>
+        <MagazineOutro
+          author="Pranav Ambwani"
+          authorBio="Founder of Settle. Deploys Claude AI into mid-market companies and manufacturers — structured rollouts, production-grade instructions, real results."
+          related={[
+            {
+              category: "Case Study",
+              title: "The Orient Case Study",
+              description:
+                "The 79-year-old manufacturer behind five of the agents in the marketplace. 49 use cases mapped, 11 deployed.",
+              href: "/blog/orient-case-study",
+            },
+            {
+              category: "Technical",
+              title:
+                "We Added a Custom AI Chat to Our Website in One Afternoon",
+              description:
+                "The architecture behind the Site Assistant, written before it was a product.",
+              href: "/blog/ai-chat-on-your-website",
+            },
+          ]}
+          ctaHeading="Browse the marketplace"
+          ctaBody={
+            <>
+              Six production-tested agents, pre-paid credits, no contracts.
+              Ninety seconds from email to running.{" "}
+              <a
+                href="https://marketplace.settlewithai.com"
+                target="_blank"
+                rel="noopener"
+                className="text-accent font-medium hover:underline"
+              >
+                Open Marketplace →
+              </a>
+            </>
+          }
+        />
       </article>
 
       <Footer />

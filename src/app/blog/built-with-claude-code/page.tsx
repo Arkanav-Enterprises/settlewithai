@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { BlogTOC } from "@/components/blog/BlogTOC";
 import { Nav } from "@/components/layout/Nav";
+import { MagazineHeader } from "@/components/blog/MagazineHeader";
+import { MagazineOutro } from "@/components/blog/MagazineOutro";
 
 export const metadata: Metadata = {
   title:
@@ -105,41 +107,18 @@ export default function Article() {
       {/* Nav */}
       <Nav />
 
-      {/* Article */}
-      <article className="max-w-[720px] mx-auto px-6 lg:px-10 pt-32 pb-24 md:pt-40 md:pb-36">
-        {/* Header */}
-        <header className="mb-16">
-          <a
-            href="/"
-            className="text-accent text-sm font-medium hover:underline"
-          >
-            &larr; Back to Settle
-          </a>
-          <h1
-            className="text-[clamp(2rem,4.5vw,3.2rem)] font-medium leading-[1.12] mt-8 mb-6"
-            style={{
-              fontFamily: "var(--font-heading)",
-              letterSpacing: "-0.03em",
-            }}
-          >
-            How We Built This Entire Site with Claude Code
-          </h1>
-          <p className="text-text-muted text-[17px] leading-relaxed">
-            Every component on settlewithai.com &mdash; the WebGL globe, the
-            interactive Cowork demo, the D3 force-directed mindmap, the SEO
-            infrastructure &mdash; was built inside Claude Code, Anthropic&apos;s
-            CLI coding tool. No web IDE, no copy-pasting from ChatGPT. Just
-            terminal sessions, screenshots, and iteration.
-          </p>
-          <div className="flex items-center gap-3 mt-6 text-sm text-text-faint">
-            <a href="/#contact" className="hover:text-accent transition-colors">Pranav Ambwani</a>
-            <span>&middot;</span>
-            <time dateTime="2026-03-30">March 2026</time>
-            <span>&middot;</span>
-            <span>12 min read</span>
-          </div>
-        </header>
+      <MagazineHeader
+        category="Technical"
+        issue="No. 04"
+        title="How We Built This Entire Site with Claude Code"
+        deck="Every component on settlewithai.com — the WebGL globe, the Cowork demo, the D3 mindmap, the SEO infrastructure — was built inside Claude Code, Anthropic's CLI coding tool. No web IDE. No copy-pasting. Just terminal sessions, screenshots, and iteration."
+        author="Pranav Ambwani"
+        date="2026-03-30"
+        readingTime="12 min read"
+      />
 
+      {/* Article */}
+      <article className="max-w-[720px] mx-auto px-6 lg:px-10 pb-24 md:pb-36">
         {/* Body */}
         <div className="prose-settle">
           <h2>Why build a site with a CLI tool?</h2>
@@ -475,46 +454,30 @@ export default function Article() {
             every animation, every schema tag. Built in Claude Code.
           </p>
 
-          {/* Related */}
-          <div className="mt-16 pt-10 border-t border-[rgba(20,20,19,0.1)]">
-            <h3 className="text-lg font-medium mb-6">Related</h3>
-            <div className="grid sm:grid-cols-2 gap-6">
-              <a href="/blog/orient-case-study" className="group">
-                <p className="font-medium group-hover:text-[#d97757] transition-colors">How a 79-Year-Old Manufacturer Deployed AI Across 7 Departments</p>
-                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">49 use cases mapped. 18 projects structured. 11 deployed. 85% faster document generation.</p>
-              </a>
-              <a href="/blog/ai-powered-outreach-with-cowork" className="group">
-                <p className="font-medium group-hover:text-[#d97757] transition-colors">We Used Claude AI Cowork to Prospect 12 Companies in One Session</p>
-                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">How we used Claude AI&apos;s Cowork feature to research prospects, personalise outreach, and build a send calendar.</p>
-              </a>
-            </div>
-          </div>
-
-          {/* Author */}
-          <div className="mt-16 pt-8 border-t border-border-light flex items-start gap-4">
-            <div className="w-12 h-12 rounded-full bg-[#e8e6dc] flex items-center justify-center shrink-0 text-text font-medium text-lg" style={{ fontFamily: "var(--font-heading)" }}>P</div>
-            <div>
-              <a href="/#contact" className="font-medium text-text hover:text-accent transition-colors">Pranav Ambwani</a>
-              <p className="text-sm text-text-muted mt-1 leading-relaxed">Founder of Settle. Deploys Claude AI into mid-market companies and manufacturers &mdash; structured rollouts, production-grade instructions, real results.</p>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="mt-16 pt-10 border-t border-border-light">
-            <h3>Want Claude AI deployed across your organisation?</h3>
-            <p>
-              We help manufacturers and mid-market companies integrate Claude AI
-              into their daily operations &mdash; structured rollouts,
-              production-grade instructions, and measurable results.{" "}
-              <a
-                href="/#contact"
-                className="text-accent font-medium hover:underline"
-              >
-                Start a conversation &rarr;
-              </a>
-            </p>
-          </div>
         </div>
+
+        <MagazineOutro
+          author="Pranav Ambwani"
+          authorBio="Founder of Settle. Deploys Claude AI into mid-market companies and manufacturers — structured rollouts, production-grade instructions, real results."
+          related={[
+            {
+              category: "Case Study",
+              title:
+                "How a 79-Year-Old Manufacturer Deployed AI Across 7 Departments",
+              description:
+                "49 use cases mapped. 18 projects structured. 11 deployed. 85% faster document generation.",
+              href: "/blog/orient-case-study",
+            },
+            {
+              category: "Playbook",
+              title:
+                "We Used Claude AI Cowork to Prospect 12 Companies in One Session",
+              description:
+                "How we used Claude AI's Cowork feature to research prospects, personalise outreach, and build a send calendar.",
+              href: "/blog/ai-powered-outreach-with-cowork",
+            },
+          ]}
+        />
       </article>
 
       <Footer />

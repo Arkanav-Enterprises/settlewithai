@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { BlogTOC } from "@/components/blog/BlogTOC";
 import { Nav } from "@/components/layout/Nav";
+import { MagazineHeader } from "@/components/blog/MagazineHeader";
+import { MagazineOutro } from "@/components/blog/MagazineOutro";
 
 export const metadata: Metadata = {
   title: "The AI You Dismissed Isn't the AI That's Here Now",
@@ -101,40 +103,18 @@ export default function Article() {
       {/* Nav */}
       <Nav />
 
-      {/* Article */}
-      <article className="max-w-[720px] mx-auto px-6 lg:px-10 pt-32 pb-24 md:pt-40 md:pb-36">
-        {/* Header */}
-        <header className="mb-16">
-          <a
-            href="/blog"
-            className="text-accent text-sm font-medium hover:underline"
-          >
-            &larr; Back to Blog
-          </a>
-          <h1
-            className="text-[clamp(2rem,4.5vw,3.2rem)] font-medium leading-[1.12] mt-8 mb-6"
-            style={{
-              fontFamily: "var(--font-heading)",
-              letterSpacing: "-0.03em",
-            }}
-          >
-            The AI You Dismissed Isn&apos;t the AI That&apos;s Here Now
-          </h1>
-          <p className="text-text-muted text-[17px] leading-relaxed">
-            I keep having the same conversation. A client tells me they &ldquo;tried AI&rdquo;
-            and it wasn&apos;t impressive. Then I show them what Claude actually does
-            inside their workflow, and they go quiet. Andrej Karpathy just put words
-            to why that gap exists.
-          </p>
-          <div className="flex items-center gap-3 mt-6 text-sm text-text-faint">
-            <a href="/#contact" className="hover:text-accent transition-colors">Pranav Ambwani</a>
-            <span>&middot;</span>
-            <time dateTime="2026-04-10">April 2026</time>
-            <span>&middot;</span>
-            <span>10 min read</span>
-          </div>
-        </header>
+      <MagazineHeader
+        category="Essay"
+        issue="No. 02"
+        title="The AI You Dismissed Isn't the AI That's Here Now"
+        deck="A client tells me they tried AI and it wasn't impressive. Then I show them what Claude actually does inside their workflow, and they go quiet. Andrej Karpathy just put words to why that gap exists."
+        author="Pranav Ambwani"
+        date="2026-04-10"
+        readingTime="10 min read"
+      />
 
+      {/* Article */}
+      <article className="max-w-[720px] mx-auto px-6 lg:px-10 pb-24 md:pb-36">
         {/* Body */}
         <div className="prose-settle">
 
@@ -347,14 +327,10 @@ export default function Article() {
 
         </div>
 
-        {/* Author bio */}
-        <div className="mt-16 pt-8 border-t border-border-light flex items-start gap-4">
-          <div className="w-12 h-12 rounded-full bg-[#e8e6dc] flex items-center justify-center shrink-0 text-text font-medium text-lg" style={{ fontFamily: "var(--font-heading)" }}>P</div>
-          <div>
-            <a href="/#contact" className="font-medium text-text hover:text-accent transition-colors">Pranav Ambwani</a>
-            <p className="text-sm text-text-muted mt-1 leading-relaxed">Founder of Settle. Deploys Claude AI into mid-market companies and manufacturers — structured rollouts, production-grade instructions, real results.</p>
-          </div>
-        </div>
+        <MagazineOutro
+          author="Pranav Ambwani"
+          authorBio="Founder of Settle. Deploys Claude AI into mid-market companies and manufacturers — structured rollouts, production-grade instructions, real results."
+        />
       </article>
 
       {/* Footer */}

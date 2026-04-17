@@ -225,19 +225,79 @@ h1, h2, h3 {
   animation: fuse-travel 6s linear infinite;
 }
 
-/* ─── Article typography ────────────────────── */
+/* ─── Article typography (editorial / magazine) ──
+   The ruleset below powers every post in /blog. Changes cascade instantly.
+   Magazine devices wired in: drop cap, Fig-numbered figures, oversized
+   blockquote, pull quote, section ornament, end mark. Keep `.prose-settle`
+   as the single class — BlogTOC discovery and ImageLightbox key off it. */
+.prose-settle {
+  counter-reset: figure;
+}
 .prose-settle p {
   color: var(--text-muted);
   font-size: 1.0625rem;
   line-height: 1.8;
   margin-bottom: 1.5rem;
 }
-.prose-settle h2 {
-  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+
+/* Drop cap — first paragraph of a post gets a dropped serif cap.
+   Scoped to `:first-child` so posts that open with a figure or callout
+   are untouched. Applies from md up; on mobile we reduce to 3 lines. */
+.prose-settle > p:first-child::first-letter {
+  font-family: var(--font-heading);
   font-weight: 500;
-  margin-top: 3rem;
+  float: left;
+  font-size: 4.4rem;
+  line-height: 0.88;
+  padding: 0.4rem 0.7rem 0 0;
+  margin-top: 0.35rem;
+  color: var(--text);
+  letter-spacing: -0.04em;
+}
+@media (min-width: 768px) {
+  .prose-settle > p:first-child::first-letter {
+    font-size: 5.6rem;
+    line-height: 0.86;
+    padding: 0.45rem 0.8rem 0 0;
+    margin-top: 0.4rem;
+  }
+}
+/* Opt-out for posts where the opening paragraph is short, a callout,
+   or otherwise shouldn't carry a drop cap. Add `no-drop-cap` on the
+   parent `.prose-settle` element (or individual <p>). */
+.prose-settle.no-drop-cap > p:first-child::first-letter,
+.prose-settle > p.no-drop-cap::first-letter {
+  float: none;
+  font-size: inherit;
+  line-height: inherit;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+
+/* H2 — eyebrow rule + display serif. The ::before sets a hairline above
+   each section, making the article feel like it has plates. */
+.prose-settle h2 {
+  font-size: clamp(1.55rem, 2.8vw, 2.05rem);
+  font-weight: 500;
+  margin-top: 3.75rem;
   margin-bottom: 1rem;
   color: var(--text);
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  position: relative;
+  padding-top: 2rem;
+}
+.prose-settle h2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 1px;
+  background: var(--accent);
 }
 .prose-settle h3 {
   font-size: clamp(1.15rem, 2vw, 1.4rem);
@@ -245,6 +305,7 @@ h1, h2, h3 {
   margin-top: 2.5rem;
   margin-bottom: 0.75rem;
   color: var(--text);
+  letter-spacing: -0.025em;
 }
 .prose-settle ul {
   margin-bottom: 1.5rem;
@@ -280,12 +341,128 @@ h1, h2, h3 {
 .prose-settle a:hover {
   text-decoration: underline;
 }
+/* Blockquote — editorial, with a display-scale opening quotation mark. */
 .prose-settle blockquote {
-  border-left: 3px solid var(--accent);
-  padding-left: 1.25rem;
-  margin: 1.5rem 0;
+  position: relative;
+  border-left: 2px solid var(--accent);
+  padding: 0.25rem 0 0.25rem 1.75rem;
+  margin: 2.5rem 0 2.5rem -0.5rem;
+  font-family: var(--font-heading);
   font-style: italic;
-  color: var(--text-muted);
+  font-weight: 400;
+  color: var(--text);
+  font-size: clamp(1.15rem, 1.8vw, 1.35rem);
+  line-height: 1.45;
+  letter-spacing: -0.015em;
+}
+.prose-settle blockquote p {
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  margin-bottom: 0.5rem;
+}
+.prose-settle blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Pull quote — drop this in mid-article for a feature statement.
+   Full-bleed on the reading column, centered, huge serif, flanked by
+   hairline rules. Use as <p class="pull-quote">…</p> or wrap in <aside>. */
+.prose-settle .pull-quote,
+.prose-settle aside.pull-quote {
+  position: relative;
+  margin: 3rem 0;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-style: normal;
+  color: var(--text);
+  font-size: clamp(1.45rem, 2.6vw, 1.95rem);
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+  text-align: left;
+  text-indent: -0.4em;
+}
+.prose-settle .pull-quote::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 64px;
+  height: 1px;
+  background: var(--accent);
+}
+.prose-settle .pull-quote cite,
+.prose-settle .pull-quote .cite {
+  display: block;
+  margin-top: 1.25rem;
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-faint);
+  text-indent: 0;
+}
+
+/* Section ornament — three accent dots, centered. Place a
+   <div class="ornament" aria-hidden="true"></div> between sections
+   when the rhythm needs a breath without a new H2. */
+.prose-settle .ornament,
+.ornament {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 3rem 0;
+  height: 1.25rem;
+}
+.prose-settle .ornament::before,
+.prose-settle .ornament::after,
+.ornament::before,
+.ornament::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.85;
+}
+.prose-settle .ornament::after,
+.ornament::after {
+  opacity: 0.4;
+}
+.prose-settle .ornament {
+  position: relative;
+}
+.prose-settle .ornament > span,
+.ornament > span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.6;
+}
+
+/* End mark — drop a <span class="end-mark" /> or just rely on
+   `.prose-settle > p:last-child::after` to auto-append a diamond. */
+.prose-settle .end-mark,
+.prose-settle > p:last-of-type::after {
+  content: " ◆";
+  color: var(--accent);
+  font-size: 0.7em;
+  margin-left: 0.15em;
+  vertical-align: 0.1em;
+  letter-spacing: 0.02em;
+}
+/* The tail selector above can be an annoyance on posts where the last
+   paragraph is a CTA, sign-off, or link row. Opt out with a class. */
+.prose-settle.no-end-mark > p:last-of-type::after,
+.prose-settle > p.no-end-mark::after {
+  content: none;
 }
 .prose-settle ol {
   margin-bottom: 1.5rem;
@@ -353,6 +530,109 @@ h1, h2, h3 {
   border: none;
   border-top: 1px solid var(--border-light);
   margin: 2.5rem 0;
+}
+
+/* Magazine figures — each <figure> increments a counter so the caption
+   reads `Fig. 01 —`. Posts that wrap an <img> in <figure> get the plate
+   treatment automatically. Direct <img> tags are untouched. */
+.prose-settle figure {
+  counter-increment: figure;
+  margin: 2.5rem 0 3rem;
+}
+.prose-settle figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.prose-settle figure figcaption,
+.prose-settle figcaption {
+  display: block;
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-light);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+  text-align: left;
+  letter-spacing: 0;
+}
+.prose-settle figure figcaption::before {
+  content: "Fig. " counter(figure, decimal-leading-zero) " — ";
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-right: 0.35rem;
+  vertical-align: 0.02em;
+}
+/* Opt out for a caption that shouldn't carry the Fig. label. */
+.prose-settle figure.no-fig figcaption::before,
+.prose-settle figcaption.no-fig::before {
+  content: none;
+}
+
+/* Editorial sub-eyebrow — small-caps kicker for use above an H2 when the
+   author wants to signal a chapter or section break explicitly. */
+.prose-settle .kicker,
+.kicker {
+  display: block;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  margin-bottom: 0.65rem;
+}
+
+/* Lede — a larger intro paragraph, positioned under the H1 deck. Use on
+   the very first paragraph of an article when you want a Vanity-Fair
+   feel (serif italic, wider line-height). Combine with `no-drop-cap`
+   to prevent the drop cap collision. */
+.prose-settle .lede,
+.lede {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.2rem, 1.9vw, 1.4rem);
+  line-height: 1.45;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+}
+
+/* Running folio — reading-progress rail anchored to the left edge.
+   The inner bar scales by `--progress` (0 → 1), set by the client
+   ReadingRail component. Keeps flat on mobile (hidden) to avoid crowd. */
+.reading-rail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100vh;
+  background: transparent;
+  z-index: 40;
+  pointer-events: none;
+}
+.reading-rail::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  opacity: 0.08;
+}
+.reading-rail::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(var(--progress, 0) * 100%);
+  background: var(--accent);
+  transition: height 80ms linear;
 }
 
 /* ─── FAQ accordion ────────────────────────── */

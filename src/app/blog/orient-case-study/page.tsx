@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { BlogTOC } from "@/components/blog/BlogTOC";
 import { Nav } from "@/components/layout/Nav";
+import { MagazineHeader } from "@/components/blog/MagazineHeader";
+import { MagazineOutro } from "@/components/blog/MagazineOutro";
 
 export const metadata: Metadata = {
   title:
@@ -102,43 +104,18 @@ export default function Article() {
       {/* Nav */}
       <Nav />
 
-      {/* Article */}
-      <article className="max-w-[720px] mx-auto px-6 lg:px-10 pt-32 pb-24 md:pt-40 md:pb-36">
-        {/* Header */}
-        <header className="mb-16">
-          <a
-            href="/"
-            className="text-accent text-sm font-medium hover:underline"
-          >
-            &larr; Back to Settle
-          </a>
-          <h1
-            className="text-[clamp(2rem,4.5vw,3.2rem)] font-medium leading-[1.12] mt-8 mb-6"
-            style={{
-              fontFamily: "var(--font-heading)",
-              letterSpacing: "-0.03em",
-            }}
-          >
-            How a 79-Year-Old Manufacturer Deployed AI Across 7 Departments
-            in 6 Months
-          </h1>
-          <p className="text-text-muted text-[17px] leading-relaxed">
-            Orient Printing &amp; Packaging has been manufacturing printing
-            presses since 1946. With 20,000+ units installed across 50
-            countries, they&apos;re one of the world&apos;s largest suppliers
-            in their field. This is the story of how they went from zero AI
-            to 11 deployed projects &mdash; and what the numbers actually
-            looked like.
-          </p>
-          <div className="flex items-center gap-3 mt-6 text-sm text-text-faint">
-            <a href="/#contact" className="hover:text-accent transition-colors">Pranav Ambwani</a>
-            <span>&middot;</span>
-            <time dateTime="2026-03-27">March 2026</time>
-            <span>&middot;</span>
-            <span>15 min read</span>
-          </div>
-        </header>
+      <MagazineHeader
+        category="Case Study"
+        issue="No. 03"
+        title="How a 79-Year-Old Manufacturer Deployed AI Across 7 Departments in 6 Months"
+        deck="Orient Printing & Packaging has been manufacturing presses since 1946 — 20,000+ units installed across 50 countries. This is the story of how they went from zero AI to 11 deployed projects, and what the numbers actually looked like."
+        author="Pranav Ambwani"
+        date="2026-03-27"
+        readingTime="15 min read"
+      />
 
+      {/* Article */}
+      <article className="max-w-[720px] mx-auto px-6 lg:px-10 pb-24 md:pb-36">
         {/* Stats banner */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 py-8 border-y border-border-light">
           {[
@@ -559,46 +536,42 @@ export default function Article() {
             And they&apos;re not slowing down.
           </p>
 
-          {/* Related */}
-          <div className="mt-16 pt-10 border-t border-[rgba(20,20,19,0.1)]">
-            <h3 className="text-lg font-medium mb-6">Related</h3>
-            <div className="grid sm:grid-cols-2 gap-6">
-              <a href="/blog/integrating-ai-into-your-company" className="group">
-                <p className="font-medium group-hover:text-[#d97757] transition-colors">How to Actually Integrate AI Into Your Company</p>
-                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">A structured, phase-by-phase approach to deploying AI across your team&apos;s real workflows.</p>
-              </a>
-              <a href="/blog/mcp-explained-for-business" className="group">
-                <p className="font-medium group-hover:text-[#d97757] transition-colors">MCP Explained: Connect Your ERP, CRM, and Systems to Claude AI</p>
-                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">How Model Context Protocol lets Claude AI read and write to your business systems.</p>
-              </a>
-            </div>
-          </div>
+        </div>
 
-          {/* Author */}
-          <div className="mt-16 pt-8 border-t border-border-light flex items-start gap-4">
-            <div className="w-12 h-12 rounded-full bg-[#e8e6dc] flex items-center justify-center shrink-0 text-text font-medium text-lg" style={{ fontFamily: "var(--font-heading)" }}>P</div>
-            <div>
-              <a href="/#contact" className="font-medium text-text hover:text-accent transition-colors">Pranav Ambwani</a>
-              <p className="text-sm text-text-muted mt-1 leading-relaxed">Founder of Settle. Deploys Claude AI into mid-market companies and manufacturers &mdash; structured rollouts, production-grade instructions, real results.</p>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="mt-16 pt-10 border-t border-border-light">
-            <h3>Want results like these?</h3>
-            <p>
-              We help companies go from zero to deployed &mdash; structured
-              rollouts, production-grade instructions, and measurable
-              results.{" "}
+        <MagazineOutro
+          author="Pranav Ambwani"
+          authorBio="Founder of Settle. Deploys Claude AI into mid-market companies and manufacturers — structured rollouts, production-grade instructions, real results."
+          related={[
+            {
+              category: "Playbook",
+              title: "How to Actually Integrate AI Into Your Company",
+              description:
+                "A structured, phase-by-phase approach to deploying AI across your team's real workflows.",
+              href: "/blog/integrating-ai-into-your-company",
+            },
+            {
+              category: "Technical",
+              title:
+                "MCP Explained: Connect Your ERP, CRM, and Systems to Claude AI",
+              description:
+                "How Model Context Protocol lets Claude AI read and write to your business systems.",
+              href: "/blog/mcp-explained-for-business",
+            },
+          ]}
+          ctaHeading="Want results like these?"
+          ctaBody={
+            <>
+              We help companies go from zero to deployed — structured
+              rollouts, production-grade instructions, and measurable results.{" "}
               <a
                 href="/#contact"
                 className="text-accent font-medium hover:underline"
               >
-                Start a conversation &rarr;
+                Start a conversation →
               </a>
-            </p>
-          </div>
-        </div>
+            </>
+          }
+        />
       </article>
 
       <Footer />

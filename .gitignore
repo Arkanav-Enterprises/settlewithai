@@ -52,6 +52,7 @@ settle-v2-visible.png
 # test artifacts and debug screenshots
 /.playwright-mcp/
 /screenshots/
+/.agent-shots/
 # any new PNG dropped at the repo root (existing tracked ones are unaffected)
 /*.png
 

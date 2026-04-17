@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { BlogTOC } from "@/components/blog/BlogTOC";
 import { Nav } from "@/components/layout/Nav";
+import { MagazineHeader } from "@/components/blog/MagazineHeader";
+import { MagazineOutro } from "@/components/blog/MagazineOutro";
 
 export const metadata: Metadata = {
   title:
@@ -105,40 +107,18 @@ export default function Article() {
       {/* Nav */}
       <Nav />
 
-      {/* Article */}
-      <article className="max-w-[720px] mx-auto px-6 lg:px-10 pt-32 pb-24 md:pt-40 md:pb-36">
-        {/* Header */}
-        <header className="mb-16">
-          <a
-            href="/blog"
-            className="text-accent text-sm font-medium hover:underline"
-          >
-            &larr; Back to Blog
-          </a>
-          <h1
-            className="text-[clamp(2rem,4.5vw,3.2rem)] font-medium leading-[1.12] mt-8 mb-6"
-            style={{
-              fontFamily: "var(--font-heading)",
-              letterSpacing: "-0.03em",
-            }}
-          >
-            The Client Brain: An LLM Wiki System Inspired by Andrej Karpathy
-          </h1>
-          <p className="text-text-muted text-[17px] leading-relaxed">
-            When you&apos;re running 18 Claude projects across 7 departments
-            for one client, facts can&apos;t live in twelve places. We built
-            a wiki that gives every project one source of truth and tells us
-            the moment something drifts.
-          </p>
-          <div className="flex items-center gap-3 mt-6 text-sm text-text-faint">
-            <a href="/#contact" className="hover:text-accent transition-colors">Pranav Ambwani</a>
-            <span>&middot;</span>
-            <time dateTime="2026-04-09">April 2026</time>
-            <span>&middot;</span>
-            <span>10 min read</span>
-          </div>
-        </header>
+      <MagazineHeader
+        category="Engineering"
+        issue="No. 05"
+        title="The Client Brain: An LLM Wiki System Inspired by Andrej Karpathy"
+        deck="When you're running 18 Claude projects across 7 departments for one client, facts can't live in twelve places. We built a wiki that gives every project one source of truth — and tells us the moment something drifts."
+        author="Pranav Ambwani"
+        date="2026-04-09"
+        readingTime="10 min read"
+      />
 
+      {/* Article */}
+      <article className="max-w-[720px] mx-auto px-6 lg:px-10 pb-24 md:pb-36">
         {/* Body */}
         <div className="prose-settle">
           <p>
@@ -474,30 +454,28 @@ export default function Article() {
             </a>
           </p>
 
-          {/* Related */}
-          <div className="mt-16 pt-10 border-t border-[rgba(20,20,19,0.1)]">
-            <h3 className="text-lg font-medium mb-6">Related</h3>
-            <div className="grid sm:grid-cols-2 gap-6">
-              <a href="/blog/structuring-claude-for-business" className="group">
-                <p className="font-medium group-hover:text-[#d97757] transition-colors">Structuring Claude for Business</p>
-                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">Skills, MCP, and the instruction architecture that actually scales across departments.</p>
-              </a>
-              <a href="/blog/orient-case-study" className="group">
-                <p className="font-medium group-hover:text-[#d97757] transition-colors">Orient Case Study</p>
-                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">49 use cases mapped. 18 projects structured. 11 deployed. 85% faster document generation.</p>
-              </a>
-            </div>
-          </div>
         </div>
 
-        {/* Author */}
-        <div className="mt-16 pt-8 border-t border-border-light flex items-start gap-4">
-          <div className="w-12 h-12 rounded-full bg-[#e8e6dc] flex items-center justify-center shrink-0 text-text font-medium text-lg" style={{ fontFamily: "var(--font-heading)" }}>P</div>
-          <div>
-            <a href="/#contact" className="font-medium text-text hover:text-accent transition-colors">Pranav Ambwani</a>
-            <p className="text-sm text-text-muted mt-1 leading-relaxed">Founder of Settle. Deploys Claude AI into mid-market companies and manufacturers — structured rollouts, production-grade instructions, real results.</p>
-          </div>
-        </div>
+        <MagazineOutro
+          author="Pranav Ambwani"
+          authorBio="Founder of Settle. Deploys Claude AI into mid-market companies and manufacturers — structured rollouts, production-grade instructions, real results."
+          related={[
+            {
+              category: "Playbook",
+              title: "Structuring Claude for Business",
+              description:
+                "Skills, MCP, and the instruction architecture that actually scales across departments.",
+              href: "/blog/structuring-claude-for-business",
+            },
+            {
+              category: "Case Study",
+              title: "Orient Case Study",
+              description:
+                "49 use cases mapped. 18 projects structured. 11 deployed. 85% faster document generation.",
+              href: "/blog/orient-case-study",
+            },
+          ]}
+        />
       </article>
 
       <Footer />
