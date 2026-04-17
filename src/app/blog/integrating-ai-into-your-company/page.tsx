@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { BlogTOC } from "@/components/blog/BlogTOC";
 import { Nav } from "@/components/layout/Nav";
+import { MagazineOutro } from "@/components/blog/MagazineOutro";
 
 export const metadata: Metadata = {
   title: "How to Actually Integrate AI Into Your Company",
@@ -32,6 +33,14 @@ export const metadata: Metadata = {
     siteName: "Settle",
     publishedTime: "2026-03-27T00:00:00Z",
     authors: ["Pranav Ambwani"],
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1519,
+        height: 1090,
+        alt: "How to Actually Integrate AI Into Your Company — Settle",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -49,16 +58,19 @@ export default function Article() {
     description:
       "A structured, phase-by-phase approach to deploying AI across your team's real workflows.",
     datePublished: "2026-03-27T00:00:00Z",
-    dateModified: "2026-03-27T00:00:00Z",
+    dateModified: "2026-04-17T00:00:00Z",
     image: "https://settlewithai.com/og-image.png",
     author: {
       "@type": "Person",
       name: "Pranav Ambwani",
       jobTitle: "Founder",
       url: "https://settlewithai.com",
+      sameAs: ["https://www.linkedin.com/in/pranavambwani/"],
+      description: "Founder of Settle, a full-stack AI agency for manufacturers and mid-market teams. USC Electrical Engineering. Based between Los Angeles and New Delhi. Deploys Claude AI for operations — structured rollouts, production-grade instructions, real results.",
       worksFor: {
         "@type": "Organization",
         name: "Settle",
+        url: "https://settlewithai.com",
       },
     },
     publisher: {
@@ -137,6 +149,16 @@ export default function Article() {
         {/* Body */}
         <div className="prose-settle">
           <p>
+            Integrating AI into a company is a four-phase process: discover
+            every repeatable workflow, architect a tiered rollout, engineer
+            production-grade instructions, and deploy in phases. Most teams
+            skip three of those four steps. They run a demo, see it work,
+            and assume the rest will figure itself out.
+          </p>
+          <p>
+            It doesn&apos;t.
+          </p>
+          <p>
             A few months ago I watched a room full of senior managers nod
             enthusiastically at an AI demo. Somebody summarised a contract
             in ten seconds. Somebody else generated a marketing email that
@@ -159,7 +181,7 @@ export default function Article() {
             work that gets skipped.
           </p>
 
-          <h2>The demo trap</h2>
+          <h2>Why do most AI demos never reach production?</h2>
           <p>
             Demos create a dangerous illusion. They show AI at its absolute
             best: generating a perfect email, summarising a document,
@@ -223,7 +245,7 @@ export default function Article() {
             guessing.
           </p>
 
-          <h2>The rollout plan</h2>
+          <h2>What does an AI rollout plan need to answer?</h2>
           <p>
             Once you know what&apos;s worth deploying, you need a structure
             for actually doing it. I don&apos;t mean project management in
@@ -362,7 +384,8 @@ export default function Article() {
             advice only goes so far.
           </p>
           <p>
-            In a deployment for a printing and packaging manufacturer, I
+            In the Orient Printing &amp; Packaging deployment (a 79-year-old
+            manufacturer, engagement spanning late 2025 to March 2026), I
             mapped 49 use cases across seven departments. Of the 18
             projects we structured, 11 were deployed in the first
             engagement. The range was wide: offer generation, bill of
@@ -370,8 +393,9 @@ export default function Article() {
             specifications, quality control checklists.
           </p>
           <p>
-            Document generation time dropped by 85%. Tasks that previously
-            took four hours were completed in thirty minutes. And these
+            Document generation time dropped by 85% — tasks that previously
+            took four hours were completed in thirty minutes (measured on
+            the Orient offer-generation workflow, March 2026). And these
             weren&apos;t demo results. They were production measurements,
             taken after teams had been using the tools in their actual
             daily work for weeks.
@@ -386,7 +410,7 @@ export default function Article() {
             previous one ended.
           </p>
 
-          <h2>It&apos;s not a technology problem</h2>
+          <h2>Is it really a technology problem?</h2>
           <p>
             AI tools are already capable enough to transform most knowledge
             work. The <a href="https://docs.anthropic.com/en/docs/about-claude/models" target="_blank" rel="noopener noreferrer">models</a> are good. The interfaces are improving. The
@@ -407,45 +431,24 @@ export default function Article() {
             solvable one.
           </p>
 
-          {/* Related */}
-          <div className="mt-16 pt-10 border-t border-[rgba(20,20,19,0.1)]">
-            <h3 className="text-lg font-medium mb-6">Related</h3>
-            <div className="grid sm:grid-cols-2 gap-6">
-              <a href="/blog/orient-case-study" className="group">
-                <p className="font-medium group-hover:text-[#d97757] transition-colors">How a 79-Year-Old Manufacturer Deployed AI Across 7 Departments</p>
-                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">49 use cases mapped, 18 projects structured, 11 deployed in the first engagement.</p>
-              </a>
-              <a href="/blog/mcp-explained-for-business" className="group">
-                <p className="font-medium group-hover:text-[#d97757] transition-colors">MCP Explained: Connect Your ERP, CRM, and Systems to Claude AI</p>
-                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">How Model Context Protocol lets Claude AI read and write to your business systems.</p>
-              </a>
-            </div>
-          </div>
-
-          {/* Author */}
-          <div className="mt-16 pt-8 border-t border-border-light flex items-start gap-4">
-            <div className="w-12 h-12 rounded-full bg-[#e8e6dc] flex items-center justify-center shrink-0 text-text font-medium text-lg" style={{ fontFamily: "var(--font-heading)" }}>P</div>
-            <div>
-              <a href="/#contact" className="font-medium text-text hover:text-accent transition-colors">Pranav Ambwani</a>
-              <p className="text-sm text-text-muted mt-1 leading-relaxed">Founder of Settle. Deploys Claude AI into mid-market companies and manufacturers &mdash; structured rollouts, production-grade instructions, real results.</p>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="mt-16 pt-10 border-t border-border-light">
-            <h3>Ready to deploy AI into your team&apos;s workflows?</h3>
-            <p>
-              We help companies go from zero to deployed — structured
-              rollouts, production-grade instructions, and measurable
-              results.{" "}
-              <a
-                href="/#contact"
-                className="text-accent font-medium hover:underline"
-              >
-                Start a conversation →
-              </a>
-            </p>
-          </div>
+          <MagazineOutro
+            author="Pranav Ambwani"
+            related={[
+              {
+                title: "How a 79-Year-Old Manufacturer Deployed AI Across 7 Departments",
+                description: "49 use cases mapped, 18 projects structured, 11 deployed in the first engagement.",
+                href: "/blog/orient-case-study",
+                category: "Case Study",
+              },
+              {
+                title: "MCP Explained: How to Connect Your ERP, CRM, and Internal Systems to Claude",
+                description: "How Model Context Protocol lets Claude AI read and write to your business systems.",
+                href: "/blog/mcp-explained-for-business",
+                category: "Technical",
+              },
+            ]}
+            ctaHeading="Ready to deploy AI into your team's workflows?"
+          />
         </div>
       </article>
 

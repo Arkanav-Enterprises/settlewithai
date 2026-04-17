@@ -35,6 +35,14 @@ export const metadata: Metadata = {
     siteName: "Settle",
     publishedTime: "2026-04-10T00:00:00Z",
     authors: ["Pranav Ambwani"],
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1519,
+        height: 1090,
+        alt: "The AI You Dismissed Isn't the AI That's Here Now — Settle",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -52,16 +60,19 @@ export default function Article() {
     description:
       "Most people tried ChatGPT once and formed an opinion. Meanwhile, frontier models like Claude are restructuring entire business workflows. The gap between perception and reality is growing fast.",
     datePublished: "2026-04-10T00:00:00Z",
-    dateModified: "2026-04-10T00:00:00Z",
+    dateModified: "2026-04-17T00:00:00Z",
     image: "https://settlewithai.com/og-image.png",
     author: {
       "@type": "Person",
       name: "Pranav Ambwani",
       jobTitle: "Founder",
       url: "https://settlewithai.com",
+      sameAs: ["https://www.linkedin.com/in/pranavambwani/"],
+      description: "Founder of Settle, a full-stack AI agency for manufacturers and mid-market teams. USC Electrical Engineering. Based between Los Angeles and New Delhi. Deploys Claude AI for operations — structured rollouts, production-grade instructions, real results.",
       worksFor: {
         "@type": "Organization",
         name: "Settle",
+        url: "https://settlewithai.com",
       },
     },
     publisher: {
@@ -137,12 +148,12 @@ export default function Article() {
             And it&apos;s a gap almost nobody outside the tech industry can see.
           </p>
 
-          <h2>Karpathy put it better than I could</h2>
+          <h2>What did Karpathy just say about the AI gap?</h2>
           <p>
-            Andrej Karpathy, one of the most respected AI researchers alive (co-founded
-            OpenAI, led AI at Tesla, built the Eureka Labs education platform), posted
-            something recently that crystallized exactly what I&apos;ve been trying to explain
-            to clients for months.
+            <a href="https://x.com/karpathy" target="_blank" rel="noopener noreferrer">Andrej Karpathy</a>, one of the most respected AI researchers alive (co-founded
+            OpenAI, led AI at Tesla, built the <a href="https://eurekalabs.ai" target="_blank" rel="noopener noreferrer">Eureka Labs</a> education platform),
+            posted something recently that crystallized exactly what I&apos;ve been
+            trying to explain to clients for months.
           </p>
           <p>
             He described two groups of people talking past each other:
@@ -208,7 +219,7 @@ export default function Article() {
             frontier, professional-grade experience accelerates.
           </p>
 
-          <h2>Here&apos;s what I didn&apos;t expect</h2>
+          <h2>Does the same dynamic apply outside programming?</h2>
           <p>
             Karpathy&apos;s post focuses on programming and technical work. Fair enough.
             That&apos;s his world. But what surprised me over the past year is that the
@@ -224,16 +235,19 @@ export default function Article() {
             doesn&apos;t. The spec sheet either includes the right components or it doesn&apos;t.
             The document either follows the company&apos;s format or it doesn&apos;t. These are
             all binary checks. And the dollar value? A single offset printing press
-            offer can be worth $200,000 or more. Getting it right matters. Getting it
-            fast matters more.
+            offer can be worth $200,000 or more (based on Orient Printing &amp;
+            Packaging&apos;s average deal size, a 79-year-old manufacturer selling into
+            50+ countries). Getting it right matters. Getting it fast matters more.
           </p>
           <p>
-            I watched one of our clients go from spending two hours building each
-            sales offer to generating one in about 15 minutes. Not because AI is
-            magic. Because we gave Claude the right context: their price lists, their
-            sample offer templates, their brand guidelines, their product images. With
-            structured instructions and the right reference material, Claude doesn&apos;t
-            hallucinate prices. It pulls them from the actual spreadsheet.
+            I watched one of our clients — Orient Printing &amp; Packaging, again —
+            go from spending two hours building each sales offer to generating one in
+            about 15 minutes (measured over the March 2026 offer-generation rollout).
+            Not because AI is magic. Because we gave Claude the right context: their
+            price lists, their sample offer templates, their brand guidelines, their
+            product images. With structured instructions and the right reference
+            material, Claude doesn&apos;t hallucinate prices. It pulls them from the
+            actual spreadsheet.
           </p>
           <p>
             That&apos;s a different planet from &ldquo;write me a marketing email.&rdquo;
@@ -329,7 +343,6 @@ export default function Article() {
 
         <MagazineOutro
           author="Pranav Ambwani"
-          authorBio="Founder of Settle. Deploys Claude AI into mid-market companies and manufacturers — structured rollouts, production-grade instructions, real results."
         />
       </article>
 

@@ -129,10 +129,9 @@ export default function RootLayout({
           "Workflow Automation",
           "AI Agent Development",
         ],
-        /* sameAs intentionally scoped to the founder's LinkedIn until
-           verified company social profiles are published. Better empty
-           than wrong — Google penalizes invalid sameAs URLs. */
-        sameAs: [],
+        sameAs: [
+          "https://www.linkedin.com/company/settle-with-ai",
+        ],
         knowsAbout: [
           "Artificial Intelligence",
           "AI Integration",

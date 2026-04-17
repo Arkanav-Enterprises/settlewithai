@@ -36,6 +36,14 @@ export const metadata: Metadata = {
     siteName: "Settle",
     publishedTime: "2026-04-14T00:00:00Z",
     authors: ["Pranav Ambwani"],
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1519,
+        height: 1090,
+        alt: "Settle Marketplace: The Agents We Built for Clients, Now for Sale — Settle",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -62,9 +70,12 @@ export default function Article() {
       name: "Pranav Ambwani",
       jobTitle: "Founder",
       url: "https://settlewithai.com",
+      sameAs: ["https://www.linkedin.com/in/pranavambwani/"],
+      description: "Founder of Settle, a full-stack AI agency for manufacturers and mid-market teams. USC Electrical Engineering. Based between Los Angeles and New Delhi. Deploys Claude AI for operations — structured rollouts, production-grade instructions, real results.",
       worksFor: {
         "@type": "Organization",
         name: "Settle",
+        url: "https://settlewithai.com",
       },
     },
     publisher: {
@@ -312,7 +323,6 @@ export default function Article() {
 
         <MagazineOutro
           author="Pranav Ambwani"
-          authorBio="Founder of Settle. Deploys Claude AI into mid-market companies and manufacturers — structured rollouts, production-grade instructions, real results."
           related={[
             {
               category: "Case Study",

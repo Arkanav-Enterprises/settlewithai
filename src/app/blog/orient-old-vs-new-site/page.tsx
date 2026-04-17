@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { BlogTOC } from "@/components/blog/BlogTOC";
 import { Nav } from "@/components/layout/Nav";
+import { MagazineOutro } from "@/components/blog/MagazineOutro";
 
 export const metadata: Metadata = {
   title:
@@ -32,6 +33,14 @@ export const metadata: Metadata = {
     siteName: "Settle",
     publishedTime: "2026-04-07T00:00:00Z",
     authors: ["Pranav Ambwani"],
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1519,
+        height: 1090,
+        alt: "Orient's Old Site vs the New One: A Side-by-Side Walkthrough — Settle",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -51,16 +60,19 @@ export default function Article() {
     description:
       "We rebuilt The Printers House Orient's website from a one-screen brochure into an AI-powered product experience. Here's the side-by-side comparison with screenshots.",
     datePublished: "2026-04-07T00:00:00Z",
-    dateModified: "2026-04-07T00:00:00Z",
+    dateModified: "2026-04-17T00:00:00Z",
     image: "https://settlewithai.com/og-image.png",
     author: {
       "@type": "Person",
       name: "Pranav Ambwani",
       jobTitle: "Founder",
       url: "https://settlewithai.com",
+      sameAs: ["https://www.linkedin.com/in/pranavambwani/"],
+      description: "Founder of Settle, a full-stack AI agency for manufacturers and mid-market teams. USC Electrical Engineering. Based between Los Angeles and New Delhi. Deploys Claude AI for operations — structured rollouts, production-grade instructions, real results.",
       worksFor: {
         "@type": "Organization",
         name: "Settle",
+        url: "https://settlewithai.com",
       },
     },
     publisher: {
@@ -420,43 +432,37 @@ export default function Article() {
             That&apos;s the lesson I keep coming back to. Most companies don&apos;t have a website problem. They have a knowledge problem. The website is just where the knowledge problem becomes visible.
           </p>
 
-          {/* Related */}
-          <div className="mt-16 pt-10 border-t border-[rgba(20,20,19,0.1)]">
-            <h3 className="text-lg font-medium mb-6">Related</h3>
-            <div className="grid sm:grid-cols-2 gap-6">
-              <a href="/blog/orient-product-experience" className="group">
-                <p className="font-medium group-hover:text-[#d97757] transition-colors">How We Engineered an AI Product Expert for The Printers House Orient</p>
-                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">The architecture behind the AI chat. One knowledge base, three surfaces, all consistent.</p>
-              </a>
-              <a href="/blog/orient-case-study" className="group">
-                <p className="font-medium group-hover:text-[#d97757] transition-colors">How a 79-Year-Old Manufacturer Deployed AI Across 7 Departments</p>
-                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">49 use cases mapped, 18 projects structured, 11 deployed. The full case study.</p>
-              </a>
-            </div>
-          </div>
-
-          {/* Author */}
-          <div className="mt-16 pt-8 border-t border-border-light flex items-start gap-4">
-            <div className="w-12 h-12 rounded-full bg-[#e8e6dc] flex items-center justify-center shrink-0 text-text font-medium text-lg" style={{ fontFamily: "var(--font-heading)" }}>P</div>
-            <div>
-              <a href="/#contact" className="font-medium text-text hover:text-accent transition-colors">Pranav Ambwani</a>
-              <p className="text-sm text-text-muted mt-1 leading-relaxed">Founder of Settle. Deploys Claude AI into mid-market companies and manufacturers. Structured rollouts, production-grade instructions, real results.</p>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="mt-16 pt-10 border-t border-border-light">
-            <h3>Want this for your manufacturing site?</h3>
-            <p>
-              We help B2B manufacturers turn their internal sales knowledge into customer-facing AI experiences. Same source of truth, multiple surfaces, no drift.{" "}
-              <a
-                href="/#contact"
-                className="text-accent font-medium hover:underline"
-              >
-                Start a conversation &rarr;
-              </a>
-            </p>
-          </div>
+          <MagazineOutro
+            author="Pranav Ambwani"
+            related={[
+              {
+                title: "How We Engineered an AI Product Expert for The Printers House Orient",
+                description: "The architecture behind the AI chat. One knowledge base, three surfaces, all consistent.",
+                href: "/blog/orient-product-experience",
+                category: "Engineering",
+              },
+              {
+                title: "How a 79-Year-Old Manufacturer Deployed AI Across 7 Departments",
+                description: "49 use cases mapped, 18 projects structured, 11 deployed. The full case study.",
+                href: "/blog/orient-case-study",
+                category: "Case Study",
+              },
+            ]}
+            ctaHeading="Want this for your manufacturing site?"
+            ctaBody={
+              <>
+                We help B2B manufacturers turn their internal sales knowledge
+                into customer-facing AI experiences. Same source of truth,
+                multiple surfaces, no drift.{" "}
+                <a
+                  href="/#contact"
+                  className="text-accent font-medium hover:underline"
+                >
+                  Start a conversation →
+                </a>
+              </>
+            }
+          />
         </div>
       </article>
 

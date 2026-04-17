@@ -2,7 +2,10 @@ export interface BlogPost {
   slug: string;
   title: string;
   description: string;
+  /** ISO date the post was first published. */
   date: string;
+  /** ISO date the post was last materially updated. Falls back to `date` in sitemap if unset. */
+  dateModified?: string;
   tag: string;
   priority?: number;
 }
@@ -22,6 +25,7 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "One of the first production deployments of AI controlling physical industrial machinery. Not a chatbot. Not a copilot. An agent that starts, stops, and tunes a digital printing press through natural language.",
     date: "2026-04-13",
+    dateModified: "2026-04-17",
     tag: "Case Study",
   },
   {
@@ -30,6 +34,7 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "Most people tried ChatGPT once and formed an opinion. Meanwhile, frontier models like Claude are restructuring entire business workflows. The gap between perception and reality is growing fast.",
     date: "2026-04-10",
+    dateModified: "2026-04-17",
     tag: "Perspective",
   },
   {
@@ -159,6 +164,7 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "Most AI adoption stalls at the demo. Here's a structured, phase-by-phase approach to deploying AI across your team's real workflows.",
     date: "2026-03-27",
+    dateModified: "2026-04-17",
     tag: "Guide",
   },
   {
@@ -167,6 +173,7 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "We rebuilt The Printers House Orient's website from a one-screen brochure into an AI-powered product experience. Here's the side-by-side, screenshot for screenshot.",
     date: "2026-03-26",
+    dateModified: "2026-04-17",
     tag: "Case Study",
   },
 ];

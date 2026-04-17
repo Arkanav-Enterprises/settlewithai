@@ -9,8 +9,8 @@ interface RelatedPost {
 interface MagazineOutroProps {
   /** Author display name. */
   author: string;
-  /** Author bio paragraph. */
-  authorBio: string;
+  /** Author bio paragraph. Defaults to the canonical Pranav bio. */
+  authorBio?: string;
   /** Link attached to author name (defaults to /#contact). */
   authorHref?: string;
   /** Two or three related-reading cards. */
@@ -19,6 +19,9 @@ interface MagazineOutroProps {
   ctaHeading?: string;
   ctaBody?: React.ReactNode;
 }
+
+const DEFAULT_AUTHOR_BIO =
+  "Founder of Settle, a full-stack AI agency for manufacturers and mid-market teams. USC Electrical Engineering. Based between Los Angeles and New Delhi. Deploys Claude AI for operations — structured rollouts, production-grade instructions, real results.";
 
 /**
  * MagazineOutro — end-of-piece footer for blog posts.
@@ -31,7 +34,7 @@ interface MagazineOutroProps {
  */
 export function MagazineOutro({
   author,
-  authorBio,
+  authorBio = DEFAULT_AUTHOR_BIO,
   authorHref = "/#contact",
   related,
   ctaHeading = "Want Claude AI deployed across your organisation?",

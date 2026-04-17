@@ -44,5 +44,3 @@ User-agent: Diffbot
 Allow: /
 
 Sitemap: https://settlewithai.com/sitemap.xml
-Sitemap: https://settlewithai.com/llms.txt
-Sitemap: https://settlewithai.com/llms-full.txt

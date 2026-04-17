@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { BlogTOC } from "@/components/blog/BlogTOC";
 import { Nav } from "@/components/layout/Nav";
+import { MagazineOutro } from "@/components/blog/MagazineOutro";
 
 export const metadata: Metadata = {
   title: "We're Teaching AI to Run a Printing Press",
@@ -31,6 +32,14 @@ export const metadata: Metadata = {
     siteName: "Settle",
     publishedTime: "2026-04-13T00:00:00Z",
     authors: ["Pranav Ambwani"],
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1519,
+        height: 1090,
+        alt: "We're Teaching AI to Run a Printing Press — Settle",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -48,16 +57,19 @@ export default function Article() {
     description:
       "Settle AI is building one of the first production deployments of Claude controlling physical industrial machinery — not a chatbot, not a copilot, but an AI agent that starts, stops, and tunes a digital printing press through natural language.",
     datePublished: "2026-04-13T00:00:00Z",
-    dateModified: "2026-04-13T00:00:00Z",
+    dateModified: "2026-04-17T00:00:00Z",
     image: "https://settlewithai.com/og-image.png",
     author: {
       "@type": "Person",
       name: "Pranav Ambwani",
       jobTitle: "Founder",
       url: "https://settlewithai.com",
+      sameAs: ["https://www.linkedin.com/in/pranavambwani/"],
+      description: "Founder of Settle, a full-stack AI agency for manufacturers and mid-market teams. USC Electrical Engineering. Based between Los Angeles and New Delhi. Deploys Claude AI for operations — structured rollouts, production-grade instructions, real results.",
       worksFor: {
         "@type": "Organization",
         name: "Settle",
+        url: "https://settlewithai.com",
       },
     },
     publisher: {
@@ -309,63 +321,37 @@ export default function Article() {
             That&apos;s the job.
           </p>
 
-          {/* Related */}
-          <div className="mt-16 pt-10 border-t border-[rgba(20,20,19,0.1)]">
-            <h3 className="text-lg font-medium mb-6">Related</h3>
-            <div className="grid sm:grid-cols-2 gap-6">
-              <a href="/blog/orient-case-study" className="group">
-                <p className="font-medium group-hover:text-[#d97757] transition-colors">
-                  How a 79-Year-Old Manufacturer Deployed AI Across 7 Departments
-                </p>
-                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">
-                  49 use cases mapped, 18 projects structured, 11 deployed. The full story of Orient&apos;s AI transformation.
-                </p>
-              </a>
-              <a href="/blog/orient-product-experience" className="group">
-                <p className="font-medium group-hover:text-[#d97757] transition-colors">
-                  How We Engineered an AI Product Expert for Orient
-                </p>
-                <p className="text-sm text-[rgba(20,20,19,0.5)] mt-1">
-                  One knowledge base. Three surfaces. All consistent. From internal docs to customer-facing AI.
-                </p>
-              </a>
-            </div>
-          </div>
-
-          {/* Author bio */}
-          <div className="mt-16 pt-8 border-t border-border-light flex items-start gap-4">
-            <div
-              className="w-12 h-12 rounded-full bg-[#e8e6dc] flex items-center justify-center shrink-0 text-text font-medium text-lg"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              P
-            </div>
-            <div>
-              <a
-                href="/#contact"
-                className="font-medium text-text hover:text-accent transition-colors"
-              >
-                Pranav Ambwani
-              </a>
-              <p className="text-sm text-text-muted mt-1 leading-relaxed">
-                Founder of Settle, a full-stack AI agency for manufacturers and mid-market teams. Works on-site with factory teams to build production-grade Claude systems. USC Electrical Engineering. Based between Los Angeles and New Delhi.
-              </p>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="mt-16 pt-10 border-t border-border-light">
-            <h3>Want AI that works on the factory floor?</h3>
-            <p>
-              We build Claude systems for manufacturers &mdash; on-site, production-grade, safe. Not chatbots. Systems that do the work.{" "}
-              <a
-                href="/#contact"
-                className="text-accent font-medium hover:underline"
-              >
-                Start a conversation &rarr;
-              </a>
-            </p>
-          </div>
+          <MagazineOutro
+            author="Pranav Ambwani"
+            related={[
+              {
+                title: "How a 79-Year-Old Manufacturer Deployed AI Across 7 Departments",
+                description: "49 use cases mapped, 18 projects structured, 11 deployed. The full story of Orient's AI transformation.",
+                href: "/blog/orient-case-study",
+                category: "Case Study",
+              },
+              {
+                title: "How We Engineered an AI Product Expert for Orient",
+                description: "One knowledge base. Three surfaces. All consistent. From internal docs to customer-facing AI.",
+                href: "/blog/orient-product-experience",
+                category: "Engineering",
+              },
+            ]}
+            ctaHeading="Want AI that works on the factory floor?"
+            ctaBody={
+              <>
+                We build Claude systems for manufacturers — on-site,
+                production-grade, safe. Not chatbots. Systems that do the
+                work.{" "}
+                <a
+                  href="/#contact"
+                  className="text-accent font-medium hover:underline"
+                >
+                  Start a conversation →
+                </a>
+              </>
+            }
+          />
         </div>
       </article>
 

@@ -2,6 +2,9 @@
 
 > Settle is a full-stack AI agency that settles Claude (Anthropic's AI) into businesses — structured rollouts, production-grade instructions, measurable results. Built for manufacturers and mid-market companies (50-500 employees).
 
+Full: https://settlewithai.com/llms-full.txt
+Last-Modified: 2026-04-17
+
 ## Services
 
 - AI Readiness Assessment: Department-by-department workflow audit, use case discovery, tier-based rollout planning
@@ -55,15 +58,25 @@ Read the full case study: https://settlewithai.com/blog/orient-case-study
 
 ## Blog
 
-- How a 79-Year-Old Manufacturer Deployed AI: https://settlewithai.com/blog/orient-case-study
-- Beyond the 7-Day Playbook — Deploying Claude AI: https://settlewithai.com/blog/claude-team-deployment-beyond-diy
-- MCP Explained for Business: https://settlewithai.com/blog/mcp-explained-for-business
-- How to Actually Integrate AI Into Your Company: https://settlewithai.com/blog/integrating-ai-into-your-company
-- AI-Powered Outreach with Cowork: https://settlewithai.com/blog/ai-powered-outreach-with-cowork
-- Built with Claude Code: https://settlewithai.com/blog/built-with-claude-code
-- Claude's Agent Mode — What It Means for Business Automation: https://settlewithai.com/blog/claude-agent-mode-business-automation
-- Structuring Claude for Business — Skills, MCP, and Instruction Architecture: https://settlewithai.com/blog/structuring-claude-for-business
-- Why Your Enterprise Doesn't Need a Custom AI Model — It Needs Claude: https://settlewithai.com/blog/why-claude-over-custom-ai
+- Settle Marketplace: The Agents We Built for Clients, Now for Sale (2026-04-14): https://settlewithai.com/blog/settle-marketplace-launch
+- We're Teaching AI to Run a Printing Press (2026-04-13): https://settlewithai.com/blog/claude-printing-press
+- The AI You Dismissed Isn't the AI That's Here Now (2026-04-10): https://settlewithai.com/blog/the-ai-gap
+- We Added a Custom AI Chat to Our Website in One Afternoon (2026-04-10): https://settlewithai.com/blog/ai-chat-on-your-website
+- The Client Brain: An LLM Wiki System Inspired by Andrej Karpathy (2026-04-09): https://settlewithai.com/blog/the-client-brain
+- The Handover Plan: Anatomy of an AI Rollout Working Session (2026-04-08): https://settlewithai.com/blog/the-handover-plan
+- How We Engineered an AI Product Expert for The Printers House Orient (2026-04-07): https://settlewithai.com/blog/orient-product-experience
+- Which ERPs and CRMs Best Connect with Claude in 2026? (2026-04-04): https://settlewithai.com/blog/erp-crm-claude-connectors-2026
+- Why Claude Is the Best Invention of the 21st Century (2026-04-03): https://settlewithai.com/blog/claude-best-invention-2026
+- Why Your Enterprise Doesn't Need a Custom AI Model — It Needs Claude (2026-04-02): https://settlewithai.com/blog/why-claude-over-custom-ai
+- How to Structure Claude for Your Business: Skills, MCP, and Instruction Architecture (2026-04-02): https://settlewithai.com/blog/structuring-claude-for-business
+- Claude's Agent Mode Is Here — What It Means for Business Automation (2026-04-02): https://settlewithai.com/blog/claude-agent-mode-business-automation
+- How We Built This Entire Site with Claude Code (2026-03-30): https://settlewithai.com/blog/built-with-claude-code
+- Beyond the 7-Day Playbook: Deploying Claude AI Across a Real Organization (2026-03-30): https://settlewithai.com/blog/claude-team-deployment-beyond-diy
+- MCP Explained: How to Connect Your ERP, CRM, and Internal Systems to Claude (2026-03-29): https://settlewithai.com/blog/mcp-explained-for-business
+- We Used Claude Cowork to Prospect 12 Companies and Draft 48 Emails (2026-03-29): https://settlewithai.com/blog/ai-powered-outreach-with-cowork
+- How a 79-Year-Old Manufacturer Deployed AI Across 7 Departments (2026-03-27): https://settlewithai.com/blog/orient-case-study
+- How to Actually Integrate AI Into Your Company (2026-03-27): https://settlewithai.com/blog/integrating-ai-into-your-company
+- Orient's Old Site vs the New One: A Side-by-Side Walkthrough (2026-03-26): https://settlewithai.com/blog/orient-old-vs-new-site
 
 ## Marketplace Agents (pay-per-use, no subscriptions)
 
