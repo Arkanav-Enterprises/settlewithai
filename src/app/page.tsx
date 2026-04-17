@@ -755,7 +755,7 @@ function SettleMark({
    Writes --mx/--my directly on the element so the spotlight follows the
    cursor without a React re-render — one DOM style write per mousemove
    vs. a full reconcile tree if we stashed coords in state. */
-function handleFeatureCardMove(e: React.MouseEvent<HTMLDivElement>) {
+function handleFeatureCardMove(e: React.MouseEvent<HTMLElement>) {
   const el = e.currentTarget;
   const r = el.getBoundingClientRect();
   el.style.setProperty("--mx", `${e.clientX - r.left}px`);
