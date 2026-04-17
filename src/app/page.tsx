@@ -879,7 +879,7 @@ export default function Home() {
          dispatch rail and four corner brackets frame the composition
          like a Field Notes cover. The globe is untouched — just
          repositioned from "fills below text" to "emerges behind text". */}
-      <section className="relative min-h-[780px] md:min-h-screen overflow-hidden">
+      <section className="relative min-h-svh overflow-hidden">
         {/* Corner brackets — echo the GAAS ops-canvas framing */}
         <CornerBracket position="tl" />
         <CornerBracket position="tr" />
@@ -898,17 +898,19 @@ export default function Home() {
 
         {/* Top mono dispatch rail — full width, framed by brackets */}
         <div className="relative z-20 pt-8 md:pt-10 px-8 md:px-14">
-          <div className="max-w-[1440px] mx-auto flex items-center justify-between text-[10px] md:text-[11px] font-mono uppercase tracking-[0.22em] text-text/55">
+          <div className="max-w-[1440px] mx-auto flex items-center justify-between gap-4 text-[10px] md:text-[11px] font-mono uppercase tracking-[0.22em] text-text/55 whitespace-nowrap">
             <span>Dispatch · 01</span>
             <span className="hidden md:inline tracking-[0.26em]">
               Settle — Full-stack AI layer
             </span>
-            <span className="inline-flex items-center gap-2">
-              <span className="relative inline-flex w-[6px] h-[6px]">
+            <span className="inline-flex items-center gap-2 min-w-0">
+              <span className="relative inline-flex w-[6px] h-[6px] shrink-0">
                 <span className="absolute inset-0 rounded-full bg-accent animate-ping opacity-70" />
                 <span className="relative inline-block w-full h-full rounded-full bg-accent" />
               </span>
-              Live · Apr 2026 · {globeCountry}
+              <span className="truncate">
+                Live<span className="hidden sm:inline"> · Apr 2026</span> · {globeCountry}
+              </span>
             </span>
           </div>
           {/* Hairline under rail, joins the corner brackets visually */}
