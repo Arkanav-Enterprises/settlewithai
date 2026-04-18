@@ -405,6 +405,57 @@ export default function Article() {
             about <a href="https://docs.anthropic.com/en/docs/about-claude/models" target="_blank" rel="noopener noreferrer">instruction engineering</a>.
           </p>
 
+          <p>
+            The brand standards the offer generator enforces weren&apos;t
+            abstract. They were built in the same engagement. Settle&apos;s
+            canvas generated Orient&apos;s type scale, chevron motif,
+            imagery DNA, and the eighty-years-of-installations stats slide
+            — every asset reviewed item-by-item by Orient&apos;s marketing
+            lead before it shipped.
+          </p>
+
+          {/* Recording of the design-system canvas being assembled. 3x
+             playback so the twelve-minute generation reads as a minute.
+             Autoplay-loop-muted for inline context inside an article. */}
+          <figure className="my-10 lg:-mx-10">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className="rounded-xl border border-border-light w-full block"
+            >
+              <source
+                src="/videos/orient-design-system.mp4"
+                type="video/mp4"
+              />
+            </video>
+            <figcaption className="text-center text-sm text-text-faint mt-3">
+              Orient&apos;s brand system taking shape inside Settle&apos;s
+              canvas. Slide templates, type scale, icon vocabulary, and
+              imagery rules — all generated, reviewed, and approved in the
+              same week the pricing engine went live. Playback sped 3&times;.
+            </figcaption>
+          </figure>
+
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <figure className="my-10 lg:-mx-10">
+            <img
+              src="/orient/orient-design-system.png"
+              alt="Settle canvas showing Orient's design-system deliverables — chevron motif, icon vocabulary, imagery DNA, Orient sample deck with an Eighty years of installations stats slide, voice do/don't, wordmark lockup — each with a Looks good / Needs work approval gate"
+              loading="lazy"
+              width={2216}
+              height={1542}
+              className="rounded-xl border border-border-light w-full"
+            />
+            <figcaption className="text-center text-sm text-text-faint mt-3">
+              Every deliverable passes through a Looks-good / Needs-work
+              gate. Claude drafts, a human signs off. Nothing ships without
+              both.
+            </figcaption>
+          </figure>
+
           <h2>Eleven projects live</h2>
           <p>
             By the end of the first engagement, eleven projects were in

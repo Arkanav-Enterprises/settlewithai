@@ -13,6 +13,9 @@ const Globe = dynamic(() => import("./globe"), { ssr: false });
 const CoworkDemo = dynamic(() => import("./cowork-demo"), { ssr: false });
 const ProcessScroll = dynamic(() => import("./process-scroll"), { ssr: false });
 const AgentDiagram = dynamic(() => import("./agent-diagram"), { ssr: false });
+const DesignOutputScroll = dynamic(() => import("./design-output-scroll"), {
+  ssr: false,
+});
 
 /* ─── Homepage FAQ structured data ───────────────────────
    Lives here (not in root layout.tsx) so it only emits on the
@@ -1593,6 +1596,13 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── Design output — pinned scroll-scrub video ────
+         Reinforces the keynote claim ("Everything, shipped.") with a
+         live artefact: a recording of Orient's brand system being
+         generated and approved inside Settle's canvas. Pinned on
+         desktop, scrub-driven; mobile falls back to inline loop. */}
+      <DesignOutputScroll />
 
       {/* ── Process (scroll-pinned) ──────────────────── */}
       {/* Server-rendered heading so non-JS crawlers (CCBot, Common Crawl)
