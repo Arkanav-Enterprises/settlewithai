@@ -11,21 +11,30 @@ const PHASES = [
     num: "01",
     title: "Discovery",
     desc: "We map every repeatable workflow across your team. What eats time, what\u2019s error-prone, what\u2019s high-volume.",
+    image: "/cave-art.webp",
+    // cave-art is black-on-white, so grayscale + multiply works without inverting first.
+    invertColors: false,
   },
   {
     num: "02",
     title: "Architecture",
     desc: "Your entire rollout \u2014 use cases, departments, timelines, gaps, and skills \u2014 in one interactive dashboard.",
+    image: "/Architecture.png",
+    invertColors: true,
   },
   {
     num: "03",
     title: "Instruction Engineering",
     desc: "Production-grade Claude instructions for every use case. Structured workflows with review gates and safety rules.",
+    image: "/Instruction%20Engineering.png",
+    invertColors: true,
   },
   {
     num: "04",
     title: "Deploy & Settle",
     desc: "We deploy, train your team, and iterate. Quick wins ship in weeks. Deeper integrations follow in phases.",
+    image: "/Deploy%20and%20Settle.png",
+    invertColors: true,
   },
 ];
 
@@ -241,10 +250,10 @@ export default function ProcessScroll() {
         })}
       </div>
 
-      {/* Ghost numeral — editorial replacement for the previous illustration
-         crossfade. Giant italic Fraunces numeral anchored in the right half,
-         crossfading between phases. Echoes the ghost-numeral motif on the
-         Explore cards. Desktop only; hidden on mobile to preserve scroll room. */}
+      {/* Faint cave-art silhouette per phase. grayscale + multiply blends the
+         image into the cream background as a texture; white-on-dark source
+         PNGs get inverted first so multiply renders consistently across the
+         whole set. Desktop only to preserve mobile scroll room. */}
       <div
         aria-hidden
         className="absolute right-0 top-0 bottom-0 w-[min(56vw,760px)] pointer-events-none select-none hidden md:flex items-center justify-center"
@@ -260,25 +269,31 @@ export default function ProcessScroll() {
           }}
         />
         {PHASES.map((phase, i) => (
-          <span
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
             key={phase.num}
-            className="absolute italic font-normal leading-none tabular-nums"
+            src={phase.image}
+            alt=""
+            width={1024}
+            height={1024}
+            loading={i === 0 ? "eager" : "lazy"}
+            className="absolute inset-0 m-auto object-contain"
             style={{
-              fontFamily: "var(--font-heading)",
-              fontSize: "clamp(280px, 38vw, 560px)",
-              letterSpacing: "-0.06em",
-              color: "rgba(20,20,19,0.07)",
-              opacity: activePhase === i ? 1 : 0,
+              width: "min(52vw, 640px)",
+              height: "min(52vw, 640px)",
+              opacity: activePhase === i ? 0.08 : 0,
               transform:
                 activePhase === i
                   ? "translateY(0) scale(1)"
                   : "translateY(8px) scale(0.985)",
+              filter: phase.invertColors
+                ? "invert(1) grayscale(1)"
+                : "grayscale(1)",
+              mixBlendMode: "multiply",
               transition:
                 "opacity 700ms cubic-bezier(0.16, 1, 0.3, 1), transform 900ms cubic-bezier(0.16, 1, 0.3, 1)",
             }}
-          >
-            {phase.num}
-          </span>
+          />
         ))}
 
         {/* Editorial specimen caption — tiny uppercase label under the
