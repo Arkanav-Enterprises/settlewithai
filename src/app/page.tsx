@@ -2704,11 +2704,11 @@ export default function Home() {
               </div>
             </div>
 
-            {/* RIGHT: particle mark — KEEP untouched.
-               The animation morphs S → illustration → bot → S and is the
-               signature motif of this page. Opacity / sizing unchanged. */}
+            {/* RIGHT: particle mark — scaled to sit alongside the form card
+               rather than tower over it. The 2:3 aspect matches the lottie's
+               native 199×298 viewBox, so no letter-boxing regardless of size. */}
             <div className="hidden md:flex justify-center items-center">
-              <div className="w-[320px] h-[480px] lg:w-[380px] lg:h-[570px] opacity-[0.32]">
+              <div className="w-[200px] h-[300px] lg:w-[240px] lg:h-[360px] opacity-[0.32]">
                 <ParticleSettleMark />
               </div>
             </div>
