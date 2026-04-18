@@ -12,6 +12,15 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: "making-your-site-agent-ready",
+    title:
+      "We Took Our Site From 25 to 83 on Cloudflare's Agent Scanner. Here's the Playbook.",
+    description:
+      "AI agents are a new class of visitor — they read HTTP headers, follow manifests, and hit well-known URLs. The four-pillar checklist we used to make settlewithai.com agent-native, and what we deliberately didn't fake.",
+    date: "2026-04-18",
+    tag: "Engineering",
+  },
+  {
     slug: "settle-marketplace-launch",
     title: "Settle Marketplace: The Agents We Built for Clients, Now for Sale",
     description:
