@@ -302,24 +302,14 @@ function Diagram({ L, paths, visible, uid }: { L: Layout; paths: string[]; visib
         }
       `}</style>
 
-      {/* ── Operations canvas — dark inset that frames the diagram.
-         This is the inflection point of the page: we flip from cream
-         to warm ink to signal "live infrastructure, not illustration."
-         Layering order (back-to-front):
-           1. dark fill + radial vignette
-           2. hairline grid
-           3. grain/noise
-           4. corner engineering brackets                          */}
+      {/* ── Canvas frame — hairline graph grid on the page's cream bg,
+         corner brackets to anchor the diagram as a technical drawing. */}
       <div
         aria-hidden
         className="absolute inset-0 rounded-[18px] md:rounded-[22px] overflow-hidden"
         style={{
-          background:
-            "radial-gradient(ellipse 75% 60% at 50% 50%, #1f1a14 0%, #14110d 55%, #0e0c09 100%)",
           opacity: visible ? 1 : 0,
           transition: "opacity 700ms ease",
-          boxShadow:
-            "inset 0 1px 0 rgba(255,255,255,0.04), inset 0 0 0 1px rgba(217,119,87,0.1), 0 20px 60px -30px rgba(20,20,19,0.4)",
         }}
       >
         {/* Hairline grid — faint, editorial graph-paper feel */}
@@ -327,19 +317,10 @@ function Diagram({ L, paths, visible, uid }: { L: Layout; paths: string[]; visib
           className="absolute inset-0"
           style={{
             backgroundImage:
-              "linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px)",
+              "linear-gradient(to right, rgba(20,20,19,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(20,20,19,0.06) 1px, transparent 1px)",
             backgroundSize: "44px 44px",
             maskImage: "radial-gradient(ellipse 80% 70% at 50% 50%, black 40%, transparent 95%)",
             WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 50% 50%, black 40%, transparent 95%)",
-          }}
-        />
-        {/* Grain — SVG fractal noise, extremely low opacity */}
-        <div
-          className="absolute inset-0 mix-blend-overlay opacity-[0.18] pointer-events-none"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
-            animation: `canvasNoise-${uid} 6s steps(2) infinite`,
           }}
         />
         <CornerBracket pos="tl" />
@@ -386,12 +367,12 @@ function Diagram({ L, paths, visible, uid }: { L: Layout; paths: string[]; visib
           }}
         />
 
-        {/* Base connecting curves — cream-tinted so they read on dark canvas */}
+        {/* Base connecting curves — ink-tinted hairlines on cream */}
         {paths.map((d, i) => (
           <path
             key={i}
             d={d}
-            stroke="rgba(232,230,220,0.18)"
+            stroke="rgba(20,20,19,0.22)"
             strokeWidth="1.15"
             strokeDasharray="600"
             style={{
@@ -480,7 +461,7 @@ function Diagram({ L, paths, visible, uid }: { L: Layout; paths: string[]; visib
         </g>
       </svg>
 
-      {/* Hub label — cream against ink */}
+      {/* Hub label — ink-gray on cream */}
       <div
         className="absolute left-1/2 -translate-x-1/2 text-center"
         style={{
@@ -492,7 +473,7 @@ function Diagram({ L, paths, visible, uid }: { L: Layout; paths: string[]; visib
         <span
           className="text-[10px] md:text-[11px] uppercase tracking-[0.22em] font-medium"
           style={{
-            color: "rgba(232,230,220,0.62)",
+            color: "rgba(20,20,19,0.55)",
             fontFamily: "ui-monospace, 'SF Mono', Menlo, monospace",
           }}
         >

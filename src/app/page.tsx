@@ -10,7 +10,6 @@ import { AskClaude } from "@/components/AskClaude";
 import { ParticleSettleMark } from "@/components/ParticleSettleMark";
 
 const Globe = dynamic(() => import("./globe"), { ssr: false });
-const Mindmap = dynamic(() => import("./mindmap"), { ssr: false });
 const CoworkDemo = dynamic(() => import("./cowork-demo"), { ssr: false });
 const ProcessScroll = dynamic(() => import("./process-scroll"), { ssr: false });
 const AgentDiagram = dynamic(() => import("./agent-diagram"), { ssr: false });
@@ -805,15 +804,6 @@ export default function Home() {
      The Globe component emits onFocus once per country change (not per
      animation frame), so this re-renders ~1×/6s — cheap. */
   const [globeCountry, setGlobeCountry] = useState("India");
-  /* Services highlight state. `hoveredService` is the transient preview
-     that fires on pointer enter/leave. `pinnedService` is the sticky
-     selection set by clicking a pill — it persists until the same pill
-     is clicked again (unpin) or a different pill replaces it. Hover
-     wins over pin for the duration of the hover so you can preview
-     other branches without losing your baseline. */
-  const [hoveredService, setHoveredService] = useState<string | null>(null);
-  const [pinnedService, setPinnedService] = useState<string | null>(null);
-  const activeServiceCategory = hoveredService ?? pinnedService;
 
   /* FAQ category filter. "All" is the default; clicking a category pill
      narrows the index to just those entries. Kept as local state here
@@ -927,11 +917,11 @@ export default function Home() {
                on mobile (spans collapse to inline so the heading wraps at
                word boundaries like the body copy below, matching its line
                width instead of stacking one word per line). */}
-            <h1 className="font-heading font-medium leading-[1.02] md:leading-[0.92] tracking-[-0.035em] text-text text-[clamp(2.4rem,9vw,6.4rem)]">
+            <h1 className="font-heading font-light leading-[1.02] md:leading-[0.92] tracking-[-0.035em] text-text text-[clamp(2.4rem,9vw,6.4rem)]">
               <span className="md:block">Your </span>
               <span className="md:block">business, </span>
               <span className="md:block">made </span>
-              <span className="md:block text-accent">AI-native.</span>
+              <span className="md:block italic text-accent">AI-native.</span>
             </h1>
 
             {/* RIGHT: narrow lede column — eyebrow, subtitle, CTA */}
@@ -1354,147 +1344,253 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Services — pill rail above full-width mindmap ────
-         Editorial treatment: hairline-flanked eyebrow on the H2, italic
-         Fraunces accent on "deliver"; pills get a tiny accent dot on the
-         active/hovered state; the mindmap is framed with corner brackets
-         and specimen-label annotations (plate title, legend). */}
+      {/* ── Services — "What you receive" Apple-keynote value rail ──
+         Replaces the prior mindmap + pill-rail treatment. Structure
+         borrows from Apple product pages: poster-scale display headline,
+         quartet of oversized metrics, bento grid where each tile carries
+         a single italic line + one CSS-built visual. No images loaded —
+         every visual is pure CSS so the section renders crisp at any
+         scale and costs nothing in bytes.
+
+         Keeps `id="services"` so the BlogTOC anchor and any external
+         deep links (#services) continue to resolve. */}
       <section id="services" ref={servicesRef} className="relative z-10">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
           <div className="h-px bg-border-light" />
         </div>
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-24">
-          {/* Editorial header — eyebrow kicker + Fraunces italic on "deliver" */}
-          <div className="fade-up text-center mb-10 md:mb-12">
-            <div className="inline-flex items-center gap-3 mb-5">
-              <div className="w-8 h-px bg-[rgba(20,20,19,0.2)]" />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
-                Scope &amp; deliverables
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-20 md:py-32">
+          {/* Eyebrow — hairline rules on either side for keynote centering */}
+          <div className="fade-up flex items-center justify-center gap-3 mb-7">
+            <div className="w-8 h-px bg-[rgba(20,20,19,0.18)]" />
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
+              In every engagement
+            </p>
+            <div className="w-8 h-px bg-[rgba(20,20,19,0.18)]" />
+          </div>
+
+          {/* Display headline — poster scale, one idea. Italic accent
+             is what turns a marketing claim into a confident declarative.
+             Kept at light weight (300) so Fraunces reads elegant at
+             display scale rather than chunky. */}
+          <h2
+            className="fade-up text-center text-[clamp(2.6rem,7.2vw,5.75rem)] leading-[0.96] tracking-[-0.035em] font-light mb-4"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
+            <span className="block">Twelve weeks.</span>
+            <span className="block">
+              Everything,{" "}
+              <span className="italic text-accent">shipped.</span>
+            </span>
+          </h2>
+          <p className="fade-up text-center text-[15px] md:text-[16px] leading-[1.6] text-text-muted max-w-[520px] mx-auto mb-20 md:mb-24">
+            Not a proposal. Not a deck. A company, operating on Claude —
+            audited, built, trained, and handed over.
+          </p>
+
+          {/* Metric quartet — giant tabular numerals, micro-labels.
+             The "holy shit" moment: four numbers doing the selling. */}
+          <div className="fade-up grid grid-cols-2 md:grid-cols-4 border-y border-[rgba(20,20,19,0.14)] mb-6 md:mb-8">
+            {[
+              { num: "49", label: "Workflows mapped" },
+              { num: "11+", label: "Agents shipped" },
+              { num: "7", label: "Departments covered" },
+              { num: "12wk", label: "Discovery to live" },
+            ].map((m, i) => (
+              <div
+                key={m.label}
+                className={`text-center py-12 md:py-16 ${i === 0 ? "border-r border-b md:border-b-0 border-[rgba(20,20,19,0.14)]" : ""} ${i === 1 ? "border-b md:border-b-0 md:border-r border-[rgba(20,20,19,0.14)]" : ""} ${i === 2 ? "border-r border-[rgba(20,20,19,0.14)]" : ""}`}
+              >
+                <div
+                  className="text-[clamp(3.5rem,7vw,5.5rem)] leading-[0.92] tracking-[-0.045em] font-light tabular-nums mb-3"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  {m.num}
+                </div>
+                <div className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-text-muted">
+                  {m.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Bento grid — asymmetric: one anchor tile (audit) with
+             the 49-bar visual carries the density claim, five smaller
+             companion tiles each show one deliverable via a single
+             CSS micro-illustration.
+
+             Mobile: cards become a sticky stack at incrementing top
+             offsets (1rem → 6rem) so scrolling feels like flipping
+             through notebook pages — each card's top edge "peeks"
+             above the one that's currently covering it. Subtle upward
+             shadow sells the paper-stack depth. The fade-up wrapper
+             is deliberately *outside* the grid so its transform doesn't
+             capture sticky children inside a containing block. */}
+          <div className="grid grid-cols-6 gap-0 md:gap-4 md:auto-rows-[260px]">
+            {/* 1 — Audit (anchor: col-4 × row-2) */}
+            <article className="col-span-6 md:col-span-4 md:row-span-2 sticky top-4 md:relative md:top-auto rounded-[28px] bg-[#ede8d8] p-8 md:p-12 relative overflow-hidden min-h-[320px] shadow-[0_-6px_24px_-10px_rgba(20,20,19,0.1)] md:shadow-none">
+              <div className="relative z-10">
+                <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-accent mb-5">
+                  01 &middot; Audit
+                </p>
+                <h3
+                  className="text-[clamp(1.5rem,2.8vw,2.4rem)] leading-[1.05] max-w-[440px]"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  Every workflow,{" "}
+                  <span className="italic">mapped.</span>
+                </h3>
+                <p className="mt-4 text-[13.5px] md:text-[14.5px] text-text-muted leading-[1.55] max-w-[400px]">
+                  Department-by-department audit. Every repeatable task,
+                  ranked by cost and frequency.
+                </p>
+              </div>
+              {/* 49 bars — one per workflow. Sine-seeded heights give
+                 a charted feel without implying real data. */}
+              <div className="absolute left-8 right-8 md:left-12 md:right-12 bottom-8 md:bottom-12 flex items-end gap-[3px] md:gap-[4px] h-[70px] md:h-[120px]">
+                {Array.from({ length: 49 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="flex-1 bg-text/70 rounded-t-[2px]"
+                    style={{
+                      height: `${20 + Math.abs(Math.sin(i * 0.618)) * 78}%`,
+                    }}
+                  />
+                ))}
+              </div>
+            </article>
+
+            {/* 2 — Dashboard (col-2) */}
+            <article className="col-span-6 md:col-span-2 sticky top-8 md:relative md:top-auto rounded-[24px] bg-[#f5f1e3] p-6 md:p-8 relative overflow-hidden min-h-[240px] shadow-[0_-6px_24px_-10px_rgba(20,20,19,0.1)] md:shadow-none">
+              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-accent mb-3">
+                02 &middot; Dashboard
               </p>
-              <div className="w-8 h-px bg-[rgba(20,20,19,0.2)]" />
-            </div>
-            <h2 className="text-[clamp(1.7rem,3.4vw,2.6rem)] tracking-[-0.02em] font-medium leading-[1.1]">
-              What we{" "}
-              <span
-                className="italic"
+              <h3
+                className="text-[clamp(1.15rem,1.8vw,1.5rem)] leading-[1.1] max-w-[220px]"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
-                deliver.
-              </span>
-            </h2>
-          </div>
+                Live rollout,{" "}
+                <span className="italic">one URL.</span>
+              </h3>
+              {/* Mini browser chrome */}
+              <div className="absolute bottom-5 right-5 w-[58%] rounded-xl bg-white/80 p-3 shadow-[0_4px_14px_rgba(20,20,19,0.06)]">
+                <div className="flex gap-1 mb-2">
+                  {[0, 1, 2].map((i) => (
+                    <div
+                      key={i}
+                      className="w-1.5 h-1.5 rounded-full bg-text-muted/30"
+                    />
+                  ))}
+                </div>
+                <div className="space-y-1.5">
+                  <div className="h-1 w-full bg-text/10 rounded" />
+                  <div className="h-1 w-[65%] bg-accent/50 rounded" />
+                  <div className="h-1 w-[40%] bg-text/10 rounded" />
+                </div>
+              </div>
+            </article>
 
-          {/* Pill rail — each pill: Fraunces title · hairline · descriptor.
-             Active/pinned state grows a tiny accent dot prefix and warms
-             the border so the selected tag reads as "currently isolated". */}
-          <div className="fade-up flex flex-wrap justify-center gap-2.5 mb-10 md:mb-14">
-            {[
-              {
-                title: "The audit",
-                category: "The audit",
-                desc: "A week inside your business.",
-              },
-              {
-                title: "Teaching the AI your business",
-                category: "Teaching the AI",
-                desc: "Answers the way your best employee would.",
-              },
-              {
-                title: "Rolling it out",
-                category: "Rolling it out",
-                desc: "We stay until every team uses it.",
-              },
-              {
-                title: "Training your team",
-                category: "Training your team",
-                desc: "On-site for a month, one-on-one.",
-              },
-            ].map((s) => {
-              const active = pinnedService === s.category;
-              return (
-                <button
-                  key={s.title}
-                  type="button"
-                  aria-pressed={active}
-                  onClick={() =>
-                    setPinnedService((p) =>
-                      p === s.category ? null : s.category,
-                    )
-                  }
-                  onMouseEnter={() => setHoveredService(s.category)}
-                  onMouseLeave={() => setHoveredService(null)}
-                  className={[
-                    "group inline-flex items-center gap-3 rounded-full pl-4 pr-5 py-2.5 border transition-all duration-300 cursor-pointer",
-                    active
-                      ? "bg-[rgba(217,119,87,0.1)] border-[rgba(217,119,87,0.45)] shadow-[0_4px_18px_-6px_rgba(217,119,87,0.25)]"
-                      : "bg-bg border-[rgba(20,20,19,0.12)] hover:border-[rgba(20,20,19,0.3)] hover:bg-[rgba(20,20,19,0.03)] hover:-translate-y-[1px]",
-                  ].join(" ")}
-                >
-                  {/* Accent indicator — hairline on inactive, filled dot on active */}
-                  <span
-                    aria-hidden
-                    className={[
-                      "shrink-0 transition-all duration-300 rounded-full",
-                      active
-                        ? "w-1.5 h-1.5 bg-accent"
-                        : "w-2 h-px bg-[rgba(20,20,19,0.3)] group-hover:bg-[rgba(20,20,19,0.5)]",
-                    ].join(" ")}
-                  />
-                  <span
-                    className="text-[13px] font-medium text-text"
-                    style={{ fontFamily: "var(--font-heading)" }}
-                  >
-                    {s.title}
-                  </span>
-                  <span
-                    aria-hidden
-                    className="w-px h-3 bg-[rgba(20,20,19,0.15)] hidden sm:inline-block"
-                  />
-                  <span className="text-text-muted text-[12.5px] hidden sm:inline">
-                    {s.desc}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Mindmap — framed as an editorial plate.
-             Corner brackets + specimen-label top-left + legend bottom-right.
-             Faint inset border to separate the plate from the page. */}
-          <div className="fade-up relative px-2 md:px-4 py-3 md:py-5">
-            <CornerBracket position="tl" />
-            <CornerBracket position="tr" />
-            <CornerBracket position="bl" />
-            <CornerBracket position="br" />
-
-            {/* Top-left specimen tag */}
-            <div className="absolute top-4 left-12 md:top-7 md:left-16 z-10 flex items-center gap-3 pointer-events-none">
-              <div className="w-5 h-px bg-accent" />
-              <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-accent">
-                Plate &middot; Service constellation
+            {/* 3 — Instructions (col-2) */}
+            <article className="col-span-6 md:col-span-2 sticky top-12 md:relative md:top-auto rounded-[24px] bg-[#f5f1e3] p-6 md:p-8 relative overflow-hidden min-h-[240px] shadow-[0_-6px_24px_-10px_rgba(20,20,19,0.1)] md:shadow-none">
+              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-accent mb-3">
+                03 &middot; Instructions
               </p>
-            </div>
+              <h3
+                className="text-[clamp(1.15rem,1.8vw,1.5rem)] leading-[1.1] max-w-[220px]"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                Production{" "}
+                <span className="italic">Claude,</span> every agent.
+              </h3>
+              {/* Mini instruction snippet */}
+              <div className="absolute bottom-5 right-5 font-mono text-[10px] leading-[1.65] text-text/55 text-right">
+                <div>## role</div>
+                <div>senior analyst.</div>
+                <div className="text-accent/80">[review gate]</div>
+                <div>→ output: json</div>
+              </div>
+            </article>
 
-            {/* Bottom-right legend */}
-            <div className="absolute bottom-4 right-12 md:bottom-7 md:right-16 z-10 flex items-center gap-3 pointer-events-none">
-              <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-text-muted">
-                Hover a tag to isolate
+            {/* 4 — Knowledge (col-2) */}
+            <article className="col-span-6 md:col-span-2 sticky top-16 md:relative md:top-auto rounded-[24px] bg-[#ede8d8] p-6 md:p-8 relative overflow-hidden min-h-[240px] shadow-[0_-6px_24px_-10px_rgba(20,20,19,0.1)] md:shadow-none">
+              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-accent mb-3">
+                04 &middot; Knowledge
               </p>
-              <div className="w-5 h-px bg-[rgba(20,20,19,0.3)]" />
-            </div>
+              <h3
+                className="text-[clamp(1.15rem,1.8vw,1.5rem)] leading-[1.1] max-w-[200px]"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                Your context,{" "}
+                <span className="italic">packaged.</span>
+              </h3>
+              {/* Stacked documents */}
+              <div className="absolute bottom-5 right-6 w-[80px] h-[96px]">
+                {[0, 1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="absolute bg-white/85 border border-text/10 rounded-md shadow-[0_2px_6px_rgba(20,20,19,0.05)]"
+                    style={{
+                      width: "56px",
+                      height: "76px",
+                      top: `${i * 5}px`,
+                      left: `${i * 6}px`,
+                      transform: `rotate(${-3 - i * 2}deg)`,
+                    }}
+                  />
+                ))}
+              </div>
+            </article>
 
-            {/* Full-width mindmap.
-               Explicit height is required because the Mindmap reads
-               container.clientHeight on mount/resize — without a fixed
-               height the component would render at 0 and never lay out. */}
-            <div className="w-full h-[520px] md:h-[640px]">
-              <Mindmap
-                className="w-full h-full"
-                highlightCategory={activeServiceCategory}
-              />
-            </div>
+            {/* 5 — Training (col-2) */}
+            <article className="col-span-6 md:col-span-2 sticky top-20 md:relative md:top-auto rounded-[24px] bg-[#f5f1e3] p-6 md:p-8 relative overflow-hidden min-h-[240px] shadow-[0_-6px_24px_-10px_rgba(20,20,19,0.1)] md:shadow-none">
+              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-accent mb-3">
+                05 &middot; Training
+              </p>
+              <h3
+                className="text-[clamp(1.15rem,1.8vw,1.5rem)] leading-[1.1] max-w-[200px]"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                On-site,{" "}
+                <span className="italic">recorded.</span>
+              </h3>
+              {/* Calendar grid with highlighted session days */}
+              <div className="absolute bottom-5 right-5 grid grid-cols-5 gap-[5px] w-[110px]">
+                {Array.from({ length: 15 }).map((_, i) => {
+                  const highlight = [1, 4, 7, 10, 13].includes(i);
+                  return (
+                    <div
+                      key={i}
+                      className={`aspect-square rounded-[4px] ${highlight ? "bg-accent/80" : "bg-white/75 border border-text/10"}`}
+                    />
+                  );
+                })}
+              </div>
+            </article>
+
+            {/* 6 — Runbook (col-2) */}
+            <article className="col-span-6 md:col-span-2 sticky top-24 md:relative md:top-auto rounded-[24px] bg-[#ede8d8] p-6 md:p-8 relative overflow-hidden min-h-[240px] shadow-[0_-6px_24px_-10px_rgba(20,20,19,0.1)] md:shadow-none">
+              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-accent mb-3">
+                06 &middot; Runbook
+              </p>
+              <h3
+                className="text-[clamp(1.15rem,1.8vw,1.5rem)] leading-[1.1] max-w-[200px]"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                Permanent,{" "}
+                <span className="italic">yours.</span>
+              </h3>
+              {/* Booklet with bookmark */}
+              <div className="absolute bottom-5 right-6 w-[72px] h-[96px] bg-white/85 border border-text/10 rounded-md shadow-[0_2px_6px_rgba(20,20,19,0.05)] flex flex-col gap-[6px] p-3">
+                <div className="h-[3px] w-full bg-text/15 rounded" />
+                <div className="h-[3px] w-[75%] bg-text/15 rounded" />
+                <div className="h-[3px] w-full bg-text/15 rounded" />
+                <div className="h-[3px] w-[55%] bg-text/15 rounded" />
+                <div className="h-[3px] w-[88%] bg-text/15 rounded" />
+                <div className="h-[3px] w-[70%] bg-text/15 rounded" />
+                {/* Bookmark tab */}
+                <div className="absolute -top-[1px] right-3 w-[7px] h-[22px] bg-accent/80" />
+              </div>
+            </article>
           </div>
-
         </div>
       </section>
 
@@ -1637,7 +1733,7 @@ export default function Home() {
           <div className="fade-up mb-6 md:mb-10 max-w-2xl">
             <p className="text-[10.5px] uppercase tracking-[0.18em] text-accent mb-2.5 flex items-center gap-2.5">
               <span className="inline-block w-6 h-px bg-accent/60" />
-              Voices from South Asia
+              Voices from the field
             </p>
             <h2 className="text-[clamp(1.25rem,3vw,2.5rem)] font-medium leading-[1.1] tracking-[-0.02em] text-text">
               What business leaders are{" "}
@@ -1679,7 +1775,7 @@ export default function Home() {
               <div className="flex items-center gap-2.5 mt-3 md:mt-4">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                 <span className="text-[10px] md:text-[10.5px] uppercase tracking-[0.15em] text-text-muted">
-                  Entrepreneur · India
+                  Entrepreneur · United States
                 </span>
               </div>
             </article>
@@ -1698,7 +1794,7 @@ export default function Home() {
               <div className="relative flex items-center gap-2.5 mt-3 md:mt-4">
                 <span className="w-1.5 h-1.5 rounded-full bg-white/80" />
                 <span className="text-[10px] md:text-[10.5px] uppercase tracking-[0.15em] text-white/80">
-                  Entrepreneur · India
+                  Entrepreneur · United Kingdom
                 </span>
               </div>
             </article>
@@ -1713,7 +1809,7 @@ export default function Home() {
               <div className="flex items-center gap-2.5 mt-3 md:mt-4">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                 <span className="text-[9.5px] md:text-[10.5px] uppercase tracking-[0.15em] text-text-muted">
-                  Entrepreneur · India
+                  Entrepreneur · Germany
                 </span>
               </div>
             </article>
@@ -1727,7 +1823,7 @@ export default function Home() {
               <div className="flex items-center gap-2.5 mt-3 md:mt-4">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                 <span className="text-[9.5px] md:text-[10.5px] uppercase tracking-[0.15em] text-text-muted">
-                  Entrepreneur · India
+                  Entrepreneur · Brazil
                 </span>
               </div>
             </article>
@@ -1741,31 +1837,19 @@ export default function Home() {
                 &ldquo;
               </span>
               <blockquote className="relative text-[12.5px] md:text-[14px] leading-[1.55] text-bg/90">
-                Accidentally, AI gave me the idea of a new business
-                &mdash; enough to retire my family and help people in
-                Balochistan and Sindh.
+                I run a four-person shop. Since Claude, we&rsquo;re
+                winning tenders we couldn&rsquo;t even have bid on
+                before.
               </blockquote>
               <div className="relative flex items-center gap-2.5 mt-3 md:mt-4">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                 <span className="text-[9.5px] md:text-[10.5px] uppercase tracking-[0.15em] text-bg/60">
-                  Entrepreneur · Pakistan
+                  Entrepreneur · Australia
                 </span>
               </div>
             </article>
           </div>
 
-          <p className="text-[10.5px] md:text-[11px] text-text-faint mt-7 md:mt-12 max-w-2xl">
-            From Anthropic&rsquo;s{" "}
-            <a
-              href="https://www.anthropic.com/features/81k-interviews#quotes"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:text-text-muted transition-colors"
-            >
-              81,000 Conversations About AI
-            </a>
-            , edited for clarity.
-          </p>
         </div>
       </section>
 
