@@ -90,95 +90,105 @@ export default function DesignOutputScroll() {
       ref={sectionRef}
       className="relative bg-[#ebe6d9] overflow-hidden"
     >
-      <div className="min-h-screen flex flex-col justify-center py-12 md:py-20">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10 w-full">
-          {/* Header block — eyebrow + Fraunces headline + body */}
-          <div className="max-w-[860px] mb-8 md:mb-10">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-8 h-px bg-accent/60" />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
-                Sample output &middot; Orient
-              </p>
-            </div>
-            <h2
-              className="text-[clamp(2rem,5.4vw,4.2rem)] font-light leading-[1.02] tracking-[-0.03em] text-text mb-5"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              Marketing, decks, identity —{" "}
-              <span className="italic text-accent">generated in a week.</span>
-            </h2>
-            <p className="text-[15px] md:text-[17px] leading-[1.6] text-text-muted max-w-[560px]">
-              Design tokens, slide systems, icon vocabularies, brand voice
-              rules. Claude drafts each asset. Humans approve in the same
-              canvas. The whole system ships inside the engagement — not
-              after it.
-            </p>
-          </div>
-
-          {/* Video frame — editorial inset with hairline border and subtle
-             shadow so it reads like a framed specimen plate, not a hero. */}
-          <div className="relative">
-            <div
-              className="relative overflow-hidden rounded-lg md:rounded-xl border border-black/[0.08] bg-black/5"
-              style={{
-                boxShadow:
-                  "0 1px 0 rgba(20,20,19,0.04), 0 30px 60px -30px rgba(20,20,19,0.25)",
-              }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <video
-                ref={videoRef}
-                src="/videos/orient-design-system.mp4"
-                muted
-                playsInline
-                preload="auto"
-                /* autoPlay primes iOS; we pause immediately in effect */
-                autoPlay
-                className="block w-full h-auto"
-              />
-
-              {/* Scrub indicator — hairline fills left→right as scroll
-                 advances. Inline style + scaleX on transform is GPU-cheap. */}
-              <div
-                aria-hidden
-                className="absolute left-0 right-0 bottom-0 h-[3px] origin-left"
-                ref={progressRef}
-                style={{
-                  background: "#d97757",
-                  transform: "scaleX(0)",
-                  transition: "transform 80ms linear",
-                }}
-              />
-            </div>
-
-            {/* Caption rail — three crossfading labels, one per scrub third.
-               Absolute-positioned so they stack without layout shift. */}
-            <div className="relative mt-6 md:mt-7 h-12 md:h-10">
-              {CAPTIONS.map((c, i) => (
-                <p
-                  key={c}
-                  className="absolute inset-0 text-[13px] md:text-[14px] tracking-[0.02em] text-text-muted flex items-center gap-3"
-                  style={{
-                    opacity: active === i ? 1 : 0,
-                    transform:
-                      active === i ? "translateY(0)" : "translateY(4px)",
-                    transition:
-                      "opacity 500ms ease, transform 500ms cubic-bezier(0.16, 1, 0.3, 1)",
-                  }}
-                  aria-hidden={active !== i}
-                >
-                  <span
-                    className="inline-block w-5 h-px bg-accent/60"
-                    aria-hidden
-                  />
-                  <span>
-                    <span className="tabular-nums text-accent font-semibold mr-2">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    {c}
-                  </span>
+      {/* One-viewport shell. During the desktop pin this owns exactly 100vh,
+         so the grid below never scrolls internally. Text left / video right
+         on desktop, stacked on mobile. */}
+      <div className="h-screen flex items-center py-6 md:py-10">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-10 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-[minmax(0,34%)_1fr] gap-8 md:gap-10 lg:gap-14 items-center">
+            {/* ── Copy column (left on desktop) ───────── */}
+            <div className="max-w-[460px]">
+              <div className="flex items-center gap-3 mb-4 md:mb-5">
+                <div className="w-8 h-px bg-accent/60" />
+                <p className="text-[10.5px] md:text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
+                  Sample output &middot; Orient
                 </p>
-              ))}
+              </div>
+              <h2
+                className="text-[clamp(1.6rem,3vw,2.6rem)] font-light leading-[1.05] tracking-[-0.025em] text-text mb-4 md:mb-5"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                Marketing, decks, identity —{" "}
+                <span className="italic text-accent">
+                  generated in a week.
+                </span>
+              </h2>
+              <p className="text-[14px] md:text-[15px] leading-[1.6] text-text-muted mb-6 md:mb-8">
+                Design tokens, slide systems, icon vocabularies, brand voice
+                rules. Claude drafts each asset; humans approve in the same
+                canvas. The whole system ships inside the engagement — not
+                after it.
+              </p>
+
+              {/* Caption rail — lives with the copy so it reads as a
+                 live narration of the scrub happening alongside. */}
+              <div className="relative h-14 md:h-12">
+                {CAPTIONS.map((c, i) => (
+                  <p
+                    key={c}
+                    className="absolute inset-0 text-[13px] md:text-[14px] leading-[1.45] tracking-[0.01em] text-text flex items-start gap-3"
+                    style={{
+                      opacity: active === i ? 1 : 0,
+                      transform:
+                        active === i ? "translateY(0)" : "translateY(4px)",
+                      transition:
+                        "opacity 500ms ease, transform 500ms cubic-bezier(0.16, 1, 0.3, 1)",
+                    }}
+                    aria-hidden={active !== i}
+                  >
+                    <span
+                      className="inline-block w-5 h-px bg-accent/60 shrink-0 mt-[0.7em]"
+                      aria-hidden
+                    />
+                    <span>
+                      <span className="tabular-nums text-accent font-semibold mr-2">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      {c}
+                    </span>
+                  </p>
+                ))}
+              </div>
+            </div>
+
+            {/* ── Video column (right on desktop) ────────
+               max-h caps the frame to what fits in a pinned viewport.
+               aspect-video isn't quite right (clip is 1600×816 ≈ 1.96:1)
+               so we let the intrinsic aspect drive height and cap it. */}
+            <div className="relative">
+              <div
+                className="relative overflow-hidden rounded-lg md:rounded-xl border border-black/[0.08] bg-black/5 mx-auto"
+                style={{
+                  maxHeight: "min(78vh, 780px)",
+                  aspectRatio: "1600 / 816",
+                  boxShadow:
+                    "0 1px 0 rgba(20,20,19,0.04), 0 30px 60px -30px rgba(20,20,19,0.25)",
+                }}
+              >
+                <video
+                  ref={videoRef}
+                  src="/videos/orient-design-system.mp4"
+                  muted
+                  playsInline
+                  preload="auto"
+                  /* autoPlay primes iOS; we pause immediately in effect */
+                  autoPlay
+                  className="block w-full h-full object-contain"
+                />
+
+                {/* Scrub indicator — hairline fills left→right as scroll
+                   advances. Inline style + scaleX on transform is GPU-cheap. */}
+                <div
+                  aria-hidden
+                  className="absolute left-0 right-0 bottom-0 h-[3px] origin-left"
+                  ref={progressRef}
+                  style={{
+                    background: "#d97757",
+                    transform: "scaleX(0)",
+                    transition: "transform 80ms linear",
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
