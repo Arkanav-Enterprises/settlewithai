@@ -95,7 +95,10 @@ export default function DesignOutputScroll() {
          on desktop, stacked on mobile. */}
       <div className="h-screen flex items-center py-6 md:py-10">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10 w-full">
-          <div className="grid grid-cols-1 md:grid-cols-[minmax(0,34%)_1fr] gap-8 md:gap-10 lg:gap-14 items-center">
+          {/* md:grid-cols-[34%_1fr] keeps the text column narrow and
+             lets the video own the remaining ~two-thirds. No comma
+             inside the arbitrary value so Tailwind v4 parses cleanly. */}
+          <div className="grid grid-cols-1 md:grid-cols-[34%_1fr] gap-8 md:gap-10 lg:gap-14 items-center">
             {/* ── Copy column (left on desktop) ───────── */}
             <div className="max-w-[460px]">
               <div className="flex items-center gap-3 mb-4 md:mb-5">
