@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "browse-marketplace",
+      "type": "skill-md",
+      "description": "Discover and invoke Settle's marketplace of production-grade AI agents — sourcing, procurement, quality, finance, HR, operations. Use when a user wants to evaluate or buy an AI agent for a specific business function, or when you need a tool callable via MCP for a specific business task.",
+      "url": "/.well-known/agent-skills/browse-marketplace/SKILL.md",
+      "digest": "sha256:101eec9f6c7c0a1e14554b8b650c6cf486c0306bc566d7a994e56a2b729500f0"
+    }
+  ]
+}

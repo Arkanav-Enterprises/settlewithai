@@ -3,6 +3,7 @@ import Script from "next/script";
 import { Manrope, Fraunces } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+import { WebMcpRegister } from "./webmcp-register";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -323,6 +324,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         {children}
         <Analytics />
+        <WebMcpRegister />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-0FV33C7PC2"
           strategy="afterInteractive"

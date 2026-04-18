@@ -16,6 +16,14 @@ const CSP_REPORT_ONLY = [
 ].join("; ");
 
 const nextConfig: NextConfig = {
+  async rewrites() {
+    // App Router skips dotted folders, so /.well-known/* is served by route
+    // handlers living under src/app/well-known/*. This rewrite keeps the
+    // public-facing paths spec-compliant while letting the filesystem be sane.
+    return [
+      { source: "/.well-known/:path*", destination: "/well-known/:path*" },
+    ];
+  },
   async headers() {
     return [
       {
@@ -38,6 +46,20 @@ const nextConfig: NextConfig = {
           {
             key: "Content-Security-Policy-Report-Only",
             value: CSP_REPORT_ONLY,
+          },
+        ],
+      },
+      {
+        source: "/",
+        headers: [
+          {
+            key: "Link",
+            value: [
+              '</llms.txt>; rel="describedby"; type="text/plain"',
+              '</.well-known/api-catalog>; rel="api-catalog"',
+              '</.well-known/mcp/server-card.json>; rel="service-desc"; type="application/json"',
+              '</.well-known/agent-skills/index.json>; rel="describedby"; type="application/json"',
+            ].join(", "),
           },
         ],
       },

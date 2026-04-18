@@ -14,6 +14,27 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(url, 308);
   }
 
+  // Markdown content negotiation on the homepage. Agents advertising
+  // `Accept: text/markdown` get the llms.txt representation; everyone else
+  // gets HTML. `Vary: Accept` on both branches prevents caches from serving
+  // whichever format arrived first to every subsequent requester.
+  if (request.nextUrl.pathname === "/") {
+    const accept = request.headers.get("accept") ?? "";
+    if (accept.includes("text/markdown")) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/llms.txt";
+      return NextResponse.rewrite(url, {
+        headers: {
+          "Content-Type": "text/markdown; charset=utf-8",
+          Vary: "Accept",
+        },
+      });
+    }
+    const response = NextResponse.next();
+    response.headers.set("Vary", "Accept");
+    return response;
+  }
+
   return NextResponse.next();
 }
 
