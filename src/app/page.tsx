@@ -16,6 +16,7 @@ const AgentDiagram = dynamic(() => import("./agent-diagram"), { ssr: false });
 const DesignOutputScroll = dynamic(() => import("./design-output-scroll"), {
   ssr: false,
 });
+const PromoLoop = dynamic(() => import("./promo-loop"), { ssr: false });
 
 /* ─── Homepage FAQ structured data ───────────────────────
    Lives here (not in root layout.tsx) so it only emits on the
@@ -985,6 +986,10 @@ export default function Home() {
           <OrientCaseStudyCard />
         </div>
       </section>
+
+      {/* ── 30-sec promo loop — pulls back from Orient deep-dive
+         to the broader Settle thesis before Ask Claude ──────── */}
+      <PromoLoop />
 
       {/* ── Ask Claude ─────────────────────────────────── */}
       <AskClaude />
