@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { BlogTOC } from "@/components/blog/BlogTOC";
 import { Nav } from "@/components/layout/Nav";
 import { MagazineHeader } from "@/components/blog/MagazineHeader";
+import { LazyVideo } from "@/components/LazyVideo";
 import { MagazineOutro } from "@/components/blog/MagazineOutro";
 
 export const metadata: Metadata = {
@@ -418,19 +419,14 @@ export default function Article() {
              playback so the twelve-minute generation reads as a minute.
              Autoplay-loop-muted for inline context inside an article. */}
           <figure className="my-10 lg:-mx-10">
-            <video
+            <LazyVideo
+              src="/videos/orient-design-system.mp4"
               autoPlay
               muted
               loop
               playsInline
-              preload="metadata"
               className="rounded-xl border border-border-light w-full block"
-            >
-              <source
-                src="/videos/orient-design-system.mp4"
-                type="video/mp4"
-              />
-            </video>
+            />
             <figcaption className="text-center text-sm text-text-faint mt-3">
               Orient&apos;s brand system taking shape inside Settle&apos;s
               canvas. Slide templates, type scale, icon vocabulary, and

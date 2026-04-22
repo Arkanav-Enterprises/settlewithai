@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLazyVideo } from "@/lib/use-lazy-video";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,7 +17,13 @@ const CAPTIONS = [
 
 export default function DesignOutputScroll() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  // Larger rootMargin on a scroll-scrub video: we need the buffer to
+  // be filling BEFORE the user scrolls in, so seeks feel responsive
+  // instead of stalling on network.
+  const { ref: videoRef, videoProps } = useLazyVideo(
+    "/videos/orient-design-system.mp4",
+    "600px",
+  );
   const progressRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const activeRef = useRef(0);
@@ -170,11 +177,12 @@ export default function DesignOutputScroll() {
               >
                 <video
                   ref={videoRef}
-                  src="/videos/orient-design-system.mp4"
+                  {...videoProps}
                   muted
                   playsInline
-                  preload="auto"
-                  /* autoPlay primes iOS; we pause immediately in effect */
+                  /* autoPlay primes iOS; we pause immediately in effect.
+                     Safe to keep: until useLazyVideo attaches src, there's
+                     no media to auto-play. */
                   autoPlay
                   className="block w-full h-full object-contain"
                 />

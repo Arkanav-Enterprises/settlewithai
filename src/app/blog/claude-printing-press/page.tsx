@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { BlogTOC } from "@/components/blog/BlogTOC";
 import { Nav } from "@/components/layout/Nav";
 import { MagazineOutro } from "@/components/blog/MagazineOutro";
+import { LazyVideo } from "@/components/LazyVideo";
 
 export const metadata: Metadata = {
   title: "We're Teaching AI to Run a Printing Press",
@@ -129,17 +130,15 @@ export default function Article() {
       <section className="relative h-[85vh] min-h-[600px] flex items-end overflow-hidden">
         {/* Background video */}
         <div className="absolute inset-0 overflow-hidden">
-          <video
+          <LazyVideo
+            src="/videos/orient-press.mp4"
             autoPlay
             muted
             loop
             playsInline
             poster="/blog/machine-control-dashboard.png"
             className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover"
-          >
-            {/* TODO: Replace with actual factory/press video */}
-            <source src="/videos/orient-press.mp4" type="video/mp4" />
-          </video>
+          />
           {/* Dark overlay for text legibility */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
         </div>

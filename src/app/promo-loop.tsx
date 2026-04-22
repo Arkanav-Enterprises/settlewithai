@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLazyVideo } from "@/lib/use-lazy-video";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,7 +27,9 @@ function formatTime(seconds: number): string {
 export default function PromoLoop() {
   const sectionRef = useRef<HTMLElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const { ref: videoRef, videoProps } = useLazyVideo(
+    "/videos/settle-promo-cinema.mp4",
+  );
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
   const seamRef = useRef<HTMLDivElement>(null);
@@ -88,11 +91,6 @@ export default function PromoLoop() {
 
     const onMeta = () => {
       setDuration(video.duration || 19);
-      // Seek a sliver past 0 so the first frame paints while paused.
-      // Without this, the <video> element shows black until play.
-      if (video.currentTime === 0) {
-        try { video.currentTime = 0.05; } catch { /* seek may fail pre-canPlay */ }
-      }
     };
     const onTime = () => setCurrentTime(video.currentTime);
     const onPlay = () => { setIsPlaying(true); setHasStarted(true); };
@@ -167,12 +165,12 @@ export default function PromoLoop() {
       >
         <video
           ref={videoRef}
-          src="/videos/settle-promo-cinema.mp4"
+          {...videoProps}
+          poster="/videos/settle-promo-cinema-poster.jpg"
           width={1920}
           height={1080}
           muted
           playsInline
-          preload="auto"
           aria-label="Sixteen-second loop — use-case stats, live three-pane system, tile montage, configurable controls, closing tagline"
           className="absolute inset-0 w-full h-full object-cover"
         />
