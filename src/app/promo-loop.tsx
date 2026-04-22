@@ -73,12 +73,16 @@ export default function PromoLoop() {
     tl.to(right, { xPercent: 100, duration: 1, ease: "power2.inOut" }, 0);
     if (seam) tl.to(seam, { opacity: 0, duration: 0.3, ease: "power1.in" }, 0);
 
-    const refresh = () => ScrollTrigger.refresh();
-    requestAnimationFrame(refresh);
-    video.addEventListener("loadedmetadata", refresh);
+    // NOTE: do NOT call ScrollTrigger.refresh() on loadedmetadata.
+    // With preload="none" the metadata event fires when the user is
+    // already scrolling, and a refresh mid-scroll recalculates every
+    // trigger on the page — which breaks the ProcessScroll pin above
+    // us, leaving a visible empty strip after the wheel. The frame
+    // container has a fixed aspect-[16/9], so video load doesn't
+    // change layout anyway. If a refresh is ever needed later, gate
+    // it on !ScrollTrigger.isInViewport() of all pinned triggers.
 
     return () => {
-      video.removeEventListener("loadedmetadata", refresh);
       tl.scrollTrigger?.kill();
       tl.kill();
     };
