@@ -147,7 +147,7 @@ export default function Article() {
           <h2>What Claude Design is</h2>
           <p>
             <a
-              href="https://www.anthropic.com/news/claude-design"
+              href="https://www.anthropic.com/news/claude-design-anthropic-labs"
               target="_blank"
               rel="noopener noreferrer"
               className="text-accent hover:underline"
@@ -203,12 +203,21 @@ export default function Article() {
             between scenes.
           </p>
 
-          {/* Screenshot slot — add /public/blog/claude-design-canvas.png
-             (1512x782, Claude Design canvas mid-generation) and restore:
-             <img src="/blog/claude-design-canvas.png"
-                  alt="Claude Design canvas view mid-generation..."
-                  width={1512} height={782} loading="lazy"
-                  className="rounded-xl border border-[rgba(20,20,19,0.1)] my-10" /> */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/blog/claude-design-canvas.webp"
+            alt="Claude Design canvas: a globe visualization on the left with a Tweaks panel on the right exposing theme, breakpoint, and live parameter sliders for arc color, width, glow, and density"
+            width={1512}
+            height={848}
+            loading="lazy"
+            className="rounded-xl border border-[rgba(20,20,19,0.1)] my-10"
+          />
+          <p className="text-[13px] text-text-faint -mt-6 mb-10 italic">
+            The Claude Design canvas. Left: the rendered output (in this
+            case Anthropic&apos;s own launch visual). Right: the tweaks
+            panel with theme, breakpoint, and per-parameter sliders.
+            Image via Anthropic.
+          </p>
 
           <h2>Attempt one, and why it failed</h2>
           <p>
