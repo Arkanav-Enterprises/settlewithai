@@ -105,6 +105,26 @@ h1, h2, h3 {
   }
 }
 
+/* ─── Cinema projector glow ──────────────────── */
+/* Warm popcorn-butter radial light that breathes behind the
+   promo-loop play button. Warm amber core with salmon midtone
+   fades to transparent — reads as the projector's spot, not a
+   generic button halo. */
+.cinema-glow {
+  background: radial-gradient(
+    circle,
+    rgba(255, 203, 128, 0.40) 0%,
+    rgba(217, 119, 87, 0.18) 38%,
+    transparent 70%
+  );
+  animation: cinema-breathe 4s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+@keyframes cinema-breathe {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50%      { opacity: 0.85; transform: scale(1.06); }
+}
+
 /* ─── Scrollbar ─────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
