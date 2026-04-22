@@ -12,6 +12,15 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: "claude-design-homepage-video",
+    title:
+      "How I made Settle's homepage hero in Claude Design, in under an hour",
+    description:
+      "The exact workflow: the prompt that worked, what broke on the first try, and an honest frame on what Claude Design is and isn't good for.",
+    date: "2026-04-22",
+    tag: "Essay",
+  },
+  {
     slug: "making-your-site-agent-ready",
     title:
       "We Took Our Site From 25 to 83 on Cloudflare's Agent Scanner. Here's the Playbook.",
