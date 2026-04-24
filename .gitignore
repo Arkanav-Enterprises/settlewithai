@@ -58,3 +58,6 @@ settle-v2-visible.png
 
 # next.js build cache that sometimes lands inside /public during dev
 /public/.next/
+
+# impeccable live-mode runtime state (helper PID, session token)
+.impeccable-live.json

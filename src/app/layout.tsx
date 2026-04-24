@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { ImpeccableLive } from "@/components/ImpeccableLive";
 import { Manrope, Fraunces } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
@@ -332,6 +333,9 @@ export default function RootLayout({
         <Script id="gtag-config" strategy="afterInteractive">
           {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0FV33C7PC2');`}
         </Script>
+        {/* impeccable-live-start */}
+        <ImpeccableLive />
+        {/* impeccable-live-end */}
       </body>
     </html>
   );
