@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Settle",
   },
   description:
-    "We deploy Claude AI (Anthropic's AI) across your team's actual workflows. Structured rollouts, production-grade instructions, real results. Built for manufacturers and mid-market companies.",
+    "We deploy Claude AI across your team's workflows. Structured rollouts, production-grade instructions, real results. For manufacturers and mid-market ops.",
   keywords: [
     "AI deployment",
     "AI consulting",
@@ -68,14 +68,14 @@ export const metadata: Metadata = {
     siteName: "Settle",
     title: "Settle — Full-Stack AI Agency for Traditional Businesses",
     description:
-      "We deploy Claude AI (Anthropic's AI) across your team's actual workflows. Structured rollouts, production-grade instructions, real results. Built for manufacturers and mid-market companies.",
+      "We deploy Claude AI across your team's workflows. Structured rollouts, production-grade instructions, real results. For manufacturers and mid-market ops.",
     images: [{ url: "/og-image.png", width: 1519, height: 1090, alt: "Settle — Full-Stack AI Agency" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Settle — Full-Stack AI Agency",
     description:
-      "We deploy Claude AI (Anthropic's AI) across your team's actual workflows. Structured rollouts, production-grade instructions, real results.",
+      "We deploy Claude AI across your team's workflows. Structured rollouts, production-grade instructions, real results. For mid-market ops.",
     images: ["/og-image.png"],
   },
 };

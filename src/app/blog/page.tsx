@@ -5,7 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { BLOG_POSTS } from "@/content/blog-posts";
 
 export const metadata: Metadata = {
-  title: "Field Notes — Settle",
+  title: { absolute: "Field Notes — Settle" },
   description:
     "Case studies, playbooks, and field notes on deploying Claude AI inside manufacturers, mid-market companies, and traditional businesses.",
   alternates: {
@@ -16,6 +16,21 @@ export const metadata: Metadata = {
     description:
       "Case studies, playbooks, and field notes on deploying Claude AI inside real businesses.",
     url: "https://settlewithai.com/blog",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1519,
+        height: 1090,
+        alt: "Field Notes — Settle",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Field Notes — Settle",
+    description:
+      "Case studies, playbooks, and field notes on deploying Claude AI inside real businesses.",
+    images: ["/og-image.png"],
   },
 };
 

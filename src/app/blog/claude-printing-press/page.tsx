@@ -8,7 +8,7 @@ import { LazyVideo } from "@/components/LazyVideo";
 export const metadata: Metadata = {
   title: "We're Teaching AI to Run a Printing Press",
   description:
-    "Settle AI is building one of the first production deployments of Claude controlling physical industrial machinery. Not a chatbot. Not a copilot. An AI agent that starts, stops, and tunes a digital printing press through natural language.",
+    "One of the first production deployments of Claude controlling industrial machinery. An AI agent that starts, stops, and tunes a printing press.",
   keywords: [
     "AI manufacturing",
     "Claude AI industrial",

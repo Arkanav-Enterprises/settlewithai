@@ -8,7 +8,7 @@ import { MagazineOutro } from "@/components/blog/MagazineOutro";
 export const metadata: Metadata = {
   title: "The AI You Dismissed Isn't the AI That's Here Now",
   description:
-    "Most people tried ChatGPT once and formed an opinion. Meanwhile, frontier models like Claude are restructuring entire business workflows. The gap between perception and reality is growing fast.",
+    "Most people tried ChatGPT once and wrote AI off. Meanwhile, frontier Claude is restructuring entire business workflows. The gap is growing fast.",
   keywords: [
     "AI capability gap",
     "Claude AI vs ChatGPT",

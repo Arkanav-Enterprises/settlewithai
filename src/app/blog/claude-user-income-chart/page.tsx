@@ -120,10 +120,9 @@ function DotMatrix({ label, value, accent }: { label: string; value: number; acc
 }
 
 export const metadata: Metadata = {
-  title:
-    "80% of US Claude users earn six figures. It's not a price story, it's a work story.",
+  title: "80% of Claude users earn over $100K. Here's why.",
   description:
-    "Epoch AI just published the income distribution of every major AI's user base. Claude's is wildly skewed toward $100K+ households — 80% vs. Meta AI's 37%. Why that chart is a stronger buy signal for mid-market businesses than any benchmark.",
+    "Epoch AI published the income distribution of every major AI user base. Claude's is 80% vs Meta AI's 37%. Why that chart beats any benchmark.",
   keywords: [
     "Claude AI user demographics",
     "Claude vs Meta AI",
@@ -143,10 +142,9 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "article",
-    title:
-      "80% of US Claude users earn six figures. It's not a price story, it's a work story.",
+    title: "80% of Claude users earn over $100K. Here's why.",
     description:
-      "Epoch AI just published the income distribution of every major AI's user base. Claude's is unlike any consumer product's — and it explains more about the tool than any benchmark does.",
+      "Epoch AI published the income distribution of every major AI user base. Claude's is 80% vs Meta AI's 37%. Why that chart beats any benchmark.",
     url: "https://settlewithai.com/blog/claude-user-income-chart",
     siteName: "Settle",
     publishedTime: "2026-04-24T00:00:00Z",
@@ -162,10 +160,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "80% of US Claude users earn six figures. It's not a price story, it's a work story.",
+    title: "80% of Claude users earn over $100K. Here's why.",
     description:
-      "Epoch AI just published the income distribution of every major AI's user base. Claude's is unlike any consumer product's, and it explains more about the tool than any benchmark.",
+      "Epoch AI published the income distribution of every major AI user base. Claude's is 80% vs Meta AI's 37%. Why that chart beats any benchmark.",
   },
 };
 
@@ -173,10 +170,9 @@ export default function Article() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline:
-      "80% of US Claude users earn six figures. It's not a price story, it's a work story.",
+    headline: "80% of Claude users earn over $100K. Here's why.",
     description:
-      "Epoch AI just published the income distribution of every major AI's user base. Claude's is wildly skewed toward $100K+ households, at 80% vs. Meta AI's 37%. Why that chart is a stronger buy signal for mid-market businesses than any benchmark.",
+      "Epoch AI published the income distribution of every major AI user base. Claude's is wildly skewed toward $100K+ households at 80% vs. Meta AI's 37%. The chart is a stronger buy signal for mid-market businesses than any benchmark.",
     datePublished: "2026-04-24T00:00:00Z",
     dateModified: "2026-04-24T00:00:00Z",
     image: "https://settlewithai.com/og-image.png",
