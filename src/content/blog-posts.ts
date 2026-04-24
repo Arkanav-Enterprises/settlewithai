@@ -12,6 +12,15 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: "claude-user-income-chart",
+    title:
+      "80% of US Claude users earn six figures. It's not a price story, it's a work story.",
+    description:
+      "Epoch AI just published the income distribution of every major AI's user base. Claude's is wildly skewed toward $100K+ households — 80% vs. Meta AI's 37%. Why that chart is a stronger buy signal for mid-market businesses than any benchmark.",
+    date: "2026-04-24",
+    tag: "Perspective",
+  },
+  {
     slug: "claude-design-homepage-video",
     title:
       "How I made Settle's homepage hero in Claude Design, in under an hour",
