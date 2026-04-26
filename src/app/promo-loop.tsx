@@ -7,15 +7,38 @@ import { useLazyVideo } from "@/lib/use-lazy-video";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* Broadway horizontal curtain + cinema-hall player.
-   At rest: two cream panels meet at center, sealing the frame.
-   On scroll-scrub: panels part left/right to reveal the paused
-   first frame of the video, with a liquid-glass play button
-   haloed by a warm popcorn-projector glow at center.
-   The user chooses when to play. Controls (play/pause, scrub,
-   time, speed) appear on hover after playback starts. */
+/* Slice-fold manifest + cinema-hall player.
+   At rest: a twelve-line agent manifest covers the frame, rendered
+   like a real config artifact. On scroll-scrub: each line folds
+   backward in 3D from the top down (staggered rotateX with bottom-
+   edge transform-origin), peeling away to reveal the paused first
+   frame of the video underneath. The play button + warm projector
+   glow sit at center; the user chooses when to play.
+
+   This replaced an earlier two-curtain reveal. Slice manifest is
+   on-brand: Settle ships agent manifests, so the cover IS a sample
+   of the work, not stage dressing. */
 
 const PLAYBACK_RATES = [1, 1.5, 2] as const;
+const SLICE_COUNT = 12;
+
+/* The lines that compose the cover. Reads as a real agent manifest
+   — the kind of file Settle actually checks into a client repo.
+   Keep the slice count and this list aligned. */
+const MANIFEST_LINES: { text: string; tone: "comment" | "key" | "value" | "list" | "tag" }[] = [
+  { text: "# /agents/orient-printing.yaml", tone: "comment" },
+  { text: "project: Orient Printing & Packaging", tone: "key" },
+  { text: "version: 2.4", tone: "key" },
+  { text: "deployed: 2026-04-12", tone: "key" },
+  { text: "instructions:", tone: "key" },
+  { text: "  - Generate offer documents from the price list", tone: "list" },
+  { text: "  - Match brand template for proposals", tone: "list" },
+  { text: "  - Pull live spec data from the BOM sheet", tone: "list" },
+  { text: "guardrails:", tone: "key" },
+  { text: "  - Refuse to fabricate part numbers", tone: "list" },
+  { text: "tools: [knowledge-base, pricing-sheet, brand-pdf]", tone: "key" },
+  { text: "status: production", tone: "tag" },
+];
 
 function formatTime(seconds: number): string {
   const s = Math.max(0, Math.floor(seconds));
@@ -30,9 +53,7 @@ export default function PromoLoop() {
   const { ref: videoRef, videoProps } = useLazyVideo(
     "/videos/settle-promo-cinema.mp4",
   );
-  const leftRef = useRef<HTMLDivElement>(null);
-  const rightRef = useRef<HTMLDivElement>(null);
-  const seamRef = useRef<HTMLDivElement>(null);
+  const slicesRef = useRef<HTMLDivElement>(null);
   const scrubRef = useRef<HTMLDivElement>(null);
 
   const [isPlaying, setIsPlaying] = useState(false);
@@ -42,20 +63,22 @@ export default function PromoLoop() {
   const [rate, setRate] = useState<number>(1);
   const [hovered, setHovered] = useState(false);
 
-  // ── Curtain scroll-scrub ────────────────────────────
+  // ── Slice fold scroll-scrub ─────────────────────────
   useEffect(() => {
     const frame = frameRef.current;
     const video = videoRef.current;
-    const left = leftRef.current;
-    const right = rightRef.current;
-    const seam = seamRef.current;
-    if (!frame || !video || !left || !right) return;
+    const slicesEl = slicesRef.current;
+    if (!frame || !video || !slicesEl) return;
+
+    const sliceEls = Array.from(
+      slicesEl.querySelectorAll<HTMLDivElement>("[data-slice]"),
+    );
+    if (sliceEls.length === 0) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
-      gsap.set(left, { xPercent: -100 });
-      gsap.set(right, { xPercent: 100 });
-      if (seam) gsap.set(seam, { opacity: 0 });
+      gsap.set(sliceEls, { autoAlpha: 0 });
+      gsap.set(slicesEl, { autoAlpha: 0 });
       return;
     }
 
@@ -69,9 +92,22 @@ export default function PromoLoop() {
       },
     });
 
-    tl.to(left, { xPercent: -100, duration: 1, ease: "power2.inOut" }, 0);
-    tl.to(right, { xPercent: 100, duration: 1, ease: "power2.inOut" }, 0);
-    if (seam) tl.to(seam, { opacity: 0, duration: 0.3, ease: "power1.in" }, 0);
+    // Slices fold top-down: each rotates -100deg around its bottom
+    // edge with a small backward Z lift, staggered by 0.07s. Power3.in
+    // matches Settle's house easing curve (cubic-bezier(0.16, 1, 0.3, 1)).
+    sliceEls.forEach((el, i) => {
+      tl.to(
+        el,
+        {
+          rotateX: -100,
+          z: -40,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.in",
+        },
+        i * 0.07,
+      );
+    });
 
     // NOTE: do NOT call ScrollTrigger.refresh() on loadedmetadata.
     // With preload="none" the metadata event fires when the user is
@@ -179,62 +215,92 @@ export default function PromoLoop() {
           className="absolute inset-0 w-full h-full object-cover"
         />
 
-        {/* ── Left curtain ───────────────────────────────
-           Four layered CSS gradients, innermost to outermost:
-           1. Body gradient — light top to slightly weighted bottom,
-              so the fabric has mass rather than reading as a flat rect.
-           2. Pleat texture — repeating-linear-gradient with ≤2% alpha
-              spikes; perceptible as "light vertical banding," never
-              as a pattern. Whisper-level, not theatrical.
-           3. Bottom hem — single vertical gradient on the lower 8%
-              with 5% alpha; seats the fabric on the floor.
-           4. Inner-edge gather — 8% narrow shadow on the side that
-              meets the seam. Reads as "the curtain is gathered here"
-              without any drawn detail.
-           No valance, no fringe, no tassels — professional cinema
-           lobby, not community-theater set dressing. */}
-        <div
-          ref={leftRef}
-          aria-hidden
-          className="absolute left-0 top-0 bottom-0 pointer-events-none"
-          style={{
-            width: "50%",
-            zIndex: 10,
-            backgroundImage: [
-              "linear-gradient(to right, transparent 92%, rgba(20,20,19,0.10) 100%)",
-              "linear-gradient(to bottom, transparent 92%, rgba(20,20,19,0.06) 100%)",
-              "repeating-linear-gradient(to right, rgba(20,20,19,0) 0%, rgba(20,20,19,0.018) 4%, rgba(20,20,19,0) 8%)",
-              "linear-gradient(to bottom, #ece9df 0%, #e2ded0 100%)",
-            ].join(", "),
-          }}
-        />
+        {/* ── Slice manifest cover ─────────────────────
+           Twelve horizontal slices of a Settle agent manifest stack
+           over the video, each with its own bottom-edge transform-
+           origin so they fold backward in sequence on scroll-scrub.
+           Each slice is a real line of YAML-styled config — Settle's
+           cover is a sample of the work, not stage dressing.
 
-        {/* ── Right curtain ──────────────────────────── */}
+           Layout: a flex column with 3D `perspective` on the parent
+           and `transform-style: preserve-3d` so each rotateX renders
+           into actual depth rather than flattening to a 2D shear. */}
         <div
-          ref={rightRef}
+          ref={slicesRef}
           aria-hidden
-          className="absolute right-0 top-0 bottom-0 pointer-events-none"
+          className="absolute inset-0 flex flex-col pointer-events-none"
           style={{
-            width: "50%",
             zIndex: 10,
-            backgroundImage: [
-              // Inner edge on the LEFT side of this panel (the side meeting the seam)
-              "linear-gradient(to right, rgba(20,20,19,0.10) 0%, transparent 8%)",
-              "linear-gradient(to bottom, transparent 92%, rgba(20,20,19,0.06) 100%)",
-              "repeating-linear-gradient(to right, rgba(20,20,19,0) 0%, rgba(20,20,19,0.018) 4%, rgba(20,20,19,0) 8%)",
-              "linear-gradient(to bottom, #ece9df 0%, #e2ded0 100%)",
-            ].join(", "),
+            perspective: "2000px",
+            perspectiveOrigin: "50% 50%",
+            transformStyle: "preserve-3d",
+            backgroundImage: "linear-gradient(to bottom, #ece9df 0%, #e2ded0 100%)",
           }}
-        />
-
-        {/* Vertical seam — thin salmon spotlight where the two curtain
-           inner edges meet. Fades with the first third of the parting. */}
-        <div
-          ref={seamRef}
-          aria-hidden
-          className="absolute top-0 bottom-0 left-1/2 w-px -translate-x-1/2 bg-accent/40 pointer-events-none"
-          style={{ zIndex: 15 }}
-        />
+        >
+          {MANIFEST_LINES.slice(0, SLICE_COUNT).map((line, i) => {
+            const isComment = line.tone === "comment";
+            const isList = line.tone === "list";
+            const isTag = line.tone === "tag";
+            // Split "key: value" into a coloured key + neutral value where
+            // applicable. List items don't split (the whole line is value).
+            const colonIdx = !isList && !isComment ? line.text.indexOf(":") : -1;
+            const head = colonIdx > 0 ? line.text.slice(0, colonIdx + 1) : null;
+            const tail = colonIdx > 0 ? line.text.slice(colonIdx + 1) : line.text;
+            return (
+              <div
+                key={i}
+                data-slice
+                className="relative flex items-center w-full px-6 md:px-12 lg:px-20 select-none will-change-transform"
+                style={{
+                  flex: "1 1 0",
+                  transformOrigin: "50% 100%",
+                  transformStyle: "preserve-3d",
+                  // Hairline rule between slices reads as the natural break
+                  // between code lines. Salmon-tinted under shadow on the
+                  // lower edge gives each slice a faint paper weight.
+                  borderBottom:
+                    i < SLICE_COUNT - 1
+                      ? "1px solid rgba(20, 20, 19, 0.06)"
+                      : "none",
+                  boxShadow:
+                    i < SLICE_COUNT - 1
+                      ? "0 1px 0 0 rgba(255, 255, 255, 0.4) inset"
+                      : "none",
+                }}
+              >
+                {/* Faint line-number gutter — reads like a code editor without
+                   making it look like one. Tabular nums keep the column rigid. */}
+                <span
+                  className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 text-[9px] md:text-[10px] font-mono tabular-nums"
+                  style={{ color: "rgba(20, 20, 19, 0.25)" }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <pre
+                  className="font-mono text-[11px] md:text-[14px] lg:text-[16px] leading-none whitespace-pre"
+                  style={{
+                    color: isComment
+                      ? "var(--accent)"
+                      : isTag
+                        ? "var(--text)"
+                        : "rgba(20, 20, 19, 0.78)",
+                    fontWeight: isTag ? 600 : 400,
+                    letterSpacing: "-0.005em",
+                  }}
+                >
+                  {head ? (
+                    <>
+                      <span style={{ color: "rgba(20, 20, 19, 0.55)" }}>{head}</span>
+                      <span>{tail}</span>
+                    </>
+                  ) : (
+                    line.text
+                  )}
+                </pre>
+              </div>
+            );
+          })}
+        </div>
 
         {/* ── Cinema play button (center) ─────────────
            Visible until playback begins. Liquid-glass surface
