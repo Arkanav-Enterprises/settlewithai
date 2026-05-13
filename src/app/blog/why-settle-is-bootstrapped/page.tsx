@@ -425,6 +425,26 @@ export default function Article() {
             structure where we can mean what we say.
           </p>
           <p>
+            That doesn&apos;t mean we&apos;re allergic to scale. The honest
+            goal is to find a productized angle inside this work. A recurring
+            problem, a repeating shape, a theme that several customers pull
+            at the same way. Something that wants to be productized because
+            the work itself keeps pointing to it. We watch for it on every
+            engagement. We haven&apos;t found it yet.
+          </p>
+          <p>
+            If it shows up, we&apos;ll build it on the same terms as everything
+            else. Bootstrapped. Transparent about what&apos;s working and what
+            isn&apos;t. Scaled because the work is pulling us into the next
+            shape, not because a cap table needs the upside.
+          </p>
+          <p>
+            And if we never find it, that&apos;s fine too. Helping a handful
+            of real businesses solve real problems isn&apos;t a consolation
+            prize. It&apos;s a different shape of success than the one the
+            venture script teaches you to want.
+          </p>
+          <p>
             The frozen pizzas, the on-chain account, the fund that didn&apos;t
             fundraise, the micro-caps. None of it is a flex. It&apos;s the
             receipt for the freedom to build the version of Settle I actually
