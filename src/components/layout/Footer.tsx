@@ -29,6 +29,7 @@ const INDUSTRY_LINKS = [
 ];
 
 const BLOG_LINKS = [
+  { label: "Why Settle Is Bootstrapped", href: "/blog/why-settle-is-bootstrapped" },
   { label: "Orient Case Study", href: "/blog/orient-case-study" },
   { label: "The Handover Plan", href: "/blog/the-handover-plan" },
   { label: "The Client Brain", href: "/blog/the-client-brain" },

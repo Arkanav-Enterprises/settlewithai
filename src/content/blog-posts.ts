@@ -12,6 +12,15 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: "why-settle-is-bootstrapped",
+    title:
+      "I ate frozen pizzas so I could buy bitcoin. That's why Settle is bootstrapped.",
+    description:
+      "The actual story behind Settle's runway. Paychecks, frozen pizza in LA, an on-chain Crypto Twitter account, Long Tail Ventures, BharatNiti.ai, and a few Indian micro-caps. None of it is a flex. It's the receipt for the freedom to walk away.",
+    date: "2026-05-13",
+    tag: "Essay",
+  },
+  {
     slug: "claude-user-income-chart",
     title:
       "80% of US Claude users earn six figures. It's not a price story, it's a work story.",
